@@ -15,6 +15,7 @@ public class DonationListVo {
 	private String dlcontent;
 	private Date dlmdate;
 	private Timestamp dldbdate;
+	private String dldeletest;
 	private int midx;
 	
 	public int getDlidx() {
@@ -77,12 +78,19 @@ public class DonationListVo {
 	public void setDldbdate(Timestamp dldbdate) {
 		this.dldbdate = dldbdate;
 	}
+	public String getDldeletest() {
+		return dldeletest;
+	}
+	public void setDldeletest(String dldeletest) {
+		this.dldeletest = dldeletest;
+	}
 	public int getMidx() {
 		return midx;
 	}
 	public void setMidx(int midx) {
 		this.midx = midx;
 	}
+
 	
 	
 }
