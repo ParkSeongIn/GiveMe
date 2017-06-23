@@ -12,7 +12,7 @@ public class MemberVo {
 	private int mbirth;
 	private int mphone;
 	private String mmail;
-	private int post;
+	private int mpost;
 	private String maddr1;
 	private String maddr2;
 	private String mgrade;
@@ -66,11 +66,11 @@ public class MemberVo {
 	public void setMmail(String mmail) {
 		this.mmail = mmail;
 	}
-	public int getPost() {
-		return post;
+	public int getMpost() {
+		return mpost;
 	}
-	public void setPost(int post) {
-		this.post = post;
+	public void setMpost(int mpost) {
+		this.mpost =mpost;
 	}
 	public String getMaddr1() {
 		return maddr1;
