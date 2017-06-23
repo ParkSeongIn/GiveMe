@@ -1,6 +1,9 @@
 package common;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class DBClose {
 	public static void close(Connection con, PreparedStatement pstmt, ResultSet rs) {

@@ -2,8 +2,9 @@ package common;
 
 import java.sql.*;
 
+
 public class DBConnect {
-	public  DBConnect() {}
+	public DBConnect() {}
 	
 	public Connection getConnection() {
 		String url = "jdbc:oracle:thin:@127.0.0.1:1521:XE";
@@ -21,3 +22,4 @@ public class DBConnect {
 		return conn;
 	}
 }
+
