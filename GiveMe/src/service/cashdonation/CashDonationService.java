@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 public interface CashDonationService {
 	ArrayList<CashDonationVo> getCashDonationList();
-	int insertCashDonation();
 	CashDonationVo modifyCashDonationState();
 	int getPaging();
 	CashDonationVo getReceipt();
+	int insertCashDonation(CashDonationVo vo);
+	int insertCashDonation();
 }

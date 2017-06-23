@@ -6,20 +6,13 @@ import common.DBConnect;
 
 public class AllBoardServiceImpl implements AllBoardService{
 
-    DBConnect dbconnect = null; //dbconnect °ªÀ» ÃÊ±âÈ­ÇÔ.
-    String sql="";	//sql °ªÀ» °ø¹éÀ¸·Î ¼³Á¤.
+    DBConnect dbconnect = null; //dbconnect ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½ï¿½.
+    String sql="";	//sql ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
     
     public AllBoardServiceImpl(){
-	dbconnect = new DBConnect();	//dbconnect °´Ã¼¸¦ »ý¼º dbconnect Ã£´Â °÷ÀÌ ÀÖÀ¸¸é °´Ã¼¸¦ »ý¼ºÇØ¼­ »ç¿ëÇÏ°Ú´Ù´Â °Í
+	dbconnect = new DBConnect();	//dbconnect ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ dbconnect Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°Ú´Ù´ï¿½ ï¿½ï¿½
     }
     
-    
-    @Override
-    public AllBoardVo getAllBoard() {
-	// TODO Auto-generated method stub
-	return null;
-    }
-
     @Override
     public ArrayList<AllBoardVo> getAllBoardList() {
 	// TODO Auto-generated method stub
@@ -38,6 +31,10 @@ public class AllBoardServiceImpl implements AllBoardService{
 	return 0;
     }
 
-    
+    @Override
+    public AllBoardVo getAllBoard() {
+	// TODO Auto-generated method stub
+	return null;
+    }
     
 }

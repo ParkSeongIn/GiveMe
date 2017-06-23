@@ -4,7 +4,7 @@
 
 <servlet>
         <servlet-name>FrontController</servlet-name> <!--  서블릿이름  --> 
-        <servlet-class>common.FrontController</servlet-class> <!--  셋팅된 클래스  -->   
+        <servlet-class>controller.common.FrontController</servlet-class> <!--  셋팅된 클래스  -->   
 </servlet>
 
 

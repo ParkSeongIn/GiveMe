@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class QusetionDeleteServlet
  */
 @WebServlet("/QusetionDeleteServlet")
-public class QusetionDeleteServlet extends HttpServlet {
+public class QuestionDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QusetionDeleteServlet() {
+    public QuestionDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
