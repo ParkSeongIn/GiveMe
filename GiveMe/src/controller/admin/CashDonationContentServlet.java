@@ -7,6 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Model.MemberDao;
+import Model.MemberVo;
+import service.cashdonation.CashDonationServiceImpl;
+import service.cashdonation.CashDonationVo;
+
 /**
  * Servlet implementation class CashDonationContentServlet
  */
@@ -28,6 +33,15 @@ public class CashDonationContentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		int cidx = Integer.parseInt(request.getParameter("cidx"));
+		
+		CashDonationServiceImpl cd = new CashDonationServiceImpl();
+		CashDonationVo cv= cd.getCashDonation(cidx);	
+		cv.setCidx(cidx);
+		
+		request.setAttribute("cv", cv);   		
+		
 	}
 
 	/**
