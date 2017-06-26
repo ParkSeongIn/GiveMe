@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.admin.CashDonationContentServlet;
+import controller.cashdonation.CashDonationInsertServlet;
+import controller.cashdonation.CashDonationListServlet;
+
 
 /**
  * Servlet implementation class FrontController
@@ -36,7 +40,7 @@ public class FrontController extends HttpServlet {
 		String url = request.getRequestURI();
 		String command = url.substring(contextPath.length());
 		
-		if(command.equals("/controller/CashDonationListServlet.do")){
+		if(command.equals("/controller/cashdonation/CashDonationListServlet.do")){
 
 			CashDonationListServlet cdls = new CashDonationListServlet();
 			cdls.doGet(request, response);
@@ -44,22 +48,22 @@ public class FrontController extends HttpServlet {
 			this.view = "/admin/ad_cash_list.jsp";
 			this.isRedirect = false;
 		
-//		}else if (command.equals("/Controller/QuestionWriteServlet.do")) {
-//			
-//			QuestionWriteServlet qws = new QuestionWriteServlet();
-//			qws.doPost(request, response);
-//			
-//			this.view = "/community/qna_write.jsp";
-//			this.isRedirect = false;
-//			
-//		}else if (command.equals("/Controller/QuestionWriteActionServlet.do")) {
-//			
-//			QuestionWriteActionServlet qwa = new QuestionWriteActionServlet();
-//			qwa.doPost(request, response);
-//			
-//			this.view = "/Controller/QuestionListServlet.do";
-//			this.isRedirect = true;
-//			
+		}else if (command.equals("/controller/cashdonation/CashDonationInsertServlet.do")) {
+			
+			CashDonationInsertServlet cdis = new CashDonationInsertServlet();
+			cdis.doPost(request, response);
+			
+			this.view = "/donation/cash_confirm.jsp";
+			this.isRedirect = false;
+			
+		}else if (command.equals("/controller/cashdonation/CashDonationContentServlet.do")) {
+			
+			CashDonationContentServlet cdcs = new CashDonationContentServlet();
+			cdcs.doPost(request, response);
+			
+			this.view = "/admin/ad_cash_content.jsp";
+			this.isRedirect = true;
+			
 //		}else if (command.equals("/Controller/QuestionContentServlet.do")) {
 //			
 //			QuestionContentServlet qcs = new QuestionContentServlet();

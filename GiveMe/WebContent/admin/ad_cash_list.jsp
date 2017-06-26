@@ -56,7 +56,8 @@
 				작업
 			</td>
 			<td colspan="2" style="text-align:right">
-				<a class="btn btn-default" href="/main.jsp" style="width:100px;">Home</a>
+				<a class="btn btn-default" href="<%=request.getContextPath()%>/main.jsp">Home</a>
+				<a class="btn btn-default" href="<%=request.getContextPath()%>/donation/cash_insert.jsp" target="_blank">후원하기</a>
 	  		</td>
 		</tr>
 	</table>

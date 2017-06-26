@@ -8,5 +8,14 @@
 </head>
 <body>
 
+<% 
+
+ String radio = request.getParameter("cpay"); 
+
+ out.println(radio); 
+
+ %> 
+
+
 </body>
 </html>

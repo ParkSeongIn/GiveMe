@@ -3,19 +3,21 @@ package service.admin;
 import java.sql.*; 
 import java.util.ArrayList;
 
+import Model1.DBClose;
 import common.DBConnect;
 import service.allboard.AllBoardVo;
+import service.allpay.AllPayVo;
 import service.cashdonation.CashDonationVo;
 import service.member.MemberVo; 
 
 
 public class AdminServiceImpl implements AdminService{
     
-    DBConnect dbconnect = null; //dbconnect °ªÀ» ÃÊ±âÈ­ÇÔ.
-    String sql="";	//sql °ªÀ» °ø¹éÀ¸·Î ¼³Á¤.
+    DBConnect dbconnect = null; //dbconnect ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½ï¿½.
+    String sql="";	//sql ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
     
-    public AdminServiceImpl(){	//»ý¼ºÀÚ(Å¬·¡½º¸í°ú µ¿ÀÏÇÏ¹Ç·Î)
-	dbconnect = new DBConnect();	//dbconnect °´Ã¼¸¦ »ý¼º dbconnect Ã£´Â °÷ÀÌ ÀÖÀ¸¸é °´Ã¼¸¦ »ý¼ºÇØ¼­ »ç¿ëÇÏ°Ú´Ù´Â °Í 
+    public AdminServiceImpl(){	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¹Ç·ï¿½)
+	dbconnect = new DBConnect();	//dbconnect ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ dbconnect Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°Ú´Ù´ï¿½ ï¿½ï¿½ 
     }
 
     
@@ -35,8 +37,37 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     public CashDonationVo getCashDonation() {
-	// TODO Auto-generated method stub
-	return null;
+    	Connection con = dbconnect.getConnection(); 
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+		CashDonationVo cv = null; 
+		MemberVo mv = null;
+		DonationListVo dv = null;
+		AllPayVo pv = null;
+		try { 
+			sql = "select tm.midx, tm.mname, tc.cway, tc.cpaydate1, td.dlgroup1, td.dlgroup2, td.dlplace, tc.cmoney, ta.apdbdate, ta.apstate, tc.cpay "
+					+ "from table_member tm, table_cashdonation tc, table_allpay ta, table_donationlist td where td.dlidx = tc.dlidx and ta.cidx = tc.cidx and ta.midx = tm.midx and ta.apidx = ?";
+			pstmt = con.prepareStatement(sql); 
+			pstmt.setInt(1, midx);
+			rs = pstmt.executeQuery(); 
+			while(rs.next()) { 
+				cv = new CashDonationVo();	
+				mv.setMname(rs.getString("mname"));
+				cv.setCway(rs.getString("cway"));
+				cv.setCpaydate1(rs.getString("cpaydate1"));
+				dv.setDlgroup1(rs.getString("dlgroup1"));
+				dv.setDlgroup2(rs.getString("dlgroup2"));
+				dv.setDlplace(rs.getString("dlplace"));
+				cv.setCmoney(rs.getInt("cmoney"));
+	
+			} 
+		}catch(Exception e) {
+				
+		}finally { 
+			DBClose.close(con,pstmt,rs);
+		} 
+	return mv;
+	} 
     }
 
     @Override

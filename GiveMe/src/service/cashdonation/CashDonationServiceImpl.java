@@ -22,21 +22,21 @@ public class CashDonationServiceImpl implements CashDonationService {
 		ResultSet rs = null; 
 		ArrayList<CashDonationVo> cdlist = new ArrayList<CashDonationVo>(); 
 		try { 
-		String	sql = "select * from (select rownum rnum,tm.midx,tc.cway, tc.cmoney,tc.cstate,tc.capst "
-				+ "from table_member tm,table_cashdonation tc"
-				+ "where tm.midx = tc.midx order by tc.cidx desc)"
-				+ "where rnum <= 20 and rnum >= 1; "; 
+		String	sql = "select * from "
+				+ "(select rownum rnum,tm.midx,tc.cway, tc.cmoney,tc.cstate,tc.capst from table_member tm,table_cashdonation tc"
+				+ " where tm.midx = tc.midx order by tc.cidx desc) where rnum <= 20 and rnum >= 1 "; 
 			pstmt = con.prepareStatement(sql); 
 			rs = pstmt.executeQuery(); 
 			
 			while(rs.next()) { 
 			CashDonationVo vo = new CashDonationVo(); 
 			
-			vo.setMidx(rs.getInt(1)); 
+			vo.setCidx(rs.getInt(1));
+			vo.setMidx(rs.getInt(2)); 
 			vo.setCway(rs.getString(3)); 	
-			vo.setCmoney(rs.getInt(7)); 		
-			vo.setCstate(rs.getString(9)); 	
-			vo.setCapst(rs.getString(10)); 	
+			vo.setCmoney(rs.getInt(4)); 		
+			vo.setCstate(rs.getString(5)); 	
+			vo.setCapst(rs.getString(6)); 	
 	
 			cdlist.add(vo); 
 			}
@@ -48,11 +48,33 @@ public class CashDonationServiceImpl implements CashDonationService {
 		return cdlist; 
 		}
 
+	
+	
 	@Override
-	public int insertCashDonation() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public int insertCashDonation(CashDonationVo vo) {
+		Connection con = dbconnect.getConnection(); 
+		PreparedStatement pstmt = null; 
+		int row = 0;
+		try { sql = "insert into table_cashdonation values(seq_cidx.nextval,?,?,?,?,sysdate,?,?,sysdate,?,?,?,?); "; 
+		pstmt = con.prepareStatement(sql); 
+		pstmt.setString(1, pasing(vo.getCway()));
+		pstmt.setInt(2, vo.getCmoney()); 
+		pstmt.setString(3, pasing(vo.getCreceipt())); 
+		pstmt.setString(4, pasing(vo.getCpaydate1())); 
+		pstmt.setString(5, pasing(vo.getCstate()));
+		pstmt.setInt(6, vo.getCpoint());
+		pstmt.setInt(7, vo.getMidx());
+		pstmt.setInt(8, vo.getDlidx());
+		pstmt.setString(9, pasing(vo.getCpay())); 
+		pstmt.setString(10, pasing(vo.getCapst())); 		
+		row = pstmt.executeUpdate(); 
+		}catch(Exception e) { 
+			
+		}finally { 
+			DBClose.close(con,pstmt);
+			} 
+			 return row;
+		} 
 
 	@Override
 	public CashDonationVo modifyCashDonationState() {
@@ -72,10 +94,15 @@ public class CashDonationServiceImpl implements CashDonationService {
 		return null;
 	}
 
-	@Override
-	public int insertCashDonation(CashDonationVo vo) {
-		// TODO Auto-generated method stub
-		return 0;
-	} 
 
+	public String pasing(String data) { 
+		try { 
+			data = new String(data.getBytes("8859_1"), "UTF-8"); 
+			}catch (Exception e){
+				
+			}
+		return data; 
+		}
+
+	
 }

@@ -17,7 +17,9 @@
 					<div class="indexcategory">
 						<div class="home"><a class="btn btn-default" href="main.jsp" >HOME</a></div>
 						<div class="talent"><a class="btn btn-default" href="#" >재능기부</a></div>
-						<div class="cash"><a class="btn btn-default" href="#" >현금기부</a></div>
+						<div class="cash"><a class="btn btn-default" href="<%=request.getContextPath()%>/donation/cash_insert.jsp" >현금기부</a></div>
+						<td style="width:80%;vertical-align:middle;">현금기부 리스트</td>
+		<td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/cashdonation/CashDonationListServlet.do" target="_blank">VIEW</a></td>
 					</div>
 	</div>
 </body>

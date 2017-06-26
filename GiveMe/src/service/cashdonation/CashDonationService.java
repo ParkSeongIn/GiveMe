@@ -8,5 +8,5 @@ public interface CashDonationService {
 	int getPaging();
 	CashDonationVo getReceipt();
 	int insertCashDonation(CashDonationVo vo);
-	int insertCashDonation();
+//	int insertCashDonation();
 }
