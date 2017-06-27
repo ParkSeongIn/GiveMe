@@ -9,7 +9,7 @@ public class CashDonationVo {
 	private String cway;
 	private int cmoney;
 	private String creceipt;
-	private String cpaydate1;
+	private int cpaydate1;
 	private Date cpaydate2;
 	private String cpay;
 	private String cstate;
@@ -43,10 +43,10 @@ public class CashDonationVo {
 	public void setCreceipt(String creceipt) {
 		this.creceipt = creceipt;
 	}
-	public String getCpaydate1() {
+	public int getCpaydate1() {
 		return cpaydate1;
 	}
-	public void setCpaydate1(String cpaydate1) {
+	public void setCpaydate1(int cpaydate1) {
 		this.cpaydate1 = cpaydate1;
 	}
 	public Date getCpaydate2() {

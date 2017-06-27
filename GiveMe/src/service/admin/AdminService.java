@@ -10,7 +10,7 @@ public interface AdminService {
 
     ArrayList<MemberVo> getMemberList();
     int deleteMember();
-    CashDonationVo getCashDonation();
+ //   CashDonationVo getCashDonation();
     int insertAllBoard();
     AllBoardVo modifyAllBoard();
     int deleteAllBoard();
@@ -20,5 +20,6 @@ public interface AdminService {
     DonationListVo modifyDonationList();
     int deleteDonationList();
     int getPaging();
+	CashDonationConVo getCashDonation(int a);
     
 }

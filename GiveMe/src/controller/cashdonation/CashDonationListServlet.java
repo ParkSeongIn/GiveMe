@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.cashdonation.CashDonationListVo;
 import service.cashdonation.CashDonationServiceImpl;
 import service.cashdonation.CashDonationVo;
+
 
 /**
  * Servlet implementation class CashDonationListServlet
@@ -34,7 +36,7 @@ public class CashDonationListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		CashDonationServiceImpl cd = new CashDonationServiceImpl();
-		ArrayList<CashDonationVo> cdlist = cd.getCashDonationList();
+		ArrayList<CashDonationListVo> cdlist = cd.getCashDonationList();
 		
 		System.out.println(cdlist);
 		request.setAttribute("cdlist", cdlist);

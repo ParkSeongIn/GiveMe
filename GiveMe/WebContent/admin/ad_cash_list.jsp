@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import ="java.util.*" %>
 <%@ page import ="service.cashdonation.*" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,30 +26,40 @@
 <body>
 <div class="container">
 <%
-	ArrayList<CashDonationVo> cdlist = (ArrayList<CashDonationVo>)request.getAttribute("cdlist");
+	ArrayList<CashDonationListVo> cdlist = (ArrayList<CashDonationListVo>) request.getAttribute("cdlist");
 %>
 	<table class="table table-striped table-bordered table-hover" style="width:800px;margin:0 auto;text-align:center;">
-
+`
 		<tr>
 			<td style="width:20%">cidx</td>
-			<td style="width:20%">회원번호</td>
-			<td style="width:40%">후원방법</td>
-			<td style="width:40%">기부금액</td>
-			<td style="width:40%">기부상태</td>
-			<td style="width:40%">결제상태</td>
+			<td style="width:20%">회원번호 midx</td>
+			<td style="width:40%">회원이름 mname</td>
+			<td style="width:40%">후원방법 cway</td>
+			<td style="width:40%">기부처 dlgroup1</td>
+			<td style="width:40%">기부처 dlgroup2</td>
+			<td style="width:40%">기부지역 dlplace</td>
+			<td style="width:40%">기부금액 cmoney</td>
+			<td style="width:40%">기부날짜 apdbdate</td>
+			<td style="width:40%">기부상태 cstate</td>
+			<td style="width:40%">결제상태 capst</td>
 			<td style="width:40%">영수증</td>
 			
 		</tr>
 		
-		<% for (CashDonationVo cd : cdlist) {  %>
+		<% for (CashDonationListVo cd : cdlist) {  %>
 		<tr>
 			<td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/admin/CashDonationContentServlet.do?cidx=<%=cd.getCidx()%>"><%=cd.getCidx() %></a></td>
 			<td><%=cd.getMidx() %></td>
+			<td><%=cd.getMname() %></td>
 			<td><%=cd.getCway() %></td>
+			<td><%=cd.getDlgroup1() %></td>
+			<td><%=cd.getDlgroup2() %></td>
+			<td><%=cd.getDlplace() %></td>
 			<td><%=cd.getCmoney() %></td>
+			<td><%=cd.getApdbdate() %></td>
 			<td><%=cd.getCstate() %></td>
 			<td><%=cd.getCapst() %></td>
-			<a class="btn btn-default" href="<%=request.getContextPath()%>/mypage/cash_receipt" style="width:100px;">출력</a>
+			<td><a class="btn btn-default" href="<%=request.getContextPath()%>/mypage/cash_receipt" style="width:100px;">출력</a><td>
 		</tr>
 		<% }%>
 		<tr>
@@ -57,7 +68,7 @@
 			</td>
 			<td colspan="2" style="text-align:right">
 				<a class="btn btn-default" href="<%=request.getContextPath()%>/main.jsp">Home</a>
-				<a class="btn btn-default" href="<%=request.getContextPath()%>/donation/cash_insert.jsp" target="_blank">후원하기</a>
+				<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/cashdonation/CashDonationInsertServlet.do" target="_blank">후원하기</a>
 	  		</td>
 		</tr>
 	</table>

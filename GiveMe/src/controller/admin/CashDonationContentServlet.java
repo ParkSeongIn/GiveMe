@@ -7,10 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Model.MemberDao;
-import Model.MemberVo;
-import service.cashdonation.CashDonationServiceImpl;
-import service.cashdonation.CashDonationVo;
+import service.admin.AdminServiceImpl;
+import service.admin.CashDonationConVo;
 
 /**
  * Servlet implementation class CashDonationContentServlet
@@ -30,17 +28,17 @@ public class CashDonationContentServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		int cidx = Integer.parseInt(request.getParameter("cidx"));
+		int cidx = Integer.parseInt(request.getParameter("cidx"),10);
+		System.out.println(cidx);
+		AdminServiceImpl ad = new AdminServiceImpl();
+		CashDonationConVo gcv = new CashDonationConVo();
+		gcv = ad.getCashDonation(cidx);	
+		gcv.setCidx(cidx);
 		
-		CashDonationServiceImpl cd = new CashDonationServiceImpl();
-		CashDonationVo cv= cd.getCashDonation(cidx);	
-		cv.setCidx(cidx);
-		
-		request.setAttribute("cv", cv);   		
+		request.setAttribute("gcv", gcv);
 		
 	}
 

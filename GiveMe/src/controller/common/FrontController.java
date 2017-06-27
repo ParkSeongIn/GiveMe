@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.admin.CashDonationContentServlet;
+import controller.cashdonation.CashDonationInsertActionServlet;
 import controller.cashdonation.CashDonationInsertServlet;
 import controller.cashdonation.CashDonationListServlet;
 
@@ -53,16 +54,24 @@ public class FrontController extends HttpServlet {
 			CashDonationInsertServlet cdis = new CashDonationInsertServlet();
 			cdis.doPost(request, response);
 			
-			this.view = "/donation/cash_confirm.jsp";
+			this.view = "/donation/cash_insert.jsp";
 			this.isRedirect = false;
 			
-		}else if (command.equals("/controller/cashdonation/CashDonationContentServlet.do")) {
+		}else if (command.equals("/controller/cashdonation/CashDonationInsertActionServlet.do")) {
 			
+			CashDonationInsertActionServlet cdas = new CashDonationInsertActionServlet();
+			cdas.doPost(request, response);
+			
+			this.view = "/controller/cashdonation/CashDonationListServlet.do";
+			this.isRedirect = false;
+			
+		}		else if (command.equals("/controller/admin/CashDonationContentServlet.do")) {
+			System.out.println("TestOk");
 			CashDonationContentServlet cdcs = new CashDonationContentServlet();
 			cdcs.doPost(request, response);
 			
 			this.view = "/admin/ad_cash_content.jsp";
-			this.isRedirect = true;
+			this.isRedirect = false;
 			
 //		}else if (command.equals("/Controller/QuestionContentServlet.do")) {
 //			

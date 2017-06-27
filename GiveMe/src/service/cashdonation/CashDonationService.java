@@ -3,7 +3,7 @@ package service.cashdonation;
 import java.util.ArrayList;
 
 public interface CashDonationService {
-	ArrayList<CashDonationVo> getCashDonationList();
+	ArrayList<CashDonationListVo> getCashDonationList();
 	CashDonationVo modifyCashDonationState();
 	int getPaging();
 	CashDonationVo getReceipt();
