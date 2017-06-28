@@ -7,6 +7,7 @@ import common.DBConnect;
 import common.DBClose;
 import service.allboard.AllBoardVo;
 import service.allpay.AllPayVo;
+import service.cashdonation.CashDonationConVo;
 import service.cashdonation.CashDonationVo;
 import service.member.MemberVo; 
 

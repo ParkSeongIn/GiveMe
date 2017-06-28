@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import ="java.util.*" %>
 <%@ page import ="service.cashdonation.*" %>
-<% if(session.getAttribute("Mgrade").equals("G")) { %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,31 +24,39 @@
 <body>
 <div class="container">
 <%
-	ArrayList<CashDonationVo> cdlist = (ArrayList<CashDonationVo>) request.getAttribute("cdlist");
+	ArrayList<CashDonationListVo> mcdlist = (ArrayList<CashDonationListVo>) request.getAttribute("mcdlist");
 %>
 	<table class="table table-striped table-bordered table-hover" style="width:800px;margin:0 auto;text-align:center;">
 `
 		<tr>
+			<td style="width:20%">rnum</td>
 			<td style="width:20%">회원번호 midx</td>
 			<td style="width:40%">후원방법 cway</td>
-			<td style="width:40%">기부처 dlgroup1</td>
-			<td style="width:40%">기부금액 cmoney1</td>
+			<td style="width:40%">기부금액 cmoney</td>
 			<td style="width:40%">납입방법 cpay</td>
 			<td style="width:40%">기부날짜 apdbdate</td>
 			<td style="width:40%">기부상태 cstate</td>
+			<td style="width:20%">기부처번호 dlidx</td>
+			<td style="width:20%">결제번호 apidx</td>
+			<td style="width:20%">현금기부 번호 cidx</td>
+			<td style="width:40%">기부처 dlgroup1</td>
 			<td style="width:40%">영수증 receipt</td>
-			
 		</tr>
 		
-		<% for (CashDonationVo cd : cdlist) {  %>
+		<% for (CashDonationListVo cd : mcdlist) {  %>
 		<tr>
-			<td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/admin/CashDonationContentServlet.do?cidx=<%=cd.getCidx()%>"><%=cd.getCidx() %></a></td>
-			<td><%=cd.getMidx() %></td>
+			<td><%=cd.getRnum() %></td>	
+			<td><%=cd.getMidx() %></td>	
 			<td><%=cd.getCway() %></td>
 			<td><%=cd.getCmoney() %></td>
+			<td><%=cd.getCpay() %></td>
+			<td><%=cd.getApdbdate() %></td>
 			<td><%=cd.getCstate() %></td>
-			<td><%=cd.getCapst() %></td>
-			<a class="btn btn-default" href="<%=request.getContextPath()%>/mypage/cash_receipt" style="width:100px;">출력</a>
+			<td><%=cd.getDlidx() %></td>
+			<td><%=cd.getApidx() %></td>			
+			<td><%=cd.getCidx() %></td>
+			<td><%=cd.getDlgroup1() %></td>
+			<td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/cashdonation/CashDonationReceiptServlet.do" style="width:100px;">출력</a><td>
 		</tr>
 		<% }%>
 		<tr>
@@ -62,8 +69,6 @@
 	  		</td>
 		</tr>
 	</table>
-	<% } %>
 </div>
-
 </body>
 </html>

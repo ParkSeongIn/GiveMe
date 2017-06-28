@@ -13,6 +13,8 @@ import controller.admin.CashDonationContentServlet;
 import controller.cashdonation.CashDonationInsertActionServlet;
 import controller.cashdonation.CashDonationInsertServlet;
 import controller.cashdonation.CashDonationListServlet;
+import controller.cashdonation.CashDonationReceiptServlet;
+import controller.member.MypageCashDonationListServlet;
 
 
 /**
@@ -49,7 +51,15 @@ public class FrontController extends HttpServlet {
 			this.view = "/admin/ad_cash_list.jsp";
 			this.isRedirect = false;
 		
-		}else if (command.equals("/controller/cashdonation/CashDonationInsertServlet.do")) {
+		}else if (command.equals("/controller/member/MypageCashDonationListServlet.do")) {
+			
+			MypageCashDonationListServlet mcl = new MypageCashDonationListServlet();
+			mcl.doPost(request, response);
+			
+			this.view = "/mypage/cash_detail.jsp";
+			this.isRedirect = false;
+			
+		}		else if (command.equals("/controller/cashdonation/CashDonationInsertServlet.do")) {
 			
 			CashDonationInsertServlet cdis = new CashDonationInsertServlet();
 			cdis.doPost(request, response);
@@ -65,14 +75,22 @@ public class FrontController extends HttpServlet {
 			this.view = "/controller/cashdonation/CashDonationListServlet.do";
 			this.isRedirect = false;
 			
-		}		else if (command.equals("/controller/admin/CashDonationContentServlet.do")) {
-			System.out.println("TestOk");
+		}else if (command.equals("/controller/admin/CashDonationContentServlet.do")) {
+		//	System.out.println("TestOk");
 			CashDonationContentServlet cdcs = new CashDonationContentServlet();
 			cdcs.doPost(request, response);
 			
 			this.view = "/admin/ad_cash_content.jsp";
 			this.isRedirect = false;
-			
+		
+		}else if (command.equals("/controller/cashdonation/CashDonationReceiptServlet.do")) {
+				
+			CashDonationReceiptServlet cdrs = new CashDonationReceiptServlet();
+			cdrs.doPost(request, response);
+				
+			this.view = "/mypage/cash_receipt";
+			this.isRedirect = false;
+				
 //		}else if (command.equals("/Controller/QuestionContentServlet.do")) {
 //			
 //			QuestionContentServlet qcs = new QuestionContentServlet();

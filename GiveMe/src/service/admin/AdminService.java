@@ -3,6 +3,7 @@ package service.admin;
 import java.util.ArrayList;
 
 import service.allboard.AllBoardVo;
+import service.cashdonation.CashDonationConVo;
 import service.cashdonation.CashDonationVo;
 import service.member.MemberVo;
 

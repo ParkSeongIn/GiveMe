@@ -1,4 +1,4 @@
-package service.admin;
+package service.cashdonation;
 
 import java.sql.Timestamp;
 
@@ -16,6 +16,10 @@ public class CashDonationConVo {
 	private Timestamp apdbdate;
 	private String apstate;
 	private String cpay;
+	private int mpost;
+	private String maddr1;
+	private String maddr2;
+	private int mbirth;
 	
 	public int getCidx() {
 		return cidx;
@@ -89,7 +93,29 @@ public class CashDonationConVo {
 	public void setCpay(String cpay) {
 		this.cpay = cpay;
 	}
-	
-	
+	public int getMpost() {
+		return mpost;
+	}
+	public void setMpost(int mpost) {
+		this.mpost = mpost;
+	}
+	public String getMaddr1() {
+		return maddr1;
+	}
+	public void setMaddr1(String maddr1) {
+		this.maddr1 = maddr1;
+	}
+	public String getMaddr2() {
+		return maddr2;
+	}
+	public void setMaddr2(String maddr2) {
+		this.maddr2 = maddr2;
+	}
+	public int getMbirth() {
+		return mbirth;
+	}
+	public void setMbirth(int mbirth) {
+		this.mbirth = mbirth;
+	}
 	
 }

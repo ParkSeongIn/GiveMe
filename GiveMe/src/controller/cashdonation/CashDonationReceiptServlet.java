@@ -1,4 +1,4 @@
-package controller.admin;
+package controller.cashdonation;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,18 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import service.admin.AdminServiceImpl;
 import service.cashdonation.CashDonationConVo;
+import service.cashdonation.CashDonationServiceImpl;
 
 /**
- * Servlet implementation class CashDonationContentServlet
+ * Servlet implementation class CashDonationReceiptServlet
  */
-@WebServlet("/CashDonationContentServlet")
-public class CashDonationContentServlet extends HttpServlet {
+@WebServlet("/CashDonationReceiptServlet")
+public class CashDonationReceiptServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CashDonationContentServlet() {
+    public CashDonationReceiptServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +31,16 @@ public class CashDonationContentServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+	
 		
-		int cidx = Integer.parseInt(request.getParameter("cidx"));
+		int midx = Integer.parseInt(request.getParameter("midx"));
 		//System.out.println(cidx);
-		AdminServiceImpl ad = new AdminServiceImpl();
-		CashDonationConVo gcv = new CashDonationConVo();
-		gcv = ad.getCashDonation(cidx);	
-		gcv.setCidx(cidx);
+		CashDonationServiceImpl cd = new CashDonationServiceImpl();
+		CashDonationConVo rcv = new CashDonationConVo();
+		rcv = cd.getReceipt(midx);	
+		rcv.setMidx(midx);
 		
-		request.setAttribute("gcv", gcv);
-		
+		request.setAttribute("rcv", rcv);
 	}
 
 	/**

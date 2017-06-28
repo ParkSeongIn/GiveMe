@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class CashDonationListVo {
 
+	private int rnum;
 	private int cidx;
 	private int midx;
 	private String mname;
@@ -18,7 +19,15 @@ public class CashDonationListVo {
 	private String cstate;
 	private String cpay;
 	private String capst;
+	private int dlidx;
+	private int apidx;
 	
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 	public int getCidx() {
 		return cidx;
 	}
@@ -103,6 +112,16 @@ public class CashDonationListVo {
 	public void setCapst(String capst) {
 		this.capst = capst;
 	}
-	
-	
+	public int getDlidx() {
+		return dlidx;
+	}
+	public void setDlidx(int dlidx) {
+		this.dlidx = dlidx;
+	}
+	public int getApidx() {
+		return apidx;
+	}
+	public void setApidx(int apidx) {
+		this.apidx = apidx;
+	}
 }

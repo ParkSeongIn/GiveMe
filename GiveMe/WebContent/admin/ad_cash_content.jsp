@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import ="java.util.*" %>
-<%@ page import ="service.admin.*" %>
+<%@ page import ="service.cashdonation.*" %>
 <% 
 	CashDonationConVo gcv = (CashDonationConVo) request.getAttribute("gcv");
 %>
@@ -32,7 +32,7 @@
 	</div> 
 	<div class="form-group">
     	<label for="midx">midx :</label>
-		<input class="form-control" name="mdx" id="midx" type="text" value="<%=gcv.getMidx() %>" readonly="readonly"/>
+		<input class="form-control" name="midx" id="midx" type="text" value="<%=gcv.getMidx() %>" readonly="readonly"/>
 	</div> 
 	<div class="form-group">
 	    <label for="mname">mname :</label>
@@ -52,7 +52,7 @@
 	 </div>
 	 <div class="form-group">
 	    <label for="dlgroup2">dlgroup2 :</label>
-	    <input class="form-control" name="dlgroup1" id="dlgroup1" type="text" value="<%=gcv.getDlgroup2() %>" readonly="readonly"/>
+	    <input class="form-control" name="dlgroup2" id="dlgroup2" type="text" value="<%=gcv.getDlgroup2() %>" readonly="readonly"/>
 	 </div>
 		<div class="form-group">
 	    <label for="dlplace">dlplace :</label>

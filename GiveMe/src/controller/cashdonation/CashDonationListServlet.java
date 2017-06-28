@@ -34,11 +34,11 @@ public class CashDonationListServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+	//	System.out.println("dddsss:");
 		CashDonationServiceImpl cd = new CashDonationServiceImpl();
 		ArrayList<CashDonationListVo> cdlist = cd.getCashDonationList();
 		
-		System.out.println(cdlist);
+	//	System.out.println(cdlist);
 		request.setAttribute("cdlist", cdlist);
 	}
 

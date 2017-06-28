@@ -22,39 +22,44 @@ public class CashDonationServiceImpl implements CashDonationService {
 		ResultSet rs = null; 
 		ArrayList<CashDonationListVo> cdlist = new ArrayList<CashDonationListVo>(); 
 		try { 
-		String	sql = "select * from "
-				+ "(select * from "
-				+ "(select rownum rn, AAA.* from "
-				+ "(select  AA.*,BB.dlgroup1, BB.dlgroup2,BB.dlplace from "
-				+ "( select tc.cidx,tm.midx, tm.mname, tc.cway, tc.cmoney, ta.apdbdate, tc.cstate, tc.capst, tc.dlidx, ta.apidx"
-				+ "	from table_member tm, "
-				+ "table_cashdonation tc, "
-				+ "table_allpay ta "
-				+ "where tm.midx = tc.midx "
-				+ "and tm.midx = ta.midx)AA, "
-				+ "table_donationlist BB  "
-				+ "where  AA.dlidx = BB.dlidx"
-				+ "order by AA.apidx desc)AAA"
-				+ ") "
-				+ "where  rn <=20) "
-				+ "where rn >=1"; 
+		String	sql = "select * from ("
+					+ "select * from ("
+					+ "select rownum rn, AAA.* from ("
+					+ "select  AA.*,BB.dlgroup1, BB.dlgroup2,BB.dlplace from ( "
+					+ "select tc.cidx,tm.midx, tm.mname, tc.cway, tc.cmoney, ta.apdbdate, tc.cstate, tc.capst, tc.dlidx, ta.apidx	"
+					+ "from table_member tm, table_cashdonation tc, table_allpay ta "
+					+ "where tm.midx = tc.midx "
+					+ "and tm.midx = ta.midx"
+					+ ")AA, table_donationlist BB  "
+					+ "where  AA.dlidx = BB.dlidx "
+					+ "order by AA.apidx desc"
+					+ ")AAA"
+					+ ") where  rn <=20"
+					+ ") where rn >=1"; 
 			pstmt = con.prepareStatement(sql); 
 			rs = pstmt.executeQuery(); 
-			
+			//System.out.println(sql);
 			while(rs.next()) { 
+				
+			//	System.out.println("ddd:"+rs.getInt(2));
+			//	System.out.println("ddds:"+rs.getTimestamp(7));
 			CashDonationListVo vo = new CashDonationListVo(); 
 			
-			vo.setCidx(rs.getInt(2));
-			vo.setMidx(rs.getInt(3)); 
-			vo.setMname(rs.getString(3));
-			vo.setCway(rs.getString(4));
-			vo.setDlgroup1(rs.getString(5));
-			vo.setDlgroup2(rs.getString(6));
-			vo.setDlplace(rs.getString(7)); 
-			vo.setCmoney(rs.getInt(8));
-			vo.setApdbdate(rs.getTimestamp(9));
-			vo.setCstate(rs.getString(10)); 	
-			vo.setCapst(rs.getString(11)); 	
+			vo.setRnum(rs.getInt("rnum"));
+			vo.setCidx(rs.getInt("cidx"));
+			vo.setMidx(rs.getInt("midx")); 
+			vo.setMname(rs.getString("mname"));
+			vo.setCway(rs.getString("cway"));
+			vo.setCmoney(rs.getInt("cmoney"));
+			vo.setApdbdate(rs.getTimestamp("apdbdate"));	
+			vo.setCstate(rs.getString("cstate")); 
+			vo.setCapst(rs.getString("capst"));
+			vo.setDlidx(rs.getInt("dlidx")); 
+			vo.setApidx(rs.getInt("apidx")); 
+			vo.setDlgroup1(rs.getString("dlgroup1"));
+			vo.setDlgroup2(rs.getString("dlgroup2"));
+			vo.setDlplace(rs.getString("dlplace"));
+			
 	
 			cdlist.add(vo); 
 			}
@@ -66,29 +71,80 @@ public class CashDonationServiceImpl implements CashDonationService {
 		return cdlist; 
 		}
 
+	@Override
+	public ArrayList<CashDonationListVo> getMypageCashDonationList() {
+		Connection con = dbconnect.getConnection(); 
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null; 
+		ArrayList<CashDonationListVo> mcdlist = new ArrayList<CashDonationListVo>(); 
+		try { 
+		String	sql = " select * from ("
+					+ "select * from ("
+					+ "select rownum rn, AAA.* from ("
+					+ "select  AA.*,BB.dlgroup1 from ("
+					+ "select tm.midx,tc.cway,tc.cmoney,tc.cpay,ta.apdbdate,tc.cstate,tc.capst, tc.dlidx, ta.apidx, tc.cidx"
+					+ "from table_member tm, table_cashdonation tc, table_allpay ta "
+					+ "where tm.midx = tc.midx "
+					+ "and tm.midx = ta.midx "
+					+ "and tm.midx = ?"
+					+ ")AA, table_donationlist BB "
+					+ "where AA.dlidx = BB.dlidx"
+					+ "order by AA.apidx desc"
+					+ ")AAA"
+					+ ") where rn <=20"
+					+ ") where rn >=1 "; 
+			pstmt = con.prepareStatement(sql); 
+			rs = pstmt.executeQuery(); 
+			
+			while(rs.next()) { 
+				
+			CashDonationListVo vo = new CashDonationListVo(); 
+			
+			vo.setRnum(rs.getInt("rnum"));
+			vo.setMidx(rs.getInt("midx"));
+			vo.setCway(rs.getString("cway"));
+			vo.setCmoney(rs.getInt("cmoney"));
+			vo.setCpay(rs.getString("cpay"));
+			vo.setApdbdate(rs.getTimestamp("apdbdate"));	
+			vo.setCstate(rs.getString("cstate")); 
+			vo.setCapst(rs.getString("capst"));
+			vo.setDlidx(rs.getInt("dlidx")); 
+			vo.setApidx(rs.getInt("apidx"));
+			vo.setCidx(rs.getInt("cidx"));
+			vo.setDlgroup1(rs.getString("dlgroup1"));
 	
+			mcdlist.add(vo); 
+			}
+		}catch(Exception e) { 
+			
+		}finally { 
+			DBClose.close(con,pstmt,rs); 
+			}
+		return mcdlist; 
+		}
 	
 	@Override
 	public int insertCashDonation(CashDonationVo vo) {
 		Connection con = dbconnect.getConnection(); 
 		PreparedStatement pstmt = null; 
 		
-		System.out.println(vo.getCmoney());
-		System.out.println(vo.getCway());
-		System.out.println(vo.getCreceipt());
-		System.out.println(vo.getCpaydate1());
-		System.out.println(vo.getCstate());
-		System.out.println(vo.getCpoint());
-		System.out.println(vo.getMidx());
-		System.out.println(vo.getDlidx());
-		System.out.println(vo.getCpay());
-		System.out.println(vo.getCapst());
+		System.out.println("cway"+vo.getCway());
+		System.out.println("cmoney"+vo.getCmoney());
+		System.out.println("creceipt"+vo.getCreceipt());
+		System.out.println("cpaydate1"+vo.getCpaydate1());
+		System.out.println("cstate"+vo.getCstate());
+		System.out.println("cpoint"+vo.getCpoint());
+		System.out.println("midx"+vo.getMidx());
+		System.out.println("dlidx"+vo.getDlidx());
+		System.out.println("cpay"+vo.getCpay());
+		System.out.println("capst"+vo.getCapst());
 		
 		int row = 0;
 		try { sql = "insert into table_cashdonation values(seq_cidx.nextval,?,?,?,?,sysdate,?,?,sysdate,?,?,?,?)"; 
 		//			insert into table_cashdonation values(seq_cidx.nextval,'P',20000,'Y',10,sysdate,'S',1000,sysdate,4,4,'C', 'Y'); 
 		
 		pstmt = con.prepareStatement(sql); 
+		//pstmt.setInt(1, vo.getMidx());
 		pstmt.setString(1, vo.getCway());
 		pstmt.setInt(2, vo.getCmoney()); 
 		pstmt.setString(3, vo.getCreceipt()); 
@@ -123,10 +179,50 @@ public class CashDonationServiceImpl implements CashDonationService {
 	}
 
 	@Override
-	public CashDonationVo getReceipt() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public CashDonationConVo getReceipt(int midx) {
+		Connection con = dbconnect.getConnection(); 
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+		CashDonationConVo rcv = null; 
+		
+		try { 
+			sql = "select tm.mname, tm.mpost, tm.maddr1, tm.maddr2, tm.mbirth, td.dlgroup1, td.dlgroup2, td.dlplace, tc.cmoney, ta.apdbdate "
+					+ "from table_member tm, table_cashdonation tc, table_allpay ta, table_donationlist td "
+					+ "where td.dlidx = tc.dlidx "
+					+ "and ta.cidx = tc.cidx "
+					+ "and ta.midx = tm.midx "
+					+ "and ta.apidx = ? "
+					+ "and tc.creceipt = Y";
+			pstmt = con.prepareStatement(sql); 
+			pstmt.setInt(1, midx);
+			rs = pstmt.executeQuery(); 
+			while(rs.next()) { 
+				rcv = new CashDonationConVo();
+				rcv.setMname(rs.getString("mname"));
+				rcv.setMpost(rs.getInt("mpost"));
+				rcv.setMaddr1(rs.getString("maddr1"));
+				rcv.setMaddr2(rs.getString("maddr2"));
+				rcv.setMbirth(rs.getInt("mbirth"));
+				rcv.setDlgroup1(rs.getString("dlgroup1"));
+				rcv.setDlgroup2(rs.getString("dlgroup2"));
+				rcv.setDlplace(rs.getString("dlplace"));
+				rcv.setCmoney(rs.getInt("cmoney"));
+				rcv.setCway(rs.getString("cway"));
+				rcv.setCpaydate1(rs.getString("cpaydate1"));
+				rcv.setDlgroup1(rs.getString("dlgroup1"));
+				rcv.setDlgroup2(rs.getString("dlgroup2"));
+				rcv.setDlplace(rs.getString("dlplace"));
+				rcv.setCmoney(rs.getInt("cmoney"));
+				rcv.setApdbdate(rs.getTimestamp("apdbdate"));
+				
+			} 
+		}catch(Exception e) {
+			//	System.out.println(e.getMessage());
+		}finally { 
+			DBClose.close(con,pstmt,rs);
+		} 
+	return rcv;
+	} 
 
 
 	public String pasing(String data) { 
