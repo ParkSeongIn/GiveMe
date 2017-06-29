@@ -31,7 +31,7 @@
 	<table class="table table-striped table-bordered table-hover" style="width:800px;margin:0 auto;text-align:center;">
 `
 		<tr>
-			<td style="width:20%">rnum</td>
+			
 			<td style="width:20%">cidx</td>
 			<td style="width:20%">회원번호 midx</td>
 			<td style="width:40%">회원이름 mname</td>
@@ -50,7 +50,7 @@
 		
 		<% for (CashDonationListVo cd : cdlist) {  %>
 		<tr>
-			<td><%=cd.getRnum() %></td>
+			
 			<td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/admin/CashDonationContentServlet.do?cidx=<%=cd.getCidx()%>"><%=cd.getCidx() %></a></td>
 			<td><%=cd.getMidx() %></td>
 			<td><%=cd.getMname() %></td>

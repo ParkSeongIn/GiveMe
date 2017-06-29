@@ -32,13 +32,12 @@ public class MypageCashDonationListServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	
-		request.setCharacterEncoding("UTF-8");
-		
+//		int midx = Integer.parseInt(request.getParameter("midx"));
+		int midx = 4;
 		CashDonationServiceImpl cd = new CashDonationServiceImpl();
-		ArrayList<CashDonationListVo> mcdlist = cd.getCashDonationList();
-		
+		ArrayList<CashDonationListVo> mcdlist = cd.getMypageCashDonationList(midx);
+		System.out.println(mcdlist);
 		request.setAttribute("mcdlist", mcdlist);
 	}
 

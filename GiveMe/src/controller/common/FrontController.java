@@ -59,7 +59,7 @@ public class FrontController extends HttpServlet {
 			this.view = "/mypage/cash_detail.jsp";
 			this.isRedirect = false;
 			
-		}		else if (command.equals("/controller/cashdonation/CashDonationInsertServlet.do")) {
+		}else if (command.equals("/controller/cashdonation/CashDonationInsertServlet.do")) {
 			
 			CashDonationInsertServlet cdis = new CashDonationInsertServlet();
 			cdis.doPost(request, response);
@@ -72,8 +72,8 @@ public class FrontController extends HttpServlet {
 			CashDonationInsertActionServlet cdas = new CashDonationInsertActionServlet();
 			cdas.doPost(request, response);
 			
-			this.view = "/controller/cashdonation/CashDonationListServlet.do";
-			this.isRedirect = false;
+			this.view = "/controller/cashdonation/CashDonationConfirmServlet.do";
+			this.isRedirect = true;
 			
 		}else if (command.equals("/controller/admin/CashDonationContentServlet.do")) {
 		//	System.out.println("TestOk");
@@ -84,11 +84,11 @@ public class FrontController extends HttpServlet {
 			this.isRedirect = false;
 		
 		}else if (command.equals("/controller/cashdonation/CashDonationReceiptServlet.do")) {
-				
+			//System.out.println("TTTTT");
 			CashDonationReceiptServlet cdrs = new CashDonationReceiptServlet();
 			cdrs.doPost(request, response);
 				
-			this.view = "/mypage/cash_receipt";
+			this.view = "/mypage/cash_receipt.jsp";
 			this.isRedirect = false;
 				
 //		}else if (command.equals("/Controller/QuestionContentServlet.do")) {

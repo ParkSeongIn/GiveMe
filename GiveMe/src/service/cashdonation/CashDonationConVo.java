@@ -20,6 +20,8 @@ public class CashDonationConVo {
 	private String maddr1;
 	private String maddr2;
 	private int mbirth;
+	private int apidx;
+	private int dlidx;
 	
 	public int getCidx() {
 		return cidx;
@@ -117,5 +119,16 @@ public class CashDonationConVo {
 	public void setMbirth(int mbirth) {
 		this.mbirth = mbirth;
 	}
-	
+	public int getApidx() {
+		return apidx;
+	}
+	public void setApidx(int apidx) {
+		this.apidx = apidx;
+	}
+	public int getDlidx() {
+		return dlidx;
+	}
+	public void setDlidx(int dlidx) {
+		this.dlidx = dlidx;
+	}
 }

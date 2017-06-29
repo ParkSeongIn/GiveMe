@@ -29,7 +29,7 @@
 	<table class="table table-striped table-bordered table-hover" style="width:800px;margin:0 auto;text-align:center;">
 `
 		<tr>
-			<td style="width:20%">rnum</td>
+		
 			<td style="width:20%">회원번호 midx</td>
 			<td style="width:40%">후원방법 cway</td>
 			<td style="width:40%">기부금액 cmoney</td>
@@ -45,7 +45,7 @@
 		
 		<% for (CashDonationListVo cd : mcdlist) {  %>
 		<tr>
-			<td><%=cd.getRnum() %></td>	
+			
 			<td><%=cd.getMidx() %></td>	
 			<td><%=cd.getCway() %></td>
 			<td><%=cd.getCmoney() %></td>
@@ -56,7 +56,8 @@
 			<td><%=cd.getApidx() %></td>			
 			<td><%=cd.getCidx() %></td>
 			<td><%=cd.getDlgroup1() %></td>
-			<td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/cashdonation/CashDonationReceiptServlet.do" style="width:100px;">출력</a><td>
+			<td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/cashdonation/CashDonationReceiptServlet.do?apidx=<%=cd.getApidx()%>" style="width:100px;">출력</a><td>
+			
 		</tr>
 		<% }%>
 		<tr>
