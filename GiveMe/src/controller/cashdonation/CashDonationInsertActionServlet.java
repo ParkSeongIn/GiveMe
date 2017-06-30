@@ -30,7 +30,6 @@ public class CashDonationInsertActionServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -72,7 +71,7 @@ public class CashDonationInsertActionServlet extends HttpServlet {
 	    cv.setCapst(capst);
 	    
 	    int row = cd.insertCashDonation(cv); 
-	    System.out.println(row);
+	    //System.out.println(row);
 	}
 
 	/**

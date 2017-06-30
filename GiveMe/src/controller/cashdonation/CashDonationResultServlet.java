@@ -1,30 +1,23 @@
 package controller.cashdonation;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.cashdonation.CashDonationListVo;
-import service.cashdonation.CashDonationServiceImpl;
-import service.cashdonation.CashDonationVo;
-
-
 /**
- * Servlet implementation class CashDonationListServlet
+ * Servlet implementation class CashDonationResultServlet
  */
-@WebServlet("/CashDonationListServlet")
-public class CashDonationListServlet extends HttpServlet {
+@WebServlet("/CashDonationResultServlet")
+public class CashDonationResultServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CashDonationListServlet() {
+    public CashDonationResultServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,14 +25,9 @@ public class CashDonationListServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//System.out.println("dddsss:");
-		CashDonationServiceImpl cd = new CashDonationServiceImpl();
-		ArrayList<CashDonationListVo> cdlist = cd.getCashDonationList();
-		
-	//	System.out.println(cdlist);
-		request.setAttribute("cdlist", cdlist);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

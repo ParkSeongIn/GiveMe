@@ -78,7 +78,7 @@
 <div style="width:800px;margin:0 auto;margin-top:100px;">
 
 <h1>현금기부 후원하기</h1>
-    <form id="addForm" action="<%=request.getContextPath()%>/controller/cashdonation/CashDonationInsertActionServlet.do" method="post">
+    <form id="addForm" action="<%=request.getContextPath()%>/controller/cashdonation/CashDonationConfirmServlet.do" method="post">
         <div class="form-group">
             <label for="cway">현금기부 방식</label>
             <input class="form-control" name="cway" id="cway" type="text" autocomplete="off"/>
@@ -120,9 +120,8 @@
             <input class="form-control" name="capst" id="capst" type="text" autocomplete="off"/>
         </div>
           <div>
-            <input class="btn btn-default" id="addButton" type="button" value="글입력"/>
-            <input class="btn btn-default" type="reset" value="초기화"/>
-            <a class="btn btn-default" href="<%=request.getContextPath()%>/controller/cashdonation/CashDonationListServlet.do">글목록</a>
+         	 <input class="btn btn-default" id="addButton" type="button" value="다음"/>
+            <a class="btn btn-default" href="<%=request.getContextPath()%>/main.jsp">취소</a>
         </div>
     </form>
 

@@ -230,9 +230,21 @@ public class CashDonationServiceImpl implements CashDonationService {
 				pstmt = con.prepareStatement(sql); 	
 				pstmt.setInt(1, cidx);
 				rs = pstmt.executeQuery(); 
-				
+				System.out.println(sql);
 				while(rs.next()) {
 					cv= new CashDonationVo();
+					
+					System.out.println("cway :"+rs.getString("cway"));
+					System.out.println("cmoney :"+rs.getString("cmoney"));
+					System.out.println("creceipt :"+rs.getString("creceipt"));
+					System.out.println("cpaydate1 :"+rs.getString("cpaydate1"));
+					System.out.println("cpaydate2 :"+rs.getString("cpaydate2"));
+					System.out.println("cpoint :"+rs.getString("cpoint"));
+					System.out.println("cdbdate :"+rs.getString("cdbdate"));
+					System.out.println("midx :"+rs.getString("midx"));
+					System.out.println("dlidx :"+rs.getString("dlidx"));
+					System.out.println("cpay :"+rs.getString("cpay"));
+					System.out.println("capst :"+rs.getString("capst"));
 					
 					cv.setCway(rs.getString("cway"));
 					cv.setCmoney(rs.getInt("cmoney"));

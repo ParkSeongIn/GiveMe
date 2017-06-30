@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.admin.CashDonationContentServlet;
+import controller.cashdonation.CashDonationConfirmServlet;
 import controller.cashdonation.CashDonationInsertActionServlet;
 import controller.cashdonation.CashDonationInsertServlet;
 import controller.cashdonation.CashDonationListServlet;
@@ -39,6 +40,9 @@ public class FrontController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
 		String contextPath = request.getContextPath(); 
 		String url = request.getRequestURI();
 		String command = url.substring(contextPath.length());
@@ -60,19 +64,35 @@ public class FrontController extends HttpServlet {
 			this.isRedirect = false;
 			
 		}else if (command.equals("/controller/cashdonation/CashDonationInsertServlet.do")) {
-			
+			System.out.println("TestINSERT");
 			CashDonationInsertServlet cdis = new CashDonationInsertServlet();
 			cdis.doPost(request, response);
 			
 			this.view = "/donation/cash_insert.jsp";
 			this.isRedirect = false;
 			
-		}else if (command.equals("/controller/cashdonation/CashDonationInsertActionServlet.do")) {
+		}else if (command.equals("/controller/cashdonation/CashDonationConfirmServlet.do")) {
+			System.out.println("TestCONFIRM");
+			CashDonationConfirmServlet cdcs = new CashDonationConfirmServlet();
+			cdcs.doPost(request, response);
 			
+			this.view = "/donation/cash_confirm.jsp";
+			this.isRedirect = false;
+			
+		}else if (command.equals("/controller/cashdonation/CashDonationInsertActionServlet.do")) {
+			System.out.println("TestINSERTACTION");
 			CashDonationInsertActionServlet cdas = new CashDonationInsertActionServlet();
 			cdas.doPost(request, response);
 			
-			this.view = "/controller/cashdonation/CashDonationConfirmServlet.do";
+			this.view = "/controller/cashdonation/CashDonationResultServlet.do";
+			this.isRedirect = true;
+			
+		}else if (command.equals("/controller/cashdonation/CashDonationResultServlet.do")) {
+			System.out.println("TestRESULT");
+			CashDonationInsertActionServlet cdas = new CashDonationInsertActionServlet();
+			cdas.doPost(request, response);
+			
+			this.view = "/donation/cash_result.jsp";
 			this.isRedirect = true;
 			
 		}else if (command.equals("/controller/admin/CashDonationContentServlet.do")) {
