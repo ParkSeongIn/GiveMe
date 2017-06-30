@@ -1,11 +1,16 @@
 package controller.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import service.admin.AdminServiceImpl;
+import service.member.MemberVo;
 
 /**
  * Servlet implementation class MemberListServlet
@@ -25,9 +30,14 @@ public class MemberListServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	    
+	    AdminServiceImpl asi = new AdminServiceImpl();
+	    ArrayList<MemberVo> list = asi.getMemberList();
+	//response.getWriter().append("Served at: ").append(request.getContextPath());
+	    
+	    request.setAttribute("list",  list);
 	}
 
 	/**
@@ -39,3 +49,4 @@ public class MemberListServlet extends HttpServlet {
 	}
 
 }
+

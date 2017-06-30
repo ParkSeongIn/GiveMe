@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,8 +15,8 @@
 			<div class="up1"> <!-- div up1 start -->
 				<ul class="side1">
 					<li><a href="#">Home</a></li>
-					<li><a href="#">로그인</a></li>
-					<li><a href="#">회원가입</a></li>
+					<li><a href="<%=request.getContextPath() %>/member/login.jsp">로그인</a></li>
+					<li><a href="<%=request.getContextPath()%>/member/join.jsp" >회원가입</a></li>
 					<li><a href="#">검색</a></li>
 				</ul>		
 			</div><!-- div up1 end -->
@@ -39,7 +38,7 @@
 					</li>
 					<li>후원하기
 						<ul>
-							<li><a href="#">현금기부</a></li>
+							<li><a href="<%=request.getContextPath()%>/controller/cashdonation/CashDonationInsertServlet.do">현금기부</a></li>
 							<li><a href="#">재능기부</a></li>					
 						</ul>	
 					</li>
