@@ -11,16 +11,6 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	//로그인 시 아이디 및 비밀번호 미 입력시 알림 기능.
-	function chkSubmit(){
-		var f = document.forms.member;
-		document.domain = "your domain";
-		opener.name = "openerNames";
-		f.target = opener.name;
-		f.action = "<%=request.getContextPath()%>/controller/MemberCheckLoginActionServlet.do";
-		f.submit();
-		self.close();
-		
-	}
 	
 	function chkValue(){
 		if(!document.member.mid.value){
@@ -54,7 +44,7 @@
 				<input type="text" class="form-control" id="mpwd" name="mpwd"/>
 				</div>
 			</div>
-			<button type="button" class="btn btn-default" style="float:right;" onclick="chkSubmit()">로그인</button>									
+			<button type="button" class="btn btn-default" style="float:right;" onclick="chkValue()">로그인</button>									
 		</form>	
 		
 	</div>
