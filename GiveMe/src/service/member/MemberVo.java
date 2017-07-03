@@ -23,7 +23,14 @@ public class MemberVo {
 	private Date mmdate;
 	private Date mbreakdate;
 	private Timestamp mdbdate;
+	private boolean login;
 	
+	public boolean isLogin() {
+		return login;
+	}
+	public void setLogin(boolean login) {
+		this.login = login;
+	}
 	public int getMidx() {
 		return midx;
 	}

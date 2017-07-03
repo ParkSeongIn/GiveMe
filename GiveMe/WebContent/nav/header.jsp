@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,11 +13,21 @@
 		</div><!-- upLeft end -->
 	 	
 	<!-- 	<div class="upRight">	 --><!-- upRight start -->
-			<div class="up1"> <!-- div up1 start -->
+			<div class="up1" id="login_box"> <!-- div up1 start -->
 				<ul class="side1">
 					<li><a href="#">Home</a></li>
-					<li><a href="<%=request.getContextPath() %>/member/login.jsp">로그인</a></li>
-					<li><a href="<%=request.getContextPath()%>/member/join.jsp" >회원가입</a></li>
+					<li><a href="<%=request.getContextPath() %>/controller/MemberCheckLoginServlet.do" >로그인</a></li>
+					<li><a href="<%=request.getContextPath()%>/controller/MemberInsertServlet.do'">회원가입</a></li> 
+					<li><a href="#">검색</a></li>
+				</ul>		
+			</div><!-- div up1 end -->
+			
+			<div class="up1" id="my_box" > <!-- div up1 start -->
+				<ul class="side1">
+					<li><a href="#">Home</a></li>
+					<li>${sessionScope.vo.mid}님 반갑습니다.</li>
+					<li><a href="#">마이페이지</a></li>
+					<li><a href="<%=request.getContextPath()%>/controller/MemberCheckLogoutServlet.do">로그아웃</a>
 					<li><a href="#">검색</a></li>
 				</ul>		
 			</div><!-- div up1 end -->
@@ -54,5 +65,25 @@
 					
 	<!-- 	</div> --><!-- upRight end -->
 	</div><!--  div mainup end-->
+	
+	
+<script>
+
+var chkLogIn = '<c:out value="${sessionScope.vo.login}" />';
+var login_box = document.getElementById("login_box"); 
+var my_box = document.getElementById("my_box");
+
+(function(){
+
+	if(chkLogIn == "true"){
+		login_box.style.display = "none";
+		my_box.style.display = "block";
+	}else{
+		login_box.style.display = "block";
+		my_box.style.display = "none";
+	}	
+})();
+
+</script>
 </body>
 </html>

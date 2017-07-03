@@ -1,65 +1,60 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>  
-     
-    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>  
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>·Î±×ÀÎ ÆäÀÌÁö</title>
-<% 
-	request.setCharacterEncoding("UTF-8");		
-%>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ë¡œê·¸ì¸ í˜ì´ì§€</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-	//·Î±×ÀÎ ½Ã ¾ÆÀÌµğ ¹× ºñ¹Ğ¹øÈ£ ¹Ì ÀÔ·Â½Ã ¾Ë¸² ±â´É.
-	function checkValue(){		
+	//ë¡œê·¸ì¸ ì‹œ ì•„ì´ë”” ë° ë¹„ë°€ë²ˆí˜¸ ë¯¸ ì…ë ¥ì‹œ ì•Œë¦¼ ê¸°ëŠ¥.
+	function chkSubmit(){
+		var f = document.forms.member;
+		document.domain = "your domain";
+		opener.name = "openerNames";
+		f.target = opener.name;
+		f.action = "<%=request.getContextPath()%>/controller/MemberCheckLoginActionServlet.do";
+		f.submit();
+		self.close();
 		
-		if(!document.member.mid.value){
-			alert("¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
-			document.member.mid.focus();
-			return false;
-			
-		}else if(!document.member.mpwd.value){
-			alert("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
-			document.member.mpwd.focus();
-			return false;
-		}		 
 	}
 	
-	//È¸¿ø°¡ÀÔ ¹öÆ° Å¬¸¯½Ã È¸¿ø°¡ÀÔ È­¸éÀ¸·Î ÀÌµ¿ÇÏ´Â ±â´É.
-//	function letgojoin(){
-//		location.href="join.jsp";
-//	}
+	function chkValue(){
+		if(!document.member.mid.value){
+			alert("ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
+			document.member.mid.focus();
+			return false;
+		}else if(!document.member.mpwd.value){
+			alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
+			document.member.mpwd.focus();
+			return false;
+		}else{
+			member.submit();
+			return true;	
+		}
+	}
 	
-	//¸ŞÀÎÈ­¸é ¹öÆ° Å¬¸¯½Ã ¸ŞÀÎÈ­¸éÀ¸·Î ÀÌµ¿ÇÏ´Â ±â´É.
-//	function letgomain(){
-//		a href="/WebContent/main/main.jsp";
-//	}
-</script>
+	</script>
 
 </head>
 <body>
-	<div id = "wrap">
-		<form name="member" method="post" 
-			action="<%=request.getContextPath()%>/MemberCheckLoginServlet.do" onsubmit="return checkValue()">
-			<table>
-				<tr>
-					<td>¾ÆÀÌµğ</td>
-					<td>
-						<input type="text" name="mid" maxlength="100">
-					</td>	
-				</tr>
+	<div class= "wrap">
+		<form name="member" method="post"  action="<%=request.getContextPath()%>/controller/MemberCheckLoginActionServlet.do">
+			<div class="panel panel-default">
+				<div class="id">
+				<label class="control-label">ì•„ì´ë””</label>
+				<input type="text" class="form-control" id="mid" name="mid"/>
+				</div>
 				
-				<tr>
-					<td>ºñ¹Ğ¹øÈ£</td>
-					<td>
-						<input type="password" name="mpwd" maxlength="100">						
-					</td>
-				</tr>					
-			</table>	
-			
-			<input type="submit" value="·Î±×ÀÎ">									
+				<div class="pw">
+				<label class="control-label">ë¹„ë°€ë²ˆí˜¸</label>
+				<input type="text" class="form-control" id="mpwd" name="mpwd"/>
+				</div>
+			</div>
+			<button type="button" class="btn btn-default" style="float:right;" onclick="chkSubmit()">ë¡œê·¸ì¸</button>									
 		</form>	
 		
 	</div>

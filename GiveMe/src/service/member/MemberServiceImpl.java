@@ -28,7 +28,7 @@ public class MemberServiceImpl implements MemberService{
 	dbconnect = new DBConnect();	
     }
     
-    
+    // 회원가입 처리
     @Override
     public int insertMember(MemberVo vo) {		
 	Connection con = dbconnect.getConnection();	
@@ -53,9 +53,8 @@ public class MemberServiceImpl implements MemberService{
 	    pstmt.setString(9, vo.getMaddr2());
 	    pstmt.setString(10, Values.grade_guest);	
 	    pstmt.setString(11, Values.value_in);	
-	    
-	    
 	    row=pstmt.executeUpdate();	//execute를 실행한 후 값을 row에 담는다.
+	
 	}catch(Exception e){
 	    System.out.println(e.getMessage());
 	}finally{
@@ -64,7 +63,7 @@ public class MemberServiceImpl implements MemberService{
 	return row;
     }   
 	   
-
+    // idx를 이용해 회원정보 출력
     @Override
     public MemberVo getMember(int midx) {	//회원관리-Content
 	// TODO Auto-generated method stub
@@ -113,7 +112,53 @@ public class MemberServiceImpl implements MemberService{
 	
 	return vo;
     }
-
+    @Override
+    public MemberVo getMember(String mid){
+    	Connection con = dbconnect.getConnection();	// con은 dbconnect 파일에 있는 getconnection을 불러옴.
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	MemberVo vo = null;	// 리턴값 vo가 메소드 내 지역변수이므로 가장 위로 빼서 맞춰줌
+    	
+    	try{
+    	    String sql = "select mgrade, midx, mid, "
+    	    	+ "mpwd, mname, mbirth, mphone, mmail, mpost, "
+    	    	+ "maddr1, maddr2, menter, mmdate, mbreakdate, mpoint "
+    	    	+ "from table_member where mid = ?";
+    	    
+    	    pstmt=con.prepareStatement(sql);
+    	    pstmt.setString(1, mid);
+    	    rs=pstmt.executeQuery();
+    	    
+    	   
+    	    
+    	    if(rs.next()){	// next = 쿼리를 실행해서 다음의 값이 있는지 확인
+    		vo = new MemberVo();
+    		
+    		vo.setMgrade(Values.grade_guest);
+    		vo.setMidx(rs.getInt("midx"));
+    		vo.setMid(rs.getString("mid"));
+    		vo.setMpwd(rs.getString("mpwd"));
+    		vo.setMname(rs.getString("mname"));
+    		vo.setMbirth(rs.getInt("mbirth"));
+    		vo.setMphone(rs.getInt("mphone"));
+    		vo.setMmail(rs.getString("mmail"));
+    		vo.setMpost(rs.getInt("mpost"));
+    		vo.setMaddr1(rs.getString("maddr1"));
+    		vo.setMaddr2(rs.getString("maddr2"));
+    		vo.setMenter(rs.getDate("menter"));
+    		vo.setMmdate(rs.getDate("mmdate"));
+    		vo.setMbreakdate(rs.getDate("mbreakdate"));
+    		vo.setMpoint(rs.getInt("mpoint"));
+    		
+    	    }
+    	}catch(Exception e){
+    	    System.out.println(e.getMessage());
+    	}finally{
+    	    DBClose.close(con, pstmt, rs);
+    	}
+    	
+    	return vo;
+    }
     @Override
     public MemberVo modifyMember(int midx) {//개인정보수정에서 불러올 정보 메소드
 	// TODO Auto-generated method stub
@@ -199,32 +244,35 @@ public class MemberServiceImpl implements MemberService{
     
     
     @Override	//로그인 시 아이디, 비밀번호 체크 메소드.
-    public int checkLogin(MemberVo vo) {
+    public int checkLogin(String mid, String mpwd) {
 	// TODO Auto-generated method stub
 	Connection con = dbconnect.getConnection();
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;	
-		
-	int result = -1;
-	System.out.println(result);
+	int result = 0;
 	try{  	    
 	    String sql="select mpwd "
 	    	+ "from table_member "
 	    	+ "where mid=?";    	
-	 
+	    
 	    pstmt=con.prepareStatement(sql);
-	    pstmt.setString(1, vo.getMid());	    
+	    pstmt.setString(1, mid);	    
 	    rs=pstmt.executeQuery();
-	    	
-	    if(rs.next()){
-		if(rs.getString("mpwd").equals(vo.getMpwd())){
-		    result=1;
-		}else{
-		    result=0;
-		}
+	    
+	    boolean chk = rs.next();
+	    
+	    if(chk == false){
+	    	result = Values.login_fali_id;
 	    }else{
-		result=-1;
+	    	String get_pwd = rs.getString("mpwd");
+	    
+	    	if(get_pwd.equals(mpwd)){
+	    	result = Values.login_success;
+	    }else{
+	    	result = Values.login_fail_pw;
 	    }
+	    }
+	
 	}catch(Exception e){
 	    System.out.println("CheckLogin error" + e);
 	}finally{
