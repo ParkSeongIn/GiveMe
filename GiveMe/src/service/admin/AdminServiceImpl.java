@@ -14,11 +14,11 @@ import service.member.MemberVo;
 
 public class AdminServiceImpl implements AdminService{
     
-    DBConnect dbconnect = null; //dbconnect ���� �ʱ�ȭ��.
-    String sql="";	//sql ���� �������� ����.
+    DBConnect dbconnect = null;
+    String sql="";	
     
-    public AdminServiceImpl(){	//������(Ŭ������� �����ϹǷ�)
-	dbconnect = new DBConnect();	//dbconnect ��ü�� ���� dbconnect ã�� ���� ������ ��ü�� �����ؼ� ����ϰڴٴ� �� 
+    public AdminServiceImpl(){	
+	dbconnect = new DBConnect();	
     }
 
     

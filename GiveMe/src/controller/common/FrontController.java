@@ -16,6 +16,10 @@ import controller.cashdonation.CashDonationInsertServlet;
 import controller.cashdonation.CashDonationListServlet;
 import controller.cashdonation.CashDonationReceiptServlet;
 import controller.member.MypageCashDonationListServlet;
+import controller.question.QuestionContentServlet;
+import controller.question.QuestionListServlet;
+import controller.question.QuestionWriteActionServlet;
+import controller.question.QuestionWriteServlet;
 
 
 /**
@@ -64,7 +68,7 @@ public class FrontController extends HttpServlet {
 			this.isRedirect = false;
 			
 		}else if (command.equals("/controller/cashdonation/CashDonationInsertServlet.do")) {
-			System.out.println("TestINSERT");
+			//System.out.println("TestINSERT");
 			CashDonationInsertServlet cdis = new CashDonationInsertServlet();
 			cdis.doPost(request, response);
 			
@@ -72,7 +76,7 @@ public class FrontController extends HttpServlet {
 			this.isRedirect = false;
 			
 		}else if (command.equals("/controller/cashdonation/CashDonationConfirmServlet.do")) {
-			System.out.println("TestCONFIRM");
+			//System.out.println("TestCONFIRM");
 			CashDonationConfirmServlet cdcs = new CashDonationConfirmServlet();
 			cdcs.doPost(request, response);
 			
@@ -80,7 +84,7 @@ public class FrontController extends HttpServlet {
 			this.isRedirect = false;
 			
 		}else if (command.equals("/controller/cashdonation/CashDonationInsertActionServlet.do")) {
-			System.out.println("TestINSERTACTION");
+			//System.out.println("TestINSERTACTION");
 			CashDonationInsertActionServlet cdas = new CashDonationInsertActionServlet();
 			cdas.doPost(request, response);
 			
@@ -88,7 +92,7 @@ public class FrontController extends HttpServlet {
 			this.isRedirect = true;
 			
 		}else if (command.equals("/controller/cashdonation/CashDonationResultServlet.do")) {
-			System.out.println("TestRESULT");
+			//System.out.println("TestRESULT");
 			CashDonationInsertActionServlet cdas = new CashDonationInsertActionServlet();
 			cdas.doPost(request, response);
 			
@@ -110,16 +114,39 @@ public class FrontController extends HttpServlet {
 				
 			this.view = "/mypage/cash_receipt.jsp";
 			this.isRedirect = false;
+		}else if (command.equals("/controller/question/QuestionListServlet.do")) {
+	
+			QuestionListServlet cls = new QuestionListServlet();
+			cls.doPost(request, response);
+			
+			this.view = "/community/qna_list.jsp";
+			this.isRedirect = false;
+			
+		}else if (command.equals("/controller/question/QuestionWriteServlet.do")) {
+			
+				QuestionWriteServlet cws = new QuestionWriteServlet();
+				cws.doGet(request, response);
 				
-//		}else if (command.equals("/Controller/QuestionContentServlet.do")) {
-//			
-//			QuestionContentServlet qcs = new QuestionContentServlet();
-//			qcs.doPost(request, response);
-//			
-//			this.view= "/community/qna_content.jsp";
-//			this.isRedirect = false;
-//			
-//		}else if (command.equals("/Controller/QuestionModifyServlet.do")) {
+				this.view = "/community/qna_write.jsp";
+				this.isRedirect = false;
+				
+		}else if (command.equals("/controller/question/QuestionWriteActionServlet.do")) {
+			
+			QuestionWriteActionServlet cwas = new QuestionWriteActionServlet();
+			cwas.doPost(request, response);
+			
+			this.view = "/controller/QuestionListServlet.do";
+			this.isRedirect = true;		
+		}else if (command.equals("/controller/question/QuestionContentServlet.do")) {
+			
+			QuestionContentServlet qcs = new QuestionContentServlet();
+			qcs.doPost(request, response);
+			
+			this.view= "/community/qna_content.jsp";
+			this.isRedirect = false;
+			
+		}
+//		else if (command.equals("/Controller/QuestionModifyServlet.do")) {
 //			
 //			QuestionModifyServlet qms = new QuestionModifyServlet();
 //			qms.doPost(request, response);
@@ -199,8 +226,7 @@ public class FrontController extends HttpServlet {
 //			
 //			this.view= "/Controller/QuestionListServlet.do";
 //			this.isRedirect = true;
-			
-		}	
+//	}
 		if(this.isRedirect){
 			response.sendRedirect(contextPath+view);
 		}else{

@@ -29,7 +29,6 @@
 	ArrayList<CashDonationListVo> cdlist = (ArrayList<CashDonationListVo>) request.getAttribute("cdlist");
 %>
 	<table class="table table-striped table-bordered table-hover" style="width:800px;margin:0 auto;text-align:center;">
-`
 		<tr>
 			
 			<td style="width:20%">cidx</td>
