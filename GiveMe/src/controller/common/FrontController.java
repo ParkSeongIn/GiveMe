@@ -1,6 +1,8 @@
 package controller.common;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,23 +11,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.admin.MemberListServlet;
+import controller.member.MemberChangePwdActServlet;
 import controller.member.MemberCheckLoginActionServlet;
 import controller.member.MemberCheckLoginServlet;
 import controller.member.MemberCheckLogoutServlet;
 import controller.member.MemberCheckidServlet;
 import controller.member.MemberContentServlet;
 import controller.member.MemberFindidServlet;
+import controller.member.MemberFindpwdServlet;
 import controller.member.MemberInsertActionServlet;
 import controller.member.MemberInsertServlet;
 import controller.member.MemberModifyActServlet;
 import controller.member.MemberModifyServlet;
 import controller.admin.CashDonationContentServlet;
+import controller.admin.DonationContentServlet;
+import controller.admin.DonationDeleteServlet;
+import controller.admin.DonationListServlet;
+import controller.admin.DonationModifyActionServlet;
+import controller.admin.DonationModifyServlet;
+import controller.admin.DonationWriteActionServlet;
+import controller.admin.DonationWriteServlet;
 import controller.cashdonation.CashDonationConfirmServlet;
 import controller.cashdonation.CashDonationInsertActionServlet;
 import controller.cashdonation.CashDonationInsertServlet;
 import controller.cashdonation.CashDonationListServlet;
 import controller.cashdonation.CashDonationReceiptServlet;
 import controller.member.MypageCashDonationListServlet;
+import service.admin.DonationListVo;
 
 /**
  * Servlet implementation class FrontController
@@ -54,7 +66,7 @@ public class FrontController extends HttpServlet {
 		    String command = url.substring(contextPath.length());
 		    
 		    //회원
-		    if(command.equals("/MemberListServlet.do")){	//boolean = true;
+		    if(command.equals("/MemberListServlet.do")){
 		    	MemberListServlet ml = new MemberListServlet();
 		    	ml.doGet(request, response);
 			
@@ -75,18 +87,18 @@ public class FrontController extends HttpServlet {
 		    	this.view = "/main.jsp";
 		    	this.isRedirect = true;
 		    	
-		    }else if(command.equals("/MemberContentServlet.do")){
+		    }else if(command.equals("/controller/MemberContentServlet.do")){
 		    	MemberContentServlet mcs = new MemberContentServlet();
 		    	mcs.doGet(request, response);
 			
-		    	this.view="/ad_member_content.jsp";
+		    	this.view="/admin/ad_member_content.jsp";
 		    	this.isRedirect=false;
 			
-		    }else if(command.equals("/MemberModifyServlet.do")){
+		    }else if(command.equals("/controller/MemberModifyServlet.do")){
 			MemberModifyServlet mms = new MemberModifyServlet();
 			mms.doGet(request, response);
 			
-			this.view="/member_modify.jsp";
+			this.view="/mypage/member_modify.jsp";
 			this.isRedirect=false;
 			
 		    }else if(command.equals("/MemberModifyActServlet.do")){
@@ -107,14 +119,14 @@ public class FrontController extends HttpServlet {
 		    	MemberCheckLoginActionServlet mclas = new MemberCheckLoginActionServlet();
 		    	mclas.doPost(request, response);
 		    	
-		    	this.view="/main.jsp";
+		    	this.view="/main/main.jsp";
 		    	this.isRedirect=true;
 			
-		    }else if(command.equals("/MemberFindidServlet.do")){
+		    }else if(command.equals("/controller/MemberFindidServlet.do")){
 		    	MemberFindidServlet mfs = new MemberFindidServlet();
 		    	mfs.doGet(request, response);
 			
-		    	this.view="/login.jsp";
+		    	this.view="/member/find_id_result.jsp";
 		    	this.isRedirect=false;
 		   
 		    }else if(command.equals("/controller/MemberCheckidServlet.do")){
@@ -128,10 +140,24 @@ public class FrontController extends HttpServlet {
 		    	MemberCheckLogoutServlet mcls = new MemberCheckLogoutServlet();
 		    	mcls.doPost(request, response);
 		    	
-		    	this.view="/main.jsp";
+		    	this.view="/main/main.jsp";
 		    	this.isRedirect=true;
+		   
+		    }else if(command.equals("/controller/MemberFindpwdServlet.do")){
+		    	MemberFindpwdServlet mfps = new MemberFindpwdServlet();
+		    	mfps.doGet(request, response);
+		    	
+		    	this.view="/member/change_pwd.jsp";
+		    	this.isRedirect= false;
 		    
-		    	// 현금기부
+		    }else if(command.equals("/controller/MemberChangePwdActServlet.do")){
+		    	MemberChangePwdActServlet mcpa = new MemberChangePwdActServlet();
+		    	mcpa.doGet(request,response);
+		    	
+		    	this.view = "/member/change_pwd_result.jsp";
+		    	this.isRedirect = false;
+		    
+		    // 현금기부
 		    }else if(command.equals("/controller/cashdonation/CashDonationListServlet.do")){
 
 				CashDonationListServlet cdls = new CashDonationListServlet();
@@ -195,7 +221,10 @@ public class FrontController extends HttpServlet {
 					
 				this.view = "/mypage/cash_receipt.jsp";
 				this.isRedirect = false;
-		    
+		   
+				// 기부처 리스트
+			
+				
 			}if(this.isRedirect){
 				response.sendRedirect(contextPath+view);
 			}else{

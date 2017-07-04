@@ -14,7 +14,7 @@
 			<div class="homename"></div>
 				<div class="image" ></div>
 					<div class="indexcategory">
-						<div class="home"><a class="btn btn-default" href="main.jsp" >HOME</a></div>
+						<div class="home"><a class="btn btn-default" href="<%=request.getContextPath() %>/main/main.jsp" >HOME</a></div>
 						<div class="talent"><a class="btn btn-default" href="#" >재능기부</a></div>
 						<div class="cash"><a class="btn btn-default" href="#" >현금기부</a></div>
 					</div>

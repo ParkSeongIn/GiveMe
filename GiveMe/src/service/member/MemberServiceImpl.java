@@ -324,16 +324,15 @@ public class MemberServiceImpl implements MemberService{
 
 
     @Override
-    public int findMid(MemberVo vo) {
+    public String findMid(MemberVo vo) {
 	// TODO Auto-generated method stub
 	Connection con = dbconnect.getConnection();
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
-	
-	int result = -1;
+	String mid = null;
 	
 	try{  	    
-	    String sql="select mid, mname, mphone "
+	    String sql="select mid "
 	    	+ "from table_member "
 	    	+ "where mname=? and mphone=?";    	
 	    
@@ -341,33 +340,138 @@ public class MemberServiceImpl implements MemberService{
 	    pstmt.setString(1, vo.getMname());
 	    pstmt.setInt(2, vo.getMphone());
 	    rs=pstmt.executeQuery();
-	    	
-	    if(rs.next()){	//입력된 아이디에 해당하는 비번이 있을 경우 구문.
-		if(rs.getString("mname").equals(vo.getMname()) && Integer.parseInt(rs.getString("mphone"),10) == vo.getMphone()){		    
-		    result = 1;	//이름과 전화번호가 일치할 때.
-		}else{
-		    result=0;	//이름과 전화번호가 불일치 할 때.
-		}
-	    }else{
-		result=-1;	//없는 이름과 전화번호 일 때.
+	    
+	    
+	    if(rs.next()){
+	    	mid = rs.getString("mid");
 	    }
+	}catch(Exception e){
+	    System.out.println(e.getMessage());
+	}finally{
+	    DBClose.close(con, pstmt, rs);
+	}
+	return mid;	
+    }
+
+    @Override
+    public MemberVo findMidGetCon(MemberVo vo) {
+    	// TODO Auto-generated method stub
+    	Connection con = dbconnect.getConnection();
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	
+    	MemberVo mvo = new MemberVo();
+    	
+    	try{  	    
+    	    String sql="select mid "
+    	    	+ "from table_member "
+    	    	+ "where mname=? and mphone=?";    	
+    	    
+    	    pstmt=con.prepareStatement(sql);
+    	    pstmt.setString(1, vo.getMname());
+    	    pstmt.setInt(2, vo.getMphone());
+    	    rs=pstmt.executeQuery();
+    	  
+    	while(rs.next()){
+    	    mvo.setMid(rs.getString("mid"));
+    	}
+    		
+    	}catch(Exception e){
+    	    System.out.println(e.getMessage());
+    	}finally{
+    	    DBClose.close(con, pstmt, rs);
+    	}
+    	return mvo;	
+        }
+   
+    @Override
+    public boolean findMpwd(MemberVo vo) {
+	// TODO Auto-generated method stub
+	Connection con = dbconnect.getConnection();
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	boolean chk= true;
+	
+	try{  	    
+	    String sql="select mpwd, mid, mname, mphone "
+	    	+ "from table_member "
+	    	+ "where mid=? and mname=? and mphone=?";    	
+	    
+	    pstmt=con.prepareStatement(sql);
+	    pstmt.setString(1, vo.getMid());
+	    pstmt.setString(2, vo.getMname());
+	    pstmt.setInt(3, vo.getMphone());
+	    rs=pstmt.executeQuery();
+	    	
+	    chk = rs.next();
 		
 	}catch(Exception e){
 	    System.out.println(e.getMessage());
 	}finally{
 	    DBClose.close(con, pstmt, rs);
 	}
-	return result;	
+	return chk;	
     }
 
 
-	@Override
-	public int Findid(MemberVo vo) {
-		// TODO Auto-generated method stub
-		return 0;
-	} 
-
+    @Override
+    public MemberVo findMpwdGetCon(MemberVo vo) {
+	// TODO Auto-generated method stub
+	Connection con = dbconnect.getConnection();
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
+	MemberVo mvo = new MemberVo();
+	
+	try{  	    
+	    String sql="select mpwd "
+	    	+ "from table_member "
+	    	+ "where mid=? and mname=? and mphone=?";    	
+	    
+	    pstmt=con.prepareStatement(sql);
+	    pstmt.setString(1, vo.getMid());
+	    pstmt.setString(2, vo.getMname());
+	    pstmt.setInt(3, vo.getMphone());
+	    rs=pstmt.executeQuery();
+	  
+	while(rs.next()){
+	    mvo.setMpwd(rs.getString("mpwd"));
+	}
 		
+	}catch(Exception e){
+	    System.out.println(e.getMessage());
+	}finally{
+	    DBClose.close(con, pstmt, rs);
+	}
+	return mvo;	
+    }
+    @Override
+    public int passwordupdateMember(String mid, String mpwd) {
+	// TODO Auto-generated method stub
+	Connection con = dbconnect.getConnection();
+	PreparedStatement pstmt = null;
+	int result = 0;
+	
+	try{
+	    String sql="update table_member "
+	    	+ "set mpwd=? "	    	
+	    	+ "where mid=?";
+	    
+	    pstmt=con.prepareStatement(sql);
+	    
+	    pstmt.setString(1, mpwd);	    	    
+	    pstmt.setString(2, mid);
+	   	   
+	 result=pstmt.executeUpdate();
+	    
+	}catch(Exception e){
+	    System.out.println(e.getMessage());
+	}finally{
+	    DBClose.close(con, pstmt);
+	}
+	return result;
+	
+    }
 	
 	
 	

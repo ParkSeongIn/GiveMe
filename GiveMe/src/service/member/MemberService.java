@@ -11,11 +11,11 @@ public interface MemberService {
 	int totalPoint();
 	int modifyMemberValue();
 	boolean checkId(String mid);	//아이디 중복 검사 메소드.
-	int findMid(MemberVo vo);
-	int Findid(MemberVo vo);
-	
-	
-	
+	String findMid(MemberVo vo);
+	public MemberVo findMidGetCon(MemberVo vo); 
+	public boolean findMpwd(MemberVo vo);
+	public MemberVo findMpwdGetCon(MemberVo vo);
+	public int passwordupdateMember(String mid, String mpwd);
 	
 	
 	

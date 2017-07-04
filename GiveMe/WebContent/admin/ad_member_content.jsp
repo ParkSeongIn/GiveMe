@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "service.member.MemberVo" %>
 <%@ page import = "service.member.MemberServiceImpl" %>  
 <%@ page import = "common.Values" %>  
@@ -7,7 +6,6 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	MemberVo vo = (MemberVo)request.getAttribute("vo");
-	int midx = (Integer)request.getAttribute("midx");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -136,93 +134,12 @@
 			
 			<div>			
 	  			<input class="btn btn-default" id="DeleteButton" type="button" value="탈퇴" onclick="de()"/>
-	  			<a class="btn btn-default" href="<%=request.getContextPath()%>/controller.member/MemberModifyServlet.do?midx=<%=midx %>">수정</a>	  			
+	  			<a class="btn btn-default" href="<%=request.getContextPath()%>/controller.member/MemberModifyServlet.do">수정</a>	  			
 	  			<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/MemberListServlet.do">취소</a>
   			</div>	
   		
 		</div>
-<!-- 		
-		<div class="guest">
-			<tr>
-				<td> 아이디</td>
-				<td>					
-								
-				</td>
-			</tr>
-			
-			<tr>
-				<td> 비밀번호 </td>
-				<td>
-					<input type="password" name="pwd" maxlength="100"
-						
-				</td>
-			</tr>			
-			
-			<tr>
-				<td> 이름 </td>
-				<td>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td> 생년월일 </td>
-				<td>
-								
-				</td>
-			</tr>
-			
-			<tr>
-				<td> 핸드폰 번호</td>
-				<td>
-					<input type="text" name="phone1" maxlength="20"					
-						value=>				
-				</td>	
-			</tr>
-			
-			<tr>
-				<td> email</td>
-				<td>
-					<input type="text" name="mail1" maxlength="100"
-						value=>					
-				</td>
-			</tr>
-			
-			<tr>
-				<td>우편번호</td>
-				<td>
-					<input type="text" name="post" maxlength="20"
-						value=>
-					<input type="button" value="우편번호 검색">
-				</td>
-			</tr>
-			
-			<tr>
-				<td>주소1</td>
-				<td>
-					<input type="text" name="addr1" maxlength="500"
-						value=>
-				</td>
-			</tr>
-			
-			<tr>
-				<td>주소2</td>	
-				<td>
-					<input type="text" name="addr2" maxlength="500"
-						value=>
-				</td>
-			</tr>			
-			
-			<tr>
-				<td>총 마일리지</td>	
-				<td>
-					<input type="text" name="mpoint" maxlength="500"
-						>
-				</td>
-			</tr>
-			
-		</div>	
- -->		
+
 		</table>	
 		<br>				
 	

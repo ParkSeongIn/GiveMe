@@ -1,4 +1,4 @@
-package controller.admin;
+package controller.member;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.member.MemberServiceImpl;
+import service.member.MemberVo;
+
 /**
- * Servlet implementation class DonationModifyServlet
+ * Servlet implementation class MemberChangePwdActServlet
  */
-@WebServlet("/DonationModifyServlet")
-public class DonationModifyServlet extends HttpServlet {
+@WebServlet("/MemberChangePwdActServlet")
+public class MemberChangePwdActServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DonationModifyServlet() {
+    public MemberChangePwdActServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,15 +30,29 @@ public class DonationModifyServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	
+		String mid = request.getParameter("mid");
+    	String mpwd = request.getParameter("mpwd");	    		
+    	MemberServiceImpl msi = new MemberServiceImpl();
+    	
+    	MemberVo vo = new MemberVo();
+    	System.out.println(mid);
+    	System.out.println(mpwd);
+    	vo.setMid(mid);
+		vo.setMpwd(mpwd);
+    	
+		int result = msi.passwordupdateMember(mid, mpwd);
 	}
+		
+
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+    	
 	}
-
 }

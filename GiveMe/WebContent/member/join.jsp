@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -81,136 +80,120 @@
 		
 		
 	</script>
-
+<style>
+.panel-body{
+	width:900px;
+	height:970px;
+	padding-left: 300px;
+	margin-left: 280px;
+}
+label{
+	padding-right: 240px;
+	margin-bottom: 10px;
+}
+.form-control{
+	position:relative;
+	top: -36px;
+    left: 101px;
+}
+.form-control{
+	width:300px;
+}
+</style>
 
 </head>
 <body>
 
 <div id="wrap">
-	<br><br>
-	회원가입
-	<br><br>
+	<c:import url="/nav/header.jsp"/>
 	
-	<!-- 입력한 값을 전송하기 위해 form 태그를 사용 -->
-	<!-- 파라미터(값) 전송은 post방식, 전송할 페이지는 joinOk.jsp -->
+	<div class="panel-body">
 	<form method="post"  action="<%=request.getContextPath()%>/controller/MemberInsertActionServlet.do" name="member" onsubmit="return checkValue()">
-		<table>
-			<tr>
-				<td> 아이디</td>
-				<td>
-					<input type="text" name="mid" maxlength="100" onkeydown="inputIdChk()">					
+		<div class="form-group">
+				<label class="control-label" for="mid">아이디</label>
+					<input type="text" name="mid" maxlength="100" onkeydown="inputIdChk()">
+						
 					<input type="button" value="중복확인" onClick="checkid()">
 					<input type="hidden" name="idDuplication" value="idUncheck" >
-
-
-				</td>
-			</tr>
+				
+		</div>
+		
+			<div class="form-group">
+				<label class="control-label" for="mpwd">비밀번호</label>
+					<input type="password" class="form-control" id="mpwd" name="mpwd"/>
+				
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="mpwdcheck" style="padding-rigth:40px;">비밀번호 확인</label>
+				
+					<input type="password" class="form-control" id="mpwdcheck" name="mpwdcheck"/>
+				
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="mname">이름</label>
+				
+					<input type="text" class="form-control" id="mname" name="mname"/>
 			
-			<tr>
-				<td> 비밀번호 </td>
-				<td>
-					<input type="password" name="mpwd" maxlength="100">
-				</td>
-			</tr>
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="mbirth">생년월일</label>
+				
+					<input type="text" class="form-control" id="mbirth" name="mbirth"/>예: YYYYMMDD(8자리)
 			
-			<tr>
-				<td> 비밀번호 확인 </td>
-				<td>
-					<input type="password" name="mpwdcheck" maxlength="100">
-				</td>
-			</tr>
-			
-			<tr>
-				<td> 이름 </td>
-				<td>
-					<input type="text" name="mname" maxlength="100">
-				</td>
-			</tr>
-			
-			<tr>
-				<td> 생년월일 </td>
-				<td>
-					<input type="text" name="mbirth" maxlength="100">예: YYYYMMDD(8자리)					
-				</td>
-			</tr>				
-			
-			<tr>
-				<td> 핸드폰 번호</td>
-				<td>
-					<select name="mphone">
+			</div>
+				
+			<div class="form-group">
+				<label class="control-label" for="mphone">핸드폰 번호</label>
+				<select name="mphone">
 						<option value="010">010</option>
 						<option value="011">011</option>
 						<option value="017">017</option>
 						<option value="019">019</option>
 					</select>
-					<input type="text" name="mphone1" maxlength="20">
-					<input type="text" name="mphone2" maxlength="20">
-				</td>	
-			</tr>
-			
-			<tr>
-				<td> E-mail</td>
-				<td>
-					<input type="text" name="mmail1" maxlength="100">@
-					<select name=mmail2>
+					<input type="text" class="form-control" name="mphone1" maxlength="20">
+					<input type="text" class="form-control" name="mphone2" maxlength="20">
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="mmail1">E-mail</label>
+				<input type="text" class="form-control" name="mphone1" maxlength="20">@
+				<select name=mmail2>
 						<option value="naver.com">네이버</option>
 						<option value="hanmail.net">다음</option>
 						<option value="google.com">구글</option>
 						<option value="yahoo.com">야후</option>
 						<option value="nate.com">네이트</option>						
 					</select>
-				</td>
-			</tr>
+			</div>
 			
-			<tr>
-				<td>우편번호</td>
-				<td>
-					<input type="text" name="mpost" maxlength="20">
+			<div class="form-group">
+				<label class="control-label" for="mpost">우편번호</label>
+		
+					<input type="text" class="form-control" id="mpost" name="mpost"/>
 					<button type="button" onclick="show_address_box()">주소 검색</button>
-				</td>
-			</tr>
+				
+			</div>
 			
-			<tr>
-				<td>주소1</td>
-				<td>
-					<input type="text" name="maddr1" maxlength="500">
-				</td>
-			</tr>
+			<div class="form-group">
+				<label class="control-label" for="maddr1">주소1</label>
+				
+					<input type="text" class="form-control" id="maddr1" name="maddr1"/>
+				
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="maddr2">주소2</label>
 			
-			<tr>
-				<td>주소2</td>	
-				<td>
-					<input type="text" name="maddr2" maxlength="500">
-				</td>
-			</tr>
-			<tr>
-				<td>회원등급</td>	
-				<td>
-					<input type="hidden" name="mgrade" maxlength="500">
-				</td>
-			</tr>
+					<input type="text" class="form-control" id="maddr2" name="maddr2"/>
 			
-			<tr>
-				<td>회원상태</td>	
-				<td>
-					<input type="hidden" name="mvalue" maxlength="500">
-				</td>
-			</tr>
+			</div>
 			
 			
-		</table>	
-		<br>	
-			<input type="submit" value="회원등록">
-			<input type="button" value="취소" onclick="goLogin()">
+			<input type="submit"  class="btn btn-default" value="회원등록">
+			<input type="button" class="btn btn-default"  value="취소" onclick="goLogin()">
 	</form>
 </div>
 
-<form class="form-group">
-<%-- 다음 주소 검색 --%>
-<div id="address_box" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
-<img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 </div>
-<%-- 다음 주소 검색 --%>
-</form>
+
+<c:import url="/nav/footer.jsp"/>	
 </body>
 </html>

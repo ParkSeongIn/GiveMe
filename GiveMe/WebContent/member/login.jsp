@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>  
-
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,26 +28,44 @@
 		}
 	}
 	
-	</script>
-
+</script>
+<style>
+.panel-body{
+	width:700px;
+	height:300px;
+	padding-left: 300px;
+	margin-left: 280px;
+}
+label{
+	padding-right: 240px;
+	margin-bottom: 10px;
+}
+</style>
 </head>
 <body>
-	<div class= "wrap">
-		<form name="member" method="post"  action="<%=request.getContextPath()%>/controller/MemberCheckLoginActionServlet.do">
-			<div class="panel panel-default">
+	<c:import url="/nav/header.jsp"/>
+	<div class="wrap">
+		<div class="panel-body">
+		<form name="member" class="form-horizontal" method="post"  action="<%=request.getContextPath()%>/controller/MemberCheckLoginActionServlet.do">
+			<div class="form-group">
 				<div class="id">
-				<label class="control-label">아이디</label>
+				<label class="control-label" style="width:300px;">아이디</label>
 				<input type="text" class="form-control" id="mid" name="mid"/>
 				</div>
-				
+			</div>
+			
+			<div class="form-group">
 				<div class="pw">
-				<label class="control-label">비밀번호</label>
-				<input type="text" class="form-control" id="mpwd" name="mpwd"/>
+				<label class="control-label" style="width:300px;">비밀번호</label>
+				<input type="password" class="form-control" id="mpwd" name="mpwd"/>
 				</div>
 			</div>
 			<button type="button" class="btn btn-default" style="float:right;" onclick="chkValue()">로그인</button>									
-		</form>	
-		
+			<a href="<%=request.getContextPath()%>/member/find_id.jsp" >아이디 찾기</a>/<a href="#" >비밀번호 찾기</a>
+		</form>
+		</div>	
 	</div>
+	
+	<c:import url="/nav/footer.jsp"/>	
 </body>
 </html>

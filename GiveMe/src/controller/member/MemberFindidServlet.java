@@ -37,43 +37,18 @@ public class MemberFindidServlet extends HttpServlet {
 	    	response.setContentType("text/html; charset=utf-8");	    		    	
 	    	//뷰에서 입력한 값을 가지고 오는 것.
 	    	String mname = request.getParameter("mname");
-	    	String mphone = request.getParameter("mphone");	
-	    		System.out.println(mname+mphone);
+	    	String mphone = request.getParameter("mphone");
 	    		
 	    	
 	    	MemberServiceImpl msi = new MemberServiceImpl();
+	    	
 	    	MemberVo vo = new MemberVo();
-	    	
-	    	int result = 0;	    
-	    	
-	    	
 	    	vo.setMname(request.getParameter("mname"));
 	    	vo.setMphone(Integer.parseInt(request.getParameter("mphone"), 10));
 	    	
-	    	result = msi.findMid(vo);
-	    		
-	    	if(result==1){
-	    	    PrintWriter out = response.getWriter();
-	    	    out.println("<script>");
-	    	    out.println("alert('아이디 " + vo.getMid() + " ');");
-	    	    out.println("</script>");
-	    	    out.close();
-	    	}else if(result==0){
-	    	    PrintWriter out = response.getWriter();
-	    	    out.println("<script>");
-	    	    out.println("alert('Unname and Unphone.');");
-	    	    out.println("location.href='"+request.getContextPath()+"/member/find_id.jsp';");
-	    	    out.println("</script>");
-	    	    out.close();
-	    	}else{
-	    	    PrintWriter out = response.getWriter();
-	    	    out.println("<script>");
-	    	    out.println("alert('NOT Mid.');");
-	    	    out.println("location.href='"+request.getContextPath()+"/member/find_id.jsp';");
-	    	    out.println("</script>");
-	    	    out.close();
-	    	    
-	    	}
+	    	String mid = msi.findMid(vo);
+	    	request.setAttribute("mid", mid);
+	    	
 	    	
 	}
 

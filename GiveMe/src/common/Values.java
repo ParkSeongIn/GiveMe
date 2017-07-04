@@ -3,6 +3,7 @@ package common;
 public interface Values {
 
     String grade_guest="G";
+    String grade_admin="A";
     String value_in = "IN";
     
     // 로그인 상태값

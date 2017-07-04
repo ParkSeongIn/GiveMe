@@ -16,37 +16,21 @@
 <div class= "wrap">
 		<c:import url="/nav/header.jsp"/>
 		<div class="container" style="width:600px; height:400px; margin-top:100px;">
-		<%-- 아이디 찾기 성공했을 때 --%>
-		<c:choose>
-			<c:when test="${requestScope.mid != null }">
+		
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4>아이디 찾기</h4>
+						<h4>비밀번호 변경</h4>
 					</div>
 					<div class="panel-body" style="font-family:black;">
-						당신의 아이디는'${requestScope.mid}'입니다.
+						비밀번호 변경이 완료되었습니다.
 					</div>
 				</div>
-				<a href="<%=request.getContextPath()%>/member/find_pwd.jsp" class="btn btn-default btn-block">비밀번호찾기</a>
+				<a href="<%=request.getContextPath()%>/main/main.jsp" class="btn btn-default btn-block">메인으로 가기</a>
 				<a href="<%=request.getContextPath()%>/controller/MemberCheckLoginServlet.do" class="btn btn-default btn-block">로그인하기</a>
-				<br/><br/>
-				<%-- 아이디 찾기 성공했을 때 --%>
-			</c:when>
-			<c:otherwise>
-				<%-- 아이디 찾기를 실패했을 때 --%>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4>아이디 찾기</h4>
-					</div>
-					<div class="panel-body">
-						아이디를 찾을 수 없습니다
-					</div>
-				</div>
-				<a href="/member/find_id.jsp" class="btn btn-default btn-block">아이디/비밀번호 찾기</a>
-				<br/><br/>
-				<%-- 아이디 찾기를 실패했을 때 --%>
-			</c:otherwise>
-		</c:choose>
+				<br/>
+				<br/>
+				
+				
 		
 	</div>
 	<c:import url="/nav/footer.jsp"/>	

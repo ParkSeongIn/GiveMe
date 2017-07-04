@@ -69,13 +69,9 @@ public class MemberCheckLoginActionServlet extends HttpServlet {
     		
     	}
     	
-    	
-
-    	
-    		
-    	if(result==0){	    	    	//비밀번호가 틀렸을 경우
+    	if(result==Values.login_fail_pw){	    	    	//비밀번호가 틀렸을 경우
     		response.setCharacterEncoding("UTF-8");
-    	    response.setContentType("text/html;charset=UTF-8");
+    		response.setContentType("text/html; charset=UTF-8");
     	    PrintWriter out = response.getWriter();
     	    out.println("<script>");
     	    out.println("alert('비밀번호가 일치하지 않습니다.');");
@@ -83,13 +79,13 @@ public class MemberCheckLoginActionServlet extends HttpServlet {
     	    out.println("</script>");
     	    out.close();
     	    
-    	}else if(result==-1){		//아이디가 존재하지 않을 경우.
+    	}else if(result==Values.login_fali_id){		//아이디가 존재하지 않을 경우.
     		response.setCharacterEncoding("UTF-8");
-    	    request.setCharacterEncoding("UTF-8");
+    		response.setContentType("text/html; charset=UTF-8");
     	    PrintWriter out = response.getWriter();
     	    out.println("<script>");
     	    out.println("alert('아이디가 존재하지 않습니다.');");
-    	    out.println("location.href= '/controller/MemberCheckLoginServlet.do';");
+    	    out.println("location.href='/controller/MemberCheckLoginServlet.do';");
     	    out.println("</script>");
     	    out.close();
     	    
