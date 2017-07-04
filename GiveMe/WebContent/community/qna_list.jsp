@@ -39,7 +39,7 @@
 		<% for (QuestionVo qd : qlist) {  %>
 		<tr>
 			
-			<td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/question/QuestionContentServlet.do?qidx=<%=qd.getQidx()%>"><%=qd.getQidx() %></a></td>
+			<td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/question/QuestionContentServlet.do?qidx=<%=qd.getQidx()%>&midx=4"><%=qd.getQidx() %></a></td>
 			<td><%=qd.getQcategory() %></td>
 			<td><%=qd.getQtitle() %></td>		
 			<td><%=qd.getQstate() %></td>

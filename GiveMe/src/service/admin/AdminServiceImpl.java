@@ -49,7 +49,7 @@ public class AdminServiceImpl implements AdminService{
 			pstmt = con.prepareStatement(sql); 
 			pstmt.setInt(1, cidx);
 			rs = pstmt.executeQuery(); 
-			while(rs.next()) { 
+			if(rs.next()) { 
 				gcv = new CashDonationConVo();
 				gcv.setMidx(rs.getInt("midx"));
 				gcv.setMname(rs.getString("mname"));

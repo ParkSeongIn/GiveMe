@@ -33,6 +33,7 @@ public class QuestionListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		QuestionServiceImpl qd = new QuestionServiceImpl();
+		//나중에 회원로그인후 세션값에 담긴 회원번호 값으로 대체
 		int midx = 4;
 		ArrayList<QuestionVo> qlist = qd.getQuestionList(midx);
 		

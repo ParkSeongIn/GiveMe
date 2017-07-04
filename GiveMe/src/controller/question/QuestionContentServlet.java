@@ -30,12 +30,12 @@ public class QuestionContentServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		int qidx = Integer.parseInt(request.getParameter("qidx"));
 		int midx = Integer.parseInt(request.getParameter("midx"));
+		//System.out.println(qidx);
 		QuestionServiceImpl qd = new QuestionServiceImpl();
-		QuestionVo qv = new QuestionVo();
-		qv = qd.getQuestion(midx);
-		qv.setMidx(midx);
-		
+		QuestionVo qv = qd.getQuestion(qidx, midx);
+		//System.out.println(qv);
 		request.setAttribute("qv", qv);
 	}
 

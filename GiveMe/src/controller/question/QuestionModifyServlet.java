@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.question.QuestionServiceImpl;
+import service.question.QuestionVo;
+
 /**
  * Servlet implementation class QusetionModifyServlet
  */
@@ -25,15 +28,25 @@ public class QuestionModifyServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		int qidx = Integer.parseInt(request.getParameter("qidx"));
+		int midx = Integer.parseInt(request.getParameter("midx"));
+		System.out.println(qidx);
+		QuestionServiceImpl qd = new QuestionServiceImpl();
+		QuestionVo qv = qd.getQuestion(qidx, midx);
+		
+		request.setAttribute("qv", qv);
+	//  다인아 qv에  qidx와 midx가 모두 담기기 때문에 qv만 담아서 보내면 된다	
+	//	request.setAttribute("qidx", qidx);
+	//	request.setAttribute("midx", midx);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

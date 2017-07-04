@@ -50,11 +50,11 @@
 <h1>1:1문의 Write</h1>
 	 <form id="addForm" action="<%=request.getContextPath()%>/controller/question/QuestionWriteActionServlet.do" method="post">
 	<p>유형 : <select name="qcategory">
-			  <option value="a" selected="selected">회원가입</option>
-			  <option value="b">현금기부</option>
-			  <option value="v">재능기부</option>
-			  <option value="d">결제</option>
-			  <option value="e">기타</option>
+			  <option value="LOG" selected="selected">회원가입</option>
+			  <option value="CG">현금기부</option>
+			  <option value="TG">재능기부</option>
+			  <option value="AQ">결제</option>
+			  <option value="OTHER">기타</option>
 			</select></p>
 	<div class="form-group">
             <label for="qtitle">제목 :</label>

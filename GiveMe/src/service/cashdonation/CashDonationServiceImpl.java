@@ -181,7 +181,7 @@ public class CashDonationServiceImpl implements CashDonationService {
 		CashDonationConVo rcv = null; 
 		
 		try { 
-			sql = "select  AA.*,BB.dlgroup1, BB.dlgroup2,BB.dlplace from (select tm.midx, tm.mname, tm.mpost, tm.maddr1, tm.maddr2, tm.mbirth, tc.cmoney, ta.apdbdate, tc.dlidx, ta.apidx from table_member tm, table_cashdonation tc, table_allpay ta  where tm.midx = tc.midx and tm.midx = ta.midx and tm.midx=? and ta.apidx=?)AA, table_donationlist BB where  AA.dlidx = BB.dlidx order by AA.apidx desc";
+			sql = "select  AA.*,BB.dlgroup1, BB.dlgroup2,BB.dlplace from (select tm.midx, tm.mname, tm.mpost, tm.maddr1, tm.maddr2, tm.mbirth, tc.cmoney, ta.apdbdate, tc.dlidx, ta.apidx from table_member tm, table_cashdonation tc, table_allpay ta  where tm.midx = tc.midx and tm.midx = ta.midx and tm.midx=? and ta.apidx=?)AA, table_donationlist BB where  AA.dlidx = BB.dlidx";
 			pstmt = con.prepareStatement(sql); 
 			pstmt.setInt(1, midx);
 			pstmt.setInt(2, apidx);

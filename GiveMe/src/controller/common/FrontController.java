@@ -18,6 +18,8 @@ import controller.cashdonation.CashDonationReceiptServlet;
 import controller.member.MypageCashDonationListServlet;
 import controller.question.QuestionContentServlet;
 import controller.question.QuestionListServlet;
+import controller.question.QuestionModifyActionServlet;
+import controller.question.QuestionModifyServlet;
 import controller.question.QuestionWriteActionServlet;
 import controller.question.QuestionWriteServlet;
 
@@ -135,34 +137,35 @@ public class FrontController extends HttpServlet {
 			QuestionWriteActionServlet cwas = new QuestionWriteActionServlet();
 			cwas.doPost(request, response);
 			
-			this.view = "/controller/QuestionListServlet.do";
-			this.isRedirect = true;		
-		}else if (command.equals("/controller/question/QuestionContentServlet.do")) {
+			this.view = "/controller/question/QuestionListServlet.do";
+			this.isRedirect = true;	
 			
+		}else if (command.equals("/controller/question/QuestionContentServlet.do")) {
+			//System.out.println("content");
 			QuestionContentServlet qcs = new QuestionContentServlet();
 			qcs.doPost(request, response);
 			
 			this.view= "/community/qna_content.jsp";
 			this.isRedirect = false;
 			
+		}else if (command.equals("/controller/question/QuestionModifyServlet.do")) {
+//			System.out.println("modify");
+			QuestionModifyServlet qms = new QuestionModifyServlet();
+			qms.doPost(request, response);
+			
+			this.view= "/community/qna_modify.jsp";
+			this.isRedirect = false;
+			
+		}else if (command.equals("/controller/question/QuestionModifyActionServlet.do")) {
+			System.out.println("modifyAction");
+			QuestionModifyActionServlet qma = new QuestionModifyActionServlet();
+			qma.doPost(request, response);
+			
+			this.view= "/controller/question/QuestionContentServlet.do?qidx="+request.getParameter("qidx")+"&midx="+request.getParameter("midx");
+			this.isRedirect = true;
+			
 		}
-//		else if (command.equals("/Controller/QuestionModifyServlet.do")) {
-//			
-//			QuestionModifyServlet qms = new QuestionModifyServlet();
-//			qms.doPost(request, response);
-//			
-//			this.view= "/community/qna_modify.jsp";
-//			this.isRedirect = false;
-//			
-//		}else if (command.equals("/Controller/QuestionModifyActionServlet.do")) {
-//			
-//			QuestionModifyActionServlet qma = new QuestionModifyActionServlet();
-//			qma.doPost(request, response);
-//			
-//			this.view= "/Controller/QuestionContentServlet.do";
-//			this.isRedirect = true;
-//			
-//		}else if (command.equals("/Controller/QuestionDeleteServlet.do")) {
+//		else if (command.equals("/Controller/QuestionDeleteServlet.do")) {
 //			
 //			QuestionDeleteServlet qds = new QuestionDeleteServlet();
 //			qds.doPost(request, response);

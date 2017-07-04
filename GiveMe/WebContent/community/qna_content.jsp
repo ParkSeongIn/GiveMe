@@ -16,40 +16,46 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+<%
+int qidx = Integer.parseInt(request.getParameter("qidx"));
+%>
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" ></script>
 </head>
 <body>
 <div class="container">
 	<div class="form-group">
-		<h1>1:1문의 상세내용</h1>
+		<h1>1:1문의 상세내용<%=qidx %></h1>
 	</div>
 	<div class="form-group">
     	<label for="qidx">qidx :</label>
 		<input class="form-control" name="qidx" id="qidx" type="text" value="<%=qv.getQidx() %>" readonly="readonly"/>
 	</div> 
 	<div class="form-group">
-    	<label for="qtitle">qtitle :</label>
+    	<label for="qtitle">제목 :</label>
 		<input class="form-control" name="qtitle" id="qtitle" type="text" value="<%=qv.getQtitle() %>" readonly="readonly"/>
-	</div> 
+	</div>
 	<div class="form-group">
-	    <label for="midx">midx :</label>
+	    <label for="midx">회원번호 :</label>
 	    <input class="form-control" name="midx" id="midx" type="text" value="<%=qv.getMidx() %>" readonly="readonly""/>
 	</div>
+ 	<div class="form-group">
+    	<label for="qcategory">유형 :</label>
+		<input class="form-control" name="qcategory" id="qcategory" type="text" value="<%=qv.getQcategory() %>" readonly="readonly"/>
+	</div> 
+	<!-- 작성자 -->
 	<div class="form-group">
-	    <label for="qcategory">qcategory :</label>
-	    <input class="form-control" name="qcategory" id="qcategory" type="text" value="<%=qv.getQcategory() %>" readonly="readonly"/>
-	</div>
-	<div class="form-group">
-	    <label for="qwdate">qwdate :</label>
+	    <label for="qwdate">작성날짜 :</label>
 	    <input class="form-control" name="qwdate" id="qwdate" type="text" value="<%=qv.getQwdate() %>" readonly="readonly"/>
 	</div>
 	<div class="form-group">
-	    <label for="qcontent">qcontent :</label>
+	    <label for="qcontent">내용 :</label>
 	    <input class="form-control" name="qcontent" id="qcontent" type="text" value="<%=qv.getQcontent() %>" readonly="readonly"/>
 	 </div>
+
 	<div>
+		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/question/QuestionModifyServlet.do?qidx=<%=qidx %>&midx=<%=qv.getMidx() %>">수정</a>
+		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/question/QuestionDeleteServlet.do">삭제</a>
 	 	<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/question/QuestionListServlet.do">글목록</a>
 	</div>        
 </div>
