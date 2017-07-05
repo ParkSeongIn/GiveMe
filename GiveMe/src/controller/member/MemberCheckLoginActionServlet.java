@@ -3,6 +3,7 @@ package controller.member;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -62,35 +63,33 @@ public class MemberCheckLoginActionServlet extends HttpServlet {
     		vo = msi.getMember(mid);
     		
     		vo.setLogin(true);
-    		
-    		HttpSession session = request.getSession();
-    		session.setAttribute("vo", vo);
-    	}else{
-    		
-    	}
-    	
-    	if(result==Values.login_fail_pw){	    	    	//비밀번호가 틀렸을 경우
-    		response.setCharacterEncoding("UTF-8");
-    		response.setContentType("text/html; charset=UTF-8");
-    	    PrintWriter out = response.getWriter();
-    	    out.println("<script>");
-    	    out.println("alert('비밀번호가 일치하지 않습니다.');");
-    	    out.println("location.href= '/controller/MemberCheckLoginServlet.do';");
-    	    out.println("</script>");
-    	    out.close();
-    	    
-    	}else if(result==Values.login_fali_id){		//아이디가 존재하지 않을 경우.
-    		response.setCharacterEncoding("UTF-8");
-    		response.setContentType("text/html; charset=UTF-8");
-    	    PrintWriter out = response.getWriter();
-    	    out.println("<script>");
-    	    out.println("alert('아이디가 존재하지 않습니다.');");
-    	    out.println("location.href='/controller/MemberCheckLoginServlet.do';");
-    	    out.println("</script>");
-    	    out.close();
-    	    
-    	}
-    	
-	}
 
+        	HttpSession session = request.getSession();
+    		session.setAttribute("vo", vo);
+    		
+    	
+    	}else if(result==Values.login_fail_pw){	    	    	//비밀번호가 틀렸을 경우
+		response.setContentType("text/html;charset=UTF-8");
+	    PrintWriter out = response.getWriter();
+	    out.println("<script>");
+	    out.println("alert('비밀번호가 일치하지 않습니다.');");
+	    out.println("location.href='/GiveMe/controller/MemberCheckLoginServlet.do';");
+	    out.println("</script>");
+	    out.close();
+	    
+	}else{		//아이디가 존재하지 않을 경우.
+		response.setContentType("text/html;charset=UTF-8");
+	    PrintWriter out = response.getWriter();
+	    out.println("<script>");
+	    out.println("alert('아이디가 존재하지 않습니다.');");
+	    out.println("location.href='/GiveMe/controller/MemberCheckLoginServlet.do';");
+	    out.println("</script>");
+	    out.close();
+	}
+	}
+	
 }
+
+    	
+    	
+

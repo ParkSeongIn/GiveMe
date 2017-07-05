@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+
 import controller.admin.MemberListServlet;
 import controller.member.MemberChangePwdActServlet;
 import controller.member.MemberCheckLoginActionServlet;
@@ -119,8 +121,8 @@ public class FrontController extends HttpServlet {
 		    	MemberCheckLoginActionServlet mclas = new MemberCheckLoginActionServlet();
 		    	mclas.doPost(request, response);
 		    	
-		    	this.view="/main/main.jsp";
-		    	this.isRedirect=true;
+		    	//this.view="/main/main.jsp";
+		    	//this.isRedirect=true;
 			
 		    }else if(command.equals("/controller/MemberFindidServlet.do")){
 		    	MemberFindidServlet mfs = new MemberFindidServlet();
@@ -222,10 +224,58 @@ public class FrontController extends HttpServlet {
 				this.view = "/mypage/cash_receipt.jsp";
 				this.isRedirect = false;
 		   
-				// 기부처 리스트
-			
+			// 기부처 리스트
+			}else if(command.equals("/controller/DonationListServlet.do")){
+				DonationListServlet dl = new DonationListServlet();
+				dl.doGet(request, response);
 				
-			}if(this.isRedirect){
+				this.view = "/admin/ad_donation_list.jsp";
+				this.isRedirect = false;
+				
+			} else if(command.equals("/controller/DonationWriteServlet.do")){
+				DonationWriteServlet dw = new DonationWriteServlet();
+				dw.doGet(request,response);
+				
+				this.view = "/admin/ad_donation_write.jsp";
+				this.isRedirect = false;
+				
+			} else if(command.equals("/controller/DonationWriteActionServlet.do")){
+				DonationWriteActionServlet da = new DonationWriteActionServlet();
+				da.doPost(request,response);
+				
+				this.view = "/controller/DonationListServlet.do";
+				this.isRedirect = true;
+			
+			} else if(command.equals("/controller/DonationContentServlet.do")){
+				DonationContentServlet dc = new DonationContentServlet();
+				dc.doGet(request,response);
+				
+				this.view = "/admin/ad_donation_content.jsp";
+				this.isRedirect = false;
+				
+			}else if(command.equals("/controller/DonationModifyServlet.do")){
+				DonationModifyServlet dm = new DonationModifyServlet();
+				dm.doGet(request,response);
+				
+				this.view = "/admin/ad_donation_modify.jsp";
+				this.isRedirect = false;
+				
+			}else if(command.equals("/controller/DonationModifyActionServlet.do")){
+				DonationModifyActionServlet dam = new DonationModifyActionServlet();
+				dam.doPost(request,response);
+				this.view = "/controller/DonationContentServlet.do?dlidx="+request.getParameter("dlidx");
+				this.isRedirect = true;
+				
+			}else if(command.equals("/controller/DonationDeleteServlet.do")){
+				DonationDeleteServlet dd = new DonationDeleteServlet();
+				dd.doGet(request,response);
+				
+				this.view = "/controller/DonationListServlet.do";
+				this.isRedirect = false;
+				
+			}
+		    
+		    if(this.isRedirect){
 				response.sendRedirect(contextPath+view);
 			}else{
 				RequestDispatcher rs = request.getRequestDispatcher(view);

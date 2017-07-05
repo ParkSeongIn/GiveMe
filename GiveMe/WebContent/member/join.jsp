@@ -92,7 +92,6 @@ label{
 	margin-bottom: 10px;
 }
 .form-control{
-	position:relative;
 	top: -36px;
     left: 101px;
 }

@@ -134,7 +134,7 @@ public class MemberServiceImpl implements MemberService{
     	    if(rs.next()){	// next = 쿼리를 실행해서 다음의 값이 있는지 확인
     		vo = new MemberVo();
     		
-    		vo.setMgrade(Values.grade_guest);
+    		vo.setMgrade(rs.getString("mgrade"));
     		vo.setMidx(rs.getInt("midx"));
     		vo.setMid(rs.getString("mid"));
     		vo.setMpwd(rs.getString("mpwd"));

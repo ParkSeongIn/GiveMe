@@ -17,7 +17,14 @@ public class DonationListVo {
 	private Timestamp dldbdate;
 	private String dldeletest;
 	private int midx;
+	private String dlid;
 	
+	public String getDlid() {
+		return dlid;
+	}
+	public void setDlid(String dlid) {
+		this.dlid = dlid;
+	}
 	public int getDlidx() {
 		return dlidx;
 	}

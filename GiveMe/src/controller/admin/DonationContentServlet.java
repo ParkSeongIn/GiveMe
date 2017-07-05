@@ -1,11 +1,16 @@
 package controller.admin;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import service.admin.AdminServiceImpl;
+import service.admin.DonationListVo;
 
 /**
  * Servlet implementation class DonationContentServlet
@@ -27,7 +32,14 @@ public class DonationContentServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		int dlidx = Integer.parseInt(request.getParameter("dlidx"));
+		AdminServiceImpl as = new AdminServiceImpl();
+		DonationListVo vo = as.getDonationList(dlidx);
+		
+		request.setAttribute("vo", vo);
+		request.setAttribute("dlidx", dlidx);
+		
 	}
 
 	/**

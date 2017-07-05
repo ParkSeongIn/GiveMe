@@ -21,7 +21,6 @@
 					<li><a href="#">Home</a></li>
 					<li><a href="<%=request.getContextPath() %>/controller/MemberCheckLoginServlet.do" >로그인</a></li>
 					<li><a href="<%=request.getContextPath()%>/controller/MemberInsertServlet.do">회원가입</a></li> 
-					<li><a href="#">검색</a></li>
 				</ul>		
 			</div><!-- div up1 end -->
 			
@@ -29,20 +28,20 @@
 				<ul class="side1">
 					<li><a href="#">Home</a></li>
 					<li>${sessionScope.vo.mid}님 반갑습니다.</li>
+					
 					<c:if test="${sessionScope.vo.login == true }">
-							<c:set var="mng_grade" value="<%=Values.grade_admin%>"/>
+							<c:set var="grade" value="G"/>
 						<c:choose>
-						<c:when test="${sessionScope.vo.mgrade == pageScope.mng_grade }">
-							<li><a href="#">관리자 페이지</a></li>
+						<c:when test="${sessionScope.vo.mgrade == pageScope.grade }">
+							<li><a href="<%=request.getContextPath()%>/controller/MemberContentServlet.do">마이페이지</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="<%=request.getContextPath()%>/controller/MemberContentServlet.do">마이페이지</a></li>
+							<li><a href="<%=request.getContextPath()%>/controller/DonationListServlet.do">관리자 페이지</a></li>
 						</c:otherwise>
 						</c:choose>
 					</c:if>
 					
 					<li><a href="<%=request.getContextPath()%>/controller/MemberCheckLogoutServlet.do">로그아웃</a>
-					<li><a href="#">검색</a></li>
 				</ul>		
 			</div><!-- div up1 end -->
 			
