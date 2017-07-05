@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.question.QuestionServiceImpl;
+import service.question.QuestionVo;
+
 /**
  * Servlet implementation class QusetionDeleteServlet
  */
@@ -25,15 +28,26 @@ public class QuestionDeleteServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String qdeletest = request.getParameter("qdeletest");
+		int qidx = Integer.parseInt(request.getParameter("qidx"));
+		System.out.println(qidx);
+		
+		QuestionServiceImpl qd = new QuestionServiceImpl();
+		
+		QuestionVo qv = new QuestionVo();
+		//qd.deleteQuestion(qidx);
+	
+			int row = qd.deleteQuestion(qidx);
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

@@ -52,10 +52,15 @@ int qidx = Integer.parseInt(request.getParameter("qidx"));
 	    <label for="qcontent">내용 :</label>
 	    <input class="form-control" name="qcontent" id="qcontent" type="text" value="<%=qv.getQcontent() %>" readonly="readonly"/>
 	 </div>
+	 <div class="form-group">
+	    <label for="qrecontent">답변 :</label>
+	    <input class="form-control" name="qrecontent" id="qrecontent" type="text" value="<%=qv.getQrecontent() %>"/>
+	 </div>
+
 
 	<div>
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/question/QuestionModifyServlet.do?qidx=<%=qidx %>&midx=<%=qv.getMidx() %>">수정</a>
-		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/question/QuestionDeleteServlet.do">삭제</a>
+		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/question/QuestionDeleteServlet.do?qidx=<%=qidx %>">삭제</a>
 	 	<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/question/QuestionListServlet.do">글목록</a>
 	</div>        
 </div>

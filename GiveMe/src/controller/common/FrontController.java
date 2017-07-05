@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.admin.AdQuestionContentServlet;
+import controller.admin.AdQuestionListServlet;
+import controller.admin.AdQuestionWriteActionServlet;
+import controller.admin.AdQuestionWriteServlet;
 import controller.admin.CashDonationContentServlet;
 import controller.cashdonation.CashDonationConfirmServlet;
 import controller.cashdonation.CashDonationInsertActionServlet;
@@ -17,6 +21,7 @@ import controller.cashdonation.CashDonationListServlet;
 import controller.cashdonation.CashDonationReceiptServlet;
 import controller.member.MypageCashDonationListServlet;
 import controller.question.QuestionContentServlet;
+import controller.question.QuestionDeleteServlet;
 import controller.question.QuestionListServlet;
 import controller.question.QuestionModifyActionServlet;
 import controller.question.QuestionModifyServlet;
@@ -118,8 +123,8 @@ public class FrontController extends HttpServlet {
 			this.isRedirect = false;
 		}else if (command.equals("/controller/question/QuestionListServlet.do")) {
 	
-			QuestionListServlet cls = new QuestionListServlet();
-			cls.doPost(request, response);
+			QuestionListServlet qls = new QuestionListServlet();
+			qls.doPost(request, response);
 			
 			this.view = "/community/qna_list.jsp";
 			this.isRedirect = false;
@@ -164,16 +169,46 @@ public class FrontController extends HttpServlet {
 			this.view= "/controller/question/QuestionContentServlet.do?qidx="+request.getParameter("qidx")+"&midx="+request.getParameter("midx");
 			this.isRedirect = true;
 			
-		}
-//		else if (command.equals("/Controller/QuestionDeleteServlet.do")) {
-//			
-//			QuestionDeleteServlet qds = new QuestionDeleteServlet();
-//			qds.doPost(request, response);
-//			
-//			this.view= "/Controller/QuestionListServlet.do";
-//			this.isRedirect = true;
-//		
+		}else if (command.equals("/controller/question/QuestionDeleteServlet.do")) {
+		//	System.out.println("delete");
+			QuestionDeleteServlet qds = new QuestionDeleteServlet();
+			qds.doPost(request, response);
+			
+			this.view= "/controller/question/QuestionListServlet.do";
+			this.isRedirect = true;
 		
+		}else if (command.equals("/controller/admin/AdQuestionListServlet.do")) {
+	
+			AdQuestionListServlet aqls = new AdQuestionListServlet();
+			aqls.doPost(request, response);
+			
+			this.view = "/admin/ad_qna_list.jsp";
+			this.isRedirect = false;
+			
+		}else if (command.equals("/controller/admin/AdQuestionWriteServlet.do")) {
+	
+			AdQuestionWriteServlet aqws = new AdQuestionWriteServlet();
+			aqws.doPost(request, response);
+			
+			this.view = "/admin/ad_qna_write.jsp";
+			this.isRedirect = false;
+			
+		}else if (command.equals("/controller/admin/AdQuestionWriteActionServlet.do")) {
+	
+			AdQuestionWriteActionServlet aqas = new AdQuestionWriteActionServlet();
+			aqas.doPost(request, response);
+			
+			this.view = "/controller/question/QuestionContentServlet.do?qidx="+request.getParameter("qidx");
+			
+		}else if (command.equals("/controller/admin/AdQuestionContentServlet.do")) {
+			
+			AdQuestionContentServlet aqcs = new AdQuestionContentServlet();
+			aqcs.doPost(request, response);
+			
+			this.view= "/admin/ad_qna_write.jsp";
+			this.isRedirect = false;
+			
+		}
 //		if(command.equals("/Controller/QusetionListServlet.do")){
 //
 //			QuestionListServlet qls = new QuestionListServlet();

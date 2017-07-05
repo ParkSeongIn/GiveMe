@@ -29,8 +29,8 @@ public class QuestionServiceImpl implements QuestionService{
 					+ 		"select tq.qidx, tq.qcategory, tq.qtitle, tq.qstate, tq.qwdate "
 					+ 		"from table_member tm, table_question tq "
 					+ 		"where tm.midx = tq.midx "
-					+ 		"and tm.midx = ? "
-					+ 		")AA order by AA.qidx desc) where rn <=5 ) where rn >=1";
+					+ 		"and tm.midx = ? and tq.qdeletest = 'N' "
+					+ 		")AA order by AA.qidx desc) where rn <=10 ) where rn >=1";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, midx);
 			rs = pstmt.executeQuery();
@@ -42,7 +42,7 @@ public class QuestionServiceImpl implements QuestionService{
 				vo.setQidx(rs.getInt("qidx"));
 				vo.setQcategory(rs.getString("qcategory"));
 				vo.setQtitle(rs.getString("qtitle"));
-			//	vo.setMname(rs.getString("mname"));
+			//	vo.setMid(rs.getString("id"));
 				vo.setQstate(rs.getString("qstate"));
 				vo.setQwdate(rs.getDate("qwdate"));
 				
@@ -153,9 +153,24 @@ public class QuestionServiceImpl implements QuestionService{
 	}
 	
 	@Override
-	public int deleteQuestion() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteQuestion(int qidx) {
+		Connection con = dbconnect.getConnection();
+		PreparedStatement pstmt = null;
+		int row = 0;
+		try {
+			sql = "update table_question set qdeletest = 'Y' "
+					+ "where qidx = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, qidx);
+			row = pstmt.executeUpdate();
+		
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally { 
+			DBClose.close(con, pstmt);
+		}
+		
+		return row;
 	}
 
 	@Override

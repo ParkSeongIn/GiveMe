@@ -20,7 +20,8 @@
 						<div class="cash"><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/cashdonation/CashDonationInsertServlet.do" >현금기부</a></div>
 						<div class="ad_cash_list"><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/cashdonation/CashDonationListServlet.do" >관리자 현금기부 리스트</a></div>
 						<div class="cash_detail"><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/member/MypageCashDonationListServlet.do" >이용자 현금기부 리스트</a></div>
-						<div class="qna_list"><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/question/QuestionListServlet.do" >QNA 리스트</a></div>
+						<div class="qna_list"><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/question/QuestionListServlet.do" >QNA 이용자 리스트</a></div>
+						<div class="ad_qna_list"><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/admin/AdQuestionListServlet.do" >QNA 관리자 리스트</a></div>
 					</div>
 	</div>
 </body>

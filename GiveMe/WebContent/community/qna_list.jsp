@@ -25,9 +25,12 @@
 <div class="container">
 <%
 	ArrayList<QuestionVo> qlist = (ArrayList<QuestionVo>) request.getAttribute("qlist");
+	QuestionVo qv = (QuestionVo) request.getAttribute("qv");
 %>
 	<table class="table table-striped table-bordered table-hover" style="width:800px;margin:0 auto;text-align:center;">
 		<tr>
+		
+		
 			<!-- mname 추가 -->
 			<td style="width:20%">글번호 qidx</td>
 			<td style="width:40%">유형 qcategory</td>
@@ -38,14 +41,14 @@
 		
 		<% for (QuestionVo qd : qlist) {  %>
 		<tr>
-			
 			<td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/question/QuestionContentServlet.do?qidx=<%=qd.getQidx()%>&midx=4"><%=qd.getQidx() %></a></td>
 			<td><%=qd.getQcategory() %></td>
 			<td><%=qd.getQtitle() %></td>		
 			<td><%=qd.getQstate() %></td>
 			<td><%=qd.getQwdate() %></td>
+		<%} %>	
 		</tr>
-		<% }%>
+
 		<tr>
 			<td style="line-height:2.3;">
 				작업
