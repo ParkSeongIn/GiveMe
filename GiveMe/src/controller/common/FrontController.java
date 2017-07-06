@@ -121,8 +121,8 @@ public class FrontController extends HttpServlet {
 		    	MemberCheckLoginActionServlet mclas = new MemberCheckLoginActionServlet();
 		    	mclas.doPost(request, response);
 		    	
-		    	//this.view="/main/main.jsp";
-		    	//this.isRedirect=true;
+		    	this.view="/main/main.jsp";
+		    	this.isRedirect=true;
 			
 		    }else if(command.equals("/controller/MemberFindidServlet.do")){
 		    	MemberFindidServlet mfs = new MemberFindidServlet();
@@ -176,12 +176,12 @@ public class FrontController extends HttpServlet {
 				this.view = "/mypage/cash_detail.jsp";
 				this.isRedirect = false;
 				
-			}else if (command.equals("/CashDonationInsertServlet.do")) {
+			}else if (command.equals("/controller/CashDonationInsertServlet.do")) {
 				System.out.println("TestINSERT");
 				CashDonationInsertServlet cdis = new CashDonationInsertServlet();
 				cdis.doPost(request, response);
 				
-				this.view = "/cash_insert.jsp";
+				this.view = "/donation/cash_insert.jsp";
 				this.isRedirect = false;
 				
 			}else if (command.equals("/controller/cashdonation/CashDonationConfirmServlet.do")) {

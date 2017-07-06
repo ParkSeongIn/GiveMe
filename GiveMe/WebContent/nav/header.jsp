@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>TOP_MENU</title>
+<title>상단 메뉴</title>
 
 <link rel="stylesheet" href="../css/header.css" type="text/css">
 </head>
@@ -18,7 +18,7 @@
 	<!-- 	<div class="upRight">	 --><!-- upRight start -->
 			<div class="up1" id="login_box"> <!-- div up1 start -->
 				<ul class="side1">
-					<li><a href="#">Home</a></li>
+					<li><a href="<%=request.getContextPath() %>/main/main.jsp">Home</a></li>
 					<li><a href="<%=request.getContextPath() %>/controller/MemberCheckLoginServlet.do" >로그인</a></li>
 					<li><a href="<%=request.getContextPath()%>/controller/MemberInsertServlet.do">회원가입</a></li> 
 				</ul>		
@@ -62,14 +62,14 @@
 					</li>
 					<li>후원하기
 						<ul>
-							<li><a href="<%=request.getContextPath()%>/controller/cashdonation/CashDonationInsertServlet.do">현금기부</a></li>
+							<li><a href="<%=request.getContextPath()%>/controller/CashDonationInsertServlet.do">현금기부</a></li>
 							<li><a href="#">재능기부</a></li>					
 						</ul>	
 					</li>
 					<li>커뮤니티
 						<ul>
 							<li><a href="#">기부동향</a></li>
-							<li><a href="#">FAQ</a></li>
+							<li><a href="<%=request.getContextPath()%>/community/qna_write.jsp">QNA/FAQ</a></li>
 							<li><a href="#">기부처 검색</a></li>
 						</ul>	
 					</li>						
