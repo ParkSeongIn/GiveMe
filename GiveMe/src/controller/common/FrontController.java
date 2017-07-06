@@ -1,7 +1,6 @@
 package controller.common;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oreilly.servlet.MultipartRequest;
 
 import controller.admin.MemberListServlet;
 import controller.member.MemberChangePwdActServlet;
@@ -26,20 +24,12 @@ import controller.member.MemberInsertServlet;
 import controller.member.MemberModifyActServlet;
 import controller.member.MemberModifyServlet;
 import controller.admin.CashDonationContentServlet;
-import controller.admin.DonationContentServlet;
-import controller.admin.DonationDeleteServlet;
-import controller.admin.DonationListServlet;
-import controller.admin.DonationModifyActionServlet;
-import controller.admin.DonationModifyServlet;
-import controller.admin.DonationWriteActionServlet;
-import controller.admin.DonationWriteServlet;
 import controller.cashdonation.CashDonationConfirmServlet;
 import controller.cashdonation.CashDonationInsertActionServlet;
 import controller.cashdonation.CashDonationInsertServlet;
 import controller.cashdonation.CashDonationListServlet;
 import controller.cashdonation.CashDonationReceiptServlet;
 import controller.member.MypageCashDonationListServlet;
-import service.admin.DonationListVo;
 
 /**
  * Servlet implementation class FrontController
@@ -86,7 +76,7 @@ public class FrontController extends HttpServlet {
 		    	MemberInsertActionServlet mas = new MemberInsertActionServlet();
 		    	mas.doPost(request, response);
 		    	
-		    	this.view = "/main.jsp";
+		    	this.view = "/main/main.jsp";
 		    	this.isRedirect = true;
 		    	
 		    }else if(command.equals("/controller/MemberContentServlet.do")){
@@ -160,7 +150,7 @@ public class FrontController extends HttpServlet {
 		    	this.isRedirect = false;
 		    
 		    // 현금기부
-		    }else if(command.equals("/controller/cashdonation/CashDonationListServlet.do")){
+		    }else if(command.equals("/controller/CashDonationListServlet.do")){
 
 				CashDonationListServlet cdls = new CashDonationListServlet();
 				cdls.doGet(request, response);
@@ -168,7 +158,7 @@ public class FrontController extends HttpServlet {
 				this.view = "/admin/ad_cash_list.jsp";
 				this.isRedirect = false;
 			
-			}else if (command.equals("/controller/member/MypageCashDonationListServlet.do")) {
+			}else if (command.equals("/controller/MypageCashDonationListServlet.do")) {
 				
 				MypageCashDonationListServlet mcl = new MypageCashDonationListServlet();
 				mcl.doPost(request, response);
@@ -184,7 +174,7 @@ public class FrontController extends HttpServlet {
 				this.view = "/donation/cash_insert.jsp";
 				this.isRedirect = false;
 				
-			}else if (command.equals("/controller/cashdonation/CashDonationConfirmServlet.do")) {
+			}else if (command.equals("/controller/CashDonationConfirmServlet.do")) {
 				System.out.println("TestCONFIRM");
 				CashDonationConfirmServlet cdcs = new CashDonationConfirmServlet();
 				cdcs.doPost(request, response);
@@ -224,65 +214,78 @@ public class FrontController extends HttpServlet {
 				this.view = "/mypage/cash_receipt.jsp";
 				this.isRedirect = false;
 		   
-			// 기부처 리스트
-			}else if(command.equals("/controller/DonationListServlet.do")){
-				DonationListServlet dl = new DonationListServlet();
-				dl.doGet(request, response);
+			}else if(command.equals("/controller/cashdonation/CashDonationListServlet.do")){
+
+				CashDonationListServlet cdls = new CashDonationListServlet();
+				cdls.doGet(request, response);
 				
-				this.view = "/admin/ad_donation_list.jsp";
+				this.view = "/admin/ad_cash_list.jsp";
 				this.isRedirect = false;
-				
-			} else if(command.equals("/controller/DonationWriteServlet.do")){
-				DonationWriteServlet dw = new DonationWriteServlet();
-				dw.doGet(request,response);
-				
-				this.view = "/admin/ad_donation_write.jsp";
-				this.isRedirect = false;
-				
-			} else if(command.equals("/controller/DonationWriteActionServlet.do")){
-				DonationWriteActionServlet da = new DonationWriteActionServlet();
-				da.doPost(request,response);
-				
-				this.view = "/controller/DonationListServlet.do";
-				this.isRedirect = true;
 			
-			} else if(command.equals("/controller/DonationContentServlet.do")){
-				DonationContentServlet dc = new DonationContentServlet();
-				dc.doGet(request,response);
+			}else if (command.equals("/controller/member/MypageCashDonationListServlet.do")) {
 				
-				this.view = "/admin/ad_donation_content.jsp";
+				MypageCashDonationListServlet mcl = new MypageCashDonationListServlet();
+				mcl.doPost(request, response);
+				
+				this.view = "/mypage/cash_detail.jsp";
 				this.isRedirect = false;
 				
-			}else if(command.equals("/controller/DonationModifyServlet.do")){
-				DonationModifyServlet dm = new DonationModifyServlet();
-				dm.doGet(request,response);
+			}else if (command.equals("/controller/cashdonation/CashDonationInsertServlet.do")) {
+				//System.out.println("TestINSERT");
+				CashDonationInsertServlet cdis = new CashDonationInsertServlet();
+				cdis.doPost(request, response);
 				
-				this.view = "/admin/ad_donation_modify.jsp";
+				this.view = "/donation/cash_insert.jsp";
 				this.isRedirect = false;
 				
-			}else if(command.equals("/controller/DonationModifyActionServlet.do")){
-				DonationModifyActionServlet dam = new DonationModifyActionServlet();
-				dam.doPost(request,response);
-				this.view = "/controller/DonationContentServlet.do?dlidx="+request.getParameter("dlidx");
+			}else if (command.equals("/controller/cashdonation/CashDonationConfirmServlet.do")) {
+				//System.out.println("TestCONFIRM");
+				CashDonationConfirmServlet cdcs = new CashDonationConfirmServlet();
+				cdcs.doPost(request, response);
+				
+				this.view = "/donation/cash_confirm.jsp";
+				this.isRedirect = false;
+				
+			}else if (command.equals("/controller/cashdonation/CashDonationInsertActionServlet.do")) {
+				//System.out.println("TestINSERTACTION");
+				CashDonationInsertActionServlet cdas = new CashDonationInsertActionServlet();
+				cdas.doPost(request, response);
+				
+				this.view = "/controller/cashdonation/CashDonationResultServlet.do";
 				this.isRedirect = true;
 				
-			}else if(command.equals("/controller/DonationDeleteServlet.do")){
-				DonationDeleteServlet dd = new DonationDeleteServlet();
-				dd.doGet(request,response);
+			}else if (command.equals("/controller/cashdonation/CashDonationResultServlet.do")) {
+				//System.out.println("TestRESULT");
+				CashDonationInsertActionServlet cdas = new CashDonationInsertActionServlet();
+				cdas.doPost(request, response);
 				
-				this.view = "/controller/DonationListServlet.do";
+				this.view = "/donation/cash_result.jsp";
+				this.isRedirect = true;
+				
+			}else if (command.equals("/controller/admin/CashDonationContentServlet.do")) {
+			//	System.out.println("TestOk");
+				CashDonationContentServlet cdcs = new CashDonationContentServlet();
+				cdcs.doPost(request, response);
+				
+				this.view = "/admin/ad_cash_content.jsp";
 				this.isRedirect = false;
-				
+			
+			}else if (command.equals("/controller/cashdonation/CashDonationReceiptServlet.do")) {
+				//System.out.println("TTTTT");
+				CashDonationReceiptServlet cdrs = new CashDonationReceiptServlet();
+				cdrs.doPost(request, response);
+					
+				this.view = "/mypage/cash_receipt.jsp";
+				this.isRedirect = false;
 			}
-		    
+		   
 		    if(this.isRedirect){
 				response.sendRedirect(contextPath+view);
 			}else{
 				RequestDispatcher rs = request.getRequestDispatcher(view);
 				rs.forward(request, response);
 		    }
-	}
-
+		}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

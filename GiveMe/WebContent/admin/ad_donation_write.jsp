@@ -90,7 +90,7 @@ select::-ms-expand { /* for IE 11 */
 	<form id="addForm" action="${ContextPath }/controller/DonationWriteActionServlet.do" enctype="multipart/form-data" method="post">
 	 
 	 <div class="form-group">
-  	<label class="ontrol-label" for="mid">ID</label>
+  	<label for="mid">ID</label>
   	<div>
   	<input type="text" id="mid" class="form-control" value="${sessionScope.vo.mid }" disabled="disabled"/>
   	</div>

@@ -32,28 +32,16 @@ public class CashDonationInsertActionServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-	    String cway = request.getParameter("cway");
+	    
+		String cway = request.getParameter("cway");
 	    int cmoney = Integer.parseInt(request.getParameter("cmoney"));   
 	    String creceipt = request.getParameter("creceipt");
 	    int cpaydate1 = Integer.parseInt(request.getParameter("cpaydate1"));
 	    String cstate = request.getParameter("cstate");
 	    int cpoint = Integer.parseInt(request.getParameter("cpoint")); 
 	    int midx = Integer.parseInt(request.getParameter("midx"));
-	    int dlidx = Integer.parseInt(request.getParameter("dlidx")); 
 	    String cpay = request.getParameter("cpay");
 	    String capst = request.getParameter("capst");
-	    
-//	    System.out.println(cway);
-//	    System.out.println(cmoney);
-//	    System.out.println(creceipt);
-//	    System.out.println(cpaydate1);
-//	    System.out.println(cstate);
-//	    System.out.println(cpoint);
-//	    System.out.println(midx);
-//	    System.out.println(dlidx);
-//	    System.out.println(cpay);
-//	    System.out.println(capst);
 	    
 	    
 	    CashDonationServiceImpl cd = new CashDonationServiceImpl();
@@ -66,12 +54,10 @@ public class CashDonationInsertActionServlet extends HttpServlet {
 	    cv.setCstate(cstate);
 	    cv.setCpoint(cpoint);
 	    cv.setMidx(midx);
-	    cv.setDlidx(dlidx);
 	    cv.setCpay(cpay);
 	    cv.setCapst(capst);
 	    
 	    int row = cd.insertCashDonation(cv); 
-	    //System.out.println(row);
 	}
 
 	/**

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "service.member.MemberVo" %>
 <%@ page import = "service.member.MemberServiceImpl" %>  
-<%@ page import = "common.Values" %>  
-    
-<%
+<%@ page import = "common.Values" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+ <%
 	request.setCharacterEncoding("UTF-8");
 	MemberVo vo = (MemberVo)request.getAttribute("vo");
 	int dlidx = (Integer)request.getAttribute("dlidx");

@@ -79,23 +79,11 @@ public class CashDonationServiceImpl implements CashDonationService {
 			pstmt = con.prepareStatement(sql); 
 			pstmt.setInt(1, midx);
 			rs = pstmt.executeQuery();
-		//	System.out.println(sql);
 			while(rs.next()) { 
-				
-//				System.out.println("ddd:"+rs.getInt("midx"));
-//				System.out.println("ddds:"+rs.getString("cway"));
-//				System.out.println("bbb:"+rs.getInt("cmoney"));
-//				System.out.println("ccc:"+rs.getString("cpay"));
-//				System.out.println("ddd:"+rs.getTimestamp("apdbdate"));
-//				System.out.println("eee:"+rs.getString("cstate"));
-//				System.out.println("fff:"+rs.getInt("cidx"));
-//				System.out.println("ggg:"+rs.getInt("dlidx"));
-//				System.out.println("hhh:"+rs.getInt("apidx"));
-//				System.out.println("iii:"+rs.getString("dlgroup1"));
+		
 				
 			CashDonationListVo vo = new CashDonationListVo(); 
 			
-			//vo.setRnum(rs.getInt("rnum"));
 			vo.setMidx(rs.getInt("midx"));
 			vo.setCway(rs.getString("cway"));
 			vo.setCmoney(rs.getInt("cmoney"));
@@ -123,23 +111,14 @@ public class CashDonationServiceImpl implements CashDonationService {
 		Connection con = dbconnect.getConnection(); 
 		PreparedStatement pstmt = null; 
 		
-//		System.out.println("cway"+vo.getCway());
-//		System.out.println("cmoney"+vo.getCmoney());
-//		System.out.println("creceipt"+vo.getCreceipt());
-//		System.out.println("cpaydate1"+vo.getCpaydate1());
-//		System.out.println("cstate"+vo.getCstate());
-//		System.out.println("cpoint"+vo.getCpoint());
-//		System.out.println("midx"+vo.getMidx());
-//		System.out.println("dlidx"+vo.getDlidx());
-//		System.out.println("cpay"+vo.getCpay());
-//		System.out.println("capst"+vo.getCapst());
 		
 		int row = 0;
-		try { sql = "insert into table_cashdonation values(seq_cidx.nextval,?,?,?,?,sysdate,?,?,sysdate,?,?,?,?)"; 
-		//			insert into table_cashdonation values(seq_cidx.nextval,'P',20000,'Y',10,sysdate,'S',1000,sysdate,4,4,'C', 'Y'); 
+		try { 
+			sql = "insert into table_cashdonation "
+				 + "values(seq_cidx.nextval,?,?,?,?,sysdate,?,?,sysdate,?,?,?)"; 
+		
 		
 		pstmt = con.prepareStatement(sql); 
-		//pstmt.setInt(1, vo.getMidx());
 		pstmt.setString(1, vo.getCway());
 		pstmt.setInt(2, vo.getCmoney()); 
 		pstmt.setString(3, vo.getCreceipt()); 
@@ -147,9 +126,8 @@ public class CashDonationServiceImpl implements CashDonationService {
 		pstmt.setString(5, vo.getCstate());
 		pstmt.setInt(6, vo.getCpoint());
 		pstmt.setInt(7, vo.getMidx());
-		pstmt.setInt(8, vo.getDlidx());
-		pstmt.setString(9, vo.getCpay()); 
-		pstmt.setString(10, vo.getCapst()); 		
+		pstmt.setString(8, vo.getCpay()); 
+		pstmt.setString(9, vo.getCapst()); 		
 		row = pstmt.executeUpdate(); 
 		}catch(Exception e) { 
 			e.printStackTrace();

@@ -32,13 +32,12 @@ public class CashDonationConfirmServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		int cidx = Integer.parseInt(request.getParameter("cidx"));
-		System.out.println(cidx);
-		
 		CashDonationServiceImpl cd = new CashDonationServiceImpl();
 		CashDonationVo cv = new CashDonationVo();
 		
 		cv = cd.getCashDonationConfirm(cidx);
 		
+		request.setAttribute("cidx", cidx);
 		request.setAttribute("cv", cv);
 	}
 

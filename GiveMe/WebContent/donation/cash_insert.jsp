@@ -1,10 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import ="java.util.*" %>
 <%@ page import ="service.cashdonation.*" %>
-<% 
-	CashDonationVo cv = (CashDonationVo) request.getAttribute("cv");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -54,12 +51,6 @@
             } else if($('#cdbdate').val()=='') {
                 alert('입력하세요');
                 $('#cdbdate').focus();
-            } else if($('#midx').val()=='') {
-                alert('입력하세요');
-                $('#midx').focus();
-            } else if($('#dlidx').val()=='') {
-                alert('입력하세요');
-                $('#dlidx').focus();
             } else if($('#cpay').val()=='') {
                 alert('입력하세요');
                 $('#cpay').focus();
@@ -75,10 +66,20 @@
 <title>현금기부 insert</title>
 </head>
 <body>
-<div style="width:800px;margin:0 auto;margin-top:100px;">
-
-<h1>현금기부 후원하기</h1>
-    <form id="addForm" action="<%=request.getContextPath()%>/controller/cashdonation/CashDonationConfirmServlet.do" method="post">
+<c:import url="/nav/header.jsp"/>
+<c:import url="/nav/sidebar3.jsp"/>
+<div style="width: 700px; margin:0 auto;">
+	<h3>현금기부 후원하기</h3>
+    <form id="addForm" action="<%=request.getContextPath()%>/controller/CashDonationConfirmServlet.do" method="post">
+        
+        <div class="form-group">
+            <label for="mid">아이디</label>
+            <input class="form-control" name="mid" id="mid" type="text" value="${sessionScope.vo.mid }" disabled="disabled"/>
+        </div>
+        <div class="form-group">
+            <label for="mid">idx</label>
+            <input class="form-control" name="mid" id="mid" type="text" value="${sessionScope.vo.midx }" disabled="disabled"/>
+        </div>
         <div class="form-group">
             <label for="cway">현금기부 방식</label>
             <input class="form-control" name="cway" id="cway" type="text" autocomplete="off"/>
@@ -86,10 +87,6 @@
         <div class="form-group">
             <label for="cmoney">현금기부 금액</label>
             <input class="form-control" name="cmoney" id="cmoney" type="text" autocomplete="off"/>
-        </div>
-         <div class="form-group">
-            <label for="creceipt">현금기부 영수증</label>
-            <input class="form-control" name="creceipt" id="creceipt" type="text" autocomplete="off"/>
         </div>
          <div class="form-group">
             <label for="cpaydate1">정기후원 출금일</label>
@@ -104,14 +101,6 @@
             <input class="form-control" name="cpoint" id="cpoint" type="text" autocomplete="off"/>
         </div>
         <div class="form-group">
-            <label for="midx">midx</label>
-            <input class="form-control" name="midx" id="midx" type="text" autocomplete="off"/>
-        </div>
-        <div class="form-group">
-            <label for="dlidx">dlidx</label>
-            <input class="form-control" name="dlidx" id="dlidx" type="text" autocomplete="off"/>
-        </div>
-        <div class="form-group">
             <label for="cpay">현금기부 결제방법</label>
             <input class="form-control" name="cpay" id="cpay" type="text" autocomplete="off"/>
         </div>
@@ -119,54 +108,18 @@
             <label for="capst">현금기부 결제 상태</label>
             <input class="form-control" name="capst" id="capst" type="text" autocomplete="off"/>
         </div>
+        <div class="form-group">
+            <label for="creceipt">현금기부 영수증</label>
+            <input class="form-control" name="creceipt" id="creceipt" type="text" autocomplete="off"/>
+        </div>
+          
           <div>
          	 <input class="btn btn-default" id="addButton" type="button" value="다음"/>
-            <a class="btn btn-default" href="<%=request.getContextPath()%>/main.jsp">취소</a>
+            <a class="btn btn-default" href="<%=request.getContextPath()%>/main/main.jsp">취소</a>
         </div>
     </form>
 
-
-
-<!--<form>
-<h1>후원하기</h1> 
-<p>1. 기부방식</p>
-<p><input type="radio" name="cway" value="P"> 정기후원
-	<input type="radio" name="cway" value="D"> 일시후원 </p>
-	
-<p>2. 기부금액</p>
-<p><input type="radio" name="cmoney" value="P"> 
-<select name="cpaydate1">
-    <option value="">기부금액 선택</option>
-    <option value="one">월 1만원</option>
-    <option value="five">월 5만원</option>
-    <option value="ten">월 10만원</option>
-</select>
-	<input type="radio" name="cway" value="D">  
-	<label for="sex">직접 입력</label>
-	<input class="form-control" name="cmoney" id="cmoney" type="text" autocomplete="off"/></p>
-
-<p>3. 후원처</p>
-
-<p>4. 결제 방법</p>
-<p><input type="radio" name="cpay" value="C">신용카드
-	<input type="radio" name="cpay" value="H">핸드폰 결제 
-	<input type="radio" name="cpay" value="A">계좌이체
-<select name="cpaydate">
-    <option value="">출금일 선택</option>
-    <option value="ten">10일</option>
-    <option value="twenty">20일</option>
-    <option value="thirty">30일</option>
-</select>
-</p>
-
-<p>5. 영수증 발급</p>
-<p><input type="radio" name="creceipt" value="Y">예
-	<input type="radio" name="creceipt" value="N">아니오</p>
-
-<a class="btn btn-default" href="<%=request.getContextPath()%>/donation/cash_confirm.jsp">다음</a>
-<a class="btn btn-default" href="<%=request.getContextPath()%>/main.jsp">취소</a>
-</form>  -->
-
 </div>
+<c:import url="/nav/footer.jsp"/>
 </body>
 </html>
