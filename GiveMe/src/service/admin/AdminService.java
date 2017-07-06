@@ -16,7 +16,7 @@ public interface AdminService {
     int deleteAllBoard();
     int insertDonationList(DonationListVo vo);
     DonationListVo getDonationList(int dlidx);
-    ArrayList<DonationListVo> getDonationListLine(int midx);
+    ArrayList<DonationListVo> getDonationListLine();
     DonationListVo modifyDonationList(int dlidx);
     int modifyDonationWrite(DonationListVo vo);
     int deleteDonationList(int dlidx);

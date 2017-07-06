@@ -25,7 +25,7 @@
 						비밀번호 변경이 완료되었습니다.
 					</div>
 				</div>
-				<a href="<%=request.getContextPath()%>/main/main.jsp" class="btn btn-default btn-block">메인으로 가기</a>
+				<a href="<%=request.getContextPath()%>/controller/MainServlet.do" class="btn btn-default btn-block">메인으로 가기</a>
 				<a href="<%=request.getContextPath()%>/controller/MemberCheckLoginServlet.do" class="btn btn-default btn-block">로그인하기</a>
 				<br/>
 				<br/>

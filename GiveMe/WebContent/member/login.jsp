@@ -61,7 +61,7 @@ label{
 				</div>
 			</div>
 			<button type="button" class="btn btn-default" style="float:right;" onclick="chkValue()">로그인</button>									
-			<a href="<%=request.getContextPath()%>/member/find_id.jsp" >아이디 찾기</a>/<a href="#" >비밀번호 찾기</a>
+			<a href="<%=request.getContextPath()%>/controller/MemberFindidServlet.do" >아이디 찾기</a>/<a href="<%=request.getContextPath()%>/controller/MemberFindpwdServlet.do" >비밀번호 찾기</a>
 		</form>
 		</div>	
 	</div>

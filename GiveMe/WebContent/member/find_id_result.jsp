@@ -27,7 +27,7 @@
 						당신의 아이디는'${requestScope.mid}'입니다.
 					</div>
 				</div>
-				<a href="<%=request.getContextPath()%>/member/find_pwd.jsp" class="btn btn-default btn-block">비밀번호찾기</a>
+				<a href="<%=request.getContextPath()%>/controller/MemberFindpwdServlet.do" class="btn btn-default btn-block">비밀번호찾기</a>
 				<a href="<%=request.getContextPath()%>/controller/MemberCheckLoginServlet.do" class="btn btn-default btn-block">로그인하기</a>
 				<br/><br/>
 				<%-- 아이디 찾기 성공했을 때 --%>
@@ -42,7 +42,7 @@
 						아이디를 찾을 수 없습니다
 					</div>
 				</div>
-				<a href="/member/find_id.jsp" class="btn btn-default btn-block">아이디/비밀번호 찾기</a>
+				<a href="<%=request.getContextPath()%>/controller/MemberFindidServlet.do" class="btn btn-default btn-block">아이디/비밀번호 찾기</a>
 				<br/><br/>
 				<%-- 아이디 찾기를 실패했을 때 --%>
 			</c:otherwise>

@@ -26,10 +26,41 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public ArrayList<MemberVo> getMemberList() {
 	// TODO Auto-generated method stub
+	Connection con = dbconnect.getConnection();
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	ArrayList<MemberVo> list = new ArrayList<MemberVo>();
 	
-	
-	return null;
+	try{
+	    String sql="select * from "
+	    	+ "(select rownum rnum,midx,mname,mid,mmail,menter,mvalue "
+		+ "from table_member order by midx desc)"
+	    	+ " where rnum <= 20 and rnum >= 1";
+	    
+//	    String sql="select midx,mname,mid,mmail,menter,mvalue from table_member order by midx desc";
+	    pstmt = con.prepareStatement(sql);
+	    rs=pstmt.executeQuery();	    
+	    System.out.println(sql);
+	    while(rs.next()){
+		MemberVo vo = new MemberVo();
+		
+		vo.setMidx(rs.getInt("midx"));
+		vo.setMname(rs.getString("mname"));
+		vo.setMid(rs.getString("mid"));
+		vo.setMmail(rs.getString("mmail"));
+		vo.setMenter(rs.getDate("menter"));
+		vo.setMvalue(rs.getString("mvalue"));
+		list.add(vo);
+	    }
+	}catch(Exception e){
+	    System.out.println(e.getMessage());
+	}finally{
+	    DBClose.close(con, pstmt, rs);
+	}
+		
+	return list;	//list로 값 반환.
     }
+
 
     @Override
     public int deleteMember() {
@@ -62,7 +93,7 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public int insertDonationList(DonationListVo vo) {
+    public int insertDonationList(DonationListVo dl) {
 	// TODO Auto-generated method stub
     	Connection con = dbconnect.getConnection();
     	PreparedStatement pstmt = null;
@@ -70,15 +101,15 @@ public class AdminServiceImpl implements AdminService{
     	try{
     		sql = "insert into table_donationlist "
     			 + "(dlidx,dlgroup1,dlgroup2,dlimage,dlplace,dlarea,dlcontent,dldeletest,dlwdate, dlmdate,dldbdate)"	
-                 + "values(seq_dlidx.nextval,?,?,?,?,?,?,'N',sysdate,sysdate,sysdate,?)";
+                 + "values(seq_dlidx.nextval,?,?,?,?,?,?,'N',sysdate,sysdate,sysdate)";
     		 
     		pstmt = con.prepareStatement(sql);
-    		pstmt.setString(1, vo.getDlgroup1());
-    		pstmt.setString(2, vo.getDlgroup2());
-    		pstmt.setString(3, vo.getDlimage());
-    		pstmt.setString(4, vo.getDlplace());
-    		pstmt.setString(5, vo.getDlarea());
-    		pstmt.setString(6, vo.getDlcontent());
+    		pstmt.setString(1, dl.getDlgroup1());
+    		pstmt.setString(2, dl.getDlgroup2());
+    		pstmt.setString(3, dl.getDlimage());
+    		pstmt.setString(4, dl.getDlplace());
+    		pstmt.setString(5, dl.getDlarea());
+    		pstmt.setString(6, dl.getDlcontent());
     		row = pstmt.executeUpdate();
     		
     		
@@ -97,30 +128,27 @@ public class AdminServiceImpl implements AdminService{
     	Connection con = dbconnect.getConnection();
     	PreparedStatement pstmt = null;
     	ResultSet rs = null;
-    	DonationListVo vo = null;
+    	DonationListVo dl = null;
     	
     	try{
-    		sql = "select dl.dlidx, dl.dlimage, dl.dlplace, dl.dlarea ,dl.dlcontent, dl.dlgroup1, dl.dlgroup2, dl.dlwdate, dl.dlmdate, dl.midx, tm.mid " 
-    			 + "from table_donationlist dl, table_member tm " 
-    			 + "where dl.midx = tm.midx " 
-    			 + "and dl.dlidx = ?"; 
+    		sql = "select dlidx, dlimage, dlplace, dlarea ,dlcontent, dlgroup1, dlgroup2, dlwdate, dlmdate " 
+    			 + "from table_donationlist " 
+    			 + "where dlidx = ?"; 
     		pstmt = con.prepareStatement(sql);
     		pstmt.setInt(1, dlidx);
     		rs = pstmt.executeQuery();
     		
     		if(rs.next()){
-    			vo = new DonationListVo();
-    			vo.setDlidx(rs.getInt("dlidx"));
-    			vo.setDlimage(rs.getString("dlimage"));
-    			vo.setDlplace(rs.getString("dlplace"));
-    			vo.setDlarea(rs.getString("dlarea"));
-    			vo.setDlcontent(rs.getString("dlcontent"));
-    			vo.setDlgroup1(rs.getString("dlgroup1"));
-    			vo.setDlgroup2(rs.getString("dlgroup2"));
-    			vo.setDlwdate(rs.getDate("dlwdate"));
-    			vo.setDlmdate(rs.getDate("dlmdate"));
-    			vo.setMidx(rs.getInt("midx"));
-    			vo.setDlid(rs.getString("mid"));
+    			dl = new DonationListVo();
+    			dl.setDlidx(rs.getInt("dlidx"));
+    			dl.setDlimage(rs.getString("dlimage"));
+    			dl.setDlplace(rs.getString("dlplace"));
+    			dl.setDlarea(rs.getString("dlarea"));
+    			dl.setDlcontent(rs.getString("dlcontent"));
+    			dl.setDlgroup1(rs.getString("dlgroup1"));
+    			dl.setDlgroup2(rs.getString("dlgroup2"));
+    			dl.setDlwdate(rs.getDate("dlwdate"));
+    			dl.setDlmdate(rs.getDate("dlmdate"));
     		}
     		rs.close();
     		pstmt.close();
@@ -128,12 +156,12 @@ public class AdminServiceImpl implements AdminService{
     	}catch(Exception e){
     		
     	}
-    	return vo;
+    	return dl;
     }
     	
 
     @Override
-    public ArrayList<DonationListVo> getDonationListLine(int midx){
+    public ArrayList<DonationListVo> getDonationListLine(){
 	// TODO Auto-generated method stub
     	Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt= null;
@@ -143,9 +171,9 @@ public class AdminServiceImpl implements AdminService{
     	
 		try{
 		String sql = "select * "
-                     + "from (select rownum rnum,dl.dlidx,dl.dlgroup2,dl.dlplace,dl.dlarea,dl.dlwdate,dl.dldeletest,tm.mid " 
-                     + "from table_donationlist dl,table_member tm "
-                     + "where dl.midx = tm.midx order by dlidx desc) "
+                     + "from (select rownum rnum,dlidx,dlgroup2,dlplace,dlarea,dlwdate,dldeletest " 
+                     + "from table_donationlist "
+                     + "order by dlidx desc) "
                      + "where rnum <= 20 "
                      + "and rnum >= 1 ";
 
@@ -156,15 +184,14 @@ public class AdminServiceImpl implements AdminService{
 			
            
 			while(rs.next()){
-        	   DonationListVo vo = new DonationListVo();
-        	   vo.setDlidx(rs.getInt("dlidx"));
-        	   vo.setDlgroup2(rs.getString("dlgroup2"));
-        	   vo.setDlplace(rs.getString("dlplace"));
-        	   vo.setDlarea(rs.getString("dlarea"));
-        	   vo.setDlwdate(rs.getDate("dlwdate"));
-        	   vo.setDldeletest(rs.getString("dldeletest"));
-        	   vo.setDlid(rs.getString("mid"));
-        	   list.add(vo);
+        	   DonationListVo dl = new DonationListVo();
+        	   dl.setDlidx(rs.getInt("dlidx"));
+        	   dl.setDlgroup2(rs.getString("dlgroup2"));
+        	   dl.setDlplace(rs.getString("dlplace"));
+        	   dl.setDlarea(rs.getString("dlarea"));
+        	   dl.setDlwdate(rs.getDate("dlwdate"));
+        	   dl.setDldeletest(rs.getString("dldeletest"));
+        	   list.add(dl);
            }
     	}catch(Exception e){
     		
@@ -184,30 +211,27 @@ public class AdminServiceImpl implements AdminService{
     	PreparedStatement pstmt = null;
     	ResultSet rs = null;
     	
-    	DonationListVo vo = new DonationListVo();
+    	DonationListVo dl = new DonationListVo();
     	
     	try{
-    		sql = "select dl.dlidx, dl.dlimage, dl.dlplace, dl.dlarea ,dl.dlcontent, dl.dlgroup1, dl.dlgroup2, dl.dlwdate, dl.dlmdate, dl.midx, tm.mid " 
-       			 + "from table_donationlist dl, table_member tm " 
-       			 + "where dl.midx = tm.midx " 
-       			 + "and dl.dlidx = ?";
+    		sql = "select dlidx, dlimage,dlplace, dlarea ,dlcontent, dlgroup1, dlgroup2, dlwdate, dlmdate" 
+       			 + "from table_donationlist" 
+       			 + "where dlidx = ?";
     		pstmt = con.prepareStatement(sql);
     		pstmt.setInt(1, dlidx);
     		rs = pstmt.executeQuery();
     		
     		if(rs.next()){
-    			vo = new DonationListVo();
-    			vo.setDlidx(rs.getInt("dlidx"));
-    			vo.setDlimage(rs.getString("dlimage"));
-    			vo.setDlplace(rs.getString("dlplace"));
-    			vo.setDlarea(rs.getString("dlarea"));
-    			vo.setDlcontent(rs.getString("dlcontent"));
-    			vo.setDlgroup1(rs.getString("dlgroup1"));
-    			vo.setDlgroup2(rs.getString("dlgroup2"));
-    			vo.setDlwdate(rs.getDate("dlwdate"));
-    			vo.setDlmdate(rs.getDate("dlmdate"));
-    			vo.setDlid(rs.getString("mid"));
-    			vo.setMidx(rs.getShort("midx"));
+    			dl = new DonationListVo();
+    			dl.setDlidx(rs.getInt("dlidx"));
+    			dl.setDlimage(rs.getString("dlimage"));
+    			dl.setDlplace(rs.getString("dlplace"));
+    			dl.setDlarea(rs.getString("dlarea"));
+    			dl.setDlcontent(rs.getString("dlcontent"));
+    			dl.setDlgroup1(rs.getString("dlgroup1"));
+    			dl.setDlgroup2(rs.getString("dlgroup2"));
+    			dl.setDlwdate(rs.getDate("dlwdate"));
+    			dl.setDlmdate(rs.getDate("dlmdate"));
     		}
     		rs.close();
     		pstmt.close();
@@ -215,10 +239,10 @@ public class AdminServiceImpl implements AdminService{
     	}catch(Exception e){
     		
     	}
-    	return vo;
+    	return dl;
     }
     @Override
-    public int modifyDonationWrite(DonationListVo vo){
+    public int modifyDonationWrite(DonationListVo dl){
     	Connection con = dbconnect.getConnection();
     	PreparedStatement pstmt = null;
     	int row = 0;
@@ -229,13 +253,13 @@ public class AdminServiceImpl implements AdminService{
     			+ "dlgroup1=?, dlgroup2=?, dlmdate=sysdate " 
                 + "where dlidx = ?";
     		pstmt=con.prepareStatement(sql);
-    		pstmt.setString(1, vo.getDlimage());
-    		pstmt.setString(2, vo.getDlplace());
-    		pstmt.setString(3, vo.getDlarea());
-    		pstmt.setString(4, vo.getDlcontent());
-    		pstmt.setString(5, vo.getDlgroup1());
-    		pstmt.setString(6, vo.getDlgroup2());
-    		pstmt.setInt(7, vo.getDlidx());
+    		pstmt.setString(1, dl.getDlimage());
+    		pstmt.setString(2, dl.getDlplace());
+    		pstmt.setString(3, dl.getDlarea());
+    		pstmt.setString(4, dl.getDlcontent());
+    		pstmt.setString(5, dl.getDlgroup1());
+    		pstmt.setString(6, dl.getDlgroup2());
+    		pstmt.setInt(7, dl.getDlidx());
     		
     		row = pstmt.executeUpdate();
     		

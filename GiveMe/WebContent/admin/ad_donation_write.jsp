@@ -87,7 +87,7 @@ select::-ms-expand { /* for IE 11 */
 	<div>
 		<img id="preview"  src="http://placehold.it/300x300?text=preview"/>
 	</div>
-	<form id="addForm" action="${ContextPath }/controller/DonationWriteActionServlet.do" enctype="multipart/form-data" method="post">
+	<form id="addForm" action="${ContextPath }/controller/DonationWriteActionServlet.do"enctype="multipart/form-data" method="post">
 	 
 	 <div class="form-group">
   	<label for="mid">ID</label>
@@ -108,7 +108,6 @@ select::-ms-expand { /* for IE 11 */
         	
         	<select id="dlgroup1" name="dlgroup1">
 	    		<option value="P" >개인</option>
-	    		<option value="G">단체</option>
 			</select>
 			
 			<select id="dlgroup2" name="dlgroup2">
@@ -117,11 +116,6 @@ select::-ms-expand { /* for IE 11 */
 	    		<option value="한부모">한부모</option>
 			</select>
 			
-			<select id="dlgroup3" name="dlgroup3">	
-	    		<option value="복지관">복지관</option>
-	    		<option value="학교">학교</option>
-	    		<option value="요양시설">요양시설</option>
-	    	</select>
         
         <div class="form-group3">
         	<label for="dlcontent">내용 :</label>

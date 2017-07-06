@@ -35,34 +35,30 @@
 	padding-left: 300px;
 	margin-left: 280px;
 }
-label{
-	padding-right: 240px;
-	margin-bottom: 10px;
-}
 </style>
 </head>
 <body>
 	<div class="wrap">
 		<c:import url="/nav/header.jsp"/>
 		<div class="panel-body">
-		<form name="member" class="form-horizontal" method="post"  action="<%=request.getContextPath()%>/controller/MemberFindpwdServlet.do" onsubmit="retrun findValue()">
+		<form name="member" class="form-horizontal" method="post"  action="<%=request.getContextPath()%>/controller/MemberFindpwdActionServlet.do" onsubmit="retrun findValue()">
 			<div class="form-group">
 				<div class="mid">
-				<label class="control-label" style="width:300px;">아이디</label>
+				<label>아이디</label>
 				<input type="text" class="form-control" id="mid" name="mid"/>
 				</div>
 			</div>
 			
 			<div class="form-group">
 				<div class="mname">
-				<label class="control-label" style="width:300px;">이름</label>
+				<label>이름</label>
 				<input type="text" class="form-control" id="mname" name="mname"/>
 				</div>
 			</div>
 			
 			<div class="form-group">
 				<div class="mphone">
-				<label class="control-label" style="width:300px;">전화번호</label>
+				<label>전화번호</label>
 				<input type="text" class="form-control" id="mphone" name="mphone"/>
 				</div>
 			</div>

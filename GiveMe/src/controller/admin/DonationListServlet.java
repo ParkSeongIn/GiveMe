@@ -37,15 +37,9 @@ public class DonationListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		HttpSession session = request.getSession();
-		MemberVo vo = (MemberVo)session.getAttribute("vo");
-		int midx = 0;
-		if(vo != null){
-			midx = vo.getMidx();
-		}
 		AdminServiceImpl as = new AdminServiceImpl();
 		
-		ArrayList<DonationListVo> list = as.getDonationListLine(midx);
+		ArrayList<DonationListVo> list = as.getDonationListLine();
 		request.setAttribute("list", list);
 		
 	}

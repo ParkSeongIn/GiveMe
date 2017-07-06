@@ -70,16 +70,16 @@ public class DonationModifyActionServlet extends HttpServlet {
 		
 		AdminServiceImpl as = new AdminServiceImpl();
 		
-		DonationListVo vo = new DonationListVo();
-		vo.setDlidx(dlidx);
-		vo.setDlplace(dlplace);
-		vo.setDlarea(dlarea);
-		vo.setDlcontent(dlcontent);
-		vo.setDlgroup1(dlgroup1);
-		vo.setDlgroup2(dlgroup2);
-		vo.setDlimage(dlimage);
+		DonationListVo dl = new DonationListVo();
+		dl.setDlidx(dlidx);
+		dl.setDlplace(dlplace);
+		dl.setDlarea(dlarea);
+		dl.setDlcontent(dlcontent);
+		dl.setDlgroup1(dlgroup1);
+		dl.setDlgroup2(dlgroup2);
+		dl.setDlimage(dlimage);
 		
-		int row = as.modifyDonationWrite(vo);
+		int row = as.modifyDonationWrite(dl);
 		
 		
 	}

@@ -35,9 +35,9 @@ public class DonationModifyServlet extends HttpServlet {
 		
 		int dlidx = Integer.parseInt(request.getParameter("dlidx"));
 		AdminServiceImpl as = new AdminServiceImpl();
-		DonationListVo vo = as.modifyDonationList(dlidx);
+		DonationListVo dl = as.modifyDonationList(dlidx);
 		
-		request.setAttribute("vo", vo);
+		request.setAttribute("dl", dl);
 		
 	}
 

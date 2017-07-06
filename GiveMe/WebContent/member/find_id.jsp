@@ -32,32 +32,28 @@
 	padding-left: 300px;
 	margin-left: 280px;
 }
-.control-label1{
-	padding-right: 240px;
-	margin-bottom: 10px;
-}
 </style>
 </head>
 <body>
 <div class= "wrap">
 		<c:import url="/nav/header.jsp"/>
 		<div class="panel-body">
-		<form name="member" class="form-horizontal" method="post"  action="<%=request.getContextPath()%>/controller/MemberFindidServlet.do" onsubmit="return findValue()">
+		<form name="member" class="form-horizontal" method="post"  action="<%=request.getContextPath()%>/controller/MemberFindidActionServlet.do" onsubmit="return findValue()">
 			<div class="form-group">
 				<div class="mname">
-				<label class="control-label1" style="width:300px;">이름</label>
+				<label >이름</label>
 				<input type="text" class="form-control" id="mname" name="mname"/>
 				</div>
 			</div>
 			
 			<div class="form-group">
 				<div class="mpone">
-				<label class="control-label2" style="width:350px;">휴대폰 번호</label>
+				<label >휴대폰 번호</label>
 				<input type="text" class="form-control" id="mphone" name="mphone"/>
 				</div>
 			</div>
 			
-			<button type="button" class="btn btn-default" style="float:right;">취소</button>
+			<a href="<%=request.getContextPath()%>/controller/MainServlet.do" class="btn btn-default" style="float:right;" >취소</a>
 			<button type="submit" class="btn btn-default" style="float:right;">확인</button>
 		</form>
 		</div>	

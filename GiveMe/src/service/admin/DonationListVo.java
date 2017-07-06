@@ -16,15 +16,7 @@ public class DonationListVo {
 	private Date dlmdate;
 	private Timestamp dldbdate;
 	private String dldeletest;
-	private int midx;
-	private String dlid;
 	
-	public String getDlid() {
-		return dlid;
-	}
-	public void setDlid(String dlid) {
-		this.dlid = dlid;
-	}
 	public int getDlidx() {
 		return dlidx;
 	}
@@ -90,12 +82,6 @@ public class DonationListVo {
 	}
 	public void setDldeletest(String dldeletest) {
 		this.dldeletest = dldeletest;
-	}
-	public int getMidx() {
-		return midx;
-	}
-	public void setMidx(int midx) {
-		this.midx = midx;
 	}
 
 	

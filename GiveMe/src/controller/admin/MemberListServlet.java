@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import service.admin.AdminServiceImpl;
 import service.member.MemberVo;
@@ -35,8 +36,6 @@ public class MemberListServlet extends HttpServlet {
 	    
 	    AdminServiceImpl asi = new AdminServiceImpl();
 	    ArrayList<MemberVo> list = asi.getMemberList();
-	//response.getWriter().append("Served at: ").append(request.getContextPath());
-	    
 	    request.setAttribute("list",  list);
 	}
 

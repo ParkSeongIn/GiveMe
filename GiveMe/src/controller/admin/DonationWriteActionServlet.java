@@ -71,22 +71,17 @@ public class DonationWriteActionServlet extends HttpServlet {
 		String name1 = (String)files.nextElement();
 		String dlimage = mr.getFilesystemName(name1);
 		
-		HttpSession session = request.getSession();
-		MemberVo vo1 = (MemberVo)session.getAttribute("vo1");
-		
 		AdminServiceImpl as = new AdminServiceImpl();
 		
-		DonationListVo vo = new DonationListVo();
-		vo.setDlplace(dlplace);
-		vo.setDlarea(dlarea);
-		vo.setDlgroup1(dlgroup1);
-		vo.setDlgroup2(dlgroup2);
-		vo.setDlcontent(dlcontent);
-		vo.setDlimage(dlimage);
+		DonationListVo dl = new DonationListVo();
+		dl.setDlplace(dlplace);
+		dl.setDlarea(dlarea);
+		dl.setDlgroup1(dlgroup1);
+		dl.setDlgroup2(dlgroup2);
+		dl.setDlcontent(dlcontent);
+		dl.setDlimage(dlimage);
 		
-		int dlidx = as.insertDonationList(vo);
-		request.setAttribute("dlidx", dlidx);
-		
+		int row = as.insertDonationList(dl);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

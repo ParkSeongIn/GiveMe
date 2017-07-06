@@ -18,7 +18,7 @@
 	<!-- 	<div class="upRight">	 --><!-- upRight start -->
 			<div class="up1" id="login_box"> <!-- div up1 start -->
 				<ul class="side1">
-					<li><a href="<%=request.getContextPath() %>/main/main.jsp">Home</a></li>
+					<li><a href="<%=request.getContextPath() %>/controller/MainServlet.do">Home</a></li>
 					<li><a href="<%=request.getContextPath() %>/controller/MemberCheckLoginServlet.do" >로그인</a></li>
 					<li><a href="<%=request.getContextPath()%>/controller/MemberInsertServlet.do">회원가입</a></li> 
 				</ul>		
@@ -36,7 +36,7 @@
 							<li><a href="<%=request.getContextPath()%>/controller/MemberContentServlet.do">마이페이지</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="<%=request.getContextPath()%>/controller/DonationListServlet.do">관리자 페이지</a></li>
+							<li><a href="<%=request.getContextPath()%>/controller/MemberListServlet.do">관리자 페이지</a></li>
 						</c:otherwise>
 						</c:choose>
 					</c:if>

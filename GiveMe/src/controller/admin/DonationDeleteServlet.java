@@ -37,18 +37,6 @@ public class DonationDeleteServlet extends HttpServlet {
 		
 		int row = as.deleteDonationList(dlidx);
 		
-		String alt = null;
-		
-		if (row == 0) {
-			 alt ="삭제실패";		
-			}else{
-			 alt ="삭제성공";	
-			}
-		
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.print("<script> self.window.alert('"+alt+"'); location.href='DonationListServlet.do';</script>");
 	}
 
 	/**

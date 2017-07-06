@@ -50,7 +50,7 @@ function changeValue(){
 		 	</div>
 		 	<div class="panel-body">
 		 		<p>입력하신 정보와 일치하는 정보를 찾을 수 없습니다</p>
-		 		<a href="/member/find_pwd.jsp" class="btn btn-default">아이디/비밀번호찾기</a>
+		 		<a href="/controller/MemberFindidServlet.do" class="btn btn-default">아이디/비밀번호찾기</a>
 		 	</div>
 		 </div>
 		</c:when>

@@ -204,7 +204,7 @@ public class CashDonationServiceImpl implements CashDonationService {
 		CashDonationVo cv = null; 
 		
 		try {
-			sql = "select cidx, cway, cmoney, creceipt, cpaydate1, cpaydate2, cpoint, cdbdate, midx, dlidx, cpay, capst from table_cashdonation where cidx=?";
+			sql = "select cidx, cway, cmoney, creceipt, cpaydate1, cpaydate2, cpoint, cdbdate,cpay, capst from table_cashdonation where cidx=?";
 				pstmt = con.prepareStatement(sql); 	
 				pstmt.setInt(1, cidx);
 				rs = pstmt.executeQuery(); 
@@ -219,8 +219,6 @@ public class CashDonationServiceImpl implements CashDonationService {
 					System.out.println("cpaydate2 :"+rs.getString("cpaydate2"));
 					System.out.println("cpoint :"+rs.getString("cpoint"));
 					System.out.println("cdbdate :"+rs.getString("cdbdate"));
-					System.out.println("midx :"+rs.getString("midx"));
-					System.out.println("dlidx :"+rs.getString("dlidx"));
 					System.out.println("cpay :"+rs.getString("cpay"));
 					System.out.println("capst :"+rs.getString("capst"));
 					
@@ -231,8 +229,6 @@ public class CashDonationServiceImpl implements CashDonationService {
 					cv.setCpaydate2(rs.getDate("cpaydate2"));
 					cv.setCpoint(rs.getInt("cpoint"));
 					cv.setCdbdate(rs.getTimestamp("cdbdate"));
-					cv.setMidx(rs.getInt("midx"));
-					cv.setDlidx(rs.getInt("dlidx"));
 					cv.setCpay(rs.getString("cpay"));
 					cv.setCapst(rs.getString("capst"));	
 				}

@@ -85,44 +85,40 @@ select::-ms-expand { /* for IE 11 */
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 <div class="container">
 <%
-DonationListVo vo = (DonationListVo)request.getAttribute("vo");
+DonationListVo dl = (DonationListVo)request.getAttribute("dl");
 int dlidx = (Integer)request.getAttribute("dlidx");
 %>
 	<h1>기부처 리스트 수정</h1>
 	
 	<div class="image">
 		<c:url var="path" value="/upload"/>
-		<img src="${path }/${vo.dlimage }">
+		<img src="${path }/${dl.dlimage }">
 	</div>
 	<form id="modyForm"  name="modyForm" action="${ContextPath }/controller/DonationModifyActionServlet.do" enctype="multipart/form-data" method="post">
-	<input type="hidden" name="dlidx" value="${vo.dlidx}"/>
+	<input type="hidden" name="dlidx" value="${dl.dlidx}"/>
 	 <div class="form-group1">
             <label for="dlplace">기부처 :</label>
-            <input class="form-control" name="dlplace" id="dlplace" type="text" value="${vo.dlplace}"/>
+            <input class="form-control" name="dlplace" id="dlplace" type="text" value="${dl.dlplace}"/>
         </div><br/>
 	        
         <div class="form-group2">
             <label for="dlarea">지역 :</label>
-            <input class="form-control" name="dlarea" id="dlarea" type="text" value="${vo.dlarea }"/>
+            <input class="form-control" name="dlarea" id="dlarea" type="text" value="${dl.dlarea }"/>
         </div><br/>
         
         	<select id="dlgroup1" name="dlgroup1" >
 	    		<option value="1">개인</option>
-	    		<option value="2">단체</option>
 			</select>
 		
 			<select id="dlgroup2" name="dlgroup2"  >
 	    		<option value="독거노인">독거노인</option>
 	    		<option value="저소득">저소득</option>
 	    		<option value="한부모">한부모</option>
-	    		<option value="복지관">복지관</option>
-	    		<option value="독거노인">학교</option>
-	    		<option value="한부모">요양시설</option>
 			</select>
         
         <div class="form-group3">
         	<label for="dlcontent">내용 :</label>
-        	<textarea name="dlcontent" id="dlcontent" rows="10" cols="100" >${vo.dlcontent}</textarea>
+        	<textarea name="dlcontent" id="dlcontent" rows="10" cols="100" >${dl.dlcontent}</textarea>
         </div>
         <br/>
         
@@ -135,7 +131,7 @@ int dlidx = (Integer)request.getAttribute("dlidx");
         <div class="bottom">
             <input class="btn btn-default" id="modyButton" type="button" value="수정"/>
             <input class="btn btn-default" type="reset" value="초기화"/>
-            <a class="btn btn-default" href="${ContextPath }/controller/DonationContentServlet.do?dlidx=${vo.dlidx }">취소</a>
+            <a class="btn btn-default" href="${ContextPath }/controller/DonationContentServlet.do?dlidx=${dl.dlidx }">취소</a>
         </div>
        </form> 
  </div>    
