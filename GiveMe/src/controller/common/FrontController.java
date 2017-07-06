@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.admin.AdQuestionContentServlet;
 import controller.admin.AdQuestionListServlet;
+import controller.admin.AdQuestionModifyActionServlet;
+import controller.admin.AdQuestionModifyServlet;
 import controller.admin.AdQuestionWriteActionServlet;
 import controller.admin.AdQuestionWriteServlet;
 import controller.admin.CashDonationContentServlet;
@@ -185,28 +187,28 @@ public class FrontController extends HttpServlet {
 			this.view = "/admin/ad_qna_list.jsp";
 			this.isRedirect = false;
 			
-		}else if (command.equals("/controller/admin/AdQuestionWriteServlet.do")) {
-	
-			AdQuestionWriteServlet aqws = new AdQuestionWriteServlet();
-			aqws.doPost(request, response);
-			
-			this.view = "/admin/ad_qna_write.jsp";
-			this.isRedirect = false;
-			
-		}else if (command.equals("/controller/admin/AdQuestionWriteActionServlet.do")) {
-	
-			AdQuestionWriteActionServlet aqas = new AdQuestionWriteActionServlet();
-			aqas.doPost(request, response);
-			
-			this.view = "/controller/question/QuestionContentServlet.do?qidx="+request.getParameter("qidx");
-			
 		}else if (command.equals("/controller/admin/AdQuestionContentServlet.do")) {
-			
+		//	System.out.println("adcontent");
 			AdQuestionContentServlet aqcs = new AdQuestionContentServlet();
 			aqcs.doPost(request, response);
 			
-			this.view= "/admin/ad_qna_write.jsp";
+			this.view= "/admin/ad_qna_content.jsp";
 			this.isRedirect = false;
+			
+		}else if (command.equals("/controller/admin/AdQuestionModifyServlet.do")) {
+	
+			AdQuestionModifyServlet aqms = new AdQuestionModifyServlet();
+			aqms.doPost(request, response);
+			
+			this.view = "/admin/ad_qna_modify.jsp";
+			this.isRedirect = false;
+			
+		}else if (command.equals("/controller/admin/AdQuestionModifyActionServlet.do")) {
+	
+			AdQuestionModifyActionServlet aqas = new AdQuestionModifyActionServlet();
+			aqas.doPost(request, response);
+			
+			this.view = "/controller/admin/AdQuestionListServlet.do";
 			
 		}
 //		if(command.equals("/Controller/QusetionListServlet.do")){

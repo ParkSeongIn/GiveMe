@@ -55,7 +55,11 @@ int qidx = Integer.parseInt(request.getParameter("qidx"));
 	 </div>
 	 <div class="form-group">
 	    <label for="qrecontent">답변 :</label>
-	    <input class="form-control" name="qrecontent" id="qrecontent" type="text" value="<%=qv.getQrecontent() %>"/>
+	    <input class="form-control" name="qrecontent" id="qrecontent" type="text" value="<%=qv.getQrecontent() %>" readonly="readonly"/>
 	 </div>
+	 	<div>
+		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/admin/AdQuestionModifyServlet.do?qidx=<%=qidx %>">답변 수정</a>
+	 	<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/admin/AdQuestionListServlet.do">글목록</a>
+	</div>  
 </body>
 </html>

@@ -33,7 +33,7 @@ public class QuestionModifyServlet extends HttpServlet {
 
 		int qidx = Integer.parseInt(request.getParameter("qidx"));
 		int midx = Integer.parseInt(request.getParameter("midx"));
-		System.out.println(qidx);
+	//	System.out.println(qidx);
 		QuestionServiceImpl qd = new QuestionServiceImpl();
 		QuestionVo qv = qd.getQuestion(qidx, midx);
 		

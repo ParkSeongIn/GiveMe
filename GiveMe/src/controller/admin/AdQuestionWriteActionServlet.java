@@ -30,14 +30,14 @@ public class AdQuestionWriteActionServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String qrecontent = request.getParameter("qrecontent");
-		
-		QuestionVo qv = new QuestionVo();
-		qv.setQrecontent(qrecontent);
-		
-		AdminServiceImpl ad = new AdminServiceImpl();
-		
-		int row = ad.insertAdQuestion(qv);
+//		String qrecontent = request.getParameter("qrecontent");
+//		
+//		QuestionVo qv = new QuestionVo();
+//		qv.setQrecontent(qrecontent);
+//		
+//		AdminServiceImpl ad = new AdminServiceImpl();
+//		
+//		int row = ad.insertAdQuestion(qv);
 	}
 
 	/**

@@ -161,26 +161,6 @@ public class AdminServiceImpl implements AdminService{
     }
     
     @Override
-    public int insertAdQuestion(QuestionVo vo) {
-    	Connection con = dbconnect.getConnection();
-    	PreparedStatement pstmt = null;
-    	int row = 0;
-    	try {
-    		sql = "insert into table_question (qrecontent, qwdate, qdbdate) values(?, sysdate, sysdate)";
-    		
-    		pstmt = con.prepareStatement(sql);
-    		pstmt.setString(1, vo.getQrecontent());
-    		row = pstmt.executeUpdate();
-    	
-    	}catch(Exception e) {
-    		System.out.println(e.getMessage());
-    	}finally {
-    		DBClose.close(con,pstmt);
-    	}
-    	return row;
-    }
-    
-    @Override
     public QuestionVo getAdQuestion(int qidx) {
     	Connection con = dbconnect.getConnection();
     	PreparedStatement pstmt = null;
@@ -211,6 +191,48 @@ public class AdminServiceImpl implements AdminService{
     	}
     	return qv;
     }
+    
+    @Override
+    public int modifyWriteAdQuestion(QuestionVo qv) {
+    	Connection con = dbconnect.getConnection();
+    	PreparedStatement pstmt = null;
+    	int row = 0;
+    	try {
+    		sql = "update table_question set qrecontent = ?, qmdate = sysdate where qidx = ?";
+    	pstmt = con.prepareStatement(sql);
+    	pstmt.setString(1, (qv.getQrecontent()));
+    	pstmt.setInt(2, (qv.getQidx()));
+    	
+    	row = pstmt.executeUpdate();
+    	}catch(Exception e) {
+    		System.out.println(e.getMessage());
+    	}finally {
+    		DBClose.close(con,pstmt);
+    	}
+    	return row;
+    }
+    
+//    @Override
+//    public int insertAdQuestion(QuestionVo vo) {
+//    	Connection con = dbconnect.getConnection();
+//    	PreparedStatement pstmt = null;
+//    	int row = 0;
+//    	try {
+//    		sql = "insert into table_question (qrecontent, qwdate, qdbdate) values(?, sysdate, sysdate)";
+//    		
+//    		pstmt = con.prepareStatement(sql);
+//    		pstmt.setString(1, vo.getQrecontent());
+//    		row = pstmt.executeUpdate();
+//    	
+//    	}catch(Exception e) {
+//    		System.out.println(e.getMessage());
+//    	}finally {
+//    		DBClose.close(con,pstmt);
+//    	}
+//    	return row;
+//    }
+    
+  
     @Override
     public int getPaging() {
 	// TODO Auto-generated method stub

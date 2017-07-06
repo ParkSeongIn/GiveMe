@@ -58,11 +58,11 @@ public class QuestionModifyActionServlet extends HttpServlet {
 		qv.setQcategory(qcategory);
 		qv.setQcontent(qcontent);
 		
-		System.out.println(qv.getQidx());
-		System.out.println(qv.getMidx());
-		System.out.println(qv.getQtitle());
-		System.out.println(qv.getQcategory());
-		System.out.println(qv.getQcontent());
+//		System.out.println(qv.getQidx());
+//		System.out.println(qv.getMidx());
+//		System.out.println(qv.getQtitle());
+//		System.out.println(qv.getQcategory());
+//		System.out.println(qv.getQcontent());
 		
 		int row = qd.modifyWriteQuestion(qv);
 	}

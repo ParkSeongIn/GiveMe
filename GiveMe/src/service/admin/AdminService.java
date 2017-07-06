@@ -32,7 +32,8 @@ public interface AdminService {
 	
 // 관리자 table_Question
 	ArrayList<QuestionVo> getAdQuestionList();
-	int insertAdQuestion(QuestionVo vo);
+//	int insertAdQuestion(QuestionVo vo);
 	QuestionVo getAdQuestion(int qidx);
+	int modifyWriteAdQuestion(QuestionVo qv);
     
 }

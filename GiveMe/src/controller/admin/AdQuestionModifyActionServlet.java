@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.admin.AdminServiceImpl;
+import service.question.QuestionVo;
+
 /**
  * Servlet implementation class AdQuestionModifyActionServlet
  */
@@ -25,17 +28,28 @@ public class AdQuestionModifyActionServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+//		doGet(request, response);
+	
+		int qidx = Integer.parseInt(request.getParameter("qidx"));
+		String qrecontent = request.getParameter("qrecontent");
+		
+		AdminServiceImpl ad = new AdminServiceImpl();
+		
+		QuestionVo qv = new QuestionVo();
+		qv.setQidx(qidx);
+		qv.setQrecontent(qrecontent);
+		
+		int row = ad.modifyWriteAdQuestion(qv);
 	}
-
+	
 }
