@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="common.*" %>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,7 +52,7 @@
 						<ul>
 							<li><a href="#">기획의도</a></li>
 							<li><a href="./intro/guide.jsp">사업안내</a></li>
-							<li><a href="#">공지사항</a></li>						
+							<li><a href="<%=request.getContextPath()%>/controller/AllBoardIfListServlet.do?abtype=I">공지사항</a></li>						
 						</ul>				
 					</li>
 					<li>사업내용
@@ -63,14 +64,14 @@
 					<li>후원하기
 						<ul>
 							<li><a href="<%=request.getContextPath()%>/controller/CashDonationInsertServlet.do">현금기부</a></li>
-							<li><a href="#">재능기부</a></li>					
+							<li><a href="<%=request.getContextPath()%>/controller/TalentBoardListServlet.do">재능기부</a></li>					
 						</ul>	
 					</li>
 					<li>커뮤니티
 						<ul>
-							<li><a href="#">기부동향</a></li>
+							<li><a href="<%=request.getContextPath()%>/controller/AllBoardListServlet.do?abtype=N">기부동향</a></li>
 							<li><a href="<%=request.getContextPath()%>/community/qna_write.jsp">QNA/FAQ</a></li>
-							<li><a href="#">기부처 검색</a></li>
+							<li><a href="<%=request.getContextPath() %>/controller/AllBoardDonationSearchServlet.do">기부처 검색</a></li>
 						</ul>	
 					</li>						
 				</ul>

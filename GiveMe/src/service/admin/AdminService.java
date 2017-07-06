@@ -11,9 +11,10 @@ public interface AdminService {
     ArrayList<MemberVo> getMemberList();
     int deleteMember();
     CashDonationVo getCashDonation();
-    int insertAllBoard();
-    AllBoardVo modifyAllBoard();
-    int deleteAllBoard();
+    int insertAllBoard(AllBoardVo avo);
+    AllBoardVo AllBoardmodifySe(int abidx);
+    int modifyAllBoard(AllBoardVo avo, int abidx);
+    int deleteAllBoard(int abidx);
     int insertDonationList(DonationListVo vo);
     DonationListVo getDonationList(int dlidx);
     ArrayList<DonationListVo> getDonationListLine(int midx);

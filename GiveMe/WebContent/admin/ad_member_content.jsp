@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "service.member.MemberVo" %>
-<%@ page import = "service.member.MemberServiceImpl" %>  
+<%@ page import = "service.member.MemberServiceImpl" %> 
+<%@ page import = "java.util.*" %>
 <%@ page import = "common.Values" %>  
     
 <%
@@ -11,67 +12,68 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>È¸¿øÁ¤º¸ Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>íšŒì›ì •ë³´ Content</title>
 
 </head>
 <body>
 
 <div id="wrap">
+<%@ include file="/nav/header.jsp" %>
 	<br><br>
-	È¸¿øÁ¤º¸ Content(ÀÌ¿ëÀÚ ¹× °ü¸®ÀÚ-Á¶°Ç¿¡ µû¶ó ´Þ¸® ³ªÅ¸³ª°Ô ÇÔ)
+	íšŒì›ì •ë³´ Content(ì´ìš©ìž ë° ê´€ë¦¬ìž-ì¡°ê±´ì— ë”°ë¼ ë‹¬ë¦¬ ë‚˜íƒ€ë‚˜ê²Œ í•¨)
 	<br><br>
 	
-	<!-- ÀÔ·ÂÇÑ °ªÀ» Àü¼ÛÇÏ±â À§ÇØ form ÅÂ±×¸¦ »ç¿ë -->
-	<!-- ÆÄ¶ó¹ÌÅÍ(°ª) Àü¼ÛÀº post¹æ½Ä, Àü¼ÛÇÒ ÆäÀÌÁö´Â joinOk.jsp -->
+	<!-- ìž…ë ¥í•œ ê°’ì„ ì „ì†¡í•˜ê¸° ìœ„í•´ form íƒœê·¸ë¥¼ ì‚¬ìš© -->
+	<!-- íŒŒë¼ë¯¸í„°(ê°’) ì „ì†¡ì€ postë°©ì‹, ì „ì†¡í•  íŽ˜ì´ì§€ëŠ” joinOk.jsp -->
 	
 		<table>
 		<div class="admin">
  
 			<tr>
-				<td> È¸¿øµî±Þ</td>
+				<td> íšŒì›ë“±ê¸‰</td>
 				<td>
 					<%=vo.getMgrade() %>																
 				</td>
 			</tr>
 			
 			<tr>
-				<td> È¸¿ø¹øÈ£</td>
+				<td> íšŒì›ë²ˆí˜¸</td>
 				<td>					 
 					<%=vo.getMidx() %>				
 				</td>
 			</tr>
 			
 			<tr>
-				<td> ¾ÆÀÌµð</td>
+				<td> ì•„ì´ë””</td>
 				<td>					
 					<%=vo.getMid() %>				
 				</td>
 			</tr>
 			
 			<tr>
-				<td> ºñ¹Ð¹øÈ£ </td>
+				<td> ë¹„ë°€ë²ˆí˜¸ </td>
 				<td>				
 					<%=vo.getMpwd()%>
 				</td>
 			</tr>			
 			
 			<tr>
-				<td> ÀÌ¸§ </td>
+				<td> ì´ë¦„ </td>
 				<td>
 					<%=vo.getMname() %>
 				</td>
 			</tr>
 			
 			<tr>
-				<td> »ý³â¿ùÀÏ </td>
+				<td> ìƒë…„ì›”ì¼ </td>
 				<td>
 					<%=vo.getMbirth() %>					
 				</td>
 			</tr>
 			
 			<tr>
-				<td> ÇÚµåÆù ¹øÈ£</td>
+				<td> í•¸ë“œí° ë²ˆí˜¸</td>
 				<td>							
 					<%=vo.getMphone() %>				
 				</td>	
@@ -85,62 +87,63 @@
 			</tr>
 			
 			<tr>
-				<td>¿ìÆí¹øÈ£</td>
+				<td>ìš°íŽ¸ë²ˆí˜¸</td>
 				<td>				
 					<%=vo.getMpost()%>				
 				</td>
 			</tr>
 			
 			<tr>
-				<td>ÁÖ¼Ò1</td>
+				<td>ì£¼ì†Œ1</td>
 				<td>					
 					<%=vo.getMaddr1() %>
 				</td>
 			</tr>
 			
 			<tr>
-				<td>ÁÖ¼Ò2</td>	
+				<td>ì£¼ì†Œ2</td>	
 				<td>					
 					<%=vo.getMaddr2() %>
 				</td>
 			</tr>			
 			
 			<tr>
-				<td>°¡ÀÔ³¯Â¥</td>	
+				<td>ê°€ìž…ë‚ ì§œ</td>	
 				<td>					
 					<%=vo.getMenter() %>
 				</td>
 			</tr>
 			
 			<tr>
-				<td>¼öÁ¤³¯Â¥</td>	
+				<td>ìˆ˜ì •ë‚ ì§œ</td>	
 				<td>					
 					<%=vo.getMmdate() %>
 				</td>
 			</tr>
 			
 			<tr>
-				<td>Å»Åð³¯Â¥</td>	
+				<td>íƒˆí‡´ë‚ ì§œ</td>	
 				<td>					
 					<%=vo.getMbreakdate() %>
 				</td>
 			</tr>
 			
 			<tr>
-				<td>ÃÑ ¸¶ÀÏ¸®Áö</td>	
+				<td>ì´ ë§ˆì¼ë¦¬ì§€</td>	
 				<td>					
 					<%=vo.getMpoint() %>
 				</td>
 			</tr>
 			
 			<div>			
-	  			<input class="btn btn-default" id="DeleteButton" type="button" value="Å»Åð" onclick="de()"/>
-	  			<a class="btn btn-default" href="<%=request.getContextPath()%>/controller.member/MemberModifyServlet.do">¼öÁ¤</a>	  			
-	  			<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/MemberListServlet.do">Ãë¼Ò</a>
+	  			<input class="btn btn-default" id="DeleteButton" type="button" value="íƒˆí‡´" onclick="de()"/>
+	  			<a class="btn btn-default" href="<%=request.getContextPath()%>/controller.member/MemberModifyServlet.do">ìˆ˜ì •</a>	  			
+	  			<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/MemberListServlet.do">ì·¨ì†Œ</a>
   			</div>	
   		
 		</div>
-
+<%@ include file="/nav/sidebar.jsp" %>
+<%@ include file="/nav/footer.jsp" %>
 		</table>	
 		<br>				
 	

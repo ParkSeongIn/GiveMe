@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public interface AllBoardService {
 
-    AllBoardVo getAllBoard();
-    ArrayList<AllBoardVo> getAllBoardList();
-    int updateAllBoardHit();
-    int getPaging();
+    AllBoardVo getAllBoard(int abidx);
+    ArrayList<AllBoardVo> getAllBoardList(String abtype);
+    int updateAllBoardHit(int abidx);
+    int getPaging(String abtype);
 }

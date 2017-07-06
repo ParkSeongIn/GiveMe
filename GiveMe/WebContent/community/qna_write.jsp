@@ -30,6 +30,7 @@
 </style>
 <body>
 <c:import url="/nav/header.jsp"/>
+<c:import url="/nav/sidebar.jsp"/>
 <div class="wrap">
 	<div class="panel-body">
 		<div class="form-group1">

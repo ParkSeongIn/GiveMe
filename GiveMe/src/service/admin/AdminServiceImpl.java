@@ -44,21 +44,107 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public int insertAllBoard() {
+    public int insertAllBoard(AllBoardVo avo) {
 	// TODO Auto-generated method stub
-	return 0;
+    	Connection con = dbconnect.getConnection(); 
+		PreparedStatement pstmt = null;
+		int iab = 0;
+		
+		try { 
+			sql = "insert into table_allboard (abtype,abidx,abtitle,abhit,abwdate,abcontent,abmdate,abdbdate,abdeletest,abimage,midx) "
+					+ "values(?,seq_abidx.nextval,?,0,sysdate,?,'',sysdate,'N',?,?)";
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, avo.getAbtype());
+		pstmt.setString(2, avo.getAbtitle());
+		pstmt.setString(3, avo.getAbcontent());
+		pstmt.setString(4, avo.getAbimage());
+		pstmt.setInt(5, avo.getMidx());
+		
+		iab = pstmt.executeUpdate();
+		}catch(Exception e){
+		
+		}finally {
+			DBClose.close(con,pstmt);
+		}
+		return iab;
     }
 
     @Override
-    public AllBoardVo modifyAllBoard() {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	public AllBoardVo AllBoardmodifySe(int abidx) {
+		Connection con = dbconnect.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		AllBoardVo avo = null;
+		
+		try { 
+		String sql = "select tb.abtitle, tm.midx, tb.abwdate, tb.abimage,tb.abcontent "
+				+ "from table_allboard tb,table_member tm where tb.midx = tm.midx and tb.abidx = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,abidx);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				avo = new AllBoardVo(); 
+			
+			avo.setAbtitle(rs.getString(1));
+			avo.setMidx(rs.getInt(2));
+			avo.setAbwdate(rs.getDate(3));
+			avo.setAbimage(rs.getString(4));
+			avo.setAbcontent(rs.getString(5));
+
+			}
+		}catch(Exception e) { 
+			
+		}finally {
+			DBClose.close(con,pstmt,rs);
+			}
+			return avo;
+		}
+    
+    
+    @Override
+    public int modifyAllBoard(AllBoardVo avo, int abidx) {
+    	Connection con = dbconnect.getConnection();
+		PreparedStatement pstmt = null;
+		int abu = 0;
+		
+		try {
+			sql ="update table_allboard set abtitle = ? , abcontent = ? , abimage = ? , abmdate=sysdate where abidx = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, avo.getAbtitle());
+			pstmt.setString(2, avo.getAbcontent());
+			pstmt.setString(3, avo.getAbimage());
+			pstmt.setInt(4, abidx);
+			
+			abu = pstmt.executeUpdate();
+			
+		}	catch(Exception e){
+			
+		}	finally {
+				DBClose.close(con,pstmt);
+		}
+			return abu;
+		}
 
     @Override
-    public int deleteAllBoard() {
-	// TODO Auto-generated method stub
-	return 0;
+    public int deleteAllBoard(int abidx) {
+    	Connection con = dbconnect.getConnection();
+		PreparedStatement pstmt = null;
+		AllBoardVo avo = new AllBoardVo();
+    	int dab = 0;
+		
+    	try {
+			sql ="update table_allboard set abdeletest = 'Y' where abidx = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, abidx);
+			dab = pstmt.executeUpdate();
+		
+    	}catch(Exception e) { 
+			
+		}finally { 
+			DBClose.close(con,pstmt);
+		}
+		return dab;
     }
 
     @Override

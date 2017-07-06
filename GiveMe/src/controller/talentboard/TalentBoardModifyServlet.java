@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.talentboard.TalentBoardServiceImpl;
+import service.talentboard.TalentBoardVo;
+
 /**
  * Servlet implementation class TalentBoardModifyServlet
  */
@@ -25,15 +28,23 @@ public class TalentBoardModifyServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		int tbidx = Integer.parseInt(request.getParameter("tbidx"));
+		
+		TalentBoardServiceImpl tbsi = new TalentBoardServiceImpl();
+		TalentBoardVo tv = tbsi.TalentBoardmodifySe(tbidx);
+		
+		request.setAttribute("tv", tv);
+		request.setAttribute("tbidx", tbidx);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
