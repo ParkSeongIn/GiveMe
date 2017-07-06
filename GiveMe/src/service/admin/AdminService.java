@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import service.allboard.AllBoardVo;
 import service.cashdonation.CashDonationVo;
 import service.member.MemberVo;
+import service.question.QuestionVo;
 
 public interface AdminService {
 
@@ -22,5 +23,9 @@ public interface AdminService {
     int deleteDonationList(int dlidx);
     int getPaging();
     
+ // 관리자 table_Question
+ 	ArrayList<QuestionVo> getAdQuestionList();
+ 	QuestionVo getAdQuestion(int qidx);
+ 	int modifyWriteAdQuestion(QuestionVo qv);
 }
 

@@ -1,28 +1,23 @@
 package controller.question;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.question.QuestionServiceImpl;
-import service.question.QuestionVo;
-
 /**
- * Servlet implementation class QuestionListServlet
+ * Servlet implementation class QusetionWriteServlet
  */
-@WebServlet("/QuestionListServlet")
-public class QuestionListServlet extends HttpServlet {
+@WebServlet("/QusetionWriteServlet")
+public class QuestionWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionListServlet() {
+    public QuestionWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +26,8 @@ public class QuestionListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		QuestionServiceImpl qd = new QuestionServiceImpl();
-		//나중에 회원로그인후 세션값에 담긴 회원번호 값으로 대체
-		int midx = 4;
-		ArrayList<QuestionVo> qlist = qd.getQuestionList(midx);
-		
-		request.setAttribute("qlist", qlist);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

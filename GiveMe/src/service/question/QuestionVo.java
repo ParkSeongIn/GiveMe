@@ -8,7 +8,7 @@ public class QuestionVo {
 	private int qidx;
 	private String qcategory;
 	private String qtitle;
-	private String qcontnet;
+	private String qcontent;
 	private Date qwdate;
 	private String qstate;
 	private Date qmdate;
@@ -16,6 +16,7 @@ public class QuestionVo {
 	private String qdeletest;
 	private String qrecontent;
 	private int midx;
+//	private String mname;
 	
 	public int getQidx() {
 		return qidx;
@@ -35,17 +36,17 @@ public class QuestionVo {
 	public void setQtitle(String qtitle) {
 		this.qtitle = qtitle;
 	}
-	public String getQcontnet() {
-		return qcontnet;
+	public String getQcontent() {
+		return qcontent;
 	}
-	public void setQcontnet(String qcontnet) {
-		this.qcontnet = qcontnet;
+	public void setQcontent(String qcontent) {
+		this.qcontent = qcontent;
 	}
 	public Date getQwdate() {
 		return qwdate;
 	}
-	public void setQwdate(Date qwdate) {
-		this.qwdate = qwdate;
+	public void setQwdate(Date date) {
+		this.qwdate = date;
 	}
 	public String getQstate() {
 		return qstate;
@@ -83,6 +84,11 @@ public class QuestionVo {
 	public void setMidx(int midx) {
 		this.midx = midx;
 	}
-	
-	
+//	public String getMname() {
+//		return mname;
+//	}
+//	public void setMname(String mname) {
+//		this.mname = mname;
+//	}
+
 }

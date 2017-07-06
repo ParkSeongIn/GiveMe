@@ -10,7 +10,8 @@ import common.DBConnect;
 import common.Values;
 import service.allboard.AllBoardVo;
 import service.cashdonation.CashDonationVo;
-import service.member.MemberVo; 
+import service.member.MemberVo;
+import service.question.QuestionVo; 
 
 
 public class AdminServiceImpl implements AdminService{
@@ -268,6 +269,117 @@ public class AdminServiceImpl implements AdminService{
     return row;
     }
 
+
+    @Override
+    public ArrayList<QuestionVo> getAdQuestionList() {
+    	Connection con = dbconnect.getConnection();
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	ArrayList<QuestionVo> aqlist = new ArrayList<QuestionVo>();
+    	try { 
+    		sql = " select * from ("
+					+ "select * from ("
+					+ 	"select rownum rn, AA.*from ("
+					+ 		"select tq.qidx, tq.qcategory, tq.qtitle, tq.qstate, tq.qwdate, tq.qdeletest "
+					+ 		"from table_member tm, table_question tq "
+					+ 		"where tm.midx = tq.midx "
+					+ 		")AA order by AA.qidx desc) where rn <=20 ) where rn >=1";
+    		pstmt = con.prepareStatement(sql);
+    		rs = pstmt.executeQuery();
+    		
+    		while(rs.next()) {
+    			QuestionVo vo = new QuestionVo();
+    			
+    			vo.setQidx(rs.getInt("qidx"));
+    			vo.setQcategory(rs.getString("qcategory"));
+    			vo.setQtitle(rs.getString("qtitle"));
+   // 			vo.setMname(rs.getString("mname"));
+    			vo.setQstate(rs.getString("qstate"));
+    			vo.setQwdate(rs.getDate("qwdate"));
+    			vo.setQdeletest(rs.getString("qdeletest"));
+    			
+    			aqlist.add(vo);
+    		}
+    	}catch(Exception e) {
+    		System.out.println(e.getMessage());
+    	}finally {
+    		DBClose.close(con,pstmt,rs);
+    	}
+    	return aqlist;
+    }
+    
+    @Override
+    public QuestionVo getAdQuestion(int qidx) {
+    	Connection con = dbconnect.getConnection();
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	QuestionVo qv = null;
+    	try {
+    		sql = "select tq.qidx, tq.qtitle, tm.midx, tq.qcategory, tm.mname, tq.qwdate, tq.qcontent, tq.qrecontent "
+					+ "from table_member tm, table_question tq where tm.midx = tq.midx and tq.qidx = ?";
+    		pstmt = con.prepareStatement(sql);
+    		pstmt.setInt(1, qidx);
+    		rs = pstmt.executeQuery();
+    		
+    		if(rs.next()) {
+    			qv = new QuestionVo();
+    			qv.setQidx(rs.getInt("qidx"));
+				qv.setQtitle(rs.getString("qtitle"));
+				qv.setMidx(rs.getInt("midx"));
+				qv.setQcategory(rs.getString("qcategory"));
+	//			qv.setMname(rs.getString("mname"));
+				qv.setQwdate(rs.getDate("qwdate"));
+				qv.setQcontent(rs.getString("qcontent"));
+				qv.setQrecontent(rs.getString("qrecontent"));
+    		}
+    	}catch(Exception e) {
+    		System.out.println(e.getMessage());
+    	}finally {
+    		DBClose.close(con,pstmt,rs);
+    	}
+    	return qv;
+    }
+    
+    @Override
+    public int modifyWriteAdQuestion(QuestionVo qv) {
+    	Connection con = dbconnect.getConnection();
+    	PreparedStatement pstmt = null;
+    	int row = 0;
+    	try {
+    		sql = "update table_question set qrecontent = ?, qmdate = sysdate where qidx = ?";
+    	pstmt = con.prepareStatement(sql);
+    	pstmt.setString(1, (qv.getQrecontent()));
+    	pstmt.setInt(2, (qv.getQidx()));
+    	
+    	row = pstmt.executeUpdate();
+    	}catch(Exception e) {
+    		System.out.println(e.getMessage());
+    	}finally {
+    		DBClose.close(con,pstmt);
+    	}
+    	return row;
+    }
+    
+//    @Override
+//    public int insertAdQuestion(QuestionVo vo) {
+//    	Connection con = dbconnect.getConnection();
+//    	PreparedStatement pstmt = null;
+//    	int row = 0;
+//    	try {
+//    		sql = "insert into table_question (qrecontent, qwdate, qdbdate) values(?, sysdate, sysdate)";
+//    		
+//    		pstmt = con.prepareStatement(sql);
+//    		pstmt.setString(1, vo.getQrecontent());
+//    		row = pstmt.executeUpdate();
+//    	
+//    	}catch(Exception e) {
+//    		System.out.println(e.getMessage());
+//    	}finally {
+//    		DBClose.close(con,pstmt);
+//    	}
+//    	return row;
+//    }
+    
     @Override
     public int getPaging() {
 	// TODO Auto-generated method stub

@@ -1,28 +1,26 @@
-package controller.question;
+package controller.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.question.QuestionServiceImpl;
+import service.admin.AdminServiceImpl;
 import service.question.QuestionVo;
 
 /**
- * Servlet implementation class QuestionListServlet
+ * Servlet implementation class AdQuestionModifyActionServlet
  */
-@WebServlet("/QuestionListServlet")
-public class QuestionListServlet extends HttpServlet {
+@WebServlet("/AdQuestionModifyActionServlet")
+public class AdQuestionModifyActionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionListServlet() {
+    public AdQuestionModifyActionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +29,8 @@ public class QuestionListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		QuestionServiceImpl qd = new QuestionServiceImpl();
-		//나중에 회원로그인후 세션값에 담긴 회원번호 값으로 대체
-		int midx = 4;
-		ArrayList<QuestionVo> qlist = qd.getQuestionList(midx);
+		// TODO Auto-generated method stub
 		
-		request.setAttribute("qlist", qlist);
 	}
 
 	/**
@@ -45,7 +38,18 @@ public class QuestionListServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+//		doGet(request, response);
+	
+		int qidx = Integer.parseInt(request.getParameter("qidx"));
+		String qrecontent = request.getParameter("qrecontent");
+		
+		AdminServiceImpl ad = new AdminServiceImpl();
+		
+		QuestionVo qv = new QuestionVo();
+		qv.setQidx(qidx);
+		qv.setQrecontent(qrecontent);
+		
+		int row = ad.modifyWriteAdQuestion(qv);
 	}
-
+	
 }

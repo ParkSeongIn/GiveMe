@@ -1,8 +1,6 @@
 package controller.question;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +11,16 @@ import service.question.QuestionServiceImpl;
 import service.question.QuestionVo;
 
 /**
- * Servlet implementation class QuestionListServlet
+ * Servlet implementation class QusetionModifyServlet
  */
-@WebServlet("/QuestionListServlet")
-public class QuestionListServlet extends HttpServlet {
+@WebServlet("/QusetionModifyServlet")
+public class QuestionModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionListServlet() {
+    public QuestionModifyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +29,18 @@ public class QuestionListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 
+		int qidx = Integer.parseInt(request.getParameter("qidx"));
+		int midx = Integer.parseInt(request.getParameter("midx"));
+	//	System.out.println(qidx);
 		QuestionServiceImpl qd = new QuestionServiceImpl();
-		//나중에 회원로그인후 세션값에 담긴 회원번호 값으로 대체
-		int midx = 4;
-		ArrayList<QuestionVo> qlist = qd.getQuestionList(midx);
+		QuestionVo qv = qd.getQuestion(qidx, midx);
 		
-		request.setAttribute("qlist", qlist);
+		request.setAttribute("qv", qv);
+	//  다인아 qv에  qidx와 midx가 모두 담기기 때문에 qv만 담아서 보내면 된다	
+	//	request.setAttribute("qidx", qidx);
+	//	request.setAttribute("midx", midx);
 	}
 
 	/**
