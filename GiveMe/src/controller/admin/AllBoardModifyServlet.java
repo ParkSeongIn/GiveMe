@@ -38,8 +38,6 @@ public class AllBoardModifyServlet extends HttpServlet {
 		
 		request.setAttribute("av", av);
 		request.setAttribute("abidx", abidx);
-		System.out.println(av);
-		System.out.println(abidx);
 	}
 
 	/**

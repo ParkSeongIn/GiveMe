@@ -15,10 +15,11 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
+<%@ include file="/nav/header.jsp" %>
+<%@ include file="/nav/sidebar4.jsp" %>
 <body>
 <div class="container">
-
-<h1>재능기부 내역 관리자 페이지</h1>
+<h2>재능기부 내역 관리자 페이지</h2>
 <%
 ArrayList<TalentBoardVo> tblist = (ArrayList<TalentBoardVo>)request.getAttribute("tblist");
 
@@ -37,7 +38,7 @@ ArrayList<TalentBoardVo> tblist = (ArrayList<TalentBoardVo>)request.getAttribute
 </tr>
 <% } %>
 </table>
-
 </div>
+<%@ include file="/nav/footer.jsp" %>
 </body>
 </html>

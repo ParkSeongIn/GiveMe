@@ -15,15 +15,29 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
+<style>
+.wrap {
+height : 550px;
+}
+.table {
+width : 940px;
+height : 80px;
+margin-bottom : 10px;
+text-align : center;
+vertical-align : middle;
+}
+</style>
+<%@ include file="/nav/header.jsp" %>
+<%@ include file="/nav/sidebar2.jsp" %>
 <body>
-<div class="container"> <!-- div로 묶음 -->
+<div class="wrap"> <!-- div로 묶음 -->
 <%
 ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("ablist");
 
 %>
-<%@ include file="/nav/header.jsp" %>
+
 <table class="table table-striped table-bordered table-hover ">
-<%@ include file="/nav/sidebar2.jsp" %>
+
 <tr>
 <td>이미지</td><td>제목</td><td>내용</td> <!-- 테이블 생성 -->
 </tr>
@@ -34,10 +48,10 @@ ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("abli
 </tr>
 <% } %>
 </table>
-	<div class = "hi">
+	<div>
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardWriteServlet.do">게시글 입력</a>
 	</div>
-<%@ include file="/nav/footer.jsp" %>
 </div>
+<%@ include file="/nav/footer.jsp" %>
 </body>
 </html>

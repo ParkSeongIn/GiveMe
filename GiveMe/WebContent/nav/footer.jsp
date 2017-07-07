@@ -57,7 +57,7 @@
 						현금기부
 					</div>
 					<div>
-						재능기부
+						<a href="<%=request.getContextPath() %>/controller/TalentBoardListServlet.do" target="_self">재능기부</a>
 					</div>
 				</div>
 			</div>

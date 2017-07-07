@@ -30,9 +30,12 @@
 </script>
 </head>
 <style>
+.wrap {
+height : 550px;
+}
 .table {
-width : 650px;
-height : 408px;
+width : 950px;
+height : 80px;
 margin-bottom : 10px;
 text-align : center;
 vertical-align : middle;
@@ -54,7 +57,7 @@ vertical-align : middle;
 </tr>
 </table>
 	<div>
-		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardIfModifyServlet.do?abidx=<%=abidx %>">수정</a> <!--idx 값을 못 불러오니까 getidx였지만 설정을 안해둬서 그냥 idx 값을 불러와서 실행 -->
+		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardIfModifyServlet.do?abidx=<%=abidx %>">수정</a>
 		<input class="btn btn-default" id="DeleteButton" type="button" value="삭제" onclick="dab()"/>
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardIfListServlet.do?abtype=I">글목록</a>
 	</div>

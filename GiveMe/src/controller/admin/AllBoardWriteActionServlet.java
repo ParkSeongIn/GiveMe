@@ -43,7 +43,7 @@ public class AllBoardWriteActionServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		// 파일첨부 관련 추가
-		String savePath = request.getServletContext().getRealPath("img");
+		String savePath = request.getServletContext().getRealPath("upload");
 		int sizeLimit = 10 * 1024 * 1024 ; // 10메가 용량 제한
 		MultipartRequest multi =new MultipartRequest
 				(request, savePath, sizeLimit, "UTF-8", new DefaultFileRenamePolicy());
@@ -55,8 +55,6 @@ public class AllBoardWriteActionServlet extends HttpServlet {
 		
 		String fileFullPath = savePath + "/" + abimage;
 		
-		int midx = Integer.parseInt(multi.getParameter("midx"));
-		
 		AdminServiceImpl ads = new AdminServiceImpl();
 		AllBoardVo avo = new AllBoardVo();
 		
@@ -65,7 +63,6 @@ public class AllBoardWriteActionServlet extends HttpServlet {
 		avo.setAbcontent(abcontent);
 		avo.setAbimage(abimage);
 		avo.setFileFullPath(fileFullPath);
-		avo.setMidx(midx);
 		
 		int iab = ads.insertAllBoard(avo);
 		

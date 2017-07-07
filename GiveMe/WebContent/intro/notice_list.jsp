@@ -17,9 +17,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <style>
+.wrap {
+height : 550px;
+}
 .table {
-width : 650px;
-height : 408px;
+width : 950px;
+height : 80px;
 margin-bottom : 10px;
 text-align : center;
 vertical-align : middle;
@@ -35,12 +38,12 @@ ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("abli
 <table class="table table-striped table-bordered table-hover ">
 
 <tr>
-<td>글번호</td><td>제목</td><td>작성자</td>
+<td>제목</td><td>작성자</td>
 <td>조회수</td><td>작성날짜</td>
 </tr>
 <% for (AllBoardVo ab : ablist) { %>
 <tr>
-<td><%=ab.getAbidx() %></td><td><%=ab.getAbtitle()%></td>
+<td><%=ab.getAbtitle()%></td>
 <td><a href="<%=request.getContextPath()%>/controller/AllBoardIfContentServlet.do?abidx=<%=ab.getAbidx() %>"><%=ab.getAbmdate() %></td>
 <td><%=ab.getAbhit() %></td><td><%=ab.getAbwdate() %></td>
 </tr>

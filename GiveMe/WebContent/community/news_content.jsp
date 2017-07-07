@@ -29,18 +29,32 @@
 		}
 </script>
 </head>
+<style>
+.wrap {
+height : 550px;
+}
+.table {
+width : 930px;
+height : 80px;
+margin-bottom : 10px;
+text-align : center;
+vertical-align : middle;
+}
+</style>
+<%@ include file="/nav/header.jsp" %>
+<%@ include file="/nav/sidebar.jsp" %>
 <body>
-<div class="container"> <!-- div로 묶음 -->
+<div class="wrap"> <!-- div로 묶음 -->
 
 <table class="table table-striped table-bordered table-hover ">
 <tr>
-<td>제목</td><td>회원번호</td><td>작성자</td><td>조회수</td><td>작성날짜</td><td>수정날짜</td>
+<td>제목</td><td>작성자</td><td>조회수</td><td>작성날짜</td><td>수정날짜</td>
 <td>이미지</td><td>내용</td>
 </tr>
 <tr>
-<td><%=av.getAbtitle() %></td><td><%=av.getMidx() %></td><td><%=av.getAbdbdate() %></td>
+<td><%=av.getAbtitle() %></td><td><%=av.getAbdbdate() %></td>
 <td><%=av.getAbhit() %></td><td><%=av.getAbwdate() %></td><td><%=av.getAbmdate() %></td>
-<td><img src="/GiveMe/img/<%=av.getAbimage() %>"></td><td><%=av.getAbcontent() %></td>
+<td><img src="/upload/<%=av.getAbimage() %>"></td><td><%=av.getAbcontent() %></td>
 </tr>
 </table>
 	<div>
@@ -49,5 +63,6 @@
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardListServlet.do?abtype=N">글목록</a>
 	</div>
 </div>
+<%@ include file="/nav/footer.jsp" %>
 </body>
 </html>

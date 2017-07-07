@@ -181,7 +181,7 @@ public class FrontController extends HttpServlet {
 				this.view = "/admin/ad_cash_list.jsp";
 				this.isRedirect = false;
 			
-			}else if (command.equals("/controller/member/MypageCashDonationListServlet.do")) {
+			}else if (command.equals("/controller/MypageCashDonationListServlet.do")) {
 				
 				MypageCashDonationListServlet mcl = new MypageCashDonationListServlet();
 				mcl.doPost(request, response);

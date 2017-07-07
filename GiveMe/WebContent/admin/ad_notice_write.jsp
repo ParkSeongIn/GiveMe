@@ -43,24 +43,14 @@ ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("abli
 </script>
 <title>공지사항</title>
 </head>
-<style>
-.addForm {
-width : 650px;
-height : 408px;
-margin-bottom : 10px;
-text-align : center;
-vertical-align : middle;
-}
-</style>
 <%@ include file="/nav/header.jsp" %>
-<%@ include file="/nav/sidebar.jsp" %>
 <body>
-<div class="wrap">
+<div class="container">
     <h2>공지사항 글 추가(관리자 전용)</h2>
     <form id="addForm" action="<%=request.getContextPath()%>/controller/AllBoardIfWriteActionServlet.do" method="post">
         <div class="form-group">
             <label for="abtype">타입 :</label>
-            <input class="form-control" name="abtype" id="abtype" type="text" value="I"/>
+            <input class="form-control" name="abtype" id="abtype" type="text" value="I" readonly="readonly"/>
         </div>
 		<div class="form-group">
             <label for="abtitle">제목 :</label>
@@ -70,11 +60,6 @@ vertical-align : middle;
             <label for="abcontent">내용 :</label>
             <input class="form-control" name="abcontent" id="abcontent" type="text"/>
         </div>
-		<div class="form-group">
-            <label for="midx">회원 번호 :</label>
-            <input class="form-control" name="midx" id="midx" type="text"/>
-        </div>
-</div>
         <div>
             <center><input class="btn btn-default" id="addButton" type="button" value="글입력"/>
             <input class="btn btn-default" type="reset" value="초기화"/>

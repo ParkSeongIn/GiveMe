@@ -36,6 +36,8 @@
 		}
 </script>
 </head>
+<%@ include file="/nav/header.jsp" %>
+<%@ include file="/nav/sidebar4.jsp" %>
 <body>
 <div class="container"> <!-- div로 묶음 -->
 
@@ -61,5 +63,6 @@
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardAdListServlet.do">글목록</a>
 	</div>
 </div>
+<%@ include file="/nav/footer.jsp" %>
 </body>
 </html>

@@ -36,12 +36,26 @@
 		}
 </script>
 </head>
+<style>
+.wrap {
+height : 550px;
+}
+.table {
+width : 930px;
+height : 80px;
+margin-bottom : 10px;
+text-align : center;
+vertical-align : middle;
+}
+</style>
+<%@ include file="/nav/header.jsp" %>
+<%@ include file="/nav/sidebar3.jsp" %>
 <body>
-<div class="container"> <!-- div로 묶음 -->
+<div class="wrap"> <!-- div로 묶음 -->
 
 <table class="table table-striped table-bordered table-hover ">
 <tr>
-<td><%=tvo.getTbpeople() %></td><td><%=tvo.getTbcategory1() %></td>
+<td>작성자 분류(제공자 : S / 희망자 : H) : <%=tvo.getTbpeople() %></td><td>카테고리 : <%=tvo.getTbcategory1() %></td>
 </tr>
 <tr>
 <td>제목 : <%=tvo.getTbcategory2() %> </td>
@@ -68,5 +82,6 @@
 		
 	</div>
 </div>
+<%@ include file="/nav/footer.jsp" %>
 </body>
 </html>

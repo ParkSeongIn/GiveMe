@@ -44,7 +44,6 @@ public class AllBoardIfWriteActionServlet extends HttpServlet {
 		String abtype = request.getParameter("abtype");
 		String abtitle = request.getParameter("abtitle");
 		String abcontent = request.getParameter("abcontent");
-		int midx = Integer.parseInt(request.getParameter("midx"));
 		
 		AdminServiceImpl ads = new AdminServiceImpl();
 		AllBoardVo avo = new AllBoardVo();
@@ -52,7 +51,6 @@ public class AllBoardIfWriteActionServlet extends HttpServlet {
 		avo.setAbtype(abtype);
 		avo.setAbtitle(abtitle);
 		avo.setAbcontent(abcontent);
-		avo.setMidx(midx);
 		
 		int iab = ads.insertAllBoard(avo);
 		

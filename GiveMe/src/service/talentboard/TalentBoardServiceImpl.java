@@ -115,7 +115,7 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 						+ "from ( select tt.tbidx,tt.tbpeople,tt.tbtitle,tt.midx,tt.tbhit,tt.tbwdate "
 							+ "from table_talentboard tt,table_member tm "
 							+ "where tt.midx = tm.midx and tt.tbdeletest = 'N' "
-								+ "order by tt.tbgrp desc,tt.tbseq asc,tt.tbidx asc"
+								+ "order by tt.tbgrp asc,tt.tbseq asc,tt.tbidx asc"
 								+ ") AA "
 									+ ") where rnum <= 10"
 									+ ") where rnum >= 1";

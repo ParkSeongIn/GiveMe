@@ -68,9 +68,10 @@ $(function() {
 </script -->
 <title>재능기부 게시판 글작성</title>
 </head>
+<%@ include file="/nav/header.jsp" %>
 <body>
 <div class="container">
-    <h1>재능기부 게시판</h1>
+    <h2>재능기부 게시판</h2>
 	<form>
         <label>작성자 분류 :</label>
         <input type="radio" name="give" OnClick="window.location.href='AllBoardListServlet.do?abtype=N';">제공자
@@ -134,5 +135,6 @@ $(function() {
         </div>
     </form>
 </div>
+<%@ include file="/nav/footer.jsp" %>
 </body>
 </html>

@@ -51,14 +51,13 @@ public class AdminServiceImpl implements AdminService{
 		int iab = 0;
 		
 		try { 
-			sql = "insert into table_allboard (abtype,abidx,abtitle,abhit,abwdate,abcontent,abmdate,abdbdate,abdeletest,abimage,midx) "
-					+ "values(?,seq_abidx.nextval,?,0,sysdate,?,'',sysdate,'N',?,?)";
+			sql = "insert into table_allboard (abtype,abidx,abtitle,abhit,abwdate,abcontent,abmdate,abdbdate,abdeletest,abimage) "
+					+ "values(?,seq_abidx.nextval,?,0,sysdate,?,'',sysdate,'N',?)";
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, avo.getAbtype());
 		pstmt.setString(2, avo.getAbtitle());
 		pstmt.setString(3, avo.getAbcontent());
 		pstmt.setString(4, avo.getAbimage());
-		pstmt.setInt(5, avo.getMidx());
 		
 		iab = pstmt.executeUpdate();
 		}catch(Exception e){
@@ -77,8 +76,8 @@ public class AdminServiceImpl implements AdminService{
 		AllBoardVo avo = null;
 		
 		try { 
-		String sql = "select tb.abtitle, tm.midx, tb.abwdate, tb.abimage,tb.abcontent "
-				+ "from table_allboard tb,table_member tm where tb.midx = tm.midx and tb.abidx = ?";
+		String sql = "select tb.abtitle, tb.abwdate, tb.abimage,tb.abcontent "
+				+ "from table_allboard tb where tb.abidx = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,abidx);
 			rs = pstmt.executeQuery();
@@ -87,10 +86,9 @@ public class AdminServiceImpl implements AdminService{
 				avo = new AllBoardVo(); 
 			
 			avo.setAbtitle(rs.getString(1));
-			avo.setMidx(rs.getInt(2));
-			avo.setAbwdate(rs.getDate(3));
-			avo.setAbimage(rs.getString(4));
-			avo.setAbcontent(rs.getString(5));
+			avo.setAbwdate(rs.getDate(2));
+			avo.setAbimage(rs.getString(3));
+			avo.setAbcontent(rs.getString(4));
 
 			}
 		}catch(Exception e) { 

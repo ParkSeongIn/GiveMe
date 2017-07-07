@@ -66,9 +66,10 @@ $(document).ready(function(){
 </script>
 <title>기부동향</title>
 </head>
+<%@ include file="/nav/header.jsp" %>
 <body>
 <div class="container">
-    <h1>재능기부 수정</h1>
+    <h2>재능기부 수정</h2>
     <form id="ModifyForm" action="<%=request.getContextPath()%>/controller/TalentBoardModifyActionServlet.do" method="post">
     <div class="form-group">
 		<label for="tbidx">글번호 : <%= tbidx %></label>
@@ -125,5 +126,6 @@ $(document).ready(function(){
         </div>
     </form>
 </div>
+<%@ include file="/nav/footer.jsp" %>
 </body>
 </html>

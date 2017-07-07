@@ -12,6 +12,7 @@ AllBoardVo av = (AllBoardVo)request.getAttribute("av");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%@ include file="/nav/header.jsp" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -70,5 +71,6 @@ $(document).ready(function(){
         </div>
     </form>
 </div>
+<%@ include file="/nav/footer.jsp" %>
 </body>
 </html>

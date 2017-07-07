@@ -28,9 +28,9 @@ public class AllBoardServiceImpl implements AllBoardService{
 			String sql = "select * from ("
 							+ "select * from ("
 								+ "select rownum rnum, AA.* "
-								+ "from ( select tb.abidx,tb.abimage,tb.abtitle,tb.abhit,tb.midx,tb.abwdate,tb.abdeletest,tb.abcontent "
-									+ "from table_allboard tb,table_member tm "
-									+ "where tb.midx = tm.midx and tb.abtype = ? and tb.abdeletest = 'N' "
+								+ "from ( select tb.abidx,tb.abimage,tb.abtitle,tb.abhit,tb.abwdate,tb.abdeletest,tb.abcontent "
+									+ "from table_allboard tb "
+									+ "where tb.abtype = ? and tb.abdeletest = 'N' "
 									+ "order by tb.abidx asc"
 									+ ") AA "
 									+ ") where rnum <= 5"
@@ -46,10 +46,9 @@ public class AllBoardServiceImpl implements AllBoardService{
 				avo.setAbimage(rs.getString(3));
 				avo.setAbtitle(rs.getString(4));
 				avo.setAbhit(rs.getInt(5));
-				avo.setMidx(rs.getInt(6));
-				avo.setAbwdate(rs.getDate(7));
-				avo.setAbdeletest(rs.getString(8));
-				avo.setAbcontent(rs.getString(9));
+				avo.setAbwdate(rs.getDate(6));
+				avo.setAbdeletest(rs.getString(7));
+				avo.setAbcontent(rs.getString(8));
 				ablist.add(avo);
 			}
 			
@@ -68,7 +67,7 @@ public class AllBoardServiceImpl implements AllBoardService{
 		ResultSet rs = null;
 		AllBoardVo avo = null;
 		try {
-			String sql = "select tb.abtitle, tm.midx, tb.abhit, tb.abwdate, tb.abmdate,tb.abimage,tb.abcontent from table_allboard tb,table_member tm where tb.midx = tm.midx and tb.abidx = ?";
+			String sql = "select tb.abtitle, tb.abhit, tb.abwdate, tb.abmdate , tb.abimage ,tb.abcontent from table_allboard tb where tb.abidx = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, abidx);
 			rs = pstmt.executeQuery();
@@ -77,12 +76,11 @@ public class AllBoardServiceImpl implements AllBoardService{
 				avo = new AllBoardVo();
 				
 				avo.setAbtitle(rs.getString(1));
-				avo.setMidx(rs.getInt(2));
-				avo.setAbhit(rs.getInt(3));
-				avo.setAbwdate(rs.getDate(4));
-				avo.setAbmdate(rs.getDate(5));
-				avo.setAbimage(rs.getString(6));
-				avo.setAbcontent(rs.getString(7));
+				avo.setAbhit(rs.getInt(2));
+				avo.setAbwdate(rs.getDate(3));
+				avo.setAbmdate(rs.getDate(4));
+				avo.setAbimage(rs.getString(5));
+				avo.setAbcontent(rs.getString(6));
 				}
 			}catch(Exception e) { 
 			

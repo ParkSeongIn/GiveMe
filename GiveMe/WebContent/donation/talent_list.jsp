@@ -15,15 +15,24 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
+<style>
+.table {
+width : 920px;
+height : 408px;
+margin-bottom : 10px;
+text-align : center;
+vertical-align : middle;
+}
+</style>
+<%@ include file="/nav/header.jsp" %>
+<%@ include file="/nav/sidebar3.jsp" %>
 <body>
 <div class="container"> <!-- div로 묶음 -->
 <%
 ArrayList<TalentBoardVo> tblist = (ArrayList<TalentBoardVo>)request.getAttribute("tblist");
 
 %>
-<%@ include file="/nav/header.jsp" %>
 <table class="table table-striped table-bordered table-hover ">
-<%@ include file="/nav/sidebar3.jsp" %>
 <tr>
 <td>언어</td><td>컴퓨터</td><td>음악</td><td>디자인</td><td>수공예</td><td>기타</td>
 </tr>
@@ -53,9 +62,9 @@ ArrayList<TalentBoardVo> tblist = (ArrayList<TalentBoardVo>)request.getAttribute
 <% } %>
 </table>
 	<div>
-		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardWriteServlet.do">게시글 입력</a>
+		<center><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardWriteServlet.do">게시글 입력</a></center>
 	</div>
-<%@ include file="/nav/footer.jsp" %>
 </div>
+<%@ include file="/nav/footer.jsp" %>
 </body>
 </html>

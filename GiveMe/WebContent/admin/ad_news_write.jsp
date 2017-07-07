@@ -42,13 +42,14 @@ ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("abli
 </script>
 <title>기부동향</title>
 </head>
+<%@ include file="/nav/header.jsp" %>
 <body>
 <div class="container">
-    <h1>기부동향 게시판 글 추가(관리자 전용)</h1>
+    <h2>기부동향 게시판 글 추가(관리자 전용)</h2>
     <form id="addForm" enctype="multipart/form-data" action="<%=request.getContextPath()%>/controller/AllBoardWriteActionServlet.do" method="post" >
         <div class="form-group">
             <label for="abtype">타입 :</label>
-            <input class="form-control" name="abtype" id="abtype" type="text" value="N"/>
+            <input class="form-control" name="abtype" id="abtype" type="text" value="N" readonly="readonly" />
         </div>
 		<div class="form-group">
             <label for="abtitle">제목 :</label>
@@ -62,10 +63,6 @@ ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("abli
             <label for="abimage">사진 :</label>
             <input class="form-control" name="abimage" id="abimage" type="file"/>
         </div>
-		<div class="form-group">
-            <label for="midx">회원 번호 :</label>
-            <input class="form-control" name="midx" id="midx" type="text"/>
-        </div>
         <div>
             <center><input class="btn btn-default" id="addButton" type="button" value="글입력"/>
             <input class="btn btn-default" type="reset" value="초기화"/>
@@ -73,5 +70,6 @@ ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("abli
         </div>
     </form>
 </div>
+<%@ include file="/nav/footer.jsp" %>
 </body>
 </html>
