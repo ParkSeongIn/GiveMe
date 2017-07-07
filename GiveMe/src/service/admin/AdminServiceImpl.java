@@ -83,14 +83,13 @@ public class AdminServiceImpl implements AdminService{
 		int iab = 0;
 		
 		try { 
-			sql = "insert into table_allboard (abtype,abidx,abtitle,abhit,abwdate,abcontent,abmdate,abdbdate,abdeletest,abimage,midx) "
-					+ "values(?,seq_abidx.nextval,?,0,sysdate,?,'',sysdate,'N',?,?)";
+			sql = "insert into table_allboard (abtype,abidx,abtitle,abhit,abwdate,abcontent,abmdate,abdbdate,abdeletest,abimage) "
+					+ "values(?,seq_abidx.nextval,?,0,sysdate,?,'',sysdate,'N',?)";
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, avo.getAbtype());
 		pstmt.setString(2, avo.getAbtitle());
 		pstmt.setString(3, avo.getAbcontent());
 		pstmt.setString(4, avo.getAbimage());
-		pstmt.setInt(5, avo.getMidx());
 		
 		iab = pstmt.executeUpdate();
 		}catch(Exception e){

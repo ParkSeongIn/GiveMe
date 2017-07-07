@@ -55,8 +55,6 @@ public class AllBoardWriteActionServlet extends HttpServlet {
 		
 		String fileFullPath = savePath + "/" + abimage;
 		
-		int midx = Integer.parseInt(multi.getParameter("midx"));
-		
 		AdminServiceImpl ads = new AdminServiceImpl();
 		AllBoardVo avo = new AllBoardVo();
 		
@@ -65,7 +63,6 @@ public class AllBoardWriteActionServlet extends HttpServlet {
 		avo.setAbcontent(abcontent);
 		avo.setAbimage(abimage);
 		avo.setFileFullPath(fileFullPath);
-		avo.setMidx(midx);
 		
 		int iab = ads.insertAllBoard(avo);
 		

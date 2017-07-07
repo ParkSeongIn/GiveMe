@@ -60,10 +60,6 @@ ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("abli
             <label for="abcontent">내용 :</label>
             <input class="form-control" name="abcontent" id="abcontent" type="text"/>
         </div>
-		<div class="form-group">
-            <label for="midx">회원 번호 :</label>
-            <input class="form-control" name="midx" id="midx" type="text"/>
-        </div>
         <div>
             <center><input class="btn btn-default" id="addButton" type="button" value="글입력"/>
             <input class="btn btn-default" type="reset" value="초기화"/>
