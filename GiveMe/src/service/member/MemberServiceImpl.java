@@ -168,7 +168,7 @@ public class MemberServiceImpl implements MemberService{
 	MemberVo vo = null;	
 	
 	try{
-	    String sql="select mgrade, midx, mid, "
+	    String sql="select midx, mid, "
 		+ "mpwd, mname, mbirth, mphone, mmail, mpost, "
 		+ "maddr1, maddr2, menter, mmdate, mbreakdate, mpoint "
 		+ "from table_member where midx = ?";
@@ -180,7 +180,6 @@ public class MemberServiceImpl implements MemberService{
 	    if(rs.next()){	// next = 쿼리를 실행해서 다음의 값이 있는지 확인
 		vo = new MemberVo();
 		
-		vo.setMgrade(Values.grade_guest);
 		vo.setMidx(rs.getInt("midx"));
 		vo.setMid(rs.getString("mid"));
 		vo.setMpwd(rs.getString("mpwd"));
@@ -215,7 +214,7 @@ public class MemberServiceImpl implements MemberService{
 	int row = 0;
 	try{
 	    String sql="update table_member "
-	    	+ "set mgrade=?, mpwd=?, "
+	    	+ "set  mpwd=?, "
 	    	+ "mphone=?, mmail=?, mpost=?, "
 	    	+ "maddr1=?, maddr2=?, mmdate=sysdate, "
 	    	+ "mbreakdate=sysdate "
@@ -223,7 +222,6 @@ public class MemberServiceImpl implements MemberService{
 	    
 	    pstmt=con.prepareStatement(sql);
 	    
-	    pstmt.setString(1, Values.grade_guest);
 	    pstmt.setString(2, vo.getMpwd());
 	    pstmt.setInt(3, vo.getMphone());
 	    pstmt.setString(4, vo.getMmail());

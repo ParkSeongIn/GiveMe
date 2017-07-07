@@ -5,7 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입</title>
-
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 		//필수 입력 정보인 아이디 등 모든 정보가 입력되었는지 확인하는 함수
 		function checkValue(){
@@ -74,18 +76,25 @@
 		
 		
 	</script>
-
+<style>
+.panel-body{
+	width:800px;
+	height:460px;
+	padding-left: 300px;
+	margin-left: 280px;
+}
+</style>
 
 </head>
 <body>
-
+	<c:import url="/nav/header.jsp"/>
 <div id="wrap">
-	<br><br>
-	회원가입
-	<br><br>
+	
 	
 	<!-- 입력한 값을 전송하기 위해 form 태그를 사용 -->
 	<!-- 파라미터(값) 전송은 post방식, 전송할 페이지는 joinOk.jsp -->
+	<div class="panel-body">
+	<h2>회원가입</h2>
 	<form method="post" action="<%=request.getContextPath()%>/controller/MemberInsertActionServlet.do" name="member" onsubmit="return checkValue()">
 		<table>
 			<tr>
@@ -196,6 +205,7 @@
 		<br>	
 			<input type="submit" value="회원등록"><input type="button" value="취소" onclick="goLogin()">
 	</form>
+	</div>
 </div>
 
 </body>

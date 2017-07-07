@@ -14,7 +14,7 @@
 				<ul>
 					<li class="m" ><a href="./sidebar.jsp">기획의도</a></li>
 					<li class="h"><a href="./sidebar2.jsp">사업내용</a></li>
-					<li class="i"><a href="./index2.html">공지사항</a></li>
+					<li class="i"><a href="<%=request.getContextPath()%>/controller/AllBoardIfListServlet.do?abtype=I">공지사항</a></li>
 				</ul>
 			</nav>
 		</div>

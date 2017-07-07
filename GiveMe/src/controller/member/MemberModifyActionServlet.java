@@ -15,14 +15,14 @@ import service.member.MemberVo;
 /**
  * Servlet implementation class MemberModifyActServlet
  */
-@WebServlet("/MemberModifyActServlet")
-public class MemberModifyActServlet extends HttpServlet {
+@WebServlet("/MemberModifyActionServlet")
+public class MemberModifyActionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberModifyActServlet() {
+    public MemberModifyActionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,10 +34,10 @@ public class MemberModifyActServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	    
-	    	request.setCharacterEncoding("UTF-8");	    	  
-	    	response.setCharacterEncoding("UTF-8");
-	    	int midx = Integer.parseInt(request.getParameter("midx"), 10);	    		
-	    	String mgrade = request.getParameter("mgrade");	
+	    request.setCharacterEncoding("UTF-8");	    	  
+	    response.setCharacterEncoding("UTF-8");
+	    int midx = Integer.parseInt(request.getParameter("midx"), 10);	
+	    String mid = request.getParameter("mid");
 		String mpwd = request.getParameter("mpwd");
 		String mphone = request.getParameter("mphone");
 		String mphone1 = request.getParameter("mphone1");
@@ -50,15 +50,15 @@ public class MemberModifyActServlet extends HttpServlet {
 		
 		MemberServiceImpl msi = new MemberServiceImpl();
 		MemberVo vo = new MemberVo();
-				
-		vo.setMgrade(mgrade);			
+
+		vo.setMidx(midx);
+		vo.setMid(mid);	
 		vo.setMpwd(mpwd);		
-		vo.setMphone(Integer.parseInt((mphone+mphone1+mphone2),10));			
+		vo.setMphone(Integer.parseInt(mphone)+Integer.parseInt(mphone1)+Integer.parseInt(mphone2));			
 		vo.setMmail(mmail1+mmail2);
 		vo.setMpost(Integer.parseInt(mpost));
 		vo.setMaddr1(maddr1);
 		vo.setMaddr2(maddr2);		
-		vo.setMidx(midx);
 		
 		int row = msi.modifyupdateMember(vo);
 	}

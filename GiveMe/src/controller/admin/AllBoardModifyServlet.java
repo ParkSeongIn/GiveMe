@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.admin.AdminServiceImpl;
+import service.allboard.AllBoardVo;
+
 /**
  * Servlet implementation class AllBoardModifyServlet
  */
@@ -25,15 +28,24 @@ public class AllBoardModifyServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		int abidx = Integer.parseInt(request.getParameter("abidx"));
+		
+		AdminServiceImpl asi = new AdminServiceImpl();
+		AllBoardVo av = asi.AllBoardmodifySe(abidx);
+		
+		request.setAttribute("av", av);
+		request.setAttribute("abidx", abidx);
+		System.out.println(av);
+		System.out.println(abidx);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

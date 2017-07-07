@@ -4,14 +4,19 @@ import java.util.ArrayList;
 
 public interface TalentBoardService {
 	
-	int insertTalentBoard();
-	TalentBoardVo getTalentBoard();
+	int insertTalentBoard(TalentBoardVo tvo);
+	TalentBoardVo getTalentBoard(int tbidx);
 	ArrayList<TalentBoardVo> getTalentBoardList();
-	TalentBoardVo modifyTalentBoard();
-	int deleteTalentBoard();
+	TalentBoardVo TalentBoardmodifySe(int tbidx);
+	int modifyTalentBoard(TalentBoardVo tvo,int tbidx);
+	int deleteTalentBoard(int tbidx);
 	TalentBoardVo replyTalentBoard();
-	int updateTalentBoardHit();
+	int updateTalentBoardHit(int tbidx);
 	int getPaging();
-	int modifyTalentBoardState();
-	int modifyYalentBoardConfirm();	
+	int modifyTalentBoardState(int midx);
+	int modifyTalentBoardConfirm(int tbidx);
+	
+	int modifyTalentBoardEtime(int tbidx);
+	int modifyTalentBoardCancle(int midx);
+	TalentBoardVo TalentBoardMyList(int midx);
 }

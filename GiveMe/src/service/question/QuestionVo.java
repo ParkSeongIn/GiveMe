@@ -8,7 +8,7 @@ public class QuestionVo {
 	private int qidx;
 	private String qcategory;
 	private String qtitle;
-	private String qcontnet;
+	private String qcontent;
 	private Date qwdate;
 	private String qstate;
 	private Date qmdate;
@@ -35,11 +35,11 @@ public class QuestionVo {
 	public void setQtitle(String qtitle) {
 		this.qtitle = qtitle;
 	}
-	public String getQcontnet() {
-		return qcontnet;
+	public String getQcontent() {
+		return qcontent;
 	}
-	public void setQcontnet(String qcontnet) {
-		this.qcontnet = qcontnet;
+	public void setQcontent(String qcontent) {
+		this.qcontent = qcontent;
 	}
 	public Date getQwdate() {
 		return qwdate;

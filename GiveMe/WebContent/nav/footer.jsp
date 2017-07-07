@@ -16,7 +16,7 @@
 					<ul>
 						<li><a href="#" target="_self">기획의도</a></li>
 						<li><a href="#" target="_self">사업안내</a></li>
-						<li><a href="#" target="_self">공지사항</a></li>
+						<li><a href="<%=request.getContextPath() %>/controller/AllBoardIfListServlet.do?abtype=I" target="_self">공지사항</a></li>
 					</ul>
 				</div>
 				<div>
@@ -30,15 +30,15 @@
 					<h3>후원하기</h3>		
 					<ul>
 						<li><a href="#" target="_self">현금기부</a></li>
-						<li><a href="#" target="_self">재능기부</a></li>
+						<li><a href="<%=request.getContextPath() %>/controller/TalentBoardListServlet.do" target="_self">재능기부</a></li>
 					</ul>
 				</div>
 				<div>
 					<h3>커뮤니티</h3>		
 					<ul>
-						<li><a href="#" target="_self">기부동향</a></li>
-						<li><a href="<%=request.getContextPath() %>/community/qna_write.jsp" target="_self">FAQ/1:1문의</a></li>
-						<li><a href="#" target="_self">기부처검색</a></li>
+						<li><a href="<%=request.getContextPath() %>/controller/AllBoardListServlet.do?abtype=N" target="_self">기부동향</a></li>
+						<li><a href="<%=request.getContextPath() %>/controller/QuestionWriteServlet.do" target="_self">FAQ/1:1문의</a></li>
+						<li><a href="<%=request.getContextPath() %>/controller/AllBoardDonationSearchServlet.do" target="_self">기부처검색</a></li>
 					</ul>
 				</div>
 			</div>
@@ -57,7 +57,7 @@
 						현금기부
 					</div>
 					<div>
-						재능기부
+						<a href="<%=request.getContextPath() %>/controller/TalentBoardListServlet.do" target="_self">재능기부</a>
 					</div>
 				</div>
 			</div>

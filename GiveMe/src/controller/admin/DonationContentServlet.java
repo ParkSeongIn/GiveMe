@@ -36,9 +36,9 @@ public class DonationContentServlet extends HttpServlet {
 		int dlidx = Integer.parseInt(request.getParameter("dlidx"));
 		AdminServiceImpl as = new AdminServiceImpl();
 		DonationListVo dl = as.getDonationList(dlidx);
-		
-		request.setAttribute("dl", dl);
+
 		request.setAttribute("dlidx", dlidx);
+		request.setAttribute("dl", dl);
 		
 	}
 

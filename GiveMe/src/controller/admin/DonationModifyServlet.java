@@ -38,7 +38,7 @@ public class DonationModifyServlet extends HttpServlet {
 		DonationListVo dl = as.modifyDonationList(dlidx);
 		
 		request.setAttribute("dl", dl);
-		
+		request.setAttribute("dlidx", dlidx);
 	}
 
 	/**

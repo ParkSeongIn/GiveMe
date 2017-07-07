@@ -8,11 +8,11 @@
 </head>
 <body>
 		<div class="side3">
-				<h2><소개></h2>
+				<h2><후원하기></h2>
 			<nav class="lnb">
 				<ul>
 					<li class="m" ><a href="#">현금기부</a></li>
-					<li class="i"><a href="#">재능기부</a></li>
+					<li class="i"><a href="<%=request.getContextPath()%>/controller/TalentBoardListServlet.do">재능기부</a></li>
 				</ul>
 			</nav>
 		</div>

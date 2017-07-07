@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.admin.AdminServiceImpl;
+import service.allboard.AllBoardVo;
+
 /**
  * Servlet implementation class AllBoardDeleteServlet
  */
@@ -25,17 +28,25 @@ public class AllBoardDeleteServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		String abdeletest = request.getParameter("abdeletest");
+		int abidx = Integer.parseInt(request.getParameter("abidx"));
+		
+		AdminServiceImpl asi = new AdminServiceImpl();
+		AllBoardVo avo = new AllBoardVo();
+		
+		int dab = asi.deleteAllBoard(abidx);
+		
 	}
 
 }

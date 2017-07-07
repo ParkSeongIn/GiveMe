@@ -19,7 +19,7 @@
 .table {
 	width: 830px;
     float: right;
-    margin-right: 340px;
+    margin-right: 300px;
 }
 .bottom {
 	float: right;

@@ -64,7 +64,7 @@ public class MemberInsertActionServlet extends HttpServlet {
 	    vo.setMpwd(mpwd);	    	
 	    vo.setMname(mname);	    	
 	    vo.setMbirth(Integer.parseInt((mbirth), 10));	//숫자형(int)으로 변환하는 작업. 10은 10진법을 의미함.	    	
-	    vo.setMphone(Integer.parseInt((mphone+mphone1+mphone2), 10));
+	    vo.setMphone(Integer.parseInt(mphone)+Integer.parseInt(mphone1)+Integer.parseInt(mphone));
 	    vo.setMmail(mmail1+"@"+mmail2);
 	    vo.setMpost(Integer.parseInt((mpost), 10));
 	    vo.setMaddr1(maddr1);

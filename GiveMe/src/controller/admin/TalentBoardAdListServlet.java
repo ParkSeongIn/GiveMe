@@ -1,23 +1,28 @@
-package controller.question;
+package controller.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.talentboard.TalentBoardServiceImpl;
+import service.talentboard.TalentBoardVo;
+
 /**
- * Servlet implementation class QusetionModifyServlet
+ * Servlet implementation class TalentBoardAdListServlet
  */
-@WebServlet("/QusetionModifyServlet")
-public class QusetionModifyServlet extends HttpServlet {
+@WebServlet("/TalentBoardAdListServlet")
+public class TalentBoardAdListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QusetionModifyServlet() {
+    public TalentBoardAdListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -25,15 +30,18 @@ public class QusetionModifyServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		TalentBoardServiceImpl tbsi = new TalentBoardServiceImpl();
+		ArrayList<TalentBoardVo> tblist = tbsi.getTalentBoardList();
+		request.setAttribute("tblist", tblist);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

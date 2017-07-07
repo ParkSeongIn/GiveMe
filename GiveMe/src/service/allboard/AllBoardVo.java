@@ -16,6 +16,7 @@ public class AllBoardVo {
 	private Timestamp abdbdate;
 	private String abdeletest;
 	private int midx;
+	private String fileFullPath;
 	
 	public String getAbtype() {
 		return abtype;
@@ -83,6 +84,11 @@ public class AllBoardVo {
 	public void setMidx(int midx) {
 		this.midx = midx;
 	}
-	
+	public String getFileFullPath() {
+		return fileFullPath;
+	}
+	public void setFileFullPath(String fileFullPath) {
+		this.fileFullPath = fileFullPath;
+	}
 	
 }

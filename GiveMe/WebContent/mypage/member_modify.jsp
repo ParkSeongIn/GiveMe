@@ -1,138 +1,124 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "service.member.MemberServiceImpl" %>
 <%@ page import = "service.member.MemberVo" %>
 <%@ page import = "common.Values" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
 <%
 request.setCharacterEncoding("UTF-8");
 int midx=(Integer)request.getAttribute("midx");
 MemberVo vo = (MemberVo)request.getAttribute("vo");
 %>    
-    
-    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>È¸¿øÁ¤º¸ ¼öÁ¤</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>íšŒì›ì •ë³´ ìˆ˜ì •</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 
 function checkValue(){
 	
 	if(!document.member.pwd.value){
-		alert("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+		alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 		return false;
 	}
 	
 	if(document.member.pwd.value != document.member.pwdcheck.value){
-		alert("ºñ¹Ğ¹øÈ£°¡ µ¿ÀÏÇÏÁö ¾Ê½À´Ï´Ù.´Ù½ÃÇÑ¹ø ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+		alert("ë¹„ë°€ë²ˆí˜¸ê°€ ë™ì¼í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.ë‹¤ì‹œí•œë²ˆ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 		return false;
 	}	
 	
 	if(!document.member.phone.value){
-		alert("Åë½Å»ç¸¦ ¼±ÅÃÇÏ¼¼¿ä.");
+		alert("í†µì‹ ì‚¬ë¥¼ ì„ íƒí•˜ì„¸ìš”.");
 		return false;
 	}
 	
 	if(!document.member.phone1.value){
-		alert("ÀüÈ­¹øÈ£ °¡¿îµ¥ ÀÚ¸®¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+		alert("ì „í™”ë²ˆí˜¸ ê°€ìš´ë° ìë¦¬ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 		return false;
 	}
 	
 	if(!document.member.phone2.value){
-		alert("ÀüÈ­¹øÈ£ ³¡ÀÚ¸®¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+		alert("ì „í™”ë²ˆí˜¸ ëìë¦¬ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 		return false;
 	}
 	
 	if(!document.member.mail.value){
-		alert("e-mailÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
+		alert("e-mailì„ ì…ë ¥í•˜ì„¸ìš”.");
 		return false;
 	}
 	
 	if(!document.member.address.value){
-		alert("¿ìÆí¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+		alert("ìš°í¸ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 		return false;
 	}
 	
 	if(!document.member.addr1.value){
-		alert("½Ã±º±¸ ÁÖ¼Ò¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+		alert("ì‹œêµ°êµ¬ ì£¼ì†Œë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 		return false;
 	}
 	
 	if(!document.member.addr2.value){
-		alert("³ª¸ÓÁö ÁÖ¼Ò¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+		alert("ë‚˜ë¨¸ì§€ ì£¼ì†Œë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 		return false;
 	}
 	
 }
 </script>
-
+<style>
+.wrap{
+	height: 600px;
+}
+</style>
 </head>
 <body>
-
 <div id="wrap">
-	<br><br>
-	È¸¿øÁ¤º¸ ¼öÁ¤(ÀÌ¿ëÀÚ ¹× °ü¸®ÀÚ)
-	<br><br>
-	
-	<!-- ÀÔ·ÂÇÑ °ªÀ» Àü¼ÛÇÏ±â À§ÇØ form ÅÂ±×¸¦ »ç¿ë -->
-	<!-- ÆÄ¶ó¹ÌÅÍ(°ª) Àü¼ÛÀº post¹æ½Ä, Àü¼ÛÇÒ ÆäÀÌÁö´Â joinOk.jsp -->
-	<form method="post" action="<%=request.getContextPath()%>/controller.member/MemberModifyActServlet.do" name="member" onsubmit="return checkValue()">
-		<table>
-			
+	<c:import url="/nav/header.jsp"/>
+	<c:import url="/nav/sidebar5.jsp"/>
+	<form method="post" action="<%=request.getContextPath()%>/controller/MemberModifyActionServlet.do" name="member" onsubmit="return checkValue()">
+		<input type="hidden" name="midx" value="<%=vo.getMidx() %>">
+		<table>		
 			<tr>
-				<td id="title"> È¸¿ø¹øÈ£</td>
+				<td id="mid"> ì•„ì´ë””</td>
 				<td>					
-					<input type="text"	name="midx" value="<%=midx %>">				
-				</td>
-			</tr>
-		
-			<tr>
-				<td id="title"> È¸¿øµî±Ş</td>
-				<td>
-					<input type="text" name="mgrade" maxlength="100"
-						value="<%=vo.getMgrade() %>" readonly="readonly">										
-				</td>
-			</tr>			
-			
-			<tr>
-				<td id="title"> ¾ÆÀÌµğ</td>
-				<td>					
-					<input type="text"	name="midx" value="<%=vo.getMid() %>">				
+					<input type="text"	 name="mid" value="<%=vo.getMid() %>" disabled="disabled"/>				
 				</td>
 			</tr>
 			
 			<tr>
-				<td id="title"> ºñ¹Ğ¹øÈ£ </td>
+				<td id="mpwd"> ë¹„ë°€ë²ˆí˜¸ </td>
 				<td>
-					<input type="password" name="mpwd" maxlength="100"
-						value="<%=vo.getMpwd()%>">
+					<input type="password" name="mpwd" maxlength="100" value="<%=vo.getMpwd()%>">
 				</td>
 			</tr>	
 			
 			<tr>
-				<td> ºñ¹Ğ¹øÈ£ È®ÀÎ </td>
+				<td> ë¹„ë°€ë²ˆí˜¸ í™•ì¸ </td>
 				<td>
 					<input type="password" name="pwdcheck" maxlength="100">
 				</td>
 			</tr>		
 			
 			<tr>
-				<td id="title"> ÀÌ¸§ </td>
+				<td id="mname"> ì´ë¦„ </td>
 				<td>					
-					<input type="text"	name="midx" value="<%=vo.getMname() %>">
+					<input type="text"	name="mname" value="<%=vo.getMname() %>" disabled="disabled"/>
 				</td>
 			</tr>
 			
 			<tr>
-				<td id="title"> »ı³â¿ùÀÏ </td>
+				<td id="mbirth"> ìƒë…„ì›”ì¼ </td>
 				<td>					
-					<input type="text"	name="midx" value="<%=vo.getMbirth() %>">										
+					<input type="text"	name="mbirth" value="<%=vo.getMbirth() %>">										
 				</td>
 			</tr>
 			
 			<tr>
-				<td id="title"> ÇÚµåÆù ¹øÈ£</td>
+				<td id="mphone"> í•¸ë“œí° ë²ˆí˜¸</td>
 				<td>
 					<select name="mphone">
 						<option value="010">010</option>
@@ -151,32 +137,32 @@ function checkValue(){
 			</tr>
 			
 			<tr>
-				<td id="title"> email</td>
+				<td id="mmail"> email</td>
 				<td>
 					<input type="text" name="mmail1" maxlength="100"
 						value="<%=vo.getMmail() %>">
 						@
-					<select name=mmail2>
-						<option value="naver.com">³×ÀÌ¹ö</option>
-						<option value="hanmail.net">´ÙÀ½</option>
-						<option value="google.com">±¸±Û</option>
-						<option value="yahoo.com">¾ßÈÄ</option>
-						<option value="nate.com">³×ÀÌÆ®</option>						
+					<select name=mmail>
+						<option value="naver.com">ë„¤ì´ë²„</option>
+						<option value="hanmail.net">ë‹¤ìŒ</option>
+						<option value="google.com">êµ¬ê¸€</option>
+						<option value="yahoo.com">ì•¼í›„</option>
+						<option value="nate.com">ë„¤ì´íŠ¸</option>						
 					</select>
 				</td>
 			</tr>
 			
 			<tr>
-				<td id="title">¿ìÆí¹øÈ£</td>
+				<td id="title">ìš°í¸ë²ˆí˜¸</td>
 				<td>
 					<input type="text" name="mpost" maxlength="20"
 						value="<%=vo.getMpost()%>">
-					<input type="button" value="¿ìÆí¹øÈ£ °Ë»ö">
+					<input type="button" value="ìš°í¸ë²ˆí˜¸ ê²€ìƒ‰">
 				</td>
 			</tr>
 			
 			<tr>
-				<td id="title">ÁÖ¼Ò1</td>
+				<td id="maddr1">ì£¼ì†Œ1</td>
 				<td>
 					<input type="text" name="maddr1" maxlength="500"
 						value="<%=vo.getMaddr1() %>">
@@ -184,7 +170,7 @@ function checkValue(){
 			</tr>
 			
 			<tr>
-				<td id="title"m>ÁÖ¼Ò2</td>	
+				<td id="maddr2">ì£¼ì†Œ2</td>	
 				<td>
 					<input type="text" name="maddr2" maxlength="500"
 						value="<%=vo.getMaddr2() %>">
@@ -192,34 +178,33 @@ function checkValue(){
 			</tr>
 			
 			<tr>
-				<td id="title">¼öÁ¤³¯Â¥</td>	
+				<td id="mmdate">ìˆ˜ì •ë‚ ì§œ</td>	
 				<td>					
-					<input type="text"	name="midx" value="<%=vo.getMmdate() %>">
+					<input type="text"	name="mmdate" value="<%=vo.getMmdate() %>" disabled="disabled"/>
 				</td>
 			</tr>
 			
 			<tr>
-				<td id="title">Å»Åğ³¯Â¥</td>	
+				<td id="title">íƒˆí‡´ë‚ ì§œ</td>	
 				<td>					
-					<input type="text"	name="midx" value="<%=vo.getMbreakdate() %>">
+					<input type="text"	name="mbreakdate" value="<%=vo.getMbreakdate() %>" disabled="disabled"/>
 				</td>
 			</tr>
 			
 			<tr>
-				<td id="title">ÃÑ ¸¶ÀÏ¸®Áö</td>	
+				<td id="mbreakdate">ì´ ë§ˆì¼ë¦¬ì§€</td>	
 				<td>					
-					<input type="text"	name="midx" value="<%=vo.getMpoint() %>">
+					<input type="text"	name="midx" value="<%=vo.getMpoint() %>" disabled="disabled"/>
 				</td>
 			</tr>
 			
 		</table>	
-		<br>	
-			<input type="reset" value="Ãë¼Ò">
-            <input type="submit" value="¼öÁ¤"/>
-            <a class="btn btn-default" href="<%=request.getContextPath()%>/controller.admin/MemberListServlet.do">±Û¸ñ·Ï</a>			
+			<input class="btn btn-default"  type="reset" value="ì·¨ì†Œ">
+            <input class="btn btn-default"  type="submit" value="ìˆ˜ì •ì™„ë£Œ"/>		
 	</form>
-</div>
+	</div>
 
-
+<c:import url="/nav/footer.jsp"/>
 </body>
+
 </html>

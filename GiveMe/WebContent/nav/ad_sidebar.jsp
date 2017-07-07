@@ -15,10 +15,11 @@
 				<ul>
 					<li class="m" ><a href="${ContextPath}/controller/MemberListServlet.do">회원관리</a></li>
 					<li class="i"><a href="${ContextPath}/controller/DonationListServlet.do">기부처관리</a></li>
+					<li class="h"><a href="#">기부정보 관리</a></li>
+					<li class="h"><a href="#">게시판 관리</a></li>
+					<li class="h"><a href="#">1:1문의 관리</a></li>
 				</ul>
 			</nav>
 		</div>
-</body>
-</html>
 </body>
 </html>
