@@ -6,6 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>메인 페이지</title>
+<style>
+font{
+	text-decoration:underline;
+	text-align:center;
+}
+</style>
 </head>
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 <link rel="stylesheet" href="../css/font.css" type="text/css">
@@ -61,7 +67,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					공지사항 
-					<a href="#" style="float: right; color: black">더보기</a>
+					<a href="${ContextPath}/controller/AllBoardIfListServlet.do" style="float: right; color: black">더보기</a>
 				</div>
 				<div class="panel-body">
 					<table class="table table-hover" id="notics_board">
@@ -97,7 +103,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					기부동향 
-					<a href="#" style="float: right; color: black">더보기</a>
+					<a href="${ContextPath}/controller/AllBoardListServlet.do" style="float: right; color: black">더보기</a>
 				</div>
 				<div class="panel-body">
 					<table class="table table-hover" id="news_board">
@@ -132,11 +138,8 @@
 		<div class="col-sm-4"></div>
 		<div class="col-sm-8">
 		 <div class="panel panel-default">
-			<div class="panel-heading">
-				누적 기부금액
-			</div>
 			<div class="panel-body">
-			누적 기부금액 표시
+			<h2>현재 <font>10000000원</font>이 후원되었습니다.</h2>
 			</div>
 		</div>
 		</div>

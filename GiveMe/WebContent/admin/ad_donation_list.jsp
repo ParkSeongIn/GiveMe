@@ -13,17 +13,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-.wrap{
-	height: 500px;
-}
-.table {
-	width: 830px;
-    float: right;
-    margin-right: 300px;
-}
-.bottom {
-	float: right;
-    margin-right: 340px;
+div.col-sm-10{
+	  padding-top: 60px;
+	  padding-left: 80px;
 }
 </style>
 </head>
@@ -31,12 +23,12 @@
 <link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <c:import url="/nav/header.jsp"/>
-<c:import url="/nav/ad_sidebar.jsp"/>
+<c:import url="/nav/sidebar6.jsp"/>
 
-<div class="wrap">
-<c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
+<div class="container">
 
-<h2>기부처리스트 목록</h2>
+	<div class="col-sm-10">
+	<h2>기부처리스트 목록</h2>
 	<table class="table table-striped table-bordered table-hover" id="list">
 		<thead>	
 			<tr>
@@ -70,13 +62,14 @@
 		</tbody>
 			
 	</table>
-		<div class="bottom">
+		<div class="col-sm-8"></div>
+		<div class="col-sm-4">
 		<c:if test="${sessionScope.vo.login == true }">
 			<a class="btn btn-default" style="float:right;"href="${ContextPath}/controller/DonationWriteServlet.do">입력</a>
 		</c:if>
 		</div>
-	
-</div>
+	</div>
+	</div>
 <c:import url="/nav/footer.jsp"/>
 </body>
 </html>

@@ -22,7 +22,7 @@
 		<ul class="nav nav-pills nav-stacked">
 			  <li><a href="#"><font color="#8C8C8C">기부동향</font></a></li>
 			  <li><a href="#" ><font color="#8C8C8C">FAQ/QNA</font></a></li>
-			  <li><a href="#"><font color="#8C8C8C">기부처 검색</font></a></li>
+			  <li><a href="#"><font color="#8C8C8C">기부처검색</font></a></li>
 		</ul>
 		</div>
 </body>

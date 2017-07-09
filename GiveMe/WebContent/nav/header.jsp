@@ -24,7 +24,7 @@
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-				소개<span class="caret"></span>
+				소개
 				</a>
 				<ul class="dropdown-menu">
 					<li><a href="#">기획의도</a></li>
@@ -34,7 +34,7 @@
 				</li>
 				<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					사업내용<span class="caret"></span>
+					사업내용
 				</a>
 				<ul class="dropdown-menu">
 					<li><a href="#">현금기부</a></li>
@@ -43,7 +43,7 @@
 				</li>
 				<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-				후원하기<span class="caret"></span>
+				후원하기
 				</a>
 				<ul class="dropdown-menu">
 					<li><a href="${ContextPath}/controller/CashDonationInsertServlet.do" target="_self">현금기부</a></li>
@@ -52,7 +52,7 @@
 				</li>
 				<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-				커뮤니티<span class="caret"></span>
+				커뮤니티
 				</a>
 				<ul class="dropdown-menu">
 					<li><a href="${ContextPath}/controller/AllBoardListServlet.do?abtype=N" target="_self">기부동향</a></li>
@@ -71,7 +71,7 @@
 			
 			<div class="up1" id="my_box" > <!-- div up1 start -->
 				<ul class="nav navbar-nav navbar-right" style="float:right;">
-					<li><a>${sessionScope.vo.mid}님 반갑습니다.</a></li>
+					<li><a>${sessionScope.vo.mid}님 반갑습니다</a></li>
 					
 					<c:if test="${sessionScope.vo.login == true }">
 							<c:set var="grade" value="G"/>

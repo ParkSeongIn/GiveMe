@@ -43,25 +43,10 @@
 	
 </script>
 <style>
-img {
-	width:300px;
-	position:absolute;
+div.col-sm-10{
+	  padding-top: 60px;
+	  padding-left: 80px;
 }
-form {
-	width:700px;
-	float:right;
-}
-.form-group1, .form-group2{
-	width:300px;
-}
-.bottom{
-	margin-top:30px;
-	float:right;
-}
-.form-group3{
-margin-top:20px;
-}
-
 select{
 	width :200px; /* 원하는 너비설정 */ 
 	padding: .8em .5em; /* 여백으로 높이 설정 */ 
@@ -82,12 +67,16 @@ select::-ms-expand { /* for IE 11 */
 <link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
+<c:import url="/nav/header.jsp"/>
+<c:import url="/nav/sidebar6.jsp"/>
 <div class="container">
-	<h1>기부처 리스트 작성</h1>
 	
-	<div>
+	
+	<div class="col-sm-4">
+	<h1>기부처 리스트 작성</h1>
 		<img id="preview"  src="http://placehold.it/300x300?text=preview"/>
 	</div>
+	<div class="col-sm-6">
 	<form id="addForm" action="${ContextPath }/controller/DonationWriteActionServlet.do"enctype="multipart/form-data" method="post">
 	 
 	 <div class="form-group">
@@ -97,12 +86,12 @@ select::-ms-expand { /* for IE 11 */
   	</div>
    </div>
 	 
-	 <div class="form-group1">
+	 <div class="form-group">
             <label for="dlplace">기부처 :</label>
             <input class="form-control" name="dlplace" id="dlplace" type="text"/>
         </div><br/>
 	        
-        <div class="form-group2">
+        <div class="form-group">
             <label for="dlarea">지역 :</label>
             <input class="form-control" name="dlarea" id="dlarea" type="text"/>
         </div><br/>
@@ -118,25 +107,26 @@ select::-ms-expand { /* for IE 11 */
 			</select>
 			
         
-        <div class="form-group3">
+        <div class="form-group">
         	<label for="dlcontent">내용 :</label>
         	<textarea name="dlcontent" id="dlcontent" rows="10" cols="100"></textarea>
         </div>
         <br/>
         
-        <div class="form-group4" >
+        <div class="form-group" >
 			<label class="control-label" for="image_file">이미지첨부</label>
 				<input type="file" id="image_file" name="image_file" class="form-control" accept="image/*" onchange="get_image()"/>
 				
 		</div>
 					
-        <div class="bottom">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-8">
             <input class="btn btn-default" id="addButton" type="button" value="입력"/>
             <input class="btn btn-default" type="reset" value="초기화"/>
             <a class="btn btn-default" href="${ContextPath }/controller/DonationListServlet.do">글목록</a>
         </div>
        </form> 
-       	
+       </div>
 		
  </div>    
 </body>

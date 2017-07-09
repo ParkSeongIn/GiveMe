@@ -29,7 +29,23 @@ div.col-sm-10{
 		 		<tr>
 		 			<td width="300px;">image</td>
 					<td>내용</td>
+				</tr>
+				<tr>
+		 			<td width="300px;">image</td>
+					<td>내용</td>
 				</tr>	
+				<tr>
+		 			<td width="300px;">image</td>
+					<td>내용</td>
+				</tr>	
+				<tr>
+		 			<td width="300px;">image</td>
+					<td>내용</td>
+				</tr>	
+				<tr>
+		 			<td width="300px;">image</td>
+					<td>내용</td>
+				</tr>		
 		</tbody>
 	</table>
 	</div>
