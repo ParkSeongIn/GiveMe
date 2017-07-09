@@ -131,8 +131,7 @@ select::-ms-expand { /* for IE 11 */
         
         <div class="form-group4" >
 			<label class="control-label" for="image_file">이미지첨부</label>
-				<input type="file" id="image_file" name="image_file" class="form-control" accept="image/*" onchange="get_image()"/>
-				
+				<input type="file" id="image_file" name="image_file" class="form-control" accept="image/*" onchange="get_image()"/>	
 		</div>
 					
         <div class="bottom">

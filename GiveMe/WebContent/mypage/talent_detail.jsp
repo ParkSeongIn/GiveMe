@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*" %>
 <%@ page import = "service.talentboard.TalentBoardVo" %>
+<%@ page import = "service.member.* " %>
+<%
+	MemberVo vo = (MemberVo)session.getAttribute("vo");
+	String mid = vo.getMid();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,7 +34,7 @@ ArrayList<TalentBoardVo> tblist = (ArrayList<TalentBoardVo>)request.getAttribute
 <% for (TalentBoardVo tb : tblist) { %>
 <tr>
 <td><%=tb.getMidx() %></td><td><%=tb.getTbcategory1()%></td><td><%=tb.getTbcategory2()%></td>
-<td><%=tb.getTbidx() %></td><td><%=tb.getTbhdate() %></td>
+<td><%=mid %></td><td><%=tb.getTbhdate() %></td>
 <td><%=tb.getTbstate() %></td><td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardCancleServlet.do?midx=<%=tb.getMidx()%>">제공 취소</td>
 </tr>
 <% } %>
@@ -42,7 +47,7 @@ ArrayList<TalentBoardVo> tblist = (ArrayList<TalentBoardVo>)request.getAttribute
 <% for (TalentBoardVo tb : tblist) { %>
 <tr>
 <td><%=tb.getMidx() %></td><td><%=tb.getTbcategory1()%></td><td><%=tb.getTbcategory2()%></td>
-<td><%=tb.getTbidx() %></td><td><%=tb.getTbhdate() %></td>
+<td><%=mid %></td><td><%=tb.getTbhdate() %></td>
 <td><%=tb.getTbstate() %></td>
 <td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardConfirmServlet.do?tbidx=<%=tb.getTbidx()%>">신청자 확인</a></td>
 <td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardCancleServlet.do?midx=<%=tb.getMidx()%>">신청 취소</a></td>

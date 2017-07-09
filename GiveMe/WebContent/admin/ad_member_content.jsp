@@ -139,11 +139,10 @@
 	  			<input class="btn btn-default" id="DeleteButton" type="button" value="탈퇴" onclick="de()"/>
 	  			<a class="btn btn-default" href="<%=request.getContextPath()%>/controller.member/MemberModifyServlet.do">수정</a>	  			
 	  			<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/MemberListServlet.do">취소</a>
+	  			<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardMyListServlet.do">재능내역</a>
   			</div>	
   		
 		</div>
-<%@ include file="/nav/sidebar.jsp" %>
-<%@ include file="/nav/footer.jsp" %>
 		</table>	
 		<br>				
 	

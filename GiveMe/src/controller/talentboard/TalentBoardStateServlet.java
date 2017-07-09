@@ -43,17 +43,12 @@ public class TalentBoardStateServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String tbstate = request.getParameter("tbstate");
 		String tbapply = request.getParameter("tbapply");
-		int midx = Integer.parseInt(request.getParameter("midx"));
+		int tbidx = Integer.parseInt(request.getParameter("tbidx"));
 		
 		TalentBoardServiceImpl tbsi = new TalentBoardServiceImpl();
 		TalentBoardVo tvo = new TalentBoardVo();
 		
-		int mtbs = tbsi.modifyTalentBoardState(midx);
-		System.out.println(tvo.getTbstate());
-		System.out.println(tvo.getTbapply());
-		System.out.println(tvo.getMidx());
-		System.out.println(tbsi);
-		System.out.println(tvo);
+		int mtbs = tbsi.modifyTalentBoardState(tbidx);
 	}
 
 }

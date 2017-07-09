@@ -1,6 +1,9 @@
 package controller.admin;
 
 import java.io.IOException;
+import java.util.Enumeration;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,18 +45,27 @@ public class AllBoardWriteActionServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		
-		// 파일첨부 관련 추가
-		String savePath = request.getServletContext().getRealPath("upload");
-		int sizeLimit = 10 * 1024 * 1024 ; // 10메가 용량 제한
-		MultipartRequest multi =new MultipartRequest
-				(request, savePath, sizeLimit, "UTF-8", new DefaultFileRenamePolicy());
-
+	try {
+		ServletContext context = request.getSession().getServletContext();
+		// 파일이 저장될 물리적인 경로를 얻어온다.
+		String path = context.getRealPath("/upload");
+		// 파일 용량
+		int max = 1024 * 1024 * 100; // 100MB
+		// 저장 인코딩 방식
+		String enc = "utf-8";
+		// 중복 파일이 있을 경우 이름 변경 정책
+		DefaultFileRenamePolicy dfr = new DefaultFileRenamePolicy();
+		// 업로드 처리
+		MultipartRequest multi = new MultipartRequest(request, path, max, enc, dfr);
+			
+		request.setCharacterEncoding("UTF-8");
+			
 		String abtype = multi.getParameter("abtype");
 		String abtitle = multi.getParameter("abtitle");
 		String abcontent = multi.getParameter("abcontent");
-		String abimage = multi.getFilesystemName("abimage");
-		
-		String fileFullPath = savePath + "/" + abimage;
+		Enumeration files = multi.getFileNames();
+		String name1 = (String)files.nextElement();
+		String abimage = multi.getFilesystemName(name1);
 		
 		AdminServiceImpl ads = new AdminServiceImpl();
 		AllBoardVo avo = new AllBoardVo();
@@ -62,16 +74,13 @@ public class AllBoardWriteActionServlet extends HttpServlet {
 		avo.setAbtitle(abtitle);
 		avo.setAbcontent(abcontent);
 		avo.setAbimage(abimage);
-		avo.setFileFullPath(fileFullPath);
 		
 		int iab = ads.insertAllBoard(avo);
 		
-//	    if (iab ==0) {
-//	    response.sendRedirect(request.getContextPath()+"/controller.allboard/AllBoardListServlet.do");	
-//	    }
-//	    else{
-//	    response.sendRedirect(request.getContextPath()+"/community/news_content.jsp");
-//	    }
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
 	}
 
 }

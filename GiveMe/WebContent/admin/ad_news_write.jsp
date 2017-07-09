@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import ="java.util.*" %>
 <%@ page import ="service.allboard.AllBoardVo" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("ablist");
 %>
@@ -40,6 +41,16 @@ ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("abli
         });
     });
 </script>
+<script>
+	function get_image(){
+		var file = $("#image_file")[0].files[0];
+		var reader = new FileReader();
+		reader.onloadend = function(){
+			$("#preview").attr("src", reader.result);
+		};
+		reader.readAsDataURL(file);
+	}
+</script>
 <title>기부동향</title>
 </head>
 <%@ include file="/nav/header.jsp" %>
@@ -47,6 +58,10 @@ ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("abli
 <div class="container">
     <h2>기부동향 게시판 글 추가(관리자 전용)</h2>
     <form id="addForm" enctype="multipart/form-data" action="<%=request.getContextPath()%>/controller/AllBoardWriteActionServlet.do" method="post" >
+       <div class="form-group">
+		  	<label class="ontrol-label" for="mid">작성자</label>
+		  	<input type="text" id="mid" class="form-control" value="${sessionScope.vo.mid }" disabled="disabled"/>
+	   </div>
         <div class="form-group">
             <label for="abtype">타입 :</label>
             <input class="form-control" name="abtype" id="abtype" type="text" value="N" readonly="readonly" />
@@ -59,10 +74,10 @@ ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("abli
             <label for="abcontent">내용 :</label>
             <input class="form-control" name="abcontent" id="abcontent" type="text"/>
         </div>
-        <div class="form-group">
-            <label for="abimage">사진 :</label>
-            <input class="form-control" name="abimage" id="abimage" type="file"/>
-        </div>
+        <div class="form-group4" >
+			<label class="control-label" for="image_file">사진</label>
+				<input type="file" id="image_file" name="image_file" class="form-control" accept="image/*" onchange="get_image()"/>	
+		</div>
         <div>
             <center><input class="btn btn-default" id="addButton" type="button" value="글입력"/>
             <input class="btn btn-default" type="reset" value="초기화"/>

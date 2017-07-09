@@ -71,7 +71,7 @@ vertical-align : middle;
 </tr>
 </table>
 	<div>
-		<center><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardStateServlet.do?midx=<%=tvo.getMidx() %>">신청하기</a></center>
+		<center><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardStateServlet.do?tbidx=<%=tvo.getTbidx() %>">신청하기</a></center>
 	</div>
 	<div>
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardModifyServlet.do?tbidx=<%=tbidx %>">수정</a>

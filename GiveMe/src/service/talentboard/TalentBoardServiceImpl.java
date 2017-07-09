@@ -283,16 +283,16 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 	}
 
 	@Override
-	public int modifyTalentBoardState(int midx) { // 신청하기 눌렀을 때 바뀌는 쿼리 -- 미완
-		Connection con = dbconnect.getConnection();
+	public int modifyTalentBoardState(int tbidx) { // 신청하기 눌렀을 때 바뀌는 쿼리 -- 미완
+		Connection con = dbconnect.getConnection(); // 값 바뀌지만 로그인 안할때도 바뀜.
 		PreparedStatement pstmt = null;
 		TalentBoardVo tvo = new TalentBoardVo();
 		int mtbs = 0;
 		try {
-			sql = "update table_talentboard set tbstate = 'I' ,tbcancle = 'N', tbapply = 'Y' where midx = ?";
-			pstmt = con.prepareStatement(sql);
+			sql = "update table_talentboard set tbstate = 'I' ,tbcancle = 'N', tbapply = 'Y' where tbidx = ?";
+			pstmt = con.prepareStatement(sql); // and midx = ?
 			System.out.println(sql);
-			pstmt.setInt(1, midx);
+			pstmt.setInt(1, tbidx);
 			mtbs = pstmt.executeUpdate();
 		}catch(Exception e) { 
 
@@ -304,8 +304,8 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 
 	
 	@Override
-	public int modifyTalentBoardConfirm(int tbidx) { // 마이페이지에서 신청자 확인 눌렀을 때 업데이트. 
-		Connection con = dbconnect.getConnection(); // 완 . 값은 안넘어가지만 sql 바뀜.
+	public int modifyTalentBoardConfirm(int tbidx) {
+		Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt = null;
 		TalentBoardVo tvo = new TalentBoardVo();
 		int mtbc = 0;
@@ -337,7 +337,6 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 		try {
 			sql ="update table_talentboard set tbstate = 'W', tbapply = 'N', tbcancle = 'Y' "
 					+ " where tbstate = 'I' and tbapply='Y' and tbcancle='N' and midx = ?";
-			// tbidx?
 			pstmt = con.prepareStatement(sql);
 			System.out.println(sql);
 			pstmt.setInt(1, midx);
@@ -379,11 +378,11 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 	
 
 	@Override
-	public TalentBoardVo TalentBoardMyList(int midx) { // 마이페이지 재능내역 리스트
+	public ArrayList<TalentBoardVo> TalentBoardMyList(int midx) { // 마이페이지 재능내역 리스트 -- 완료
 		Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		TalentBoardVo tvo = null;
+		ArrayList<TalentBoardVo> tblist = new ArrayList<TalentBoardVo>();
 		
 		try {
 			sql = "select * from ("
@@ -398,20 +397,20 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 									+ ") where rnum >= 1";
 			
 			pstmt = con.prepareStatement(sql);
-			System.out.println(sql);
 			pstmt.setInt(1, midx);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
-				tvo = new TalentBoardVo();
+			while(rs.next()) {
+				TalentBoardVo tvo = new TalentBoardVo();
 				
-				tvo.setMidx(rs.getInt(1));
-				tvo.setTbcategory1(rs.getString(2));
-				tvo.setTbcategory2(rs.getString(3));
-				tvo.setTbpeople(rs.getString(4));
-				tvo.setTbhdate(rs.getInt(5));
-				tvo.setTbstate(rs.getString(6));
+				tvo.setMidx(rs.getInt("midx"));
+				tvo.setTbcategory1(rs.getString("tbcategory1"));
+				tvo.setTbcategory2(rs.getString("tbcategory2"));
+				tvo.setTbpeople(rs.getString("tbpeople"));
+				tvo.setTbhdate(rs.getInt("tbhdate"));
+				tvo.setTbstate(rs.getString("tbstate"));
 				
+				tblist.add(tvo);
 			}
 			
 		}catch(Exception e){
@@ -419,7 +418,7 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 		}finally{
 			DBClose.close(con,pstmt,rs);
 			}
-		return tvo;
+		return tblist;
 	}
 	
 	@Override
