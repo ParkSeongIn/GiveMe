@@ -517,6 +517,22 @@ public class FrontController extends HttpServlet {
 				this.view = "/mypage/talent_detail.jsp";
 				this.isRedirect = false;
 				
+			} else if (command.equals("/controller/TalentBoardReplyServlet.do")){ // 재능기부 답변 페이지 폼
+
+				TalentBoardReplyServlet tbrs = new TalentBoardReplyServlet();
+				tbrs.doGet(request, response);
+				
+				this.view = "/donation/talent_reply.jsp";
+				this.isRedirect = false;
+				
+			} else if (command.equals("/controller/TalentBoardReplyActionServlet.do")){ // 재능기부 게시판 글 등록
+
+				TalentBoardReplyActionServlet tbras = new TalentBoardReplyActionServlet();
+				tbras.doPost(request, response);
+				
+				this.view = "/controller/TalentBoardListServlet.do";
+				this.isRedirect = true;
+
 			}
 		    
 		    if(this.isRedirect){

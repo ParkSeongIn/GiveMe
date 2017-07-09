@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import = "service.talentboard.TalentBoardVo" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -61,9 +62,11 @@ ArrayList<TalentBoardVo> tblist = (ArrayList<TalentBoardVo>)request.getAttribute
 </tr>
 <% } %>
 </table>
+<c:if test="${sessionScope.vo.login == true }">
 	<div>
 		<center><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardWriteServlet.do">게시글 입력</a></center>
 	</div>
+</c:if>
 </div>
 <%@ include file="/nav/footer.jsp" %>
 </body>

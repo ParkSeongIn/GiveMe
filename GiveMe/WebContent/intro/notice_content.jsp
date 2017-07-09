@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import ="service.allboard.AllBoardVo" %>
 <%@ page import ="service.member.MemberVo" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	AllBoardVo av = (AllBoardVo)request.getAttribute("av");
@@ -56,12 +57,19 @@ vertical-align : middle;
 <td><%=av.getAbhit() %></td><td><%=av.getAbwdate() %></td><td><%=av.getAbcontent() %></td>
 </tr>
 </table>
+<c:choose>
+<c:when test="${sessionScope.vo.mgrade == 'A' }">
 	<div>
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardIfModifyServlet.do?abidx=<%=abidx %>">수정</a>
 		<input class="btn btn-default" id="DeleteButton" type="button" value="삭제" onclick="dab()"/>
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardIfListServlet.do?abtype=I">글목록</a>
 	</div>
-</div>
+</c:when>
+	<c:otherwise>
+		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardIfListServlet.do?abtype=I">글목록</a>
+	</c:otherwise>
+</c:choose>
+	</div>
 <%@ include file="/nav/footer.jsp" %>
 </body>
 </html>

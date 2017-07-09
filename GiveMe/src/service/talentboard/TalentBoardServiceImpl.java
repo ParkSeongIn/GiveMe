@@ -3,6 +3,7 @@ package service.talentboard;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import common.DBConnect;
@@ -20,7 +21,7 @@ public class TalentBoardServiceImpl implements TalentBoardService{
         }
 
 	@Override
-	public int insertTalentBoard(TalentBoardVo tvo) { // grp +1씩 증가하게 만들어야 함
+	public int insertTalentBoard(TalentBoardVo tvo) {
 		Connection con = dbconnect.getConnection(); 
 		PreparedStatement pstmt = null;
 		int itb = 0;
@@ -422,9 +423,74 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 	}
 	
 	@Override
-	public TalentBoardVo replyTalentBoard() { // 답글
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public int replyTalentBoard(TalentBoardVo tvo) {
+	      
+	      Connection con = dbconnect.getConnection();
+	      PreparedStatement pstmt = null;
+	      int rtb = 0;
+	      
+	      try{
+	          
+	         con.setAutoCommit(false);
+	         
+	         sql = "update table_talentboard set tbseq = tbseq + 1 "
+	         		+ "where tbgrp=(select tbgrp from table_tlaentboard where tbidx = ?) "
+	         		+ "and tbseq > (select tbseq from table_talentboard where tbidx = ?);";
+	      
+	         pstmt = con.prepareStatement(sql);   
+	         
+	         pstmt.setInt(1, tvo.getTbgrp());
+	         pstmt.setInt(2, tvo.getTbgrp());
+	                     
+	         rtb = pstmt.executeUpdate();
+	         
+	         sql = "insert into table_talentboard(tbidx,tbtitle,tbhit,tbwdate,tbcategory1,tbcategory2,"
+	         		+ "tbpeople,tbhadate,tbtime,tbarea1,tbarea2,tbcontent,tbfile,tbetime,tbstate,tbcancle,"
+	         		+ "tbpoint,tbhconfirm,tbmdate,tbdbdate,tbgrp,tbseq,tbdepth,midx,tbdeletest,tbpeoplecnt,tnapply) "
+	         		+ "values(seq_tbidx.nextval,?,0,sysdate,?,?,?,?,?,?,?,?,'',sysdate,'W','N',0,'N',sysdate,sysdate,"
+	         		+ "(select tbgrp from table_talentboard where tbidx = ?), "
+	         		+ "(select tbseq from table_talentboard where tbidx = ?) + 1, "
+	         		+ "(select tbdepth from table_talentboard where tbidx = ?) + 1,?,'N',?,'N')";   
+	            
+	         pstmt = con.prepareStatement(sql);
+	         
+				pstmt.setString(1, tvo.getTbtitle());
+				pstmt.setString(2, tvo.getTbcategory1());
+				pstmt.setString(3, tvo.getTbcategory2());
+				pstmt.setString(4, tvo.getTbpeople());
+				pstmt.setInt(5, tvo.getTbhdate());
+				pstmt.setString(6, tvo.getTbtime());
+				pstmt.setString(7, tvo.getTbarea1());
+				pstmt.setString(8, tvo.getTbarea2());
+				pstmt.setString(9, tvo.getTbcontent());
+				pstmt.setInt(10, tvo.getTbidx());
+				pstmt.setInt(11, tvo.getTbidx());
+				pstmt.setInt(12, tvo.getTbidx());
+				pstmt.setInt(13, tvo.getMidx());
+				pstmt.setInt(14, tvo.getTbpeoplecnt());         
+	         
+	         rtb += pstmt.executeUpdate();
+	         
+	         con.commit();
+	         
+	      }catch(Exception e){
+	         System.out.println(e.getMessage());
+	         try{
+	            con.rollback();
+	         } catch(SQLException e1){
+	            e1.printStackTrace();
+	         }
+	      }finally{
+	         try{
+	            con.setAutoCommit(true);
+	         }catch(Exception e){
+	            e.getMessage();
+	         }
+	         DBClose.close(con,pstmt);
+	      }
+	      
+	      return rtb;
+	      
+	   }
 	
 }

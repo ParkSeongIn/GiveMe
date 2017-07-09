@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import ="service.allboard.AllBoardVo" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	AllBoardVo av = (AllBoardVo)request.getAttribute("av");
@@ -57,11 +58,18 @@ vertical-align : middle;
 <td><img src="/upload/<%=av.getAbimage() %>"></td><td><%=av.getAbcontent() %></td>
 </tr>
 </table>
+<c:choose>
+<c:when test="${sessionScope.vo.mgrade == 'A' }">
 	<div>
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardModifyServlet.do?abidx=<%=abidx %>">수정</a> <!--idx 값을 못 불러오니까 getidx였지만 설정을 안해둬서 그냥 idx 값을 불러와서 실행 -->
 		<input class="btn btn-default" id="DeleteButton" type="button" value="삭제" onclick="dab()"/>
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardListServlet.do?abtype=N">글목록</a>
 	</div>
+</c:when>
+	<c:otherwise>
+		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardListServlet.do?abtype=N">글목록</a>
+	</c:otherwise>
+</c:choose>
 </div>
 <%@ include file="/nav/footer.jsp" %>
 </body>

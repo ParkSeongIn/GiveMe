@@ -79,7 +79,7 @@ vertical-align : middle;
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardListServlet.do">글목록</a>
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardConfirmServlet.do?tbidx=<%=tvo.getTbidx()%>">신청자 확인</a>
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardCancleServlet.do?midx=<%=tvo.getMidx()%>">신청 취소</a>
-		
+		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardReplyServlet.do">답변(문의 테스트중)</a>
 	</div>
 </div>
 <%@ include file="/nav/footer.jsp" %>

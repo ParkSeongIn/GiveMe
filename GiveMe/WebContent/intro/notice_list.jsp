@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*" %>
 <%@ page import = "service.allboard.AllBoardVo" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -49,9 +49,11 @@ ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("abli
 </tr>
 <% } %>
 </table>
+<c:if test="${sessionScope.vo.mgrade == 'A' }">
 	<div>
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardIfWriteServlet.do">게시글 입력</a>
 	</div>
+</c:if>
 </div>
 <%@ include file="/nav/footer.jsp" %>
 </body>
