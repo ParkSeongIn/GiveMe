@@ -1,11 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <title>키워드로 장소검색하고 목록으로 표출하기</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    
     <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -45,11 +47,13 @@
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 </style>
 </head>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
-<div class="wrap">
-	<%@ include file="/nav/header.jsp" %>
+<%@ include file="/nav/header.jsp" %>
+<%@ include file="/nav/sidebar4.jsp" %>
+<div class="container">
 	<div class="map_wrap">
-	    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+	    <div id="map" style="width:1000px;height:500px;position:relative;overflow:hidden;"></div>
 	
 	    <div id="menu_wrap" class="bg_white">
 	        <div class="option">
@@ -285,7 +289,6 @@
 	    }
 	}
 </script>
-	<%@ include file="/nav/sidebar2.jsp" %>
 	<%@ include file="/nav/footer.jsp" %>
 </div>
 </body>

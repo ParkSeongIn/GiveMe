@@ -39,8 +39,10 @@ img {
 
 </style>
 </head>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
+
 <div class="container">
 	<h1>기부처 리스트 내용</h1>
 	<div class="image">

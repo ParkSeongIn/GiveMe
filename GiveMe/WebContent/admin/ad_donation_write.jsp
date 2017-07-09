@@ -79,6 +79,7 @@ select::-ms-expand { /* for IE 11 */
 
 </style>
 </head>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 <div class="container">

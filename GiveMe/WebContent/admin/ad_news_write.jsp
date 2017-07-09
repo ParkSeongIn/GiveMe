@@ -42,6 +42,7 @@ ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("abli
 </script>
 <title>기부동향</title>
 </head>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <%@ include file="/nav/header.jsp" %>
 <body>
 <div class="container">

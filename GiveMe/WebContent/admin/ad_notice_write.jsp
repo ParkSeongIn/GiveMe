@@ -42,6 +42,7 @@ ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("abli
     });
 </script>
 <title>공지사항</title>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 </head>
 <%@ include file="/nav/header.jsp" %>
 <body>

@@ -42,6 +42,7 @@ $(document).ready(function(){
 </script>
 <title>공지사항</title>
 </head>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <div class="container">
     <h1>수정하기(관리자 전용)</h1>

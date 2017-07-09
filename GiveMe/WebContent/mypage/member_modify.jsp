@@ -75,6 +75,7 @@ function checkValue(){
 }
 </style>
 </head>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <div id="wrap">
 	<c:import url="/nav/header.jsp"/>

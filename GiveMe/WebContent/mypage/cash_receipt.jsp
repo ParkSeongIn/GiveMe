@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 
 </body>

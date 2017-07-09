@@ -40,6 +40,7 @@
 </script>
 <title>Admin QNA 답변 작성, 수정</title>
 </head>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <div class="container">
 	<div class="form-group">

@@ -1,58 +1,55 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import = "java.util.*" %>
-<%@ page import = "service.allboard.AllBoardVo" %>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>공지사항 리스트</title>
-<!-- bootstrap을 사용하기 위한 CDN주소 -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-</head>
+<title>현금후원내역(마이페이지)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-.wrap {
-height : 550px;
-}
-.table {
-width : 950px;
-height : 80px;
-margin-bottom : 10px;
-text-align : center;
-vertical-align : middle;
+div.col-sm-10{
+	  padding-top: 60px;
+	  padding-left: 80px;
 }
 </style>
+</head>
+<c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
-<%@ include file="/nav/header.jsp" %>
-<%@ include file="/nav/sidebar.jsp" %>
-<div class="wrap"> <!-- div로 묶음 -->
-<%
-ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("ablist");
-%>
-<table class="table table-striped table-bordered table-hover ">
-
-<tr>
-<td>글번호</td><td>제목</td><td>작성자</td>
-<td>조회수</td><td>작성날짜</td>
-</tr>
-<% for (AllBoardVo ab : ablist) { %>
-<tr>
-<td><%=ab.getAbidx() %></td><td><%=ab.getAbtitle()%></td>
-<td><a href="<%=request.getContextPath()%>/controller/AllBoardIfContentServlet.do?abidx=<%=ab.getAbidx() %>"><%=ab.getAbmdate() %></td>
-<td><%=ab.getAbhit() %></td><td><%=ab.getAbwdate() %></td>
-</tr>
-<% } %>
-</table>
-	<div>
-		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardIfWriteServlet.do">게시글 입력</a>
+<c:import url="/nav/header.jsp"/>
+<c:import url="/nav/sidebar1.jsp"/>
+	
+	<div class="container">
+	<div class="col-sm-10">	
+	<br>
+	<h2>공지사항</h2>
+	<hr color="#D5D5D5" width="40%" align="left">
+	<table class="table table-striped table-bordered table-hover" id="notic_board_list">
+		<thead>
+			<tr>
+				<th width="10%" align="center" valign="middle">글 번호</th>
+				<th width="20%">글제목</th>
+				<th width="10%">작성자</th>
+				<th width="10%">조회수</th>
+				<th width="20%">작성날짜</th>
+			</tr>
+		</thead>
+		 <tbody>
+		 		<tr>
+		 			<td>1</td>
+					<td>첫글입니다</td>
+					<td>admin</td>
+					<td>1</td>
+					<td>2017.7.9</td>
+				</tr>	
+		</tbody>
+	</table>
 	</div>
-</div>
-<%@ include file="/nav/footer.jsp" %>
+	</div>
+<c:import url="/nav/footer.jsp"/>
 </body>
 </html>

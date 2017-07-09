@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>헤더</title>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -29,7 +29,7 @@
 				<ul class="dropdown-menu">
 					<li><a href="#">기획의도</a></li>
 					<li><a href="#">사업안내</a></li>
-					<li><a href="#">공지사항</a></li>
+					<li><a href="${ContextPath}/controller/AllBoardIfListServlet.do?abtype=I" target="_self">공지사항</a></li>
 				</ul>
 				</li>
 				<li class="dropdown">
@@ -46,8 +46,8 @@
 				후원하기<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="#">현금기부</a></li>
-					<li><a href="#">재능기부</a></li>
+					<li><a href="${ContextPath}/controller/CashDonationInsertServlet.do" target="_self">현금기부</a></li>
+					<li><a href="${ContextPath}/controller/TalentBoardListServlet.do" target="_self">재능기부</a></li>
 				</ul>
 				</li>
 				<li class="dropdown">
@@ -55,9 +55,9 @@
 				커뮤니티<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="#">기부동향</a></li>
-					<li><a href="#">QNA/FAQ</a></li>
-					<li><a href="#">기부처 검색</a></li>
+					<li><a href="${ContextPath}/controller/AllBoardListServlet.do?abtype=N" target="_self">기부동향</a></li>
+					<li><a href="${ContextPath}/controller/QuestionWriteServlet.do" target="_self">QNA/FAQ</a></li>
+					<li><a href="${ContextPath}/controller/AllBoardDonationSearchServlet.do" target="_self">기부처 검색</a></li>
 				</ul>
 				</li>
 			</ul>

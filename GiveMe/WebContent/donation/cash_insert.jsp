@@ -39,6 +39,7 @@ select::-ms-expand { /* for IE 11 */
 
 </style>
 </head>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <c:import url="/nav/header.jsp"/>
 <c:import url="/nav/sidebar3.jsp"/>

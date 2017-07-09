@@ -38,6 +38,7 @@
 </head>
 <%@ include file="/nav/header.jsp" %>
 <%@ include file="/nav/sidebar4.jsp" %>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <div class="container"> <!-- div로 묶음 -->
 

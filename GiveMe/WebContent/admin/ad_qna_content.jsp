@@ -23,6 +23,7 @@ int qidx = Integer.parseInt(request.getParameter("qidx"));
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" ></script>
 </head>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <div class="container">
 	<div class="form-group">

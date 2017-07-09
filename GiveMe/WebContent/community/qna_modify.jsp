@@ -46,6 +46,7 @@
 </script>
 <title>QNA Modify</title>
 </head>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <div class="container">
 	<div class="form-group">

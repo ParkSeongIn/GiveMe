@@ -25,6 +25,7 @@ table{
 }
 </style>
 </head>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 
 <div id="wrap">

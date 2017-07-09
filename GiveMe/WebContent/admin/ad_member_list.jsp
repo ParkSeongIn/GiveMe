@@ -15,25 +15,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <style>
-.wrap{
-	height: 500px;
-}
-.table {
-	width:730px;
-	float: right;
-    margin-right: 316px;
+div.col-sm-10{
+	  padding-top: 60px;
+	  padding-left: 80px;
 }
 </style>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <%
 ArrayList<MemberVo> list = (ArrayList<MemberVo>)request.getAttribute("list");
 %>
 
+<c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 <c:import url="/nav/header.jsp"/>
-<c:import url="/nav/ad_sidebar.jsp"/>
-<div class = "wrap">
-<c:set var="ContextPath" value="${pageContext.request.contextPath}"/>		
+<c:import url="/nav/sidebar6.jsp"/>
+<div class = "container">
+		<div class="col-sm-10">		
 		<h2>회원관리</h2>
+		<hr color="#D5D5D5" width="40%" align="left">
 		<table class="table table-striped table-bordered table-hover" id="list">
 		  <thead>
 			<tr>
@@ -65,6 +64,7 @@ ArrayList<MemberVo> list = (ArrayList<MemberVo>)request.getAttribute("list");
 		</tbody>	
 				
 		</table>	
+	</div>
 	</div>
 <c:import url="/nav/footer.jsp"/>	
 </body>

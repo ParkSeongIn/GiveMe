@@ -1,44 +1,55 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import = "java.util.*" %>
-<%@ page import = "service.talentboard.TalentBoardVo" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>관리자 재능기부 리스트</title>
-<!-- bootstrap을 사용하기 위한 CDN주소 -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>현금후원내역(관리자)</title>
+<style>
+div.col-sm-10{
+	  padding-top: 60px;
+	  padding-left: 80px;
+}
+</style>
 </head>
-<%@ include file="/nav/header.jsp" %>
-<%@ include file="/nav/sidebar4.jsp" %>
+<c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
-<div class="container">
-<h2>재능기부 내역 관리자 페이지</h2>
-<%
-ArrayList<TalentBoardVo> tblist = (ArrayList<TalentBoardVo>)request.getAttribute("tblist");
-
-%>
-<table class="table table-striped table-bordered table-hover ">
-<tr>
-기부 상태를 클릭해도 기부 프로세스가 나타납니다. <a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardWriteServlet.do">기부 프로세스</a>
-</tr>
-<tr>
-<td>글번호</td><td>후원자</td><td>신청자</td><td>작성날짜</td><td>매칭여부</td><td>매칭확인</td>
-</tr>
-<% for (TalentBoardVo tb : tblist) { %>
-<tr>
-<td><a href="<%=request.getContextPath()%>/controller/TalentBoardAdContentServlet.do?tbidx=<%=tb.getTbidx() %>"><%=tb.getTbidx() %></td><td><%=tb.getTbpeople()%></td><td><%=tb.getTbpeople()%></td>
-<td><%=tb.getTbwdate() %></td><td><%=tb.getTbstate() %></td><td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardEtimeServlet.do?tbidx=<%=tb.getTbidx() %>">매칭확인</a></td>
-</tr>
-<% } %>
-</table>
-</div>
-<%@ include file="/nav/footer.jsp" %>
+<c:import url="/nav/header.jsp"/>
+<c:import url="/nav/sidebar6.jsp"/>
+	
+	<div class="container">
+	<div class="col-sm-10">	
+	<br>
+	<h2>현금기부 내역</h2>
+	<hr color="#D5D5D5" width="40%" align="left">
+	<table class="table table-hover" id="ad_talent_list">
+		<thead>
+			<tr>
+				<th width="10%" align="center" valign="middle">글번호</th>
+				<th width="10%">후원자</th>
+				<th width="10%">신청자</th>
+				<th width="10%">작성날짜</th>
+				<th width="10%">매칭여부</th>
+				<th width="10%">신청취소</th>
+		</thead>
+		 <tbody>
+		 		<tr>
+		 			<td>1</td>
+					<td>홍길동</td>
+					<td>혼길동</td>
+					<td>2017.07.10</td>
+					<td></td>
+					<td></td>
+				</tr>	
+		</tbody>
+	</table>
+	</div>
+	</div>
+<c:import url="/nav/footer.jsp"/>
 </body>
 </html>

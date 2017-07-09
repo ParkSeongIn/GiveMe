@@ -50,6 +50,7 @@ vertical-align : middle;
 </style>
 <%@ include file="/nav/header.jsp" %>
 <%@ include file="/nav/sidebar3.jsp" %>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <div class="wrap"> <!-- div로 묶음 -->
 

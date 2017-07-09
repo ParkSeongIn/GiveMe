@@ -18,6 +18,7 @@ div.col-sm-10{
 </style>
 </head>
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <c:import url="/nav/header.jsp"/>
 <c:import url="/nav/sidebar5.jsp"/>

@@ -10,11 +10,17 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+.col-sm-2{
+	padding-left: 130px;
+	padding-top: 60px;
+}
+</style>
 </head>
 <body>
 	<h3><font color="#949494" size="5" face="맑은 고딕">사업내용</font></h3>
 	<br>
-	<div class="col-sm-3">
+	<div class="col-sm-2">
 		<ul class="nav nav-pills nav-stacked">
 			  <li><a href="#"><font color="#8C8C8C">현금기부</font></a></li>
 			  <li><a href="#" ><font color="#8C8C8C">재능기부</font></a></li>

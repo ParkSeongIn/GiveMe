@@ -66,6 +66,7 @@
     margin-right: 210px;
 }
 </style>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <c:import url="/nav/header.jsp"/>
 <div class="wrap">

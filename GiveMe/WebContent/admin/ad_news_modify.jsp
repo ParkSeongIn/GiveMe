@@ -44,6 +44,7 @@ $(document).ready(function(){
 </script>
 <title>기부동향</title>
 </head>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <div class="container">
     <h1>기부동향 수정하기(관리자 전용)</h1>

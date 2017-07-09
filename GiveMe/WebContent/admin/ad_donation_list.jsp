@@ -28,6 +28,7 @@
 </style>
 </head>
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <c:import url="/nav/header.jsp"/>
 <c:import url="/nav/ad_sidebar.jsp"/>

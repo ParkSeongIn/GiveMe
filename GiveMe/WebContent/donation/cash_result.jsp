@@ -22,6 +22,7 @@
 <script type="text/javascript" >
 </script>
 </head>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <div class="form-group">
     	<label for="mname"></label>
