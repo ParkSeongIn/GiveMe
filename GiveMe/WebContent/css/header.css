@@ -1,140 +1,16 @@
-@CHARSET "UTF-8";
-.mainup{
-		width: 1200px;
-		min-height: 200px;
-		margin: 0 auto;		
-	}
-	.upLeft{
-		width: 220px;
-		margin: 0 auto;
-		min-height:191px;		
-		float:left;
-		background-color: rgb(123,247,243);		
-	}
-	.upRight{
-		width:900px;
-		min-height: 200px;
-		border:1px solid;
-		float:right;
-	}
-	.up1{
-		padding: 30px 0;		
-	}
-	.up2{
-		float:right;		
-		padding: 40px 0;
-		background-color: rgb(123,247,243);
-		width: 980px;
-	}
-	h1{
-		text-align:center;
-		margin: 60px 0 0 0;	
-		color:#FFF;			
-	}	
-	.side1 li{
-		display:inline-block;
-		padding: 0 80px;
-		text-align: center;	
-		color:#000;	
-	}
-	.side1 li a{
-		color:#000;		
-	}
-	.side1 a:hover{
-		text-decoration: none;		
-	}
-	.side2 li{
-		display:inline-block;
-		padding: 0 80px;		
-	}	
-	.side2{
-		border:none;
-		border:0px;
-		margin:0px;
-		padding:0px;
-		font: 67.5% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
-		font-size:14px;
-		font-weight:bold;
-		color:#FFF;
-	}
-	.side2 ul{
-		background: rgb(123,247,243);
-		height:50px;
-		list-style:none;
-		margin:0;
-		padding:0;
-	}
-	
-	.side2 li{
-		float:left;
-		padding:0px 80px;;
-	}
-	
-	.side2 li a{
-		background: rgb(123,247,243);
-		color:#FFF;
-		display:block;
-		font-weight:normal;
-		line-height:50px;
-		margin:0px;
-		padding:0px 25px;
-		text-align:center;
-		text-decoration:none;
-	}
-	
-	.side2 li a:hover, .side2 ul li:hover a{
-		background: rgb(123,247,243);
-		color:#FFFFFF;
-		text-decoration:none;
-	}
-	
-	.side2 li ul{
-		background: rgb(123,247,243);
-		display:none; /* 평상시에는 드랍메뉴가 안보이게 하기 */
-		height:auto;
-		padding:0px;
-		margin:0px;
-		border:0px;
-		position:absolute;
-		width:200px;
-		z-index:200;
-		/*top:1em;
-		/*left:0;*/
-	}
-	
-	.side2 li:hover ul{
-		display:block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
-	}	
-	.side2 li li {
-		background: rgb(123,247,243);
-		display:block;
-		float:none;
-		margin:0px;
-		padding:0px;
-		width:200px;
-	}
-	
-	.side2 li:hover li a{
-		background:none;
-	}
-	
-	.side2 li ul a{
-		display:block;
-		height:50px;
-		font-size:12px;
-		font-style:normal;
-		margin:0px;
-		padding:0px 10px 0px 15px;
-		text-align:left;
-	}
-	
-	.side2 li ul a:hover, .side2 li ul li:hover a{
-		background: rgb(123,247,243);
-		border:0px;
-		color:#ffffff;
-		text-decoration:none;
-	}
-	
-	.side2 p{
-		clear:left;
-	}
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 0px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+.container-fluid{
+	padding-top: 40px;
+}
+.navbar-brand{
+	font-size: 60px;
+}
+.nav{
+	font-size : 15px;
+}

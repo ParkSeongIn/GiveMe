@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 <link rel="stylesheet" href="../css/footer.css" type="text/css">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>footer</title>
 </head>
+<c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 <body>
 	<footer>
 			<div>
@@ -16,7 +16,7 @@
 					<ul>
 						<li><a href="#" target="_self">기획의도</a></li>
 						<li><a href="#" target="_self">사업안내</a></li>
-						<li><a href="<%=request.getContextPath() %>/controller/AllBoardIfListServlet.do?abtype=I" target="_self">공지사항</a></li>
+						<li><a href="${ContextPath}/controller/AllBoardIfListServlet.do?abtype=I" target="_self">공지사항</a></li>
 					</ul>
 				</div>
 				<div>
@@ -29,16 +29,16 @@
 				<div>
 					<h3>후원하기</h3>		
 					<ul>
-						<li><a href="#" target="_self">현금기부</a></li>
-						<li><a href="<%=request.getContextPath() %>/controller/TalentBoardListServlet.do" target="_self">재능기부</a></li>
+						<li><a href="${ContextPath}/controller/CashDonationInsertServlet.do" target="_self">현금기부</a></li>
+						<li><a href="${ContextPath}/controller/TalentBoardListServlet.do" target="_self">재능기부</a></li>
 					</ul>
 				</div>
 				<div>
 					<h3>커뮤니티</h3>		
 					<ul>
-						<li><a href="<%=request.getContextPath() %>/controller/AllBoardListServlet.do?abtype=N" target="_self">기부동향</a></li>
-						<li><a href="<%=request.getContextPath() %>/controller/QuestionWriteServlet.do" target="_self">FAQ/1:1문의</a></li>
-						<li><a href="<%=request.getContextPath() %>/controller/AllBoardDonationSearchServlet.do" target="_self">기부처검색</a></li>
+						<li><a href="${ContextPath}/controller/AllBoardListServlet.do?abtype=N" target="_self">기부동향</a></li>
+						<li><a href="${ContextPath}/controller/QuestionWriteServlet.do" target="_self">FAQ/1:1문의</a></li>
+						<li><a href="${ContextPath}/controller/AllBoardDonationSearchServlet.do" target="_self">기부처검색</a></li>
 					</ul>
 				</div>
 			</div>
@@ -57,7 +57,7 @@
 						현금기부
 					</div>
 					<div>
-						<a href="<%=request.getContextPath() %>/controller/TalentBoardListServlet.do" target="_self">재능기부</a>
+						<a href="${ContextPath}/controller/TalentBoardListServlet.do" target="_self">재능기부</a>
 					</div>
 				</div>
 			</div>

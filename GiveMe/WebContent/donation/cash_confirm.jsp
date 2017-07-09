@@ -1,59 +1,74 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import ="java.util.*" %>
-<%@ page import ="service.cashdonation.*" %>
-<% 
-	CashDonationVo cv = (CashDonationVo)request.getAttribute("cv");
-%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>현금기부 confirm</title>
+<meta charset="UTF-8">
+<title>현금기부 페이지</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+div.panel-body{
+	padding: 80px;
+}
+div.panel.panel-default{
+	margin-left: 100px;
+}
+h2{
+	padding-left: 50px;
+}
+</style>
 </head>
 <body>
-<div style="width:800px;margin:0 auto;margin-top:100px;">
-
-<h1>현금기부 confirm</h1>
-  <form id="addForm" action="<%=request.getContextPath()%>/controller/CashDonationInsertActionServlet.do" method="post">
-        <div class="form-group">
-            <label for="cway">현금기부 방식</label>
-            <input class="form-control" name="cway" id="cway" type="text" value="${sessionScope.cv.cway }" readonly="readonly"/>
-        </div>
-  <div class="form-group">
-            <label for="cmoney">현금기부 금액</label>
-            <input class="form-control" name="cmoney" id="cmoney" type="text" value="${sessionScope.cv.cmoney }" readonly="readonly"/>
-        </div>
-         <div class="form-group">
-            <label for="creceipt">현금기부 영수증</label>
-            <input class="form-control" name="creceipt" id="creceipt" type="text" value="${sessionScope.cv.creceipt }" readonly="readonly"/>
-        </div>
-         <div class="form-group">
-            <label for="cpaydate1">정기후원 출금일</label>
-            <input class="form-control" name="cpaydate1" id="cpaydate1" type="text" value="${sessionScope.cv.cpaydate1 }" readonly="readonly"/>
-        </div>
-        <div class="form-group">
-            <label for="cstate">현금기부 상태</label>
-            <input class="form-control" name="cstate" id="cstate" type="text" value="${sessionScope.cv.cstate }" readonly="readonly"/>
-        </div>
-        <div class="form-group">
-            <label for="cpoint">현금기부 마일리지</label>
-            <input class="form-control" name="cpoint" id="cpoint" type="text" value="${sessionScope.cv.cpoint }" readonly="readonly"/>
-        </div>
-        <div class="form-group">
-            <label for="cpay">현금기부 결제방법</label>
-            <input class="form-control" name="cpay" id="cpay" type="text" value="${sessionScope.cv.cpay }" readonly="readonly"/>
-        </div>
-        <div class="form-group">
-            <label for="capst">현금기부 결제 상태</label>
-            <input class="form-control" name="capst" id="capst" type="text" value="${sessionScope.cv.capst }" readonly="readonly"/>
-        </div>
-          <div>
-         	 <input class="btn btn-default" id="addButton" type="button" value="결제"/>
-			<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/cashdonation/CashDonationInsertServlet.do">취소</a>        
-        </div>
-    </form>
-</div>
-
+<c:import url="/nav/header.jsp"/>
+<c:import url="/nav/sidebar3.jsp"/>
+	<div class="container" style="margin-top:80px">
+		<div class="panel panel-default">
+			<h2>현금기부</h2>
+			<div class="panel-body">
+			<form id="addForm" action="<%=request.getContextPath()%>/controller/CashDonationConfirmServlet.do" method="post">
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label class="control-label col-sm-3" for="cway">기부방식</label>
+						<div class="col-sm-5">
+							<input type="text" id="cway" class="form-control" disabled="disabled"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-3" for="cmoney">금액</label>
+						<div class="col-sm-6">
+							<input type="text" id="cmoney" class="form-control" disabled="disabled"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-3" for="cpay">결제방법</label>
+						<div class="col-sm-6">
+							<input type="text" id="cpay" class="form-control" disabled="disabled"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-3" for="creceipt">영수증발급</label>
+						<div class="col-sm-6">
+							<input type="text" id="creceipt" class="form-control" disabled="disabled"/>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top:10px">
+						<div class="col-sm-7"></div>
+						<div class="col-sm-3">
+							<div>
+         					 <input class="btn btn-default" id="addButton" type="button" value="결제"/>
+            					<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/MainServlet.do">취소</a>
+        					</div>
+						</div>
+					</div>
+			</form>
+			</div>
+		</div>
+	</div>
+<c:import url="/nav/footer.jsp"/>	
 </body>
 </html>

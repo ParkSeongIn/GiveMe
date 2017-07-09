@@ -33,14 +33,6 @@ public class TalentBoardMyListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		request.setCharacterEncoding("UTF-8");
-		int midx = Integer.parseInt(request.getParameter("midx"));
-		TalentBoardServiceImpl tbsi = new TalentBoardServiceImpl();
-		TalentBoardVo tvo = tbsi.TalentBoardMyList(midx);
-		
-		request.setAttribute("tvo", tvo);
-		request.setAttribute("midx", midx);
-	
 	}
 
 	/**
