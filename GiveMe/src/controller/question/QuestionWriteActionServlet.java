@@ -6,7 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import service.member.MemberVo;
 import service.question.QuestionServiceImpl;
 import service.question.QuestionVo;
 
@@ -32,12 +34,19 @@ public class QuestionWriteActionServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		
 		String qcategory = request.getParameter("qcategory");
 		String qtitle = request.getParameter("qtitle");
 		String qcontent = request.getParameter("qcontent");
 	//	int midx = Integer.parseInt(request.getParameter("midx"));
 		String qrecontent = request.getParameter("qrecontent");
+		
+		int midx = 0;
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("vo") != null ) {
+			MemberVo vo = (MemberVo) session.getAttribute("vo");
+			midx = vo.getMidx();
+		}
 		
 		QuestionVo qv = new QuestionVo();
 		qv.setQcategory(qcategory);

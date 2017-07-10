@@ -358,24 +358,24 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     public int deleteDonationList(int dlidx) {
-	// TODO Auto-generated method stub
-    Connection con = dbconnect.getConnection();
-    PreparedStatement pstmt = null;
-    int row = 0;
+		// TODO Auto-generated method stub
+	    Connection con = dbconnect.getConnection();
+	    PreparedStatement pstmt = null;
+	    int row = 0;
     
-    try{
-    sql = "update table_donationlist set dldeletest = 'Y' where dlidx=?";
-    pstmt = con.prepareStatement(sql);
-    pstmt.setInt(1, dlidx);
-    row = pstmt.executeUpdate();
-   
-    }catch(Exception e){
-    	
-    }finally{
-    	DBClose.close(con,pstmt);
-    }
-    return row;
-    }
+	    try{
+		    sql = "update table_donationlist set dldeletest = 'Y' where dlidx=?";
+		    pstmt = con.prepareStatement(sql);
+		    pstmt.setInt(1, dlidx);
+		    row = pstmt.executeUpdate();
+		   
+		    }catch(Exception e){
+		    	
+		    }finally{
+		    	DBClose.close(con,pstmt);
+		    }
+		    return row;
+		    }
 
     @Override
     public ArrayList<QuestionVo> getAdQuestionList() {

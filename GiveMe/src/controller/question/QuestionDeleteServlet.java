@@ -6,7 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import service.member.MemberVo;
 import service.question.QuestionServiceImpl;
 import service.question.QuestionVo;
 
@@ -31,6 +33,14 @@ public class QuestionDeleteServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		int midx = 0;
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("vo") != null ) {
+			MemberVo vo = (MemberVo) session.getAttribute("vo");
+			midx = vo.getMidx();
+		}
+		
 		String qdeletest = request.getParameter("qdeletest");
 		int qidx = Integer.parseInt(request.getParameter("qidx"));
 		System.out.println(qidx);
@@ -38,7 +48,6 @@ public class QuestionDeleteServlet extends HttpServlet {
 		QuestionServiceImpl qd = new QuestionServiceImpl();
 		
 		QuestionVo qv = new QuestionVo();
-		//qd.deleteQuestion(qidx);
 	
 			int row = qd.deleteQuestion(qidx);
 

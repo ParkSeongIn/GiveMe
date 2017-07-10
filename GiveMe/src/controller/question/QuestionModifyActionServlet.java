@@ -6,7 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import service.member.MemberVo;
 import service.question.QuestionServiceImpl;
 import service.question.QuestionVo;
 
@@ -47,7 +49,11 @@ public class QuestionModifyActionServlet extends HttpServlet {
 		String qcategory = request.getParameter("qcategory");
 		String qcontent = request.getParameter("qcontent");
 		
-		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("vo") != null ) {
+			MemberVo vo = (MemberVo) session.getAttribute("vo");
+			midx = vo.getMidx();
+		}
 		
 		QuestionServiceImpl qd = new QuestionServiceImpl();
 		
@@ -57,12 +63,6 @@ public class QuestionModifyActionServlet extends HttpServlet {
 		qv.setMidx(midx);
 		qv.setQcategory(qcategory);
 		qv.setQcontent(qcontent);
-		
-//		System.out.println(qv.getQidx());
-//		System.out.println(qv.getMidx());
-//		System.out.println(qv.getQtitle());
-//		System.out.println(qv.getQcategory());
-//		System.out.println(qv.getQcontent());
 		
 		int row = qd.modifyWriteQuestion(qv);
 	}
