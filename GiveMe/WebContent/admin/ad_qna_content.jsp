@@ -2,6 +2,8 @@
 <%@ page import ="java.util.*" %>
 <%@ page import ="service.admin.*" %>
 <%@ page import ="service.question.*" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% 
 	QuestionVo qv = (QuestionVo) request.getAttribute("qv");
 %>
@@ -23,44 +25,45 @@ int qidx = Integer.parseInt(request.getParameter("qidx"));
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" ></script>
 </head>
+<c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 <link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
+<c:import url="/nav/header.jsp"/>
+<c:import url="/nav/sidebar4.jsp"/>
 <div class="container">
-	<div class="form-group">
-		<h1>1:1문의 상세내용<%=qidx %></h1>
-	</div>
-	<div class="form-group">
-    	<label for="qidx">qidx :</label>
-		<input class="form-control" name="qidx" id="qidx" type="text" value="<%=qv.getQidx() %>" readonly="readonly"/>
-	</div> 
-	<div class="form-group">
-    	<label for="qtitle">제목 :</label>
-		<input class="form-control" name="qtitle" id="qtitle" type="text" value="<%=qv.getQtitle() %>" readonly="readonly"/>
-	</div>
-	<div class="form-group">
-	    <label for="midx">회원번호 :</label>
-	    <input class="form-control" name="midx" id="midx" type="text" value="<%=qv.getMidx() %>" readonly="readonly""/>
-	</div>
- 	<div class="form-group">
-    	<label for="qcategory">유형 :</label>
-		<input class="form-control" name="qcategory" id="qcategory" type="text" value="<%=qv.getQcategory() %>" readonly="readonly"/>
-	</div> 
-	<!-- 작성자 -->
-	<div class="form-group">
-	    <label for="qwdate">작성날짜 :</label>
-	    <input class="form-control" name="qwdate" id="qwdate" type="text" value="<%=qv.getQwdate() %>" readonly="readonly"/>
-	</div>
-	<div class="form-group">
-	    <label for="qcontent">내용 :</label>
-	    <input class="form-control" name="qcontent" id="qcontent" type="text" value="<%=qv.getQcontent() %>" readonly="readonly"/>
-	 </div>
-	 <div class="form-group">
-	    <label for="qrecontent">답변 :</label>
-	    <input class="form-control" name="qrecontent" id="qrecontent" type="text" value="<%=qv.getQrecontent() %>" readonly="readonly"/>
-	 </div>
+	<div class="panel-body">
+		<div class="col-sm-10">
+			<h1>1:1문의 상세내용</h1>
+			<table class="table table-bordered" style="width:800px;margin:0 auto;text-align:center;margin-top:100px;">
+				<tr>
+					<td style="width:20%">글번호</td>
+					<td style="width:40%">글 유형</td>
+					<td style="width:40%">작성자</td>
+					<td style="width:40%">날짜</td>
+				</tr>
+				<tr>
+					<td><%=qv.getQidx()%></td>
+					<td><%=qv.getQcategory()%></td>
+					<td>작성자</td>
+					<td><%=qv.getQwdate()%></td>
+				</tr>
+				<tr>
+					<th style="width:20%;text-align:center;">제목</th>
+					<td colspan="3"><%=qv.getQtitle() %></td>
+				</tr>
+				<tr>
+					<th style="width:20%;text-align:center;">내용</th>
+					<td colspan="3"><%=qv.getQcontent() %></td>
+				</tr>
+				<tr>
+					<th style="width:20%;text-align:center;">답변</th>
+					<td colspan="3"><%=qv.getQrecontent() %></td>
+				</tr>
+			</table>
 	 	<div>
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AdQuestionModifyServlet.do?qidx=<%=qidx %>">답변 수정</a>
 	 	<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AdQuestionListServlet.do">글목록</a>
 	</div>  
+<c:import url="/nav/footer.jsp"/>
 </body>
 </html>

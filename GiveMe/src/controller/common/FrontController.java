@@ -684,7 +684,7 @@ public class FrontController extends HttpServlet {
 				QuestionModifyActionServlet qma = new QuestionModifyActionServlet();
 				qma.doPost(request, response);
 				
-				this.view= "/controller/QuestionContentServlet.do?qidx="+request.getParameter("qidx")+"&midx="+request.getParameter("midx");
+				this.view= "/controller/QuestionContentServlet.do?qidx="+request.getParameter("qidx");
 				this.isRedirect = true;
 				
 			}else if (command.equals("/controller/QuestionDeleteServlet.do")) {

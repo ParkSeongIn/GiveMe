@@ -38,7 +38,7 @@ public class QuestionWriteActionServlet extends HttpServlet {
 		String qtitle = request.getParameter("qtitle");
 		String qcontent = request.getParameter("qcontent");
 	//	int midx = Integer.parseInt(request.getParameter("midx"));
-		String qrecontent = request.getParameter("qrecontent");
+	//	String qrecontent = request.getParameter("qrecontent");
 		
 		int midx = 0;
 		
@@ -52,8 +52,8 @@ public class QuestionWriteActionServlet extends HttpServlet {
 		qv.setQcategory(qcategory);
 		qv.setQtitle(qtitle);
 		qv.setQcontent(qcontent);
-	//	qv.setMidx(midx);
-		qv.setQrecontent(qrecontent);
+		qv.setMidx(midx);
+	//	qv.setQrecontent(qrecontent);
 		
 		QuestionServiceImpl qd = new QuestionServiceImpl();
 		

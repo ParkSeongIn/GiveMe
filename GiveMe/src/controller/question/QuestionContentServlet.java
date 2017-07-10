@@ -33,7 +33,7 @@ public class QuestionContentServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int qidx = Integer.parseInt(request.getParameter("qidx"));
-		int midx = Integer.parseInt(request.getParameter("midx"));
+		int midx = 0;
 
 		HttpSession session = request.getSession();
 		if(session.getAttribute("vo") != null ) {

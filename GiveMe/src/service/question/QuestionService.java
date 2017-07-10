@@ -9,6 +9,7 @@ public interface QuestionService {
 	ArrayList<QuestionVo> getQuestionList(int midx);
 	int modifyWriteQuestion(QuestionVo qv);
 	QuestionVo getQuestion(int qidx, int midx);
-	int deleteQuestion(int qidx);
+//	int deleteQuestion(int qidx);
+	int deleteQuestion(int qidx, int midx);
 
 }

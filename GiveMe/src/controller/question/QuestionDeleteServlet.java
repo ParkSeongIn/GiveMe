@@ -32,24 +32,23 @@ public class QuestionDeleteServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int qidx = Integer.parseInt(request.getParameter("qidx"));
 		
-		int midx = 0;
-		
+		int midx = 0;		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("vo") != null ) {
 			MemberVo vo = (MemberVo) session.getAttribute("vo");
 			midx = vo.getMidx();
 		}
 		
-		String qdeletest = request.getParameter("qdeletest");
-		int qidx = Integer.parseInt(request.getParameter("qidx"));
-		System.out.println(qidx);
+	//	String qdeletest = request.getParameter("qdeletest");
 		
-		QuestionServiceImpl qd = new QuestionServiceImpl();
+		System.out.println(qidx);		
 		
-		QuestionVo qv = new QuestionVo();
-	
-			int row = qd.deleteQuestion(qidx);
+	//	QuestionVo qv = new QuestionVo();
+		
+		QuestionServiceImpl qd = new QuestionServiceImpl();	
+		int row = qd.deleteQuestion(qidx, midx);
 
 	}
 

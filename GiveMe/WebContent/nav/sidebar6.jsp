@@ -31,7 +31,7 @@
 			  </li>
 			  <li><a href="${ContextPath}/controller/DonationListServlet.do"><font color="#8C8C8C">기부처관리</font></a></li>
 			  <li><a href="#"><font color="#8C8C8C">게시판관리</font></a></li>
-			  <li><a href="#" ><font color="#8C8C8C">1:1 문의 관리</font></a></li>
+			  <li><a href="${ContextPath}/controller/AdQuestionListServlet.do" ><font color="#8C8C8C">1:1 문의 관리</font></a></li>
 		</ul>
 		</div>
 </body>

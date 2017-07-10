@@ -1,18 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import ="java.util.*" %>
 <%@ page import ="service.question.*" %>
+<%@ page import ="service.member.*" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% 
 	QuestionVo qv = (QuestionVo) request.getAttribute("qv");
 	int qidx = Integer.parseInt(request.getParameter("qidx"));
+	MemberVo vo = (MemberVo)session.getAttribute("vo");
+	String mid = vo.getMid();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-
 <!-- bootstrap을 사용하기 위한 CDN주소 -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -24,9 +26,22 @@
 <script type="text/javascript" ></script>
 <title>QNA Content</title>
 <style>
+	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+	@import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+	*{
+		font-family: "Noto Sans KR","Nanum Brush Script";
+	}
+
 div.col-sm-10{
-	  padding-top: 60px;
-	  padding-left: 80px;
+	padding-top: 60px;
+	padding-left: 80px;
+}
+div.qna-content{
+	width: 177px;
+	height: 100px;
+	float: right;
+	margin-top: 35px;
+	margin-right: 68px;
 }
 </style>
 </head>
@@ -37,7 +52,7 @@ div.col-sm-10{
 <c:import url="/nav/sidebar4.jsp"/>
 <div class="container">	
 	<div class="panel-body">
-		<div class="col-sm-10">	
+		<div class="col-sm-10">
 			<h1>1:1문의 상세내용</h1>
 			<table class="table table-bordered" style="width:800px;margin:0 auto;text-align:center;margin-top:100px;">
 				<tr>
@@ -54,25 +69,26 @@ div.col-sm-10{
 				</tr>
 				<tr>
 					<th style="width:20%;text-align:center;">제목</th>
-					<td><%=qv.getQtitle() %></td>
+					<td colspan="3"><%=qv.getQtitle() %></td>
 				</tr>
 				<tr>
 					<th style="width:20%;text-align:center;">내용</th>
-					<td><%=qv.getQcontent() %></td>
+					<td colspan="3"><%=qv.getQcontent() %></td>
 				</tr>
 				<tr>
 					<th style="width:20%;text-align:center;">답변</th>
-					<td><%=qv.getQrecontent() %></td>
+					<td colspan="3"><%=qv.getQrecontent() %></td>
 				</tr>
-			</table>	
+			</table>
+			<div class="qna-content">
+				<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionModifyServlet.do?qidx=<%=qidx %>">수정</a>
+				<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionDeleteServlet.do?qidx=<%=qidx %>">삭제</a>
+			 	<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionListServlet.do">글목록</a>
+			</div> 	
 		</div>
 	</div>
 </div>
-	<div>
-		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionModifyServlet.do?qidx=<%=qidx %>&midx=<%=qv.getMidx() %>">수정</a>
-		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionDeleteServlet.do?qidx=<%=qidx %>">삭제</a>
-	 	<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionListServlet.do">글목록</a>
-	</div>        
+       
 </div>
 <c:import url="/nav/footer.jsp"/>
 </body>

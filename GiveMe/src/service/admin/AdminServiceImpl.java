@@ -41,7 +41,7 @@ public class AdminServiceImpl implements AdminService{
 //	    String sql="select midx,mname,mid,mmail,menter,mvalue from table_member order by midx desc";
 	    pstmt = con.prepareStatement(sql);
 	    rs=pstmt.executeQuery();	    
-	    System.out.println(sql);
+	  //  System.out.println(sql);
 	    while(rs.next()){
 		MemberVo vo = new MemberVo();
 		
@@ -390,7 +390,9 @@ public class AdminServiceImpl implements AdminService{
 					+ 		"select tq.qidx, tq.qcategory, tq.qtitle, tq.qstate, tq.qwdate, tq.qdeletest "
 					+ 		"from table_member tm, table_question tq "
 					+ 		"where tm.midx = tq.midx "
-					+ 		")AA order by AA.qidx desc) where rn <=20 ) where rn >=1";
+					+ 		")AA order by AA.qidx desc) "
+					+ "where rn <=20 ) "
+					+ "where rn >=1";
     		pstmt = con.prepareStatement(sql);
     		rs = pstmt.executeQuery();
     		

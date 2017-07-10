@@ -64,15 +64,14 @@ public class QuestionServiceImpl implements QuestionService{
 		try { 
 			sql = "insert into table_question "
             + "(qidx,qcategory,qtitle,qcontent,qwdate,qstate,qmdate,qdbdate,midx, "
-            + "qdeletest, qrecontent) "
-            + "values(seq_qidx.nextval,?,?,?,sysdate,'N',sysdate,sysdate,4,'N',?)";
+            + "qdeletest) "
+            + "values(seq_qidx.nextval,?,?,?,sysdate,'N',sysdate,sysdate,?,'N')";
 		
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, vo.getQcategory());
 		pstmt.setString(2, vo.getQtitle());
 		pstmt.setString(3, vo.getQcontent());
-	//	pstmt.setInt(4, vo.getMidx());
-		pstmt.setString(4, vo.getQrecontent());
+		pstmt.setInt(4, vo.getMidx());	
 		row = pstmt.executeUpdate();
 		
 		}catch(Exception e) {
@@ -137,11 +136,12 @@ public class QuestionServiceImpl implements QuestionService{
 		int row = 0;
 		try {
 			sql = "update table_question set qtitle = ?, qcontent = ?, qmdate = sysdate "
-					+ "where qidx = ?";
+					+ "where qidx = ? and midx = ?";
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, (qv.getQtitle()));
 		pstmt.setString(2, (qv.getQcontent()));
 		pstmt.setInt(3, (qv.getQidx()));
+		pstmt.setInt(4, (qv.getMidx()));
 		
 		row = pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -153,15 +153,16 @@ public class QuestionServiceImpl implements QuestionService{
 	}
 	
 	@Override
-	public int deleteQuestion(int qidx) {
+	public int deleteQuestion(int qidx, int midx) {
 		Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt = null;
 		int row = 0;
 		try {
 			sql = "update table_question set qdeletest = 'Y' "
-					+ "where qidx = ?";
+					+ "where qidx = ? and midx = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, qidx);
+			pstmt.setInt(2, midx);
 			row = pstmt.executeUpdate();
 		
 		}catch(Exception e) {

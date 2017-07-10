@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import ="java.util.*" %>
 <%@ page import ="service.question.*" %>
-<%session.setAttribute("mid", request.getParameter("mid")); %>
-<%session.setAttribute("mpwd", request.getParameter("mpwd")); %>
+<%@ page import ="service.member.*" %>
+<% 
+	MemberVo vo = (MemberVo)session.getAttribute("vo");
+	String mid = vo.getMid();
+%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -39,16 +42,16 @@
 		
 		
 			<!-- mname 추가 -->
-			<td style="width:20%">글번호 qidx</td>
-			<td style="width:40%">유형 qcategory</td>
-			<td style="width:40%">글제목 qtitle</td>
-			<td style="width:40%">답변유무 qstate</td>
-			<td style="width:40%">작성날짜 qwdate</td>
+			<td style="width:20%">글번호</td>
+			<td style="width:40%">유형</td>
+			<td style="width:40%">글제목</td>
+			<td style="width:40%">답변유무</td>
+			<td style="width:40%">작성날짜</td>
 		</tr>
 		
 		<% for (QuestionVo qd : qlist) {  %>
 		<tr>
-			<td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionContentServlet.do?qidx=<%=qd.getQidx()%>&midx=4"><%=qd.getQidx() %></a></td>
+			<td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionContentServlet.do?qidx=<%=qd.getQidx()%>"><%=qd.getQidx() %></a></td>
 			<td><%=qd.getQcategory() %></td>
 			<td><%=qd.getQtitle() %></td>		
 			<td><%=qd.getQstate() %></td>

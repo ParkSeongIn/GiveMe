@@ -32,7 +32,28 @@ public class QuestionModifyActionServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int qidx = Integer.parseInt(request.getParameter("qidx"));
+		String qtitle = request.getParameter("qtitle");
+	
+	//	String qcategory = request.getParameter("qcategory");
+		String qcontent = request.getParameter("qcontent");
 		
+		int midx = 0;
+		HttpSession session = request.getSession();
+		if(session.getAttribute("vo") != null ) {
+			MemberVo vo = (MemberVo) session.getAttribute("vo");
+			midx = vo.getMidx();
+		}		
+				
+		QuestionVo qv = new QuestionVo();
+		qv.setQidx(qidx);
+		qv.setQtitle(qtitle);
+		qv.setMidx(midx);
+	//v.setQcategory(qcategory);
+		qv.setQcontent(qcontent);
+		
+		QuestionServiceImpl qd = new QuestionServiceImpl();
+		int row = qd.modifyWriteQuestion(qv);
 				
 	}
 
@@ -41,30 +62,9 @@ public class QuestionModifyActionServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		doGet(request, response);
+		doGet(request, response);
 	
-		int qidx = Integer.parseInt(request.getParameter("qidx"));
-		String qtitle = request.getParameter("qtitle");
-		int midx = Integer.parseInt(request.getParameter("midx"));
-		String qcategory = request.getParameter("qcategory");
-		String qcontent = request.getParameter("qcontent");
 		
-		HttpSession session = request.getSession();
-		if(session.getAttribute("vo") != null ) {
-			MemberVo vo = (MemberVo) session.getAttribute("vo");
-			midx = vo.getMidx();
-		}
-		
-		QuestionServiceImpl qd = new QuestionServiceImpl();
-		
-		QuestionVo qv = new QuestionVo();
-		qv.setQidx(qidx);
-		qv.setQtitle(qtitle);
-		qv.setMidx(midx);
-		qv.setQcategory(qcategory);
-		qv.setQcontent(qcontent);
-		
-		int row = qd.modifyWriteQuestion(qv);
 	}
 
 }

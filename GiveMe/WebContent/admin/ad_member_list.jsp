@@ -25,7 +25,6 @@ div.col-sm-10{
 <%
 ArrayList<MemberVo> list = (ArrayList<MemberVo>)request.getAttribute("list");
 %>
-
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 <c:import url="/nav/header.jsp"/>
 <c:import url="/nav/sidebar6.jsp"/>
