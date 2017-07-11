@@ -5,11 +5,12 @@ import java.sql.Timestamp;
 
 public class QuestionVo {
 
+//	private int rnum;
 	private int qidx;
 	private String qcategory;
 	private String qtitle;
 	private String qcontent;
-	private Date qwdate;
+	private Timestamp qwdate;
 	private String qstate;
 	private Date qmdate;
 	private Timestamp qdbdate;
@@ -17,6 +18,12 @@ public class QuestionVo {
 	private String qrecontent;
 	private int midx;
 	
+//	public int getRnum() {
+//		return rnum;
+//	}
+//	public void setRnum(int rnum) {
+//		this.rnum = rnum;
+//	}
 	public int getQidx() {
 		return qidx;
 	}
@@ -41,10 +48,10 @@ public class QuestionVo {
 	public void setQcontent(String qcontent) {
 		this.qcontent = qcontent;
 	}
-	public Date getQwdate() {
+	public Timestamp getQwdate() {
 		return qwdate;
 	}
-	public void setQwdate(Date qwdate) {
+	public void setQwdate(Timestamp qwdate) {
 		this.qwdate = qwdate;
 	}
 	public String getQstate() {

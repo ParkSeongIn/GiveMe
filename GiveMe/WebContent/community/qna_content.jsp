@@ -43,6 +43,27 @@ div.qna-content{
 	margin-top: 35px;
 	margin-right: 68px;
 }
+div.category{
+	margin-bottom: 10px;
+}
+div.other{
+	float: right;
+	margin-bottom: 10px;
+}
+div.title{
+	border: 1px solid black;
+	padding: 5px;
+	margin-bottom: 20px;
+}
+div.qcontent{
+	border: 1px solid black;
+	padding: 5px;
+	margin-bottom: 20px;
+}
+div.qrecontent{
+	border: 1px solid black;
+	padding: 20px;
+}
 </style>
 </head>
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
@@ -54,41 +75,34 @@ div.qna-content{
 	<div class="panel-body">
 		<div class="col-sm-10">
 			<h1>1:1문의 상세내용</h1>
-			<table class="table table-bordered" style="width:800px;margin:0 auto;text-align:center;margin-top:100px;">
-				<tr>
-					<td style="width:20%">회원번호</td>
-					<td style="width:40%">글 유형</td>
-					<td style="width:40%">작성자</td>
-					<td style="width:40%">날짜</td>
-				</tr>
-				<tr>
-					<td><%=qv.getMidx() %></td>
-					<td><%=qv.getQcategory() %></td>
-					<td>작성자</td>
-					<td><%=qv.getQwdate() %></td>
-				</tr>
-				<tr>
-					<th style="width:20%;text-align:center;">제목</th>
-					<td colspan="3"><%=qv.getQtitle() %></td>
-				</tr>
-				<tr>
-					<th style="width:20%;text-align:center;">내용</th>
-					<td colspan="3"><%=qv.getQcontent() %></td>
-				</tr>
-				<tr>
-					<th style="width:20%;text-align:center;">답변</th>
-					<td colspan="3"><%=qv.getQrecontent() %></td>
-				</tr>
-			</table>
+				<div class="category">
+					카테고리 : <%=qv.getQcategory() %>
+  				</div>		
+  				<div class="other">
+					작성자 : 작성자
+					작성날짜 : <%=qv.getQwdate() %>
+  				</div>	
+				제목 : 	<div class="title">
+							<%=qv.getQtitle() %>
+						</div>
+				내용 : 	<div class="qcontent">
+							<%=qv.getQcontent() %>
+						</div>	
+				답변 : 	<div class="qrecontent">
+							<%=((qv.getQrecontent()+" ").replace("null", ""))%>
+						</div>  
+
+						
+				
 			<div class="qna-content">
+				<% if(qv.getQrecontent() == null) {%>
 				<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionModifyServlet.do?qidx=<%=qidx %>">수정</a>
+				<% } %>
 				<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionDeleteServlet.do?qidx=<%=qidx %>">삭제</a>
 			 	<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionListServlet.do">글목록</a>
 			</div> 	
 		</div>
 	</div>
-</div>
-       
 </div>
 <c:import url="/nav/footer.jsp"/>
 </body>

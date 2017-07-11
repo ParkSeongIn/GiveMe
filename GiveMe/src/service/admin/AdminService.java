@@ -25,8 +25,8 @@ public interface AdminService {
     int getPaging();
     // 관리자 table_Question
  	ArrayList<QuestionVo> getAdQuestionList();
- 	QuestionVo getAdQuestion(int qidx);
  	int modifyWriteAdQuestion(QuestionVo qv);
+	QuestionVo getAdQuestion(int qidx);
 }
 
 

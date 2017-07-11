@@ -647,6 +647,14 @@ public class FrontController extends HttpServlet {
 				this.view = "/community/qna_list.jsp";
 				this.isRedirect = false;
 				
+			}else if (command.equals("/controller/QuestionFaqServlet.do")) {
+				
+				QuestionWriteServlet cws = new QuestionWriteServlet();
+				cws.doGet(request, response);
+				
+				this.view = "/community/qna_faq.jsp";
+				this.isRedirect = false;
+					
 			}else if (command.equals("/controller/QuestionWriteServlet.do")) {
 				
 				QuestionWriteServlet cws = new QuestionWriteServlet();

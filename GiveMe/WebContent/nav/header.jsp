@@ -56,7 +56,8 @@
 				</a>
 				<ul class="dropdown-menu">
 					<li><a href="${ContextPath}/controller/AllBoardListServlet.do?abtype=N" target="_self">기부동향</a></li>
-					<li><a href="${ContextPath}/controller/QuestionWriteServlet.do" target="_self">QNA/FAQ</a></li>
+					<li><a href="${ContextPath}/controller/QuestionFaqServlet.do" target="_self">자주하는 질문</a></li>
+					<li><a href="${ContextPath}/controller/QuestionWriteServlet.do" target="_self">1:1 문의</a></li>
 					<li><a href="${ContextPath}/controller/AllBoardDonationSearchServlet.do" target="_self">기부처 검색</a></li>
 				</ul>
 				</li>

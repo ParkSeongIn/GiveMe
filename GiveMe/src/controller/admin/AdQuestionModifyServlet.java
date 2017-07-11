@@ -6,8 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import service.admin.AdminServiceImpl;
+import service.member.MemberVo;
 import service.question.QuestionVo;
 
 /**
@@ -32,6 +34,13 @@ public class AdQuestionModifyServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		int qidx = Integer.parseInt(request.getParameter("qidx"));
+		int midx = 0;
+
+		HttpSession session = request.getSession();
+		if(session.getAttribute("vo") != null ) {
+			MemberVo vo = (MemberVo) session.getAttribute("vo");
+			midx = vo.getMidx();
+		}
 		
 		AdminServiceImpl ad = new AdminServiceImpl();
 		QuestionVo qv = ad.getAdQuestion(qidx);

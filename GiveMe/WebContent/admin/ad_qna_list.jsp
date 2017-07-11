@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import ="java.sql.*" %>
 <%@ page import ="java.util.*" %>
 <%@ page import ="service.admin.*" %>
 <%@ page import = "service.question.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	ArrayList<QuestionVo> aqlist = (ArrayList<QuestionVo>) request.getAttribute("aqlist");
+	QuestionVo qv = (QuestionVo) request.getAttribute("qv");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,28 +41,24 @@ div.col-sm-10{
 <c:import url="/nav/sidebar6.jsp"/>
 
 <div class="container">
-<%
-	ArrayList<QuestionVo> aqlist = (ArrayList<QuestionVo>) request.getAttribute("aqlist");
-	QuestionVo qv = (QuestionVo) request.getAttribute("qv");
-%>
 	<div class="col-sm-10">
 	<h2>1:1문의 목록</h2>
 	<table class="table table-striped table-bordered table-hover" style="width:800px;margin:0 auto;text-align:center;">
 		<tr>
 			<!-- mname 추가 -->
-			<td style="width:20%">글번호 qidx</td>
-			<td style="width:40%">유형 qcategory</td>
+			<td style="width:10%">글번호 qidx</td>
+			<td style="width:10%">유형 qcategory</td>
 			<td style="width:40%">글제목 qtitle</td>
-			<td style="width:40%">답변유무 qstate</td>
-			<td style="width:40%">작성날짜 qwdate</td>
-			<td style="width:40%">글 삭제상태 qdeletest</td>
+			<td style="width:10%">답변유무 qstate</td>
+			<td style="width:20%">작성날짜 qwdate</td>
+			<td style="width:10%">글 삭제상태 qdeletest</td>
 		</tr>
 		
 		<% for (QuestionVo qd : aqlist) {  %>
 		<tr>
-			<td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AdQuestionContentServlet.do?qidx=<%=qd.getQidx()%>"><%=qd.getQidx() %></a></td>
+			<td><%=qd.getQidx() %></a></td>
 			<td><%=qd.getQcategory() %></td>
-			<td><%=qd.getQtitle() %></td>		
+			<td><a href="<%=request.getContextPath()%>/controller/AdQuestionContentServlet.do?qidx=<%=qd.getQidx()%>"><%=qd.getQtitle() %></td>		
 			<td><%=qd.getQstate() %></td>
 			<td><%=qd.getQwdate() %></td>
 			<td><%=qd.getQdeletest() %></td>

@@ -44,10 +44,47 @@
 </script>
 <title>Admin QNA 답변 작성, 수정</title>
 <style>
+div.col-sm-10{
+  padding-top: 60px;
+  padding-left: 80px;
+}
+div.qna-modify{
+	width: 210px;
+	height: 100px;
+	float: right;
+	margin-top: 35px;
+	margin-right: 319px;
+}
+div.form-group1{
+	margin-top: 35px;
+}
+div.font{
+	font-weight: bold;
+}
+div.category{
+	margin-bottom: 10px;
+}
+div.other{
+	float: right;
+	margin-bottom: 10px;
+}
+div.qtitle{
+	border: 1px solid black;
+	padding: 5px;
+	margin-bottom: 20px;
+}
+div.qcontent{
+	border: 1px solid black;
+	padding: 5px;
+	margin-bottom: 20px;
+}
+div.qrecontent{
+	border: 1px solid black;
+	padding: 5px;
+}
 textarea:focus{    
 	outline: none; 
 }
-
 </style>
 </head>
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
@@ -59,37 +96,42 @@ textarea:focus{
 	<div class="panel-body">
 		<div class="col-sm-10">
 			<h1>1:1문의 답변수정</h1>
-			<table class="table table-bordered" style="width:800px;margin:0 auto;text-align:center;margin-top:100px;">
-				<tr>
-					<td style="width:20%">글번호</td>
-					<td style="width:40%">글 유형</td>
-					<td style="width:40%">작성자</td>
-					<td style="width:40%">날짜</td>
-				</tr>
-				<tr>
-					<td><%=qv.getQidx()%></td>
-					<td><%=qv.getQcategory()%></td>
-					<td>작성자</td>
-					<td><%=qv.getQwdate()%></td>
-				</tr>
-				<tr>
-					<th style="width:20%;text-align:center;">제목</th>
-					<td colspan="3"><%=qv.getQtitle() %></td>
-				</tr>
-				<tr>
-					<th style="width:20%;text-align:center;">내용</th>
-					<td colspan="3"><%=qv.getQcontent() %></td>
-				</tr>
-				<tr>
-					<th style="width:20%;text-align:center;">답변</th>
-					<td colspan="3">
-						<textarea name="content" rows="5" style="width:100%; border: 0;"><%=qv.getQrecontent() %></textarea>
-					</td>
-				</tr>
-			</table>
-   		<div>
-       	<input class="btn btn-default" id="ModifyButton" type="button" value="수정"/>
-       	<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AdQuestionContentServlet.do">취소</a>
-       </div>
+			<div class="form-group1">
+					<form id="ModifyForm" action="<%=request.getContextPath()%>/controller/AdQuestionModifyActionServlet.do" method="post">
+						<div class="category">
+							카테고리 : <%=qv.getQcategory() %>
+		  				</div>		
+		  				<div class="other">
+							작성자 : 작성자
+							작성날짜 : <%=qv.getQwdate() %>
+		  				</div>	
+						<div class="font">
+							제목 :
+						</div> 
+						<div class="qtitle">
+							<%=qv.getQtitle() %>
+						</div>
+						<div class="font">
+							내용 :
+						</div>	 	
+						<div class="qcontent">
+							<%=qv.getQcontent() %>
+						</div>
+						<div class="font">
+							답변 : 	
+						</div>
+						<div class="qrecontent">
+							<textarea name="qrecontent" id="qrecontent" rows="10" style="width:100%; border: 0; resize: none;"><%=qv.getQrecontent() %></textarea>
+						</div>
+						<div class="qna-modify">
+						  	<input class="btn btn-default" id="qidx" name="qidx" type="hidden" value="<%=qv.getQidx() %>"/>
+				        	<input class="btn btn-default" id="ModifyButton" type="button" value="답변 수정"/>
+				        	<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AdQuestionContentServlet.do?qidx=<%=qv.getQidx() %>">취소</a>
+        				</div>
+        			</form>
+				</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>

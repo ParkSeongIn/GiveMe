@@ -404,7 +404,7 @@ public class AdminServiceImpl implements AdminService{
     			vo.setQtitle(rs.getString("qtitle"));
    // 			vo.setMname(rs.getString("mname"));
     			vo.setQstate(rs.getString("qstate"));
-    			vo.setQwdate(rs.getDate("qwdate"));
+    			vo.setQwdate(rs.getTimestamp("qwdate"));
     			vo.setQdeletest(rs.getString("qdeletest"));
     			
     			aqlist.add(vo);
@@ -437,7 +437,7 @@ public class AdminServiceImpl implements AdminService{
 				qv.setMidx(rs.getInt("midx"));
 				qv.setQcategory(rs.getString("qcategory"));
 	//			qv.setMname(rs.getString("mname"));
-				qv.setQwdate(rs.getDate("qwdate"));
+				qv.setQwdate(rs.getTimestamp("qwdate"));
 				qv.setQcontent(rs.getString("qcontent"));
 				qv.setQrecontent(rs.getString("qrecontent"));
     		}
@@ -455,7 +455,7 @@ public class AdminServiceImpl implements AdminService{
     	PreparedStatement pstmt = null;
     	int row = 0;
     	try {
-    		sql = "update table_question set qrecontent = ?, qmdate = sysdate where qidx = ?";
+    		sql = "update table_question set qrecontent = ?, qmdate = sysdate, qstate = 'Y' where qidx = ?";
     	pstmt = con.prepareStatement(sql);
     	pstmt.setString(1, (qv.getQrecontent()));
     	pstmt.setInt(2, (qv.getQidx()));

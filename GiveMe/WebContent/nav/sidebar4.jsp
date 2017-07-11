@@ -21,7 +21,17 @@
 	<br>
 		<ul class="nav nav-pills nav-stacked">
 			  <li><a href="#"><font color="#8C8C8C">기부동향</font></a></li>
-			  <li><a href="#" ><font color="#8C8C8C">FAQ/QNA</font></a></li>
+			  <li><a href="#" ><font color="#8C8C8C"></font></a></li>
+			  
+			  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			  <font color="#8C8C8C">고객센터</font>
+			  </a>
+			  <ul class="dropdown-menu">
+					<li><a href="${ContextPath}/controller/QuestionFaqServlet.do">자주하는 질문</a></li>
+					<li><a href="${ContextPath}/controller/QuestionWriteServlet.do">1:1 문의</a></li>
+			  </ul>
+			  </li>
+			  
 			  <li><a href="#"><font color="#8C8C8C">기부처검색</font></a></li>
 		</ul>
 		</div>

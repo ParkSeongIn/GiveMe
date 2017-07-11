@@ -39,21 +39,19 @@
 %>
 	<table class="table table-striped table-bordered table-hover" style="width:800px;margin:0 auto;text-align:center;">
 		<tr>
-		
-		
 			<!-- mname 추가 -->
-			<td style="width:20%">글번호</td>
-			<td style="width:40%">유형</td>
-			<td style="width:40%">글제목</td>
-			<td style="width:40%">답변유무</td>
-			<td style="width:40%">작성날짜</td>
+			<td style="width:10%">글번호</td>
+			<td style="width:10%">유형</td>
+			<td style="width:50%">글제목</td>
+			<td style="width:10%">답변유무</td>
+			<td style="width:20%">작성날짜</td>
 		</tr>
 		
 		<% for (QuestionVo qd : qlist) {  %>
 		<tr>
-			<td><a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionContentServlet.do?qidx=<%=qd.getQidx()%>"><%=qd.getQidx() %></a></td>
+			<td><%=qd.getQidx() %></td>
 			<td><%=qd.getQcategory() %></td>
-			<td><%=qd.getQtitle() %></td>		
+			<td><a href="<%=request.getContextPath()%>/controller/QuestionContentServlet.do?qidx=<%=qd.getQidx()%>"><%=qd.getQtitle() %></a></td>		
 			<td><%=qd.getQstate() %></td>
 			<td><%=qd.getQwdate() %></td>
 		<%} %>	
@@ -63,7 +61,7 @@
 			<td style="line-height:2.3;">
 				작업
 			</td>
-			<td colspan="2" style="text-align:right">
+			<td colspan="4" style="text-align:right">
 				<a class="btn btn-default" href="<%=request.getContextPath()%>/main.jsp">Home</a>
 				<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionWriteServlet.do" target="_self">작성하기</a>
 	  		</td>

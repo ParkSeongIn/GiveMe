@@ -37,7 +37,8 @@
 					<h3>커뮤니티</h3>		
 					<ul>
 						<li><a href="${ContextPath}/controller/AllBoardListServlet.do?abtype=N" target="_self">기부동향</a></li>
-						<li><a href="${ContextPath}/controller/QuestionWriteServlet.do" target="_self">FAQ/1:1문의</a></li>
+						<li><a href="${ContextPath}/controller/QuestionFaqServlet.do" target="_self">자주하는 질문</a></li>
+						<li><a href="${ContextPath}/controller/QuestionWriteServlet.do" target="_self">1:1 문의</a></li>
 						<li><a href="${ContextPath}/controller/AllBoardDonationSearchServlet.do" target="_self">기부처검색</a></li>
 					</ul>
 				</div>

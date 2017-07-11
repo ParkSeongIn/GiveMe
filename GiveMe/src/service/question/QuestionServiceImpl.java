@@ -44,7 +44,7 @@ public class QuestionServiceImpl implements QuestionService{
 				vo.setQtitle(rs.getString("qtitle"));
 			//	vo.setMid(rs.getString("id"));
 				vo.setQstate(rs.getString("qstate"));
-				vo.setQwdate(rs.getDate("qwdate"));
+				vo.setQwdate(rs.getTimestamp("qwdate"));
 				
 				qlist.add(vo);
 			}
@@ -111,7 +111,7 @@ public class QuestionServiceImpl implements QuestionService{
 				qv.setMidx(rs.getInt("midx"));
 				qv.setQcategory(rs.getString("qcategory"));
 	//			qv.setMname(rs.getString("mname"));
-				qv.setQwdate(rs.getDate("qwdate"));
+				qv.setQwdate(rs.getTimestamp("qwdate"));
 				qv.setQcontent(rs.getString("qcontent"));
 				qv.setQrecontent(rs.getString("qrecontent"));
 			}

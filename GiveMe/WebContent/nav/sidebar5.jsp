@@ -40,7 +40,15 @@
 					<li><a href="${ContextPath}/controller/MypageCashDonationListServlet.do">현금후원</a></li>
 					<li><a href="${ContextPath}/controller/TalentBoardMyListServlet.do">재능후원</a></li>
 			  </ul>
+			  </li>
 			  
+			   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			  <font color="#8C8C8C">1:1문의 상담 내역</font>
+			  </a>
+			  <ul class="dropdown-menu">
+					<li><a href="${ContextPath}/controller/QuestionListServlet.do">1:1문의 상담 목록</a></li>
+			  </ul>
+			  </li>
 		</ul>
 		</div>
 </body>

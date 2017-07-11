@@ -35,7 +35,7 @@ public class QuestionModifyServlet extends HttpServlet {
 
 		int qidx = Integer.parseInt(request.getParameter("qidx"));
 		int midx = 0;
-	//	System.out.println(qidx);
+
 		HttpSession session = request.getSession();
 		if(session.getAttribute("vo") != null ) {
 			MemberVo vo = (MemberVo) session.getAttribute("vo");
