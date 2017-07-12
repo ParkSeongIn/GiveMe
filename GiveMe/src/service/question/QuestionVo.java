@@ -11,14 +11,16 @@ public class QuestionVo {
 	private String qtitle;
 	private String qcontent;
 	private Timestamp qwdate;
+	private Timestamp qrewdate;
 	private String qstate;
 	private Date qmdate;
 	private Timestamp qdbdate;
 	private String qdeletest;
 	private String qrecontent;
 	private int midx;
+	private String mid;
 	
-//	public int getRnum() {
+	//	public int getRnum() {
 //		return rnum;
 //	}
 //	public void setRnum(int rnum) {
@@ -53,6 +55,12 @@ public class QuestionVo {
 	}
 	public void setQwdate(Timestamp qwdate) {
 		this.qwdate = qwdate;
+	}
+	public Timestamp getQrewdate() {
+		return qrewdate;
+	}
+	public void setQrewdate(Timestamp qrewdate) {
+		this.qrewdate = qrewdate;
 	}
 	public String getQstate() {
 		return qstate;
@@ -90,6 +98,11 @@ public class QuestionVo {
 	public void setMidx(int midx) {
 		this.midx = midx;
 	}
-	
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
 	
 }

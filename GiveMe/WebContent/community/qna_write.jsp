@@ -88,11 +88,11 @@ input:focus,textarea:focus{
 			<font size="5">1:1문의 Write</font>
 			 <form id="addForm" action="<%=request.getContextPath()%>/controller/QuestionWriteActionServlet.do" method="post">
 				<p>유형 : <select name="qcategory">
-						  <option value="LOG" selected="selected">회원가입</option>
-						  <option value="CG">현금기부</option>
-						  <option value="TG">재능기부</option>
-						  <option value="AQ">결제</option>
-						  <option value="OTHER">기타</option>
+						  <option value="회원가입" selected="selected">회원가입</option>
+						  <option value="현금기부">현금기부</option>
+						  <option value="재능기부">재능기부</option>
+						  <option value="결제">결제</option>
+						  <option value="기타">기타</option>
 						</select></p>
 				<div class="form-group">
 		            <label for="qtitle">제목 :</label>

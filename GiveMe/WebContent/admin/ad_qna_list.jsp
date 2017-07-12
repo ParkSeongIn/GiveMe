@@ -6,7 +6,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	ArrayList<QuestionVo> aqlist = (ArrayList<QuestionVo>) request.getAttribute("aqlist");
-	QuestionVo qv = (QuestionVo) request.getAttribute("qv");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -46,12 +45,13 @@ div.col-sm-10{
 	<table class="table table-striped table-bordered table-hover" style="width:800px;margin:0 auto;text-align:center;">
 		<tr>
 			<!-- mname 추가 -->
-			<td style="width:10%">글번호 qidx</td>
-			<td style="width:10%">유형 qcategory</td>
-			<td style="width:40%">글제목 qtitle</td>
-			<td style="width:10%">답변유무 qstate</td>
-			<td style="width:20%">작성날짜 qwdate</td>
-			<td style="width:10%">글 삭제상태 qdeletest</td>
+			<td style="width:10%">글번호</td>
+			<td style="width:10%">유형</td>
+			<td style="width:30%">글제목</td>
+			<td style="width:10%">작성자</td>
+			<td style="width:10%">답변유무</td>
+			<td style="width:20%">작성날짜</td>
+			<td style="width:10%">글 삭제상태</td>
 		</tr>
 		
 		<% for (QuestionVo qd : aqlist) {  %>
@@ -59,6 +59,7 @@ div.col-sm-10{
 			<td><%=qd.getQidx() %></a></td>
 			<td><%=qd.getQcategory() %></td>
 			<td><a href="<%=request.getContextPath()%>/controller/AdQuestionContentServlet.do?qidx=<%=qd.getQidx()%>"><%=qd.getQtitle() %></td>		
+			<td><%=qd.getMid() %></td>
 			<td><%=qd.getQstate() %></td>
 			<td><%=qd.getQwdate() %></td>
 			<td><%=qd.getQdeletest() %></td>
@@ -68,7 +69,7 @@ div.col-sm-10{
 			<td style="line-height:2.3;">
 				작업
 			</td>
-			<td colspan="5" style="text-align:right">
+			<td colspan="6" style="text-align:right">
 				<a class="btn btn-default" href="<%=request.getContextPath()%>/main.jsp">Home</a>
 				<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AdQuestionWriteServlet.do" target="_self">작성하기</a>
 	  		</td>

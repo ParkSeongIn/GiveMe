@@ -387,11 +387,11 @@ public class AdminServiceImpl implements AdminService{
     		sql = " select * from ("
 					+ "select * from ("
 					+ 	"select rownum rn, AA.*from ("
-					+ 		"select tq.qidx, tq.qcategory, tq.qtitle, tq.qstate, tq.qwdate, tq.qdeletest "
+					+ 		"select tq.qidx, tq.qcategory, tq.qtitle, tm.mid, tq.qstate, tq.qwdate, tq.qdeletest "
 					+ 		"from table_member tm, table_question tq "
 					+ 		"where tm.midx = tq.midx "
 					+ 		")AA order by AA.qidx desc) "
-					+ "where rn <=20 ) "
+					+ "where rn <=50 ) "
 					+ "where rn >=1";
     		pstmt = con.prepareStatement(sql);
     		rs = pstmt.executeQuery();
@@ -402,7 +402,7 @@ public class AdminServiceImpl implements AdminService{
     			vo.setQidx(rs.getInt("qidx"));
     			vo.setQcategory(rs.getString("qcategory"));
     			vo.setQtitle(rs.getString("qtitle"));
-   // 			vo.setMname(rs.getString("mname"));
+    			vo.setMid(rs.getString("mid"));
     			vo.setQstate(rs.getString("qstate"));
     			vo.setQwdate(rs.getTimestamp("qwdate"));
     			vo.setQdeletest(rs.getString("qdeletest"));
@@ -424,7 +424,7 @@ public class AdminServiceImpl implements AdminService{
     	ResultSet rs = null;
     	QuestionVo qv = null;
     	try {
-    		sql = "select tq.qidx, tq.qtitle, tm.midx, tq.qcategory, tm.mname, tq.qwdate, tq.qcontent, tq.qrecontent "
+    		sql = "select tq.qidx, tq.qtitle, tm.midx, tq.qcategory, tm.mid, tq.qwdate, tq.qcontent, tq.qrecontent "
 					+ "from table_member tm, table_question tq where tm.midx = tq.midx and tq.qidx = ?";
     		pstmt = con.prepareStatement(sql);
     		pstmt.setInt(1, qidx);
@@ -436,7 +436,7 @@ public class AdminServiceImpl implements AdminService{
 				qv.setQtitle(rs.getString("qtitle"));
 				qv.setMidx(rs.getInt("midx"));
 				qv.setQcategory(rs.getString("qcategory"));
-	//			qv.setMname(rs.getString("mname"));
+				qv.setMid(rs.getString("mid"));
 				qv.setQwdate(rs.getTimestamp("qwdate"));
 				qv.setQcontent(rs.getString("qcontent"));
 				qv.setQrecontent(rs.getString("qrecontent"));
@@ -455,11 +455,12 @@ public class AdminServiceImpl implements AdminService{
     	PreparedStatement pstmt = null;
     	int row = 0;
     	try {
-    		sql = "update table_question set qrecontent = ?, qmdate = sysdate, qstate = 'Y' where qidx = ?";
+    		sql = "update table_question set qrecontent = ?, qrewdate = sysdate, qstate = 'Y' where qidx = ?";
     	pstmt = con.prepareStatement(sql);
     	pstmt.setString(1, (qv.getQrecontent()));
     	pstmt.setInt(2, (qv.getQidx()));
     	
+    	System.out.println(qv.getQrewdate());
     	row = pstmt.executeUpdate();
     	}catch(Exception e) {
     		System.out.println(e.getMessage());
@@ -469,26 +470,7 @@ public class AdminServiceImpl implements AdminService{
     	return row;
     }
     
-//    @Override
-//    public int insertAdQuestion(QuestionVo vo) {
-//    	Connection con = dbconnect.getConnection();
-//    	PreparedStatement pstmt = null;
-//    	int row = 0;
-//    	try {
-//    		sql = "insert into table_question (qrecontent, qwdate, qdbdate) values(?, sysdate, sysdate)";
-//    		
-//    		pstmt = con.prepareStatement(sql);
-//    		pstmt.setString(1, vo.getQrecontent());
-//    		row = pstmt.executeUpdate();
-//    	
-//    	}catch(Exception e) {
-//    		System.out.println(e.getMessage());
-//    	}finally {
-//    		DBClose.close(con,pstmt);
-//    	}
-//    	return row;
-//    }
-    
+   
     @Override
     public int getPaging() {
 	// TODO Auto-generated method stub

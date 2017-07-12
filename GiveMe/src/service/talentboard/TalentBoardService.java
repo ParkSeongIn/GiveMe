@@ -10,13 +10,16 @@ public interface TalentBoardService {
 	TalentBoardVo TalentBoardmodifySe(int tbidx);
 	int modifyTalentBoard(TalentBoardVo tvo,int tbidx);
 	int deleteTalentBoard(int tbidx);
-	TalentBoardVo replyTalentBoard();
+	
+	int replyTalentBoard(TalentBoardVo tvo);
+	
 	int updateTalentBoardHit(int tbidx);
 	int getPaging();
-	int modifyTalentBoardState(int midx);
+//	int modifyTalentBoardState(int midx);
+	int modifyTalentBoardState(int tbidx);
 	int modifyTalentBoardConfirm(int tbidx);
 	
 	int modifyTalentBoardEtime(int tbidx);
 	int modifyTalentBoardCancle(int midx);
-	TalentBoardVo TalentBoardMyList(int midx);
+	ArrayList<TalentBoardVo> TalentBoardMyList(int midx);
 }

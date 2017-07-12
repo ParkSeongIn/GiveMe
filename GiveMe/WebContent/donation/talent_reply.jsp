@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>재능기부 페이지</title>
+<title>재능기부 답변 페이지</title>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -65,7 +65,8 @@ select::-ms-expand { /* for IE 11 */
             }
         });
     });
-     
+</script>
+<script>
 </script>
 </head>
 <link rel="stylesheet" href="../css/font.css" type="text/css">
@@ -75,9 +76,9 @@ select::-ms-expand { /* for IE 11 */
 <c:import url="/nav/sidebar3.jsp"/>
 	<div class="container" style="margin-top:80px">
 		<div class="panel panel-default">
-			<h2>재능기부</h2>
+			<h2>재능기부 답변</h2>
 			<div class="panel-body">
-			<form id="addForm" action="${ContextPath }/controller/TalentBoardWriteActionServlet.do" method="post">
+			<form id="addForm" action="${ContextPath }/controller/TalentBoardReplyActionServlet.do" method="post">
 				<div class="form-horizontal">
 					<%-- 이 양식과 똑같이 하나하나 추가 --%>
 					<div class="col-sm-10">
@@ -86,7 +87,7 @@ select::-ms-expand { /* for IE 11 */
 					</div>
 					<div class="col-sm-10">
 						<select id="tbcategory1" name="tbcategory1">	
-							<option value="tbcategory1" selected>선택분야 분류</option>
+							<option value="tbcategory1" selected>분류1</option>
 							<option value="언어">언어</option>
 							<option value="컴퓨터">컴퓨터</option>
 							<option value="음악">음악</option>
@@ -95,8 +96,10 @@ select::-ms-expand { /* for IE 11 */
 							<option value="기타">기타</option>
 						</select>
 						<select id="tbcategory2" name="tbcategory2">
-							<option value="tbcategory2" selected>세부분류</option>
-							<option value="언어">언어</option>
+							<option value="tbcategory2" selected>분류2</option>
+							<option value="한국어">한국어</option>
+							<option value="중국어">중국어</option>
+							<option value="기타">기타</option>
 						</select>
 					</div>
 					<div class="form-group" >
@@ -108,7 +111,7 @@ select::-ms-expand { /* for IE 11 */
 					<div class="form-group" >
 						<label class="control-label col-sm-4" for="tbid">작성자</label>
 						<div class="col-sm-4">
-							<input type="text" id="mid" name="mid" class="form-control" value="${sessionScope.vo.mid }" readonly="readonly"/>
+							<input type="text" id="tbid" name="tbid" class="form-control" value="${sessionScope.vo.mid }" readonly="readonly"/>
 						</div>
 					</div>	
 					<div class="form-group" >
@@ -133,6 +136,12 @@ select::-ms-expand { /* for IE 11 */
 						<label class="control-label col-sm-4" for="tbpeoplecnt">희망인원입력</label>
 						<div class="col-sm-3">
 							<input type="text" id="tbpeoplecnt" name="tbpeoplecnt" class="form-control"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="tbidx">글번호</label>
+						<div class="col-sm-3">
+							<input type="text" id="tbidx" name="tbidx" value="${tbidx}" class="form-control"/>
 						</div>
 					</div>
 					<div class="form-group">

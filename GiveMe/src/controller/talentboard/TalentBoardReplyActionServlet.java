@@ -13,14 +13,14 @@ import service.talentboard.TalentBoardVo;
 /**
  * Servlet implementation class TalentBoardWriteActionServlet
  */
-@WebServlet("/TalentBoardWriteActionServlet")
-public class TalentBoardWriteActionServlet extends HttpServlet {
+@WebServlet("/TalentBoardReplyActionServlet")
+public class TalentBoardReplyActionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TalentBoardWriteActionServlet() {
+    public TalentBoardReplyActionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,6 +50,7 @@ public class TalentBoardWriteActionServlet extends HttpServlet {
 		String tbarea1 = request.getParameter("tbarea1");
 		String tbarea2 = request.getParameter("tbarea2");
 		String tbcontent = request.getParameter("tbcontent");
+		int tbidx = Integer.parseInt(request.getParameter("tbidx"));
 		int midx = Integer.parseInt(request.getParameter("midx"));
 		int tbpeoplecnt = Integer.parseInt(request.getParameter("tbpeoplecnt"));
 
@@ -67,24 +68,11 @@ public class TalentBoardWriteActionServlet extends HttpServlet {
 			tvo.setTbarea1(tbarea1);
 			tvo.setTbarea2(tbarea2);
 			tvo.setTbcontent(tbcontent);
+			tvo.setTbidx(tbidx);
 			tvo.setMidx(midx);
-			tvo.setTbpeoplecnt(tbpeoplecnt);
+			tvo.setTbpeoplecnt(tbpeoplecnt);	
 			
-			System.out.println(tvo.getMid());
-			System.out.println(tvo.getTbtitle());
-			System.out.println(tvo.getTbcategory1());
-			System.out.println(tvo.getTbcategory2());
-			System.out.println(tvo.getTbpeople());
-			System.out.println(tvo.getTbhdate());
-			System.out.println(tvo.getTbtime());
-			System.out.println(tvo.getTbarea1());
-			System.out.println(tvo.getTbarea2());
-			System.out.println(tvo.getTbcontent());
-			System.out.println(tvo.getMidx());
-			System.out.println(tvo.getTbpeoplecnt());
-			
-			
-			int itb = tbsi.insertTalentBoard(tvo);
+			int rtb = tbsi.replyTalentBoard(tvo);
 		
 	}
 

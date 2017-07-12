@@ -34,22 +34,24 @@ div.col-sm-10{
 				<th width="10%" align="center" valign="middle">번호</th>
 				<th width="10%">분야1</th>
 				<th width="10%">분야2</th>
-				<th width="10%">희망자 이름</th>
+				<th width="10%">후원자 이름</th>
 				<th width="10%">제공날짜</th>
 				<th width="10%">기부상태</th>
 				<th width="10%">제공취소</th>
 			</tr>
 		</thead>
 		 <tbody>
+		 	<c:forEach var="tb" items="${tblist}">
 		 		<tr>
-		 			<td>1</td>
-					<td>언어</td>
-					<td>영어</td>
-					<td>홍길동</td>
-					<td>2017년7월10일</td>
-					<td>완료</td>
-					<td></td>
+		 			<td>${tb.midx}</td>
+					<td>${tb.tbcategory1}</td>
+					<td>${tb.tbcategory2}</td>
+					<td>${tb.mid}</td>
+					<td>${tb.tbhdate}</td>
+					<td>${tb.tbstate}</td>
+					<td><a class="btn btn-default" href="${ContextPath}/controller/TalentBoardCancleServlet.do?midx=${tb.midx}">제공 취소</a></td>
 				</tr>	
+			</c:forEach>
 		</tbody>
 	</table>
 	</div>
@@ -64,22 +66,24 @@ div.col-sm-10{
 				<th width="10%" align="center" valign="middle">번호</th>
 				<th width="10%">분야1</th>
 				<th width="10%">분야2</th>
-				<th width="10%">후원자 이름</th>
+				<th width="10%">희망자 이름</th>
 				<th width="10%">받은 날짜</th>
 				<th width="10%">기부상태</th>
-				<th width="10%">제공취소</th>
+				<th width="10%">신청취소</th>
 			</tr>
 		</thead>
 		 <tbody>
+		 	<c:forEach var="tb" items="${tblist}">
 		 		<tr>
-		 			<td>1</td>
-					<td>언어</td>
-					<td>영어</td>
-					<td>홍길동</td>
-					<td>2017년7월10일</td>
-					<td>대기</td>
-					<td></td>
-				</tr>	
+		 			<td>${tb.midx}</td>
+					<td>${tb.tbcategory1}</td>
+					<td>${tb.tbcategory2}</td>
+					<td>${tb.mid}</td>
+					<td>${tb.tbhdate}</td>
+					<td>${tb.tbstate}</td>
+					<td><a class="btn btn-default" href="${ContextPath}/controller/TalentBoardCancleServlet.do?midx=${tb.midx}">신청 취소</a></td>
+				</tr>
+			</c:forEach>	
 		</tbody>
 	</table>
 	</div>

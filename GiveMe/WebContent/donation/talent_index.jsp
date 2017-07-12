@@ -46,7 +46,7 @@ select::-ms-expand { /* for IE 11 */
 	
 	<div class="container">
 	  <div class="col-sm-10">
-		<button class="btn btn-default" style="padding-right:80px;">언어</button>
+		<button class="btn btn-default" style="padding-right:80px;"><a href="${ContextPath}/controller/TalentBoardListServlet.do" target="_self">언어</a></button>
 		<button class="btn btn-default">컴퓨터</button><br/><br/><br/>
 		<button class="btn btn-default" style="padding-right:80px;">음악</button>
 		<button class="btn btn-default">디자인</button><br/><br/><br/>

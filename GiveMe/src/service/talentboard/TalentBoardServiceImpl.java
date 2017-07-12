@@ -3,6 +3,7 @@ package service.talentboard;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import common.DBConnect;
@@ -20,7 +21,7 @@ public class TalentBoardServiceImpl implements TalentBoardService{
         }
 
 	@Override
-	public int insertTalentBoard(TalentBoardVo tvo) { // grp +1씩 증가하게 만들어야 함
+	public int insertTalentBoard(TalentBoardVo tvo) {
 		Connection con = dbconnect.getConnection(); 
 		PreparedStatement pstmt = null;
 		int itb = 0;
@@ -30,7 +31,7 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 					+ "tbhdate,tbtime,tbarea1,tbarea2,tbcontent,tbfile,tbetime,tbstate,"
 					+ "tbcancle,tbpoint,tbhconfirm,tbmdate,tbdbdate,tbgrp,"
 					+ "tbseq,tbdepth,midx,tbdeletest,tbpeoplecnt,tbapply) "
-					+ "Values(seq_tbidx.nextval,?,0,sysdate,?,?,?,?,?,?,?,?,'',"
+					+ "values(seq_tbidx.nextval,?,?,0,sysdate,?,?,?,?,?,?,?,?,'',"
 					+ "sysdate,'W','N',0,'N',sysdate,sysdate,seq_tbidx.nextval,0,0,?,'N',?,'N')";
 				
 				System.out.println(sql);
@@ -46,10 +47,6 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 				pstmt.setString(9, tvo.getTbcontent());
 				pstmt.setInt(10, tvo.getMidx());
 				pstmt.setInt(11, tvo.getTbpeoplecnt());
-
-//				pstmt.setString(10, tvo.getTbstate());
-//				pstmt.setString(11, tvo.getTbcancle());
-//				pstmt.setString(14, tvo.getTbapply());
 				
 				itb = pstmt.executeUpdate();	
 			
@@ -102,7 +99,7 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 	}
 
 	@Override
-	public ArrayList<TalentBoardVo> getTalentBoardList() {
+	public ArrayList<TalentBoardVo> getTalentBoardList() { // 게시판 리스트 , 관리자 재능기부 내역 리스트
 		Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -112,10 +109,10 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 			sql = "select * from ("
 					+ "select * from ("
 						+ "select rownum rnum, AA.* "
-						+ "from ( select tt.tbidx,tt.tbpeople,tt.tbtitle,tt.midx,tt.tbhit,tt.tbwdate "
+						+ "from ( select tt.tbidx,tt.tbpeople,tt.tbtitle,tt.midx,tt.tbhit,tt.tbwdate, tt.tbstate, tt.mid "
 							+ "from table_talentboard tt,table_member tm "
 							+ "where tt.midx = tm.midx and tt.tbdeletest = 'N' "
-								+ "order by tt.tbgrp desc,tt.tbseq asc,tt.tbidx asc"
+								+ "order by tt.tbgrp asc,tt.tbseq asc,tt.tbidx asc"
 								+ ") AA "
 									+ ") where rnum <= 10"
 									+ ") where rnum >= 1";
@@ -132,6 +129,8 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 				tvo.setMidx(rs.getInt("midx"));
 				tvo.setTbhit(rs.getInt("tbhit"));
 				tvo.setTbwdate(rs.getDate("tbwdate"));
+				tvo.setTbstate(rs.getString("tbstate"));
+				tvo.setMid(rs.getString("mid"));
 				tblist.add(tvo);
 			}
 			
@@ -283,16 +282,18 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 	}
 
 	@Override
-	public int modifyTalentBoardState(int midx) { // 신청하기 눌렀을 때 바뀌는 쿼리 -- 미완
+	public int modifyTalentBoardState(int tbidx) { // 신청하기 눌렀을 때 바뀌는 쿼리 -- 미완료
 		Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt = null;
 		TalentBoardVo tvo = new TalentBoardVo();
 		int mtbs = 0;
 		try {
-			sql = "update table_talentboard set tbstate = 'I' ,tbcancle = 'N', tbapply = 'Y' where midx = ?";
+			sql = "update table_talentboard set tbstate = 'I' ,tbcancle = 'N', tbapply = 'Y' "
+					+ "where tbstate = 'W' and tbapply = 'N' and tbidx = ? ";
 			pstmt = con.prepareStatement(sql);
 			System.out.println(sql);
-			pstmt.setInt(1, midx);
+			pstmt.setInt(1, tbidx);
+//			pstmt.setInt(1, midx);
 			mtbs = pstmt.executeUpdate();
 		}catch(Exception e) { 
 
@@ -304,8 +305,8 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 
 	
 	@Override
-	public int modifyTalentBoardConfirm(int tbidx) { // 마이페이지에서 신청자 확인 눌렀을 때 업데이트. 
-		Connection con = dbconnect.getConnection(); // 완 . 값은 안넘어가지만 sql 바뀜.
+	public int modifyTalentBoardConfirm(int tbidx) { // 신청자 확인
+		Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt = null;
 		TalentBoardVo tvo = new TalentBoardVo();
 		int mtbc = 0;
@@ -330,6 +331,7 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 	
 	@Override
 	public int modifyTalentBoardCancle(int midx){ // 사용자가 신청 취소했을 때 미완
+												  // 제공 취소 시는 값이 바뀌었음
 		Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt = null;
 		TalentBoardVo tvo = new TalentBoardVo();
@@ -337,7 +339,6 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 		try {
 			sql ="update table_talentboard set tbstate = 'W', tbapply = 'N', tbcancle = 'Y' "
 					+ " where tbstate = 'I' and tbapply='Y' and tbcancle='N' and midx = ?";
-			// tbidx?
 			pstmt = con.prepareStatement(sql);
 			System.out.println(sql);
 			pstmt.setInt(1, midx);
@@ -355,7 +356,7 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 	
 	@Override
 	public int modifyTalentBoardEtime(int tbidx){ // 관리자 매칭 확인 버튼 눌렀을 시 -- 완
-		Connection con = dbconnect.getConnection(); // 값이 안넘어가지만 sql 바뀜.
+		Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt = null;
 		TalentBoardVo tvo = new TalentBoardVo();
 		int mtbe = 0;
@@ -375,43 +376,42 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 		}
 		
 		return mtbe;
-	}
-	
+	}	
 
 	@Override
-	public TalentBoardVo TalentBoardMyList(int midx) { // 마이페이지 재능내역 리스트
+	public ArrayList<TalentBoardVo> TalentBoardMyList(int midx) { // 마이페이지 재능내역 리스트 -- 완료
 		Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		TalentBoardVo tvo = null;
+		ArrayList<TalentBoardVo> tblist = new ArrayList<TalentBoardVo>();
 		
 		try {
 			sql = "select * from ("
 					+ "select * from ("
 						+ "select rownum rnum, AA.* "
-						+ "from ( select tt.midx,tt.tbcategory1,tt.tbcategory2,tt.tbpeople,tt.tbhdate,tt.tbstate "
-							+ "from table_talentboard tt,table_member tm "
-							+ "where tt.midx = tm.midx and tm.midx = ? and tt.tbdeletest = 'N' "
+						+ "from ( select tt.midx,tt.tbcategory1,tt.tbcategory2,tt.mid,tt.tbhdate,tt.tbstate "
+								+ "from table_talentboard tt,table_member tm "
+								+ "where tt.midx = tm.midx and tm.midx = ? and tt.tbdeletest = 'N' "
 								+ "order by tt.tbgrp desc,tt.tbseq asc,tt.tbidx asc"
 								+ ") AA "
-									+ ") where rnum <= 5"
-									+ ") where rnum >= 1";
+						+ ") where rnum <= 5"
+					+ ") where rnum >= 1";
 			
 			pstmt = con.prepareStatement(sql);
-			System.out.println(sql);
 			pstmt.setInt(1, midx);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				tvo = new TalentBoardVo();
+				TalentBoardVo tvo = new TalentBoardVo();
 				
-				tvo.setMidx(rs.getInt(1));
-				tvo.setTbcategory1(rs.getString(2));
-				tvo.setTbcategory2(rs.getString(3));
-				tvo.setTbpeople(rs.getString(4));
-				tvo.setTbhdate(rs.getInt(5));
-				tvo.setTbstate(rs.getString(6));
+				tvo.setMidx(rs.getInt("midx"));
+				tvo.setTbcategory1(rs.getString("tbcategory1"));
+				tvo.setTbcategory2(rs.getString("tbcategory2"));
+				tvo.setMid(rs.getString("mid"));
+				tvo.setTbhdate(rs.getInt("tbhdate"));
+				tvo.setTbstate(rs.getString("tbstate"));
 				
+				tblist.add(tvo);
 			}
 			
 		}catch(Exception e){
@@ -419,13 +419,78 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 		}finally{
 			DBClose.close(con,pstmt,rs);
 			}
-		return tvo;
+		return tblist;
 	}
 	
 	@Override
-	public TalentBoardVo replyTalentBoard() { // 답글
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public int replyTalentBoard(TalentBoardVo tvo) {  // 답글 , 아직 미완성
+	      
+	      Connection con = dbconnect.getConnection();
+	      PreparedStatement pstmt = null;
+	      int rtb = 0;
+	      
+	      try{
+	          
+	         con.setAutoCommit(false);
+	         
+	         sql = "update table_talentboard set tbseq = tbseq + 1 "
+	         		+ "where tbgrp = (select tbgrp from table_talentboard where tbidx = ?) "
+	         		+ "and tbseq > (select tbseq from table_talentboard where tbidx = ?) ";
+	      
+	         pstmt = con.prepareStatement(sql);
+	         
+	         pstmt.setInt(1, tvo.getTbidx());
+	         pstmt.setInt(2, tvo.getTbidx());
+	                     
+	         rtb = pstmt.executeUpdate();
+	         
+	         sql = "insert into table_talentboard(tbidx,tbtitle,tbhit,tbwdate,tbcategory1,tbcategory2,"
+	         		+ "tbpeople,tbhdate,tbtime,tbarea1,tbarea2,tbcontent,tbfile,tbetime,tbstate,tbcancle,"
+	         		+ "tbpoint,tbhconfirm,tbmdate,tbdbdate,tbgrp,tbseq,tbdepth,midx,tbdeletest,tbpeoplecnt,tbapply) "
+	         		+ "values(seq_tbidx.nextval,?,0,sysdate,?,?,?,?,?,?,?,?,'',sysdate,'W','N',0,'N',sysdate,sysdate,"
+	         		+ "(select tbgrp from table_talentboard where tbidx = ?), "
+	         		+ "(select tbseq from table_talentboard where tbidx = ?) + 1, "
+	         		+ "(select tbdepth from table_talentboard where tbidx = ?) + 1,?,'N',?,'N')";   
+	            
+	         pstmt = con.prepareStatement(sql);
+	         
+				pstmt.setString(1, tvo.getTbtitle());
+				pstmt.setString(2, tvo.getTbcategory1());
+				pstmt.setString(3, tvo.getTbcategory2());
+				pstmt.setString(4, tvo.getTbpeople());
+				pstmt.setInt(5, tvo.getTbhdate());
+				pstmt.setString(6, tvo.getTbtime());
+				pstmt.setString(7, tvo.getTbarea1());
+				pstmt.setString(8, tvo.getTbarea2());
+				pstmt.setString(9, tvo.getTbcontent());
+				pstmt.setInt(10, tvo.getTbidx());
+				pstmt.setInt(11, tvo.getTbidx());
+				pstmt.setInt(12, tvo.getTbidx());
+				pstmt.setInt(13, tvo.getMidx());
+				pstmt.setInt(14, tvo.getTbpeoplecnt());         
+	         
+	         rtb += pstmt.executeUpdate();
+	         
+	         con.commit();
+	         
+	      }catch(Exception e){
+	         System.out.println(e.getMessage());
+	         try{
+	            con.rollback();
+	         } catch(SQLException e1){
+	            e1.printStackTrace();
+	         }
+	      }finally{
+	         try{
+	            con.setAutoCommit(true);
+	         }catch(Exception e){
+	            e.getMessage();
+	         }
+	         DBClose.close(con,pstmt);
+	      }
+	      
+	      return rtb;
+	      
+	   }
 	
 }

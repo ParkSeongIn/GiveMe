@@ -32,6 +32,7 @@ public class TalentBoardVo {
 	private String tbdeletest;
 	private String tbapply;
 	private int midx;
+	private String mid;
 	
 	public int getTbidx() {
 		return tbidx;
@@ -195,6 +196,11 @@ public class TalentBoardVo {
 	public void setMidx(int midx) {
 		this.midx = midx;
 	}
-	
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
 	
 }

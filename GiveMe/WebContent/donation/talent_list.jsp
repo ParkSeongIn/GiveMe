@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>현금후원내역(마이페이지)</title>
+<title>재능기부</title>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -55,11 +55,17 @@ select::-ms-expand { /* for IE 11 */
 	<button class="btn btn-default">기타</button>
 	</div>
 	<div class="col-sm-10">
-		<select id="" name="">
-			<option value=""></option>
+		<select id="writer" name="신청자">
+			<option value="" selected>작성자 분류</option>
+			<option value="S">S : 제공자</option>
+			<option value="H">H : 희망자</option>
 		</select>
-		<select id="" name="">
-			<option value=""></option>
+		<select id="lan" name="언어">
+			<option value="" selected>언어</option>
+			<option value="영어">영어</option>
+    		<option value="중국어">중국어</option>
+    		<option value="일본어">일본어</option>
+    		<option value="기타">기타</option>
 		</select>
 	</div>
 	<div class="col-sm-10">	
@@ -75,14 +81,16 @@ select::-ms-expand { /* for IE 11 */
 			</tr>
 		</thead>
 		 <tbody>
+		 	<c:forEach var="tb" items="${tblist}">
 		 		<tr>
-		 			<td>1</td>
-					<td>후원자</td>
-					<td>도와주세요</td>
-					<td>aaa</td>
-					<td>1</td>
-					<td>2017.7.9</td>
-				</tr>	
+		 			<td>${tb.tbidx}</td>
+					<td>${tb.tbpeople}</td>
+					<td><a href="${ContextPath}/controller/TalentBoardContentServlet.do?tbidx=${tb.tbidx}">${tb.tbtitle}</a></td>
+					<td>${tb.mid}</td>
+					<td>${tb.tbhit}</td>
+					<td>${tb.tbwdate}</td>
+				</tr>
+			</c:forEach>	
 		</tbody>
 	</table>
 	</div>
@@ -91,6 +99,9 @@ select::-ms-expand { /* for IE 11 */
 			<div class="col-sm-3">
 				<div>
          		<%-- 버튼 자리 --%>
+         			<c:if test="${sessionScope.vo.login == true }">
+						<a class="btn btn-default" style="float:right;"href="${ContextPath}/controller/TalentBoardWriteServlet.do">등록하기</a>
+					</c:if>
         		</div>
 			</div>
 		</div>

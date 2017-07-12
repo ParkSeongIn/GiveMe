@@ -78,7 +78,7 @@ div.qrecontent{
 					카테고리 : <%=qv.getQcategory() %>
   				</div>		
   				<div class="other">
-					작성자 : 작성자
+					작성자 : <%=qv.getMid() %>
 					작성날짜 : <%=qv.getQwdate() %>
   				</div>	
 				제목 : 	<div class="title">
@@ -88,7 +88,8 @@ div.qrecontent{
 							<%=qv.getQcontent() %>
 						</div>
 				답변 : 	<div class="qrecontent">
-							<%=qv.getQrecontent() %>
+							<%=((qv.getQrecontent()+" ").replace("null", ""))%>
+							<%=qv.getQrewdate() %>
 						</div>
 				
 				<div class="qna-content">

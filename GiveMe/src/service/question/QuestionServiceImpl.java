@@ -26,7 +26,7 @@ public class QuestionServiceImpl implements QuestionService{
 			sql = " select * from ("
 					+ "select * from ("
 					+ 	"select rownum rn, AA.*from ("
-					+ 		"select tq.qidx, tq.qcategory, tq.qtitle, tq.qstate, tq.qwdate "
+					+ 		"select tq.qidx, tq.qcategory, tq.qtitle, tm.mid, tq.qstate, tq.qwdate "
 					+ 		"from table_member tm, table_question tq "
 					+ 		"where tm.midx = tq.midx "
 					+ 		"and tm.midx = ? and tq.qdeletest = 'N' "
@@ -42,7 +42,7 @@ public class QuestionServiceImpl implements QuestionService{
 				vo.setQidx(rs.getInt("qidx"));
 				vo.setQcategory(rs.getString("qcategory"));
 				vo.setQtitle(rs.getString("qtitle"));
-			//	vo.setMid(rs.getString("id"));
+				vo.setMid(rs.getString("mid"));
 				vo.setQstate(rs.getString("qstate"));
 				vo.setQwdate(rs.getTimestamp("qwdate"));
 				
@@ -63,9 +63,9 @@ public class QuestionServiceImpl implements QuestionService{
 		int row = 0;
 		try { 
 			sql = "insert into table_question "
-            + "(qidx,qcategory,qtitle,qcontent,qwdate,qstate,qmdate,qdbdate,midx, "
+            + "(qidx,qcategory,qtitle,qcontent,qwdate,qrewdate,qstate,qmdate,qdbdate,midx, "
             + "qdeletest) "
-            + "values(seq_qidx.nextval,?,?,?,sysdate,'N',sysdate,sysdate,?,'N')";
+            + "values(seq_qidx.nextval,?,?,?,sysdate,sysdate,'N',sysdate,sysdate,?,'N')";
 		
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, vo.getQcategory());
@@ -89,7 +89,7 @@ public class QuestionServiceImpl implements QuestionService{
 		ResultSet rs = null;
 		QuestionVo qv = null;
 		try {
-			sql = "select tq.qidx, tq.qtitle, tm.midx, tq.qcategory, tm.mname, tq.qwdate, tq.qcontent, tq.qrecontent "
+			sql = "select tq.qidx, tq.qtitle, tm.midx, tq.qcategory, tm.mid, tq.qwdate, tq.qcontent, tq.qrecontent "
 					+ "from table_member tm, table_question tq where tm.midx = tq.midx and tq.qidx = ? and tm.midx = ?"; 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, qidx);
@@ -110,7 +110,7 @@ public class QuestionServiceImpl implements QuestionService{
 				qv.setQtitle(rs.getString("qtitle"));
 				qv.setMidx(rs.getInt("midx"));
 				qv.setQcategory(rs.getString("qcategory"));
-	//			qv.setMname(rs.getString("mname"));
+				qv.setMid(rs.getString("mid"));
 				qv.setQwdate(rs.getTimestamp("qwdate"));
 				qv.setQcontent(rs.getString("qcontent"));
 				qv.setQrecontent(rs.getString("qrecontent"));

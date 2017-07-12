@@ -42,16 +42,30 @@ public class TalentBoardStateServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		String tbstate = request.getParameter("tbstate");
+		String tbcancle = request.getParameter("tbcancle");
 		String tbapply = request.getParameter("tbapply");
-		int midx = Integer.parseInt(request.getParameter("midx"));
+		int tbidx = Integer.parseInt(request.getParameter("tbidx"));
+//		int midx = Integer.parseInt(request.getParameter("midx"));
+
+		System.out.println(tbstate);
+		System.out.println(tbcancle);
+		System.out.println(tbapply);
+		System.out.println(tbidx);
+//		System.out.println(midx);
+		
 		
 		TalentBoardServiceImpl tbsi = new TalentBoardServiceImpl();
 		TalentBoardVo tvo = new TalentBoardVo();
 		
-		int mtbs = tbsi.modifyTalentBoardState(midx);
+		int mtbs = tbsi.modifyTalentBoardState(tbidx);
+		
+//		int mtbs = tbsi.modifyTalentBoardState(midx);
+		
 		System.out.println(tvo.getTbstate());
+		System.out.println(tvo.getTbcancle());
 		System.out.println(tvo.getTbapply());
-		System.out.println(tvo.getMidx());
+		System.out.println(tvo.getTbidx());
+//		System.out.println(tvo.getMidx());
 		System.out.println(tbsi);
 		System.out.println(tvo);
 	}
