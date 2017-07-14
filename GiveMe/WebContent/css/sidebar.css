@@ -1,0 +1,59 @@
+@CHARSET "UTF-8";
+	article,aside,figcaption,figure,footer,header,
+	nav,section,main {
+    	display:block;
+	}
+	.clearfix { /* clearfix와 clearfix:after은 익스플로러에서도 깨지지 않고 사용하기 위한 핵 */
+		*zoom: 1;
+	} 
+	.clearfix:after { 
+		content: "";
+		display: block;
+		clear: both;
+	}
+
+
+
+	
+.side3 { /* 왼쪽 사이드 메뉴바 전체 색상 , 크기, 정렬*/
+		width: 220px;
+		height: 430px;
+		background: #034F84;
+		float: left;
+		margin-left: 191px;
+	}
+	
+	.side3 h2 { /* 왼쪽 사이드 메뉴바의 큰제목( <소개> ) */
+		color: white;
+		font-size: 35px;
+		margin-top: 20px;
+		padding-left: 10px;
+		padding-bottom: 10px;
+	}
+	
+	.m, .m a{ /* 클릭한 누른 메뉴바를 강조하는 설정(여기선 기획의도) */
+		color: white;
+		font-weight: bold;
+	}
+	
+	.lnb li,.lnb li a{ /* li(세부 작은 메뉴)를 감싸는 영역 */
+		color: white;
+		line-height: 4em;
+		font-size: 20px;
+		padding-top: 10px;
+		padding-left: 10px;
+		padding-bottom: 10px;
+		list-style:none;
+	}
+	
+	.lnb li a:hover { /* 사이드바 메뉴에 마우스 올렸을 때 설정 */
+		background-color: #034F84;
+		color: white;
+		font-weight: bold;
+		text-decoration: none;
+	}
+	
+	.lnb li a:active{ /* 사이드바 메뉴를 클릭했을 때 설정 */
+		color: white;
+		text-decoration: none;
+	}
