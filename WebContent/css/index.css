@@ -1,0 +1,68 @@
+
+body{
+	margin:0px;
+	padding:0px;
+}
+.index1, .homename, .index2, .image, .home, .talent, .cash{
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+.home, .talent, .cash{
+	width:360px;
+	height:120px;
+	margin-top:10px;
+}
+.index1{
+	width:1000px;
+	height:600px;
+  }
+.homename{
+	width: 900px;
+    height: 100px;
+    margin-top: 90px;
+    background-image:url('../image/image1.jpg');
+    background-size: 486px 100px;
+    background-repeat:no-repeat;
+    background-position:center center;
+}
+.
+.index2{
+	width:900px;
+	height:450px;
+	margin-top: 30px;
+}
+.image{
+	width:440px;
+	height:410px;
+	float:left;
+	margin-top:20px;
+	margin-left:120px;
+	background-image:url('../image/giphy.gif');
+	background-size:contain; 
+    background-repeat:no-repeat;
+    background-position:center center;
+}
+.indexcategory{
+	width:380px;
+	height:410px;
+	float:right;
+	margin-top:20px;
+	margin-right:120px;
+	background-color:#FFF8DC;
+}
+.home a, .talent a, .cash a{
+	width: 325px;
+    height: 115px;
+    font-size: 50px;
+    display: inline-block;
+    line-height: 94px;
+    padding-left:20px;
+}
+
+.home, .talent, .cash{
+	position:relative;
+	margin-left: 28px;
+}
