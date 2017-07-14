@@ -23,7 +23,7 @@ public class CashDonationServiceImpl implements CashDonationService {
 		ResultSet rs = null; 
 		ArrayList<CashDonationVo> clist = new ArrayList<CashDonationVo>(); 
 		try { 
-			String	sql = "select cidx, cmoney, cpay, cstate "
+			String	sql = "select cidx, cmoney, cpay, cstate, cpoint "
 				    	+ "from table_cashdonation ";
 			pstmt = con.prepareStatement(sql); 
 			rs = pstmt.executeQuery();
@@ -34,7 +34,8 @@ public class CashDonationServiceImpl implements CashDonationService {
 			cv.setCidx(rs.getInt("cidx"));
 			cv.setCpay(rs.getString("cpay"));
 			cv.setCmoney(rs.getInt("cmoney"));
-			cv.setCstate(rs.getString("cstate")); 
+			cv.setCstate(rs.getString("cstate"));
+			cv.setCpoint(rs.getInt("cpoint"));
 			clist.add(cv); 
 			}
 		}catch(Exception e) { 
@@ -52,7 +53,7 @@ public class CashDonationServiceImpl implements CashDonationService {
 		ResultSet rs = null; 
 		ArrayList<CashDonationVo> clist = new ArrayList<CashDonationVo>(); 
 		try { 
-			String	sql = "select c.cidx, c.cway, c.cmoney, c.cpay, c.creceipt, c.cstate, c.cpaydate1, c.cpaydate2 "
+			String	sql = "select c.cidx, c.cway, c.cmoney, c.cpay, c.creceipt, c.cstate, c.cpaydate1, c.cpaydate2, c.cpoint "
 					    + "from table_cashdonation c, table_member m "
 					    + "where c.midx = m.midx "
 					    + "and m.midx=? ";
@@ -72,6 +73,7 @@ public class CashDonationServiceImpl implements CashDonationService {
 			cv.setCstate(rs.getString("cstate"));
 			cv.setCpaydate1(rs.getString("cpaydate1"));
 			cv.setCpaydate2(rs.getDate("cpaydate2"));
+			cv.setCpoint(rs.getInt("cpoint"));
 			clist.add(cv);
 			}
 		}catch(Exception e) { 
@@ -99,7 +101,7 @@ public class CashDonationServiceImpl implements CashDonationService {
 		pstmt.setString(3, cv.getCreceipt());
 		pstmt.setString(4, cv.getCpaydate1());
 		pstmt.setString(5, Values.Result);
-		pstmt.setInt(6, 0);
+		pstmt.setInt(6, cv.getCpoint());
 		pstmt.setInt(7, cv.getMidx());
 		pstmt.setString(8, cv.getCpay());
 			
@@ -143,51 +145,35 @@ public class CashDonationServiceImpl implements CashDonationService {
 	}
 
 	
-//	@Override
-//	public CashDonationVo getReceipt(int midx, int apidx) {
-//		Connection con = dbconnect.getConnection(); 
-//		PreparedStatement pstmt = null; 
-//		ResultSet rs = null;
-//		CashDonationVo rcv = null; 
-//		
-//		try { 
-//			sql = "select  AA.*,BB.dlgroup1, BB.dlgroup2,BB.dlplace from (select tm.midx, tm.mname, tm.mpost, tm.maddr1, tm.maddr2, tm.mbirth, tc.cmoney, ta.apdbdate, tc.dlidx, ta.apidx from table_member tm, table_cashdonation tc, table_allpay ta  where tm.midx = tc.midx and tm.midx = ta.midx and tm.midx=? and ta.apidx=?)AA, table_donationlist BB where  AA.dlidx = BB.dlidx order by AA.apidx desc";
-//			pstmt = con.prepareStatement(sql); 
-//			pstmt.setInt(1, midx);
-//			pstmt.setInt(2, apidx);
-//			rs = pstmt.executeQuery(); 
-//			//System.out.println(sql);
-//			while(rs.next()) { 
-//				
-//				//System.out.println();
-//				rcv = new CashDonationVo();
-//				
-//			//	rcv.setMidx(rs.getInt("midx"));
-//				rcv.setMname(rs.getString("mname"));
-//				rcv.setMpost(rs.getInt("mpost"));
-//				rcv.setMaddr1(rs.getString("maddr1"));
-//				rcv.setMaddr2(rs.getString("maddr2"));
-//				rcv.setMbirth(rs.getInt("mbirth"));
-//				rcv.setCmoney(rs.getInt("cmoney"));
-//				rcv.setApdbdate(rs.getTimestamp("apdbdate"));
-//				rcv.setDlidx(rs.getInt("dlidx"));
-//				rcv.setApidx(rs.getInt("apidx"));
-//				rcv.setDlgroup1(rs.getString("dlgroup1"));
-//				rcv.setDlgroup2(rs.getString("dlgroup2"));
-//				rcv.setDlplace(rs.getString("dlplace"));
-//				
-//	//			rcv.setCway(rs.getString("cway"));
-//	//			rcv.setCpaydate1(rs.getString("cpaydate1"));
-//				
-//				
-//			} 
-//		}catch(Exception e) {
-//			//	System.out.println(e.getMessage());
-//		}finally { 
-//			DBClose.close(con,pstmt,rs);
-//		} 
-//	return rcv;
-//	}
+	@Override
+	public CashDonationVo getReceipt(int midx, int cidx) {
+		Connection con = dbconnect.getConnection(); 
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+		CashDonationVo rcv = null; 
+		
+		try { 
+			sql = "select tc.cidx, tc.cmoney, tc.cpaydate2, tc.cway "
+				 + "from table_cashdonation tc, table_member tm "
+				 + "where tc.midx = tm.midx and tc.cidx=?";
+			pstmt = con.prepareStatement(sql); 
+			pstmt.setInt(1, cidx);
+			rs = pstmt.executeQuery(); 
+			
+			if(rs.next()) { 
+				rcv = new CashDonationVo();
+				rcv.setCidx(rs.getInt("cidx"));
+				rcv.setCpaydate2(rs.getDate("cpaydate2"));
+				rcv.setCmoney(rs.getInt("cmoney"));
+				rcv.setCway(rs.getString("cway"));
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally { 
+			DBClose.close(con,pstmt,rs);
+		} 
+	return rcv;
+	}
 
 	public CashDonationVo getCashDonationConfirm(int cidx) {
 		Connection con = dbconnect.getConnection(); 

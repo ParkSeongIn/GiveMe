@@ -241,35 +241,35 @@ public class MemberServiceImpl implements MemberService{
     }
     
     
-    @Override	//로그인 시 아이디, 비밀번호 체크 메소드.
+    @Override	//로그인 시 아이디, 비밀번호 체크, 탈퇴 아이디 구분 메소드.
     public int checkLogin(String mid, String mpwd) {
 	// TODO Auto-generated method stub
 	Connection con = dbconnect.getConnection();
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;	
 	int result = 0;
+	
 	try{  	    
-	    String sql="select mpwd "
+	    String sql="select mpwd, mid, mvalue "
 	    	+ "from table_member "
-	    	+ "where mid=?";    	
+	    	+ "where mvalue <> 'OUT' and mid=?";    	
+	    
 	    
 	    pstmt=con.prepareStatement(sql);
 	    pstmt.setString(1, mid);	    
 	    rs=pstmt.executeQuery();
 	    
 	    boolean chk = rs.next();
-	    
+	        
+	    String get_pwd = rs.getString("mpwd");
+	    		
 	    if(chk == false){
 	    	result = Values.login_fali_id;
-	    }else{
-	    	String get_pwd = rs.getString("mpwd");
-	    
-	    	if(get_pwd.equals(mpwd)){
-	    	result = Values.login_success;
+	    }else if(get_pwd.equals(mpwd)){
+	    	    result = Values.login_success;
 	    }else{
 	    	result = Values.login_fail_pw;
-	    }
-	    }
+	    }	    
 	
 	}catch(Exception e){
 	    System.out.println("CheckLogin error" + e);
@@ -278,6 +278,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 	return result;
     }
+	
     
     @Override	//Id 중복체크 메소드
     public boolean checkId(String mid) {

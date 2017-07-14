@@ -423,7 +423,7 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 			pstmt.setInt(1, midx);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
+			while(rs.next()) {
 				TalentBoardVo tvo = new TalentBoardVo();
 				
 				tvo.setMidx(rs.getInt("midx"));

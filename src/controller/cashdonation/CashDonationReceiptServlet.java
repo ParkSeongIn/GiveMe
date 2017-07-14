@@ -6,10 +6,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import service.admin.AdminServiceImpl;
 import service.cashdonation.CashDonationServiceImpl;
 import service.cashdonation.CashDonationVo;
+import service.member.MemberVo;
 
 /**
  * Servlet implementation class CashDonationReceiptServlet
@@ -31,21 +33,23 @@ public class CashDonationReceiptServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	
 		
-		//int apidx = Integer.parseInt(request.getParameter("apidx"));
-	
-		int midx = 4;
-		int apidx = 4;
-	//	System.out.println(apidx);
-		//System.out.println(midx);
+		int cidx = Integer.parseInt(request.getParameter("cidx"));
+		
+		int midx = 0;
+		HttpSession session = request.getSession();
+		MemberVo vo = (MemberVo)session.getAttribute("vo");
+		midx = vo.getMidx();
+		
+		CashDonationVo cv = new CashDonationVo();
 		
 		CashDonationServiceImpl cd = new CashDonationServiceImpl();
-		CashDonationVo rcv = new CashDonationVo();
-		//rcv = cd.getReceipt(midx, apidx);	
-		//rcv.setApidx(apidx);
 		
-		request.setAttribute("rcv", rcv);
+		cv = cd.getReceipt(midx, cidx);	
+		cv.setCidx(cidx);
+		
+		request.setAttribute("cidx", cidx);
+		request.setAttribute("cv", cv);
 	}
 
 	/**

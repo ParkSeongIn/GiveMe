@@ -40,9 +40,8 @@ public class CashDonationInsertActionServlet extends HttpServlet {
 		String cpay = request.getParameter("cpay");
 		String creceipt = request.getParameter("creceipt");		
 		String cpaydate1 = request.getParameter("cpaydate1");
-		int cpoint =  Integer.parseInt(request.getParameter("cpoint"));
+		int cpoint = (int) (cmoney*0.5); 
 		int midx = 0;
-		
 		HttpSession session = request.getSession();
 		MemberVo vo = (MemberVo)session.getAttribute("vo");
 		midx = vo.getMidx();

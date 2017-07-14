@@ -8,5 +8,6 @@ public interface CashDonationService {
 	int getPaging();
 	int insertCashDonation(CashDonationVo vo);
 	ArrayList<CashDonationVo> getMypageCashDonationList(int midx);
+	CashDonationVo getReceipt(int midx, int cidx);
 	CashDonationVo getCashDonationConfirm(int cidx);
 }

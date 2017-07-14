@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import = "service.cashdonation.*" %>
 <%@ page import = "service.member.*" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 CashDonationVo cv = (CashDonationVo)request.getAttribute("cv");
 %>
@@ -70,14 +71,13 @@ select::-ms-expand { /* for IE 11 */
 		 	   	  <c:when test="${cv.cway=='정기후원'}">	
 		 		<tr>
 		 			<td>${cv.cidx}</td>
-					<td>${cv.cmoney}원</td>
+					<td>&#8361;${cv.cmoney}</td>
 					<td>${cv.cpay}</td>
 					<td>${cv.cpaydate2}</td>
 					<td>월${cv.cpaydate1}일</td>
 					<td>${cv.cstate}</td>	
-					<td><a href="#" class="btn btn-default" >영수증 출력</a></td>
-					<td>${cv.cmoney*0.5}포인트</td>
-					
+					<td><a href="${ContextPath}/controller/CashDonationReceiptServlet.do?cidx=${cv.cidx}" class="btn btn-default" onclick="javascript:receiptOpen();">영수증 출력</a></td>
+					<td>${cv.cpoint}포인트</td>
 					<c:choose>
 						<c:when test="${cv.cstate=='후원완료' }">
 						<td><a href="${ContextPath}/controller/CashDonationModifyStateServlet.do?cidx=${cv.cidx}" class="btn btn-default" onclick="deleteCon()">후원취소</a></td>	

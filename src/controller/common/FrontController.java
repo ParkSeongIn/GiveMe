@@ -67,7 +67,6 @@ import controller.member.MypageCashDonationListServlet;
 import controller.member.MypageQuestionListServlet;
 import controller.question.QuestionContentServlet;
 import controller.question.QuestionDeleteServlet;
-import controller.question.QuestionListServlet;
 import controller.question.QuestionModifyActionServlet;
 import controller.question.QuestionModifyServlet;
 import controller.question.QuestionWriteActionServlet;
@@ -291,15 +290,14 @@ public class FrontController extends HttpServlet {
 				this.view = "/admin/ad_cash_content.jsp";
 				this.isRedirect = false;
 			
-			}else if (command.equals("/controller/cashdonation/CashDonationReceiptServlet.do")) {
-				//System.out.println("TTTTT");
+			}else if (command.equals("/controller/CashDonationReceiptServlet.do")) {
 				CashDonationReceiptServlet cdrs = new CashDonationReceiptServlet();
 				cdrs.doPost(request, response);
 					
 				this.view = "/mypage/cash_receipt.jsp";
 				this.isRedirect = false;
 		   
-			}else if(command.equals("/controller/cashdonation/CashDonationListServlet.do")){
+			}else if(command.equals("/controller/CashDonationListServlet.do")){
 
 				CashDonationListServlet cdls = new CashDonationListServlet();
 				cdls.doGet(request, response);
@@ -307,7 +305,7 @@ public class FrontController extends HttpServlet {
 				this.view = "/admin/ad_cash_list.jsp";
 				this.isRedirect = false;
 			
-			}else if (command.equals("/controller/member/MypageCashDonationListServlet.do")) {
+			}else if (command.equals("/controller/MypageCashDonationListServlet.do")) {
 				
 				MypageCashDonationListServlet mcl = new MypageCashDonationListServlet();
 				mcl.doGet(request, response);
@@ -353,6 +351,7 @@ public class FrontController extends HttpServlet {
 					
 				this.view = "/controller/MypageCashDonationListServlet.do";
 				this.isRedirect = true;
+			
 			// 기부처 리스트
 			}else if (command.equals("/controller/DonationListServlet.do")) {
 				DonationListServlet dls = new DonationListServlet();
@@ -690,14 +689,6 @@ public class FrontController extends HttpServlet {
 					this.isRedirect = true;
 				
 //-------------------------------------------------- 1:1문의 -----------------------------------------------------------------------------------------------
-			}else if (command.equals("/controller/QuestionListServlet.do")) {
-				
-				QuestionListServlet qls = new QuestionListServlet();
-				qls.doPost(request, response);
-				
-				this.view = "/community/qna_list.jsp";
-				this.isRedirect = false;
-				
 			}else if (command.equals("/controller/MypageQuestionListServlet.do")) {
 				
 				MypageQuestionListServlet mqls = new MypageQuestionListServlet();
