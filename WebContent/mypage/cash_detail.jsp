@@ -36,6 +36,9 @@ select{
 select::-ms-expand { /* for IE 11 */
     display: none;
 }
+.total{
+	float:right;
+}
 </style>
 </head>
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
@@ -54,10 +57,10 @@ select::-ms-expand { /* for IE 11 */
 	<table class="table table-hover" id="clist">
 		<thead>
 			<tr>
-				<th width="10%" align="center" valign="middle">번호</th>
+				<th width="5%" align="center" valign="middle">번호</th>
 				<th width="10%">금액</th>
-				<th width="10%">납입방법</th>
-				<th width="20%">후원날짜</th>
+				<th width="15%">납입방법</th>
+				<th width="15%">후원날짜</th>
 				<th width="10%">월 출금일</th>
 				<th width="10%">후원상태</th>
 				<th width="10%">영수증</th>
@@ -71,12 +74,13 @@ select::-ms-expand { /* for IE 11 */
 		 	   	  <c:when test="${cv.cway=='정기후원'}">	
 		 		<tr>
 		 			<td>${cv.cidx}</td>
-					<td>&#8361;${cv.cmoney}</td>
+					<td>&#8361; ${cv.cmoney}</td>
 					<td>${cv.cpay}</td>
 					<td>${cv.cpaydate2}</td>
 					<td>월${cv.cpaydate1}일</td>
 					<td>${cv.cstate}</td>	
-					<td><a href="${ContextPath}/controller/CashDonationReceiptServlet.do?cidx=${cv.cidx}" class="btn btn-default" onclick="javascript:receiptOpen();">영수증 출력</a></td>
+					<td><a href="${ContextPath}/controller/CashDonationReceiptServlet.do?cidx=${cv.cidx}" class="btn btn-default"onclick="window.open(this.href,'영수증','width=510, height=620, left=100px,top=100px,scrollbars=yes');return false;" target="_blank">
+							영수증 출력</a></td>
 					<td>${cv.cpoint}포인트</td>
 					<c:choose>
 						<c:when test="${cv.cstate=='후원완료' }">
@@ -113,11 +117,11 @@ select::-ms-expand { /* for IE 11 */
 		 	  <c:when test="${cv.cway=='일시후원'}">	
 		 		<tr>
 		 			<td>${cv.cidx}</td>
-					<td>${cv.cmoney}원</td>
+					<td>&#8361; ${cv.cmoney}</td>
 					<td>${cv.cpay}</td>
 					<td>${cv.cpaydate2}</td>
 					<td>${cv.cstate}</td>
-					<td>${cv.cmoney*0.5}포인트</td>
+					<td>${cv.cpoint}포인트</td>
 				</tr>	
 			</c:when>
 			<c:otherwise></c:otherwise>
@@ -125,6 +129,21 @@ select::-ms-expand { /* for IE 11 */
 		</c:forEach>		
 		</tbody>
 	</table>
+	<div class="total" >
+	<hr color="#D5D5D5" width="100%" align="left">
+	
+	<c:set var="sum" value="${cv.cmoney }"/>
+	<c:forEach var="cv" items="${clist }">
+		<c:set var="sum" value="${sum+cv.cmoney }"/>
+	</c:forEach>
+	<h3>총 후원금액 : &#8361; ${sum}</h3>
+	
+	<c:set var="sum" value="${cv.cpoint }"/>
+	<c:forEach var="cv" items="${clist }">
+		<c:set var="sum" value="${sum+cv.cpoint }"/>
+	</c:forEach>
+	<h3>총 마일리지 : ${sum}</h3>
+	</div>
 	</div>
 	</div>
 <c:import url="/nav/footer.jsp"/>

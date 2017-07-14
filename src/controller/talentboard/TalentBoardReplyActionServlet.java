@@ -40,7 +40,8 @@ public class TalentBoardReplyActionServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		String tbtitle = request.getParameter("tbtitle");
+		String tbtitle_s = request.getParameter("tbtitle");
+		String tbtitle = "ㄴ"+tbtitle_s;
 		String tbcontent = request.getParameter("tbcontent");
 		int tbidx = Integer.parseInt(request.getParameter("tbidx"));
 		int midx = Integer.parseInt(request.getParameter("midx"));

@@ -57,8 +57,8 @@ select::-ms-expand { /* for IE 11 */
 	<div class="col-sm-10">
 		<select id="writer" name="신청자">
 			<option value="" selected>작성자 분류</option>
-			<option value="S">S : 제공자</option>
-			<option value="H">H : 희망자</option>
+			<option value="S">제공자</option>
+			<option value="H">희망자</option>
 		</select>
 		<select id="lan" name="언어">
 			<option value="" selected>언어</option>

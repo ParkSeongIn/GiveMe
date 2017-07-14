@@ -85,14 +85,12 @@ select::-ms-expand { /* for IE 11 */
 					<div class="form-group" >
 						<label class="control-label col-sm-4" for="tbpeople"></label>
 						<div class="col-sm-10">
-							<label class="radio-inline"><input type="radio" id="tbpeople" name="tbpeople" value="제공자">제공자</label>
+							<label class="radio-inline"><input type="radio" id="tbpeople" name="tbpeople" value="제공자" checked>제공자</label>
 							<label class="radio-inline"><input type="radio" id="tbpeople" name="tbpeople" value="희망자">희망자</label>
 					</div>
-					</div>		
 					<div class="col-sm-10">
-						<select id="tbcategory1" name="tbcategory1">	
-							<option value="tbcategory1" selected>선택분야 분류</option>
-							<option value="언어">언어</option>
+						<select id="tbcategory1" name="tbcategory1">
+							<option value="언어" selected>언어</option>
 							<option value="컴퓨터">컴퓨터</option>
 							<option value="음악">음악</option>
 							<option value="디자인">디자인</option>
@@ -100,11 +98,11 @@ select::-ms-expand { /* for IE 11 */
 							<option value="기타">기타</option>
 						</select>
 						<select id="tbcategory2" name="tbcategory2">
-							<option value="tbcategory2" selected>세부분류</option>
-							<option value="언어">언어</option>
+							<option value="언어" selected>언어</option>
 						</select>
 					</div>
-					<div class="form-group" >
+					
+					<div class="form-group">
 						<label class="control-label col-sm-4" for="tbtitle">제목</label>
 						<div class="col-sm-4">
 							<input type="text" id="tbtitle" name="tbtitle" class="form-control"/>
@@ -143,8 +141,7 @@ select::-ms-expand { /* for IE 11 */
 					<label class="control-label col-sm-4" for="tbarea">지역선택</label>
 					<div class="col-sm-3">
 							<select id="시" name="tbarea1">
-								<option value="" selected">지역 선택</option>
-								<option value="서울특별시">서울특별시</option>
+								<option value="서울특별시" selected>서울특별시</option>
 								<option value="부산광역시">부산광역시</option>
 								<option value="대구광역시">대구광역시</option>
 								<option value="인천광역시">인천광역시</option>
@@ -165,8 +162,7 @@ select::-ms-expand { /* for IE 11 */
 					</div>
 					<div class="col-sm-3">
 							<select id="군" name="tbarea2">
-								<option value="" selected>군 선택</option>
-								<option value="강서구">강서구</option>
+								<option value="강서구" selected>강서구</option>
 							</select>
 					</div>
 					<div class="col-sm-2"></div>

@@ -73,20 +73,28 @@ TalentBoardVo tv = (TalentBoardVo)request.getAttribute("tv");
 				<input type="hidden" id="tbidx" name="tbidx" value="${tbidx}" class="form-control" readonly="readonly" />	
 					<%-- 이 양식과 똑같이 하나하나 추가 --%>
 					</div>
-				<div class="form-group">
-					<label for="tbtitle">제목 :</label>
-					<input class="form-control" name="tbtitle" id="tbtitle" type="text" value="${tv.tbtitle}"/>
+				<div class="form-group" >
+					<label class="control-label col-sm-4" for="tbtitle">제목</label>
+					<div class="col-sm-4">
+						<input type="text" id="tbtitle" name="tbtitle" class="form-control" value="${tv.tbtitle}"/>
+					</div>
 				</div>
+				
+				<div class="col-sm-2"></div>
 				<div class="form-group">
-					<label for="tbcontent">내용 :</label>
-					<input class="form-control" name="tbcontent" id="tbcontent" type="text" value="${tv.tbcontent}"/>
+					<label class="control-label col-sm-4" for="tbcontent">내용작성</label>
+					<div class="col-sm-6">
+						<textarea name="tbcontent" id="tbcontent" name="tbcontent" rows="10" cols="80" >${tv.tbcontent}</textarea>
+					</div>
 				</div>
+					
 				<div>
 			    </div>
 					<div class="row" style="margin-top:10px">
 						<div class="col-sm-7"></div>
 						<div class="col-sm-3">
 							<%-- 버튼 입력 자리 --%>
+							<br/>
 							<input class="btn btn-default" id="addButton" type="button" value="수정"/>
 			        		<input class="btn btn-default" type="reset" value="초기화"/>
 			        		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/TalentBoardListServlet.do">글목록</a>

@@ -34,6 +34,11 @@ public class MemberContentServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
 		
+		String diff = null;
+		if(request.getParameter("diff") != null){
+			diff = request.getParameter("diff").trim();
+		}
+		
 		HttpSession session = request.getSession();
 		MemberVo vo = (MemberVo)session.getAttribute("vo");
 		int midx=vo.getMidx();

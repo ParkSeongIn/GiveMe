@@ -182,7 +182,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		vo.setMidx(rs.getInt("midx"));
 		vo.setMid(rs.getString("mid"));
-		vo.setMpwd(rs.getString("mpwd"));
+	//	vo.setMpwd(rs.getString("mpwd"));
 		vo.setMname(rs.getString("mname"));
 		vo.setMbirth(rs.getInt("mbirth"));
 		vo.setMphone(rs.getInt("mphone"));
@@ -279,6 +279,42 @@ public class MemberServiceImpl implements MemberService{
 	return result;
     }
 	
+    @Override
+    public int MemberConModChk(int midx, String mpwd){
+		
+		Connection con = dbconnect.getConnection(); 
+		PreparedStatement pstmt = null;  
+		ResultSet rs = null;  
+		
+		System.out.println("메소드안임"+midx);
+		System.out.println("메소드안임"+mpwd);
+		
+		int row = 0;
+		
+		try { 
+			
+			this.sql = "select count(*) from table_member where midx = ? and mpwd = ?"; 
+			
+			pstmt = con.prepareStatement(this.sql); 
+			pstmt.setInt(1,midx);
+			pstmt.setString(2,mpwd);
+			rs = pstmt.executeQuery();  
+			
+			if(rs.next()) {  
+				
+				row = rs.getInt(1);  
+				
+			}
+		
+		}catch(Exception e) { 
+			System.out.println(e.getMessage());
+		}finally { 
+			DBClose.close(con,pstmt,rs);
+		}
+		
+		return row;
+		
+	}
     
     @Override	//Id 중복체크 메소드
     public boolean checkId(String mid) {

@@ -93,7 +93,7 @@ input:focus,textarea:focus{
 			    	<div>
 			         	<input class="btn btn-default" id="addButton" type="button" value="등록"/>
 			            <a class="btn btn-default" href="<%=request.getContextPath()%>/main.jsp">취소</a>
-			             <a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionListServlet.do">1:1문의 내 글 목록</a>
+			             <a class="btn btn-default" href="<%=request.getContextPath()%>/controller/MypageQuestionListServlet.do">1:1문의 내 글 목록</a>
 			        </div>
 	    	</form>
 		</c:if>

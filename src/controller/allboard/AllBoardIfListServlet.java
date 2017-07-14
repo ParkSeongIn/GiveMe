@@ -33,9 +33,11 @@ public class AllBoardIfListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String abtype = request.getParameter("abtype");
+		String keyField = request.getParameter("keyField");
+		String keyWord = request.getParameter("keyWord");
 		
 		AllBoardServiceImpl ab = new AllBoardServiceImpl();
-		ArrayList<AllBoardVo> ablist = ab.getAllBoardList(abtype);
+		ArrayList<AllBoardVo> ablist = ab.getAllBoardList(abtype,keyField,keyWord);
 		request.setAttribute("ablist", ablist);
 	}
 

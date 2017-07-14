@@ -9,6 +9,20 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+	function tbsearchList(){
+		
+		if(document.tbsearch.keyField.value=="0"){
+			alert("검색 키워드를 입력하세요");
+			document.tbsearch.keyField.focus();
+			return;			
+		}else if(document.tbsearch.keyWord.value==""){
+			alert("검색어를 입력하세요");
+			document.tbsearch.keyWord.focus();
+			return;
+		}		
+	}
+</script>
 <title>재능후원내역(관리자)</title>
 <style>
 div.col-sm-10{
@@ -38,6 +52,7 @@ div.col-sm-10{
 				<th width="10%">매칭여부</th>
 				<th width="10%">매칭확인</th>
 				<th width="10%">제공취소</th>
+				<th width="10%">신청취소</th>
 		</thead>
 		 <tbody>
 		 	<c:forEach var="tb" items="${tblist}">
@@ -49,10 +64,20 @@ div.col-sm-10{
 					<td>${tb.tbstate}</td>
 					<td><a class="btn btn-default" href="${ContextPath}/controller/TalentBoardEtimeServlet.do?tbidx=${tb.tbidx}">매칭확인</a></td>
 					<td><a class="btn btn-default" href="${ContextPath}/controller/TalentBoardDeleteCancleServlet.do?tbidx=${tb.tbidx}">제공취소</a></td>
+					<td><a class="btn btn-default" href="${ContextPath}/controller/TalentBoardCancleServlet.do?midx=${tb.midx}">신청취소</a></td>				
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<form name="tbsearch" method="post" action="<%=request.getContextPath()%>/controller/TalentBoardAdListServlet.do" onsubmit="return tbsearchList()">
+			<select name="keyField">
+				<option value="0">---선택---</option>
+				<option value="mid">아이디</option>									
+			</select>
+			
+			<input type="text" name="keyWord">
+			<input type="submit" value="검색">
+		</form>
 	</div>
 	</div>
 <c:import url="/nav/footer.jsp"/>

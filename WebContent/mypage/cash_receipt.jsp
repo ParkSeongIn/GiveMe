@@ -16,12 +16,23 @@ CashDonationVo cv = (CashDonationVo)request.getAttribute("cv");
 <script src="../js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <title>영수증</title>
 </head>
+<style>
+.homename{
+	width: 490px;
+    height: 100px;
+    margin-top: 20px;
+    background-image:url('../image/image1.jpg');
+    background-size: 486px 100px;
+    background-repeat:no-repeat;
+    background-position:center center;
+}
+</style>
 <link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <div class="container">
 	<div class="panel panel-default">
 	<h1>영수증</h1>
-	<hr color="#D5D5D5" width="40%" align="left">
+	<hr color="#D5D5D5" width="100%" align="left">
 	<div class="panel-body">
 		<div class="form-group">
 		<h2>후원자</h2>
@@ -37,12 +48,13 @@ CashDonationVo cv = (CashDonationVo)request.getAttribute("cv");
 		</div>
 		<div class="form-group">
 		
-		<label class="control-label" for="cmoney">후원금액:</label>${cv.cmoney}<br/>
+		<label class="control-label" for="cmoney">후원금액:</label>${cv.cmoney}원<br/>
 		<label class="control-label" for="cpaydate2">후원날짜:</label>${cv.cpaydate2}<br/>
 		</div>
 		<hr color="#D5D5D5" width="100%" align="left">
-		<a type="button" href="#" class="btn btn-defualt">확인</a>
-		<a href="#" class="btn btn-defualt">출력</a>
+		<div class="homename"></div>
+		<button class="btn btn-default"  href="#">확인</button>
+		<button class="btn btn-default"  href="#">출력</button>
 	</div>
 	</div>
 </div>

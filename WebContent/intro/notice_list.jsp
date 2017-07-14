@@ -12,6 +12,20 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+	function noticesearchList(){
+		
+		if(document.noticesearch.keyField.value=="0"){
+			alert("검색 키워드를 입력하세요");
+			document.noticesearch.keyField.focus();
+			return;			
+		}else if(document.noticesearch.keyWord.value==""){
+			alert("검색어를 입력하세요");
+			document.noticesearch.keyWord.focus();
+			return;
+		}		
+	}
+</script>
 <style>
 div.col-sm-10{
 	  padding-top: 60px;
@@ -52,6 +66,18 @@ div.col-sm-10{
 			</c:forEach>
 		</tbody>
 	</table>
+	<br>
+		<form name="noticesearch" method="post" action="<%=request.getContextPath()%>/controller/AllBoardIfListServlet.do" onsubmit="return noticesearchList()">
+			<select name="keyField">
+				<option value="0">---선택---</option>
+				<option value="abid">아이디</option>	
+				<option value="abtitle">제목</option>
+			</select>
+			
+			<input type="text" name="keyWord">
+			<input type="submit" value="검색">
+		</form>	
+		
 		<div class="col-sm-8"></div>
 		<div class="col-sm-4">
 		<c:if test="${sessionScope.vo.mgrade == 'A' }">

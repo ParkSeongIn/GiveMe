@@ -21,6 +21,20 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	function qsearchList(){
+		
+		if(document.qsearch.keyField.value=="0"){
+			alert("검색 키워드를 입력하세요");
+			document.qsearch.keyField.focus();
+			return;			
+		}else if(document.qsearch.keyWord.value==""){
+			alert("검색어를 입력하세요");
+			document.qsearch.keyWord.focus();
+			return;
+		}		
+	}
+</script>
 <style>
 	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 	@import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
@@ -75,6 +89,17 @@ div.col-sm-10{
 	  		</td>
 		</tr>
 	</table>
+	<br>
+		<form name="qsearch" method="post" action="<%=request.getContextPath()%>/controller/AdQuestionListServlet.do" onsubmit="return qsearchList()">
+			<select name="keyField">
+				<option value="0">---선택---</option>
+				<option value="mid">아이디</option>
+				<option value="qtitle">제목</option>									
+			</select>
+			
+			<input type="text" name="keyWord">
+			<input type="submit" value="검색">
+		</form>		
 	</div>
 </div>
 <c:import url="/nav/footer.jsp"/>

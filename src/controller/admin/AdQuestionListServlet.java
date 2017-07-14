@@ -42,10 +42,12 @@ public class AdQuestionListServlet extends HttpServlet {
 			MemberVo vo = (MemberVo) session.getAttribute("vo");
 			midx = vo.getMidx();
 		}
+		String keyField = request.getParameter("keyField");
+		String keyWord = request.getParameter("keyWord");
 		
 		AdminServiceImpl ad = new AdminServiceImpl();
 		
-		ArrayList<QuestionVo> aqlist = ad.getAdQuestionList();
+		ArrayList<QuestionVo> aqlist = ad.getAdQuestionList(keyField,keyWord);
 		request.setAttribute("aqlist", aqlist);
 	}
 

@@ -13,6 +13,20 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	function searchList(){
+		
+		if(document.search.keyField.value=="0"){
+			alert("검색 키워드를 입력하세요");
+			document.search.keyField.focus();
+			return;			
+		}else if(document.search.keyWord.value==""){
+			alert("검색어를 입력하세요");
+			document.search.keyWord.focus();
+			return;
+		}		
+	}
+</script>
 </head>
 <style>
 div.col-sm-10{
@@ -63,7 +77,19 @@ ArrayList<MemberVo> list = (ArrayList<MemberVo>)request.getAttribute("list");
 			</c:forEach>	
 		</tbody>	
 				
-		</table>	
+		</table>
+		<br/><br/>
+		<form name="search" method="post" action="<%=request.getContextPath()%>/controller/MemberListServlet.do" onsubmit="return searchList()">
+				<select name="keyField">
+					<option value="0">---선택---</option>
+					<option value="mid">아이디</option>
+					<option value="mname">이름</option>
+					<option value="mphone">전화번호</option>						
+				</select>
+				
+				<input type="text" name="keyWord">
+				<input type="submit" value="검색">
+			</form>			
 	</div>
 	</div>
 <c:import url="/nav/footer.jsp"/>	

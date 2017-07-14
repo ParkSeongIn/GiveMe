@@ -34,8 +34,11 @@ public class MemberListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	    
+		String keyField = request.getParameter("keyField");
+		String keyWord = request.getParameter("keyWord");
+		
 	    AdminServiceImpl asi = new AdminServiceImpl();
-	    ArrayList<MemberVo> list = asi.getMemberList();
+	    ArrayList<MemberVo> list = asi.getMemberList(keyField,keyWord);
 	    request.setAttribute("list",  list);
 	}
 

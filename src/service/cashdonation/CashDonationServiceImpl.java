@@ -23,7 +23,7 @@ public class CashDonationServiceImpl implements CashDonationService {
 		ResultSet rs = null; 
 		ArrayList<CashDonationVo> clist = new ArrayList<CashDonationVo>(); 
 		try { 
-			String	sql = "select cidx, cmoney, cpay, cstate, cpoint "
+			String	sql = "select cidx, cmoney, cpay, cstate, cpoint, cway, cpaydate2 "
 				    	+ "from table_cashdonation ";
 			pstmt = con.prepareStatement(sql); 
 			rs = pstmt.executeQuery();
@@ -36,6 +36,8 @@ public class CashDonationServiceImpl implements CashDonationService {
 			cv.setCmoney(rs.getInt("cmoney"));
 			cv.setCstate(rs.getString("cstate"));
 			cv.setCpoint(rs.getInt("cpoint"));
+			cv.setCway(rs.getString("cway"));
+			cv.setCpaydate2(rs.getDate("cpaydate2"));
 			clist.add(cv); 
 			}
 		}catch(Exception e) { 

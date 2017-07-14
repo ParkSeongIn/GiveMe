@@ -1,32 +1,25 @@
-package controller.admin;
+package controller.common;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import service.admin.AdminServiceImpl;
-import service.admin.DonationListVo;
-import service.member.MemberVo;
-
-import java.util.ArrayList;
 
 /**
- * Servlet implementation class DonationListServlet
+ * Servlet implementation class pageReturnLoginServlet
  */
-@WebServlet("/DonationListServlet")
-public class DonationListServlet extends HttpServlet {
+@WebServlet("/pageReturnLogInServlet")
+public class pageReturnLogInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DonationListServlet() {
+    public pageReturnLogInServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,17 +27,15 @@ public class DonationListServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		AdminServiceImpl as = new AdminServiceImpl();
-
-		String keyField = request.getParameter("keyField");
-		String keyWord = request.getParameter("keyWord");
-		ArrayList<DonationListVo> list = as.getDonationListLine(keyField,keyWord);
-		request.setAttribute("list", list);
+		request.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
 		
+		out.print("<script>alert('로그인이 필요한 서비스 입니다.');location.href='"+request.getContextPath()+"/controller/MemberCheckLoginServlet.do';</script>");	
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

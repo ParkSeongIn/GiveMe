@@ -19,37 +19,44 @@ public class AllBoardServiceImpl implements AllBoardService{
     }
     
     @Override
-    public ArrayList<AllBoardVo> getAllBoardList(String abtype) {
+    public ArrayList<AllBoardVo> getAllBoardList(String abtype, String keyField, String keyWord) {
     	Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<AllBoardVo> ablist = new ArrayList<AllBoardVo>();
 		try {
-			String sql = "select * from ("
-							+ "select * from ("
-								+ "select rownum rnum, AA.* "
-								+ "from ( select tb.abidx,tb.abimage,tb.abtitle,tb.abhit,tb.abwdate,tb.abdeletest,tb.abcontent,tb.abid "
-									+ "from table_allboard tb "
-									+ "where tb.abtype = ? and tb.abdeletest = 'N' "
-									+ "order by tb.abidx asc"
-									+ ") AA "
-									+ ") where rnum <= 5"
-									+ ") where rnum >= 1";
+			String sql = "select * from "
+				+ 	"(select * from "
+				+ 		"(select rownum rnum, AA.* from "
+				+ 			"(select tb.abidx, tb.abimage, tb.abtitle, tb.abhit, tb.abwdate, tb.abdeletest, tb.abcontent, tb.abid from "
+				+ 			"table_allboard tb where tb.abtype = ? and tb.abdeletest='N' order by tb.abidx asc) AA) "
+				+ 		"where rnum <= 5) "
+				+ 	"where rnum >= 1";
+			
+			if(keyWord != null && !keyWord.equals("") ){
+				sql +=" and "+keyField.trim()+" like '%"+keyWord.trim()+"%' order by abidx";
+			}else{
+				sql +=" order by abidx";
+			}
+			
 			pstmt = con.prepareStatement(sql);
+				System.out.println(sql);
 			pstmt.setString(1, abtype);
+			pstmt.setString(2, keyField);
+			pstmt.setString(3, keyWord);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				AllBoardVo avo = new AllBoardVo();
 				
-				avo.setAbidx(rs.getInt(2));
-				avo.setAbimage(rs.getString(3));
-				avo.setAbtitle(rs.getString(4));
-				avo.setAbhit(rs.getInt(5));
-				avo.setAbwdate(rs.getDate(6));
-				avo.setAbdeletest(rs.getString(7));
-				avo.setAbcontent(rs.getString(8));
-				avo.setAbid(rs.getString(9));
+				avo.setAbidx(rs.getInt("abidx"));
+				avo.setAbimage(rs.getString("abimage"));
+				avo.setAbtitle(rs.getString("abtitle"));
+				avo.setAbhit(rs.getInt("abhit"));
+				avo.setAbwdate(rs.getDate("abwdate"));
+				avo.setAbdeletest(rs.getString("abdeletest"));
+				avo.setAbcontent(rs.getString("abcontent"));
+				avo.setAbid(rs.getString("abid"));
 				ablist.add(avo);
 			}
 			

@@ -35,22 +35,26 @@ div.col-sm-10{
 		<thead>
 			<tr>
 				<th width="10%" align="center" valign="middle">후원번호</th>
-				<th width="10%">기부방법</th>
+				<th width="10%">성함</th>
+				<th width="20%">후원방법</th>
+				<th width="10%">결제방법</th>
 				<th width="10%">금액</th>
+				<th width="20%">결제일</th>
 				<th width="10%">상태</th>
-				<th width="20%">(정기)후원취소</th>
 			</tr>
 		</thead>
 		 <tbody>
-		 <% for (CashDonationVo cv : clist){ %>
+		 <c:forEach var="cv" items="${clist }">
 		 		<tr>
-		 			<td><%=cv.getCidx() %></td>
-					<td><%=cv.getCpay() %></td>
-					<td><%=cv.getCmoney() %></td>
-					<td><%=cv.getCstate() %></td>
-					<td></td>
+		 			<td>${cv.cidx }</td>
+		 			<td>${sessionScope.vo.mname }</td>
+					<td>${cv.cpay}</td>
+					<td>${cv.cway }</td>
+					<td>${cv.cmoney }</td>
+					<td>${cv.cpaydate2 }</td>
+					<td>${cv.cstate }</td>
 				</tr>
-		<%} %>		
+		</c:forEach>	
 		</tbody>
 	</table>
 	</div>

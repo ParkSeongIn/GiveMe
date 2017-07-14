@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import controller.admin.MemberListServlet;
 import controller.admin.TalentBoardAdContentServlet;
@@ -113,12 +113,23 @@ public class FrontController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 			request.setCharacterEncoding("UTF-8");
-			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
 			String contextPath = request.getContextPath();
 		    String url = request.getRequestURI();
 		    String command = url.substring(contextPath.length());
 		    
-		    //회원
+		    int sess_midx = 0;
+		    String sess_mgrade = null;
+		
+			HttpSession session = request.getSession();
+			
+			if(session.getAttribute("midx") != null){
+				sess_midx = (Integer) session.getAttribute("midx");
+			}
+			if(session.getAttribute("mgrade") != null){
+				sess_mgrade = (String) session.getAttribute("mgrade");
+			}
+			
 		  //회원
 		    if(command.equals("/controller/MainServlet.do")){
 		    	MainServlet ms = new MainServlet();
@@ -132,8 +143,7 @@ public class FrontController extends HttpServlet {
 		    	ml.doGet(request, response);
 			
 		    	this.view = "/admin/ad_member_list.jsp";
-		    	this.isRedirect=false;	
-			
+		    	this.isRedirect=false;
 		    }else if(command.equals("/controller/MemberInsertServlet.do")){
 		    	MemberInsertServlet mis = new MemberInsertServlet();
 		    	mis.doGet(request, response);
@@ -151,17 +161,24 @@ public class FrontController extends HttpServlet {
 		    }else if(command.equals("/controller/MemberContentServlet.do")){
 		    	MemberContentServlet mcs = new MemberContentServlet();
 		    	mcs.doGet(request, response);
-			
-		    	this.view="/admin/ad_member_content.jsp";
+		    	
+		    	
+			   	this.view="/admin/ad_member_content2.jsp";
 		    	this.isRedirect=false;
-			
 		    }else if(command.equals("/controller/MemberModifyServlet.do")){
 				MemberModifyServlet mms = new MemberModifyServlet();
 				mms.doGet(request, response);
+				int row = mms.retn();
 				
-				this.view="/mypage/member_modify.jsp";
-				this.isRedirect=false;
-			
+				if (row == 1){
+					this.view="/mypage/member_modify.jsp";				
+					this.isRedirect=false;
+				}else{
+					//잘못입력한 내용을 구분값을 두어 넘긴다 diff=1 이면 잘못입력한걸로 함
+					this.view="/controller/MemberContentServlet.do?diff=1";
+					this.isRedirect=true;
+				}
+						
 		    }else if(command.equals("/controller/MemberModifyActionServlet.do")){
 			MemberModifyActionServlet mmas = new MemberModifyActionServlet();
 			mmas.doPost(request, response);
@@ -249,6 +266,7 @@ public class FrontController extends HttpServlet {
 				CashDonationListServlet cdls = new CashDonationListServlet();
 				cdls.doGet(request, response);
 				
+			 	
 				this.view = "/admin/ad_cash_list.jsp";
 				this.isRedirect = false;
 			
@@ -275,7 +293,7 @@ public class FrontController extends HttpServlet {
 				this.isRedirect = true;
 				
 			}else if (command.equals("/controller/CashDonationResultServlet.do")) {
-				System.out.println("TestRESULT");
+				
 				CashDonationInsertActionServlet cdas = new CashDonationInsertActionServlet();
 				cdas.doPost(request, response);
 				
@@ -283,13 +301,14 @@ public class FrontController extends HttpServlet {
 				this.isRedirect = true;
 				
 			}else if (command.equals("/controller/CashDonationContentServlet.do")) {
-			//	System.out.println("TestOk");
+	
 				CashDonationContentServlet cdcs = new CashDonationContentServlet();
 				cdcs.doPost(request, response);
 				
+				
 				this.view = "/admin/ad_cash_content.jsp";
 				this.isRedirect = false;
-			
+						
 			}else if (command.equals("/controller/CashDonationReceiptServlet.do")) {
 				CashDonationReceiptServlet cdrs = new CashDonationReceiptServlet();
 				cdrs.doPost(request, response);
@@ -297,10 +316,11 @@ public class FrontController extends HttpServlet {
 				this.view = "/mypage/cash_receipt.jsp";
 				this.isRedirect = false;
 		   
-			}else if(command.equals("/controller/CashDonationListServlet.do")){
+			}else if(command.equals("/controller/cashdonation/CashDonationListServlet.do")){
 
 				CashDonationListServlet cdls = new CashDonationListServlet();
 				cdls.doGet(request, response);
+				
 				
 				this.view = "/admin/ad_cash_list.jsp";
 				this.isRedirect = false;
@@ -314,7 +334,7 @@ public class FrontController extends HttpServlet {
 				this.isRedirect = false;
 				
 			}else if (command.equals("/controller/cashdonation/CashDonationInsertServlet.do")) {
-				//System.out.println("TestINSERT");
+				
 				CashDonationInsertServlet cdis = new CashDonationInsertServlet();
 				cdis.doPost(request, response);
 				
@@ -322,7 +342,7 @@ public class FrontController extends HttpServlet {
 				this.isRedirect = false;
 				
 			}else if (command.equals("/controller/cashdonation/CashDonationResultServlet.do")) {
-				//System.out.println("TestRESULT");
+				
 				CashDonationInsertActionServlet cdas = new CashDonationInsertActionServlet();
 				cdas.doPost(request, response);
 				
@@ -330,15 +350,16 @@ public class FrontController extends HttpServlet {
 				this.isRedirect = true;
 				
 			}else if (command.equals("/controller/admin/CashDonationContentServlet.do")) {
-			//	System.out.println("TestOk");
+			
 				CashDonationContentServlet cdcs = new CashDonationContentServlet();
 				cdcs.doPost(request, response);
+				
 				
 				this.view = "/admin/ad_cash_content.jsp";
 				this.isRedirect = false;
 			
 			}else if (command.equals("/controller/cashdonation/CashDonationReceiptServlet.do")) {
-				//System.out.println("TTTTT");
+				
 				CashDonationReceiptServlet cdrs = new CashDonationReceiptServlet();
 				cdrs.doPost(request, response);
 					
@@ -354,33 +375,43 @@ public class FrontController extends HttpServlet {
 			
 			// 기부처 리스트
 			}else if (command.equals("/controller/DonationListServlet.do")) {
+				
 				DonationListServlet dls = new DonationListServlet();
 				dls.doGet(request, response);
 				
+				
 				this.view = "/admin/ad_donation_list.jsp";
 				this.isRedirect = false;
+				
 			}else if(command.equals("/controller/DonationWriteServlet.do")){
+				
 				DonationWriteServlet dw = new DonationWriteServlet();
 				dw.doGet(request,response);
+				
 				
 				this.view = "/admin/ad_donation_write.jsp";
 				this.isRedirect = false;
 				
 			} else if(command.equals("/controller/DonationWriteActionServlet.do")){
+				
 				DonationWriteActionServlet da = new DonationWriteActionServlet();
 				da.doPost(request,response);
 				
-				this.view = "/controller/DonationListServlet.do";
+				
+			this.view = "/controller/DonationListServlet.do";
 				this.isRedirect = true;
 				
 			} else if(command.equals("/controller/DonationContentServlet.do")){
+				
 				DonationContentServlet dc = new DonationContentServlet();
 				dc.doGet(request,response);
+				
 				
 				this.view = "/admin/ad_donation_content.jsp";
 				this.isRedirect = false;
 				
 			}else if(command.equals("/controller/DonationModifyServlet.do")){
+				
 				DonationModifyServlet dm = new DonationModifyServlet();
 				dm.doGet(request,response);
 				
@@ -388,19 +419,23 @@ public class FrontController extends HttpServlet {
 				this.isRedirect = false;
 				
 			}else if(command.equals("/controller/DonationModifyActionServlet.do")){
+				
 				DonationModifyActionServlet dam = new DonationModifyActionServlet();
 				dam.doPost(request,response);
+				
 				
 				this.view = "/controller/DonationContentServlet.do";
 				this.isRedirect = false;
 				
 			}else if(command.equals("/controller/DonationDeleteServlet.do")){
+				
 				DonationDeleteServlet dd = new DonationDeleteServlet();
 				dd.doGet(request,response);
 				
+				
 				this.view = "/admin/ad_donation_list.jsp";
 				this.isRedirect = false;
-			
+				
 				// ㅡㅡㅡㅡㅡㅡㅡ	기부처 검색 (커뮤니티)
 				
 				}else if(command.equals("/controller/AllBoardDonationSearchServlet.do")){ // 기부처 검색
@@ -450,6 +485,7 @@ public class FrontController extends HttpServlet {
 					AllBoardWriteServlet abw = new AllBoardWriteServlet();
 					abw.doGet(request, response);
 					
+					
 					this.view = "/admin/ad_news_write.jsp";
 					this.isRedirect = false;
 					
@@ -469,20 +505,20 @@ public class FrontController extends HttpServlet {
 					this.view = "/controller/AllBoardListServlet.do?abtype=N";
 					this.isRedirect = true;
 					
-					
 				}else if (command.equals("/controller/AllBoardIfWriteActionServlet.do")){ // 공지사항 글 등록
 
 					AllBoardIfWriteActionServlet abiwa = new AllBoardIfWriteActionServlet();
 					abiwa.doPost(request, response);
 					
+					
 					this.view = "/controller/AllBoardIfListServlet.do?abtype=I";
 					this.isRedirect = true;
-					
 					
 				}else if (command.equals("/controller/AllBoardModifyServlet.do")){ // 기부동향 수정 페이지
 				
 					AllBoardModifyServlet ams = new AllBoardModifyServlet();
 					ams.doGet(request, response);
+					
 					
 					this.view = "/admin/ad_news_modify.jsp";
 					this.isRedirect = false;
@@ -492,6 +528,7 @@ public class FrontController extends HttpServlet {
 					AllBoardIfModifyServlet aims = new AllBoardIfModifyServlet();
 					aims.doGet(request, response);
 
+					
 					this.view = "/admin/ad_notice_modify.jsp";
 					this.isRedirect = false;
 					
@@ -500,21 +537,25 @@ public class FrontController extends HttpServlet {
 					AllBoardModifyActionServlet abms = new AllBoardModifyActionServlet();  
 					abms.doPost(request, response);
 					
+					
 					this.view = "/controller/AllBoardContentServlet.do?abidx="+request.getParameter("abidx");
 					this.isRedirect = true;
+					
 					
 				}else if (command.equals("/controller/AllBoardIfModifyActionServlet.do")){ // 공지사항 수정
 
 					AllBoardIfModifyActionServlet abims = new AllBoardIfModifyActionServlet();  
 					abims.doPost(request, response);
 					
-					this.view = "/controller/AllBoardIfContentServlet.do?abidx="+request.getParameter("abidx");
+					
+				this.view = "/controller/AllBoardIfContentServlet.do?abidx="+request.getParameter("abidx");
 					this.isRedirect = true;
 					
 				}else if (command.equals("/controller/AllBoardDeleteServlet.do")){ // 기부동향 삭제
 
 					AllBoardDeleteServlet ads = new AllBoardDeleteServlet();
 					ads.doPost(request, response);
+					
 					
 					this.view = "/controller/AllBoardListServlet.do?abtype=N";
 					this.isRedirect = true;
@@ -523,6 +564,7 @@ public class FrontController extends HttpServlet {
 
 					AllBoardIfDeleteServlet ads = new AllBoardIfDeleteServlet();
 					ads.doPost(request, response);
+					
 					
 					this.view = "/controller/AllBoardIfListServlet.do?abtype=I";
 					this.isRedirect = true;
@@ -606,6 +648,7 @@ public class FrontController extends HttpServlet {
 					TalentBoardEtimeServlet tbes = new TalentBoardEtimeServlet();
 					tbes.doPost(request, response);
 					
+					
 					this.view = "/controller/TalentBoardAdListServlet.do";
 					this.isRedirect = true;
 					
@@ -622,6 +665,7 @@ public class FrontController extends HttpServlet {
 					TalentBoardAdListServlet tbals = new TalentBoardAdListServlet();
 					tbals.doGet(request, response);
 					
+					
 					this.view = "/admin/ad_talent_list.jsp";
 					this.isRedirect = false;
 					
@@ -630,9 +674,10 @@ public class FrontController extends HttpServlet {
 					TalentBoardAdContentServlet tbacs = new TalentBoardAdContentServlet();
 					tbacs.doGet(request, response);
 					
+					
 					this.view = "/admin/ad_talent_content.jsp";
 					this.isRedirect = false;
-					
+										
 				}else if (command.equals("/controller/TalentBoardMyListServlet.do")){ // 재능기부 마이페이지 내역
 
 					TalentBoardMyListServlet tbmls = new TalentBoardMyListServlet();
@@ -641,7 +686,7 @@ public class FrontController extends HttpServlet {
 					this.view = "/mypage/talent_detail.jsp";
 					this.isRedirect = false;
 					
-				}else if (command.equals("/controller/TalentBoardIndexServlet.do")){ // 재능기부 마이페이지 내역
+				}else if (command.equals("/controller/TalentBoardIndexServlet.do")){ // 재능기부 게시판 초기 화면 인덱스
 
 					TalentBoardIndexServlet tbis = new TalentBoardIndexServlet();
 					tbis.doGet(request, response);
@@ -658,13 +703,13 @@ public class FrontController extends HttpServlet {
 					this.isRedirect = false;
 					
 				}else if (command.equals("/controller/TalentBoardReplyActionServlet.do")){ // 재능기부 답변
-					System.out.println("테스트");					
+					
 					TalentBoardReplyActionServlet tbras = new TalentBoardReplyActionServlet();
 					tbras.doPost(request, response);
 					this.view = "/controller/TalentBoardListServlet.do";
 					this.isRedirect = true;
 				
-				}else if (command.equals("/controller/TalentBoardReplyModifyServlet.do")){ // 재능기부 답변 수정 폼
+				}else if (command.equals("/controller/TalentBoardReplyModifyServlet.do")){ // 재능기부 답변 수정 페이지
 
 					TalentBoardReplyModifyServlet tbrms = new TalentBoardReplyModifyServlet();
 					tbrms.doGet(request, response);
@@ -712,14 +757,6 @@ public class FrontController extends HttpServlet {
 				
 				this.view = "/community/qna_write.jsp";
 				this.isRedirect = false;
-					
-			}else if (command.equals("/controller/QuestionWriteActionServlet.do")) {
-				
-				QuestionWriteActionServlet cwas = new QuestionWriteActionServlet();
-				cwas.doPost(request, response);
-				
-				this.view = "/controller/QuestionListServlet.do";
-				this.isRedirect = true;	
 				
 			}else if (command.equals("/controller/QuestionContentServlet.do")) {
 				
@@ -766,6 +803,7 @@ public class FrontController extends HttpServlet {
 				AdQuestionContentServlet aqcs = new AdQuestionContentServlet();
 				aqcs.doPost(request, response);
 				
+				
 				this.view= "/admin/ad_qna_content.jsp";
 				this.isRedirect = false;
 				
@@ -773,6 +811,7 @@ public class FrontController extends HttpServlet {
 		
 				AdQuestionModifyServlet aqms = new AdQuestionModifyServlet();
 				aqms.doPost(request, response);
+				
 				
 				this.view = "/admin/ad_qna_modify.jsp";
 				this.isRedirect = false;
@@ -782,13 +821,13 @@ public class FrontController extends HttpServlet {
 				AdQuestionModifyActionServlet aqas = new AdQuestionModifyActionServlet();
 				aqas.doPost(request, response);
 				
+				
 				this.view = "/controller/AdQuestionListServlet.do";
 				this.isRedirect = true;
 			}
 		    
 		    
-		    
-		    if(this.isRedirect){
+		     if(this.isRedirect){
 				response.sendRedirect(contextPath+view);
 			}else{
 				RequestDispatcher rs = request.getRequestDispatcher(view);

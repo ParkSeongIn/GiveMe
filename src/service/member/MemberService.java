@@ -17,6 +17,7 @@ public interface MemberService {
 	MemberVo findMpwdGetCon(MemberVo vo);
 	int passwordupdateMember(String mid, String mpwd);
 	int deleteMember(int midx);
+	int MemberConModChk(int midx, String mpwd);
 	
 	
 	

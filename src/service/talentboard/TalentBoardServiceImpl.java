@@ -360,7 +360,7 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 		int tbdc = 0;
 		try {
 			sql ="update table_talentboard set tbstate = 'R', tbapply = 'N', tbcancle = 'Y', tbdeletest = 'Y'"
-					+ "where tbidx = ?";
+					+ " where tbidx = ? ";
 			pstmt = con.prepareStatement(sql);
 			System.out.println(sql);
 			pstmt.setInt(1, tbidx);
@@ -410,14 +410,14 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 		try {
 			sql = "select * from ("
 					+ "select * from ("
-						+ "select rownum rnum, AA.* "
-							+ "from ( select tt.midx,tt.tbcategory1,tt.tbcategory2,tm.mid,tt.tbhdate,tt.tbstate "
-								+ "from table_talentboard tt,table_member tm "
-									+ "where tt.midx = tm.midx and tm.midx = ? and tt.tbdeletest = 'N' "
-										+ "order by tt.tbgrp desc,tt.tbseq asc,tt.tbidx asc"
-											+ ") AA "
-												+ ") where rnum <= 5"
-													+ ") where rnum >= 1";
+					+ "select rownum rnum, AA.* "
+						+ "from ( select tt.tbidx,tt.midx,tt.tbcategory1,tt.tbcategory2,tm.mid,tt.tbhdate,tt.tbstate "
+						+ "from table_talentboard tt,table_member tm "
+						+ "where tt.midx = tm.midx and tm.midx = ? and tt.tbdeletest = 'N' "
+						+ "order by tt.tbgrp desc,tt.tbseq asc,tt.tbidx asc"
+						+ ") AA "
+						+ ") where rnum <= 5"
+						+ ") where rnum >= 1";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, midx);
@@ -426,6 +426,7 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 			while(rs.next()) {
 				TalentBoardVo tvo = new TalentBoardVo();
 				
+				tvo.setTbidx(rs.getInt("tbidx"));
 				tvo.setMidx(rs.getInt("midx"));
 				tvo.setTbcategory1(rs.getString("tbcategory1"));
 				tvo.setTbcategory2(rs.getString("tbcategory2"));
@@ -450,10 +451,6 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 	      Connection con = dbconnect.getConnection();
 	      PreparedStatement pstmt = null;
 	      int rtb = 0;
-	      System.out.println(tvo.getTbtitle());
-	      System.out.println(tvo.getTbcontent());
-	      System.out.println(tvo.getTbidx());
-	      System.out.println(tvo.getMidx());
 	      try{
 	          
 	         con.setAutoCommit(false);
@@ -483,7 +480,6 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 	         		+ "	?, 'N', 1 , 'N')";   
 	            
 	         pstmt = con.prepareStatement(sql);
-	         System.out.println(sql);
 				pstmt.setString(1, tvo.getTbtitle());
 				pstmt.setString(2, tvo.getTbcontent());
 				pstmt.setInt(3, tvo.getTbidx());

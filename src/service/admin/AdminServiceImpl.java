@@ -25,7 +25,7 @@ public class AdminServiceImpl implements AdminService{
 
     
     @Override
-    public ArrayList<MemberVo> getMemberList() {
+    public ArrayList<MemberVo> getMemberList(String keyField, String keyWord) {
 	// TODO Auto-generated method stub
 	Connection con = dbconnect.getConnection();
 	PreparedStatement pstmt = null;
@@ -34,14 +34,20 @@ public class AdminServiceImpl implements AdminService{
 	
 	try{
 	    String sql="select * from "
-	    	+ "(select rownum rnum,midx,mname,mid,mmail,menter,mvalue "
-		+ "from table_member order by midx desc)"
-	    	+ " where rnum <= 20 and rnum >= 1";
+	    	+ "(select rownum rnum, midx, mname, mid, mmail, menter, mvalue "
+		+ "from table_member order by midx desc) "
+	    	+ "where rnum <= 20 and rnum >= 1";
+	    
+	    if(keyWord != null && !keyWord.equals("") ){
+		sql +=" and "+keyField.trim()+" like '%"+keyWord.trim()+"%' order by midx";
+	    }else{
+		sql +=" order by midx";
+	    }
 	    
 //	    String sql="select midx,mname,mid,mmail,menter,mvalue from table_member order by midx desc";
 	    pstmt = con.prepareStatement(sql);
 	    rs=pstmt.executeQuery();	    
-	    System.out.println(sql);
+	    	System.out.println(sql);
 	    while(rs.next()){
 		MemberVo vo = new MemberVo();
 		
@@ -247,7 +253,7 @@ public class AdminServiceImpl implements AdminService{
     	
 
     @Override
-    public ArrayList<DonationListVo> getDonationListLine(){
+    public ArrayList<DonationListVo> getDonationListLine(String keyField, String keyWord){
 	// TODO Auto-generated method stub
     	Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt= null;
@@ -256,20 +262,21 @@ public class AdminServiceImpl implements AdminService{
 		ArrayList<DonationListVo> list = new ArrayList<DonationListVo>();
     	
 		try{
-		String sql = "select * "
-                     + "from (select rownum rnum,dlidx,dlgroup2,dlplace,dlarea,dlwdate,dldeletest " 
-                     + "from table_donationlist "
-                     + "order by dlidx desc) "
-                     + "where rnum <= 20 "
-                     + "and rnum >= 1 ";
+		String sql = "select * from "
+			+ "(select rownum rnum, dlidx, dlgroup2, dlplace, dlarea, dlwdate, dldeletest from "
+			+ "table_donationlist order by dlidx desc) "
+			+ "where rnum <= 20 and rnum >= 1";
 
+		if(keyWord != null && !keyWord.equals("") ){
+			sql +=" and "+keyField.trim()+" like '%"+keyWord.trim()+"%' order by dlidx";
+		}else{
+			sql +=" order by dlidx";
+		}
 		pstmt = con.prepareStatement(sql);
-
-		
+			System.out.println(sql);
 		rs = pstmt.executeQuery();
-			
            
-			while(rs.next()){
+		while(rs.next()){
         	   DonationListVo dl = new DonationListVo();
         	   dl.setDlidx(rs.getInt("dlidx"));
         	   dl.setDlgroup2(rs.getString("dlgroup2"));
@@ -379,21 +386,25 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public ArrayList<QuestionVo> getAdQuestionList() {
+    public ArrayList<QuestionVo> getAdQuestionList(String keyField, String keyWord) {
     	Connection con = dbconnect.getConnection();
     	PreparedStatement pstmt = null;
     	ResultSet rs = null;
     	ArrayList<QuestionVo> aqlist = new ArrayList<QuestionVo>();
     	try { 
-    		sql = " select * from ("
-					+ "select * from ("
-					+ 	"select rownum rn, AA.*from ("
-					+ 		"select tq.qidx, tq.qcategory, tq.qtitle, tm.mid, tq.qstate, tq.qwdate, tq.qdeletest "
-					+ 		"from table_member tm, table_question tq "
-					+ 		"where tm.midx = tq.midx "
-					+ 		")AA order by AA.qidx desc) "
-					+ "where rn <=50 ) "
-					+ "where rn >=1";
+    		sql = "select * from "
+    			+ "(select * from "
+    			+ "	(select rownum rn, AA.* from "
+    			+ "		(select tq.qidx, tq.qcategory, tq.qtitle, tm.mid, tq.qstate, tq.qwdate, tq.qdeletest from "
+    			+ "			table_member tm, table_question tq where tm.midx = tq.midx)AA order by AA.qidx desc) "
+    			+ "where rn <=25) "
+    			+ "where rn >=1";
+    		
+    		if(keyWord != null && !keyWord.equals("") ){
+    		    sql +=" and "+keyField.trim()+" like '%"+keyWord.trim()+"%' order by qidx";
+    		}else{
+    		    sql +=" order by qidx";
+    		}
     		pstmt = con.prepareStatement(sql);
     		rs = pstmt.executeQuery();
     		

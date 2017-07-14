@@ -84,7 +84,9 @@ int tbidx = (Integer)request.getAttribute("tbidx");
 			<div class="panel-body">
 			<form id="addForm" action="${ContextPath }/controller/TalentBoardReplyActionServlet.do" method="post">
 				<div class="form-horizontal">
-				<input type="hidden" id="tbidx" name="tbidx" value="${tbidx}" class="form-control" readonly="readonly" />	
+				<input type="hidden" id="tbidx" name="tbidx" value="${tbidx}" class="form-control"/>
+				<input type="hidden" id="mid" name="mid" value="${sessionScope.vo.mid }" class="form-control"/>
+				<input type="hidden" id="midx" name="midx" class="form-control" value="${sessionScope.vo.midx}" />
 					<%-- 이 양식과 똑같이 하나하나 추가 --%>
 					</div>
 					
@@ -94,18 +96,7 @@ int tbidx = (Integer)request.getAttribute("tbidx");
 							<input type="text" id="tbtitle" name="tbtitle" class="form-control"/>
 						</div>
 					</div>
-					<div class="form-group" >
-						<label class="control-label col-sm-4" for="mid">작성자</label>
-						<div class="col-sm-4">
-							<input type="text" id="mid" name="mid" value="${sessionScope.vo.mid }" class="form-control" readonly="readonly" />
-						</div>
-					</div>						
-					<div class="form-group">
-						<label class="control-label col-sm-4" for="midx">회원번호</label>
-						<div class="col-sm-4">
-							<input type="text" id="midx" name="midx" class="form-control" value="${sessionScope.vo.midx}" readonly="readonly"	/>
-						</div>
-					</div>
+					
 					<div class="col-sm-2"></div>
 					<div class="form-group">
 						<label class="control-label col-sm-4" for="tbcontent">내용작성</label>
@@ -113,9 +104,11 @@ int tbidx = (Integer)request.getAttribute("tbidx");
 							<textarea name="tbcontent" id="tbcontent" name="tbcontent" rows="10" cols="80"></textarea>
 						</div>
 					</div>
+					
 					<div class="row" style="margin-top:10px">
 						<div class="col-sm-7"></div>
 						<div class="col-sm-3">
+							<br/>
 							<%-- 버튼 입력 자리 --%>
 							<input class="btn btn-default" id="addButton" type="button" value="글입력"/>
             				<input class="btn btn-default" type="reset" value="초기화"/>

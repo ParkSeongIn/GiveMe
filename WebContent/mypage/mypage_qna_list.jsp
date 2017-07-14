@@ -36,7 +36,7 @@ div.col-sm-10{
 <link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
 <c:import url="/nav/header.jsp"/>
-<c:import url="/nav/sidebar4.jsp"/>
+<c:import url="/nav/sidebar5.jsp"/>
 
 <div class="container">
 		<div class="col-sm-10">

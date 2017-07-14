@@ -12,6 +12,20 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+	function dlsearchList(){
+		
+		if(document.dlsearch.keyField.value=="0"){
+			alert("검색 키워드를 입력하세요");
+			document.dlsearch.keyField.focus();
+			return;			
+		}else if(document.dlsearch.keyWord.value==""){
+			alert("검색어를 입력하세요");
+			document.dlsearch.keyWord.focus();
+			return;
+		}		
+	}
+</script>
 <style>
 div.col-sm-10{
 	  padding-top: 60px;
@@ -62,6 +76,17 @@ div.col-sm-10{
 		</tbody>
 			
 	</table>
+	<form name="dlsearch" method="post" action="<%=request.getContextPath()%>/controller/DonationListServlet.do" onsubmit="return dlsearchList()">
+			<select name="keyField">
+				<option value="0">---선택---</option>
+				<option value="dlarea">지역</option>
+				<option value="dlgroup2">분류</option>
+				<option value="dlplace">단체 상세</option>										
+			</select>
+			
+			<input type="text" name="keyWord">
+			<input type="submit" value="검색">
+		</form>	
 		<div class="col-sm-8"></div>
 		<div class="col-sm-4">
 		<c:if test="${sessionScope.vo.login == true }">
