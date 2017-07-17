@@ -95,7 +95,7 @@ div.qrecontent{
 						</div>
 				
 				<div class="qna-content">
-					<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AdQuestionModifyServlet.do?qidx=<%=qidx %>">답변 수정</a>
+					<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AdQuestionModifyServlet.do?qidx=<%=qidx %>">답변 작성 및 수정</a>
 	 				<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AdQuestionListServlet.do">글목록</a>
 				</div> 	
 		</div>

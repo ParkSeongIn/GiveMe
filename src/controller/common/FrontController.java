@@ -114,21 +114,11 @@ public class FrontController extends HttpServlet {
 		// TODO Auto-generated method stub
 			request.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
+			
 			String contextPath = request.getContextPath();
 		    String url = request.getRequestURI();
 		    String command = url.substring(contextPath.length());
 		    
-		    int sess_midx = 0;
-		    String sess_mgrade = null;
-		
-			HttpSession session = request.getSession();
-			
-			if(session.getAttribute("midx") != null){
-				sess_midx = (Integer) session.getAttribute("midx");
-			}
-			if(session.getAttribute("mgrade") != null){
-				sess_mgrade = (String) session.getAttribute("mgrade");
-			}
 			
 		  //회원
 		    if(command.equals("/controller/MainServlet.do")){
@@ -584,8 +574,8 @@ public class FrontController extends HttpServlet {
 					TalentBoardContentServlet tbcs = new TalentBoardContentServlet();
 					tbcs.doGet(request, response);
 					
-					this.view = "/donation/talent_content.jsp";
-					this.isRedirect = false;		
+			//		this.view = "/donation/talent_content.jsp";
+			//	this.isRedirect = false;		
 					
 				}else if (command.equals("/controller/TalentBoardWriteServlet.do")){ // 재능기부 게시판 글 작성 폼
 
@@ -757,6 +747,14 @@ public class FrontController extends HttpServlet {
 				
 				this.view = "/community/qna_write.jsp";
 				this.isRedirect = false;
+				
+			}else if (command.equals("/controller/QuestionWriteActionServlet.do")) {
+				
+				QuestionWriteActionServlet cwas = new QuestionWriteActionServlet();
+				cwas.doPost(request, response);
+				
+				this.view = "/controller/MypageQuestionListServlet.do";
+				this.isRedirect = true;	
 				
 			}else if (command.equals("/controller/QuestionContentServlet.do")) {
 				

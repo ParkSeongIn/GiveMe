@@ -128,7 +128,7 @@ textarea:focus{
 						</div>
 						<div class="qna-modify">
 						  	<input class="btn btn-default" id="qidx" name="qidx" type="hidden" value="<%=qv.getQidx() %>"/>
-				        	<input class="btn btn-default" id="ModifyButton" type="button" value="답변 작성"/>
+				        	<input class="btn btn-default" id="ModifyButton" type="button" value="답변 작성 및 수정"/>
 				        	<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AdQuestionContentServlet.do?qidx=<%=qv.getQidx() %>">취소</a>
         				</div>
         			</form>

@@ -401,9 +401,9 @@ public class AdminServiceImpl implements AdminService{
     			+ "where rn >=1";
     		
     		if(keyWord != null && !keyWord.equals("") ){
-    		    sql +=" and "+keyField.trim()+" like '%"+keyWord.trim()+"%' order by qidx";
+    		    sql +=" and "+keyField.trim()+" like '%"+keyWord.trim()+"%' order by qidx desc";
     		}else{
-    		    sql +=" order by qidx";
+    		    sql +=" order by qidx desc";
     		}
     		pstmt = con.prepareStatement(sql);
     		rs = pstmt.executeQuery();

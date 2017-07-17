@@ -114,7 +114,7 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 							+ "where tt.midx = tm.midx and tt.tbdeletest = 'N' "
 								+ "order by tt.tbgrp asc,tt.tbseq asc,tt.tbidx asc"
 								+ ") AA "
-									+ ") where rnum <= 10"
+									+ ") where rnum <= 20"
 									+ ") where rnum >= 1";
 			
 			pstmt = con.prepareStatement(sql);
