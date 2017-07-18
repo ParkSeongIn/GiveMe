@@ -50,7 +50,8 @@ public class MemberInsertActionServlet extends HttpServlet {
 	    String mphone2 = request.getParameter("mphone2");	    
 	    String mmail1 = request.getParameter("mmail1");
 	    String mmail2 = request.getParameter("mmail2");
-	    String mpost = request.getParameter("mpost");	   
+	    String mpost1 = request.getParameter("mpost1");
+	    String mpost2 = request.getParameter("mpost2");
 	    String maddr1 = request.getParameter("maddr1");
 	    String maddr2 = request.getParameter("maddr2");
 	    String mgrade = request.getParameter("mgrade");
@@ -66,7 +67,7 @@ public class MemberInsertActionServlet extends HttpServlet {
 	    vo.setMbirth(Integer.parseInt((mbirth), 10));	//숫자형(int)으로 변환하는 작업. 10은 10진법을 의미함.	    	
 	    vo.setMphone(Integer.parseInt((mphone)+(mphone1)+(mphone),10));
 	    vo.setMmail(mmail1+"@"+mmail2);
-	    vo.setMpost(Integer.parseInt((mpost), 10));
+	    vo.setMpost(Integer.parseInt((mpost1)+(mpost2), 10));
 	    vo.setMaddr1(maddr1);
 	    vo.setMaddr2(maddr2);
 	    vo.setMgrade(mgrade);

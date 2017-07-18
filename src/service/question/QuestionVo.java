@@ -15,7 +15,7 @@ public class QuestionVo {
 	private String qstate;
 	private Date qmdate;
 	private Timestamp qdbdate;
-	private String qdeletest;
+	private int qdeletest;
 	private String qrecontent;
 	private int midx;
 	private String mid;
@@ -80,10 +80,10 @@ public class QuestionVo {
 	public void setQdbdate(Timestamp qdbdate) {
 		this.qdbdate = qdbdate;
 	}
-	public String getQdeletest() {
+	public int getQdeletest() {
 		return qdeletest;
 	}
-	public void setQdeletest(String qdeletest) {
+	public void setQdeletest(int qdeletest) {
 		this.qdeletest = qdeletest;
 	}
 	public String getQrecontent() {

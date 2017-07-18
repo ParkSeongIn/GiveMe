@@ -67,7 +67,7 @@ div.col-sm-10{
 			<td style="line-height:2.3;">
 			</td>
 			<td colspan="5" style="text-align:right">
-				<a class="btn btn-default" href="<%=request.getContextPath()%>/main.jsp">Home</a>
+				<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/MainServlet.do">Home</a>
 				<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionWriteServlet.do" target="_self">작성하기</a>
 	  		</td>
 		</tr>

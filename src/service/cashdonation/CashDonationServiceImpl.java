@@ -23,8 +23,15 @@ public class CashDonationServiceImpl implements CashDonationService {
 		ResultSet rs = null; 
 		ArrayList<CashDonationVo> clist = new ArrayList<CashDonationVo>(); 
 		try { 
-			String	sql = "select cidx, cmoney, cpay, cstate, cpoint, cway, cpaydate2 "
-				    	+ "from table_cashdonation ";
+			String	sql = " select * from ("
+					+			 "select * from ( "
+					+ 				"select rownum rn, AA.* from ("
+					+ 					"select tc.cidx, tm.mname, tc.cmoney, tc.cpay, tc.cstate, tc.cpoint, tc.cway, tc.cpaydate2 "
+					+					 "from table_member tm, table_cashdonation tc "
+					+ 					 "where tm.midx = tc.midx"
+					+ 					")AA order by AA.cidx desc"
+					+ 				") where rn <=20"
+					+ 			")where rn >=1 ";
 			pstmt = con.prepareStatement(sql); 
 			rs = pstmt.executeQuery();
 			while(rs.next()) { 
@@ -32,12 +39,13 @@ public class CashDonationServiceImpl implements CashDonationService {
 			CashDonationVo cv = new CashDonationVo(); 
 			
 			cv.setCidx(rs.getInt("cidx"));
+			cv.setMname(rs.getString("mname"));
 			cv.setCpay(rs.getString("cpay"));
+			cv.setCway(rs.getString("cway"));
 			cv.setCmoney(rs.getInt("cmoney"));
+			cv.setCpaydate2(rs.getDate("cpaydate2"));
 			cv.setCstate(rs.getString("cstate"));
 			cv.setCpoint(rs.getInt("cpoint"));
-			cv.setCway(rs.getString("cway"));
-			cv.setCpaydate2(rs.getDate("cpaydate2"));
 			clist.add(cv); 
 			}
 		}catch(Exception e) { 

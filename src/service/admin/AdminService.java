@@ -18,13 +18,14 @@ public interface AdminService {
     int deleteAllBoard(int abidx);
     int insertDonationList(DonationListVo vo);
     DonationListVo getDonationList(int dlidx);
-    ArrayList<DonationListVo> getDonationListLine(String keyField, String keyWord);
+    ArrayList<DonationListVo> getDonationListLine(String keyField, String keyWord,int page_num);
     DonationListVo modifyDonationList(int dlidx);
     int modifyDonationWrite(DonationListVo vo);
     int deleteDonationList(int dlidx);
     int getPaging();
+    int getPaging1();
     // 관리자 table_Question
- 	ArrayList<QuestionVo> getAdQuestionList(String keyField, String keyWord);
+ 	ArrayList<QuestionVo> getAdQuestionList(String keyField, String keyWord, int page_num);
  	QuestionVo getAdQuestion(int qidx);
  	int modifyWriteAdQuestion(QuestionVo qv);
 }

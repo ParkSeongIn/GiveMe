@@ -119,9 +119,36 @@ public class FrontController extends HttpServlet {
 		    String url = request.getRequestURI();
 		    String command = url.substring(contextPath.length());
 		    
-			
+		  // HTML 공통
+		  if(command.equals("/controller/IntroGuideServlet.do")){
+			  IntroGuideServlet is = new IntroGuideServlet();
+			  is.doGet(request, response);
+			  
+			  this.view = "/intro/intro_guide.jsp";
+			  this.isRedirect = false;
+		  }else if(command.equals("/controller/IntroPlanServlet.do")){
+			  IntroPlanServlet ip = new IntroPlanServlet();
+			  ip.doGet(request, response);
+			  
+			  this.view = "/intro/intro_plan.jsp";
+			  this.isRedirect =false;
+		 
+		  }else if(command.equals("/controller/BusinessCashDonation.do")){
+			  BusinessCashDonation bc = new BusinessCashDonation();
+			  bc.doGet(request, response);
+			  
+			  this.view = "/business/business_cashdonation.jsp";
+			  this.isRedirect = false;
+			  
+		  }else if(command.equals("/controller/BusinessTalentDonation.do")){
+			  BusinessTalentDonation bt = new BusinessTalentDonation();
+			  bt.doGet(request, response);
+			  
+			  this.view = "/business/business_talentdonation.jsp";
+			  this.isRedirect = false;
+			  
 		  //회원
-		    if(command.equals("/controller/MainServlet.do")){
+		  }else if(command.equals("/controller/MainServlet.do")){
 		    	MainServlet ms = new MainServlet();
 		    	ms.doGet(request, response);
 		    	
@@ -134,7 +161,8 @@ public class FrontController extends HttpServlet {
 			
 		    	this.view = "/admin/ad_member_list.jsp";
 		    	this.isRedirect=false;
-		    }else if(command.equals("/controller/MemberInsertServlet.do")){
+		    
+			}else if(command.equals("/controller/MemberInsertServlet.do")){
 		    	MemberInsertServlet mis = new MemberInsertServlet();
 		    	mis.doGet(request, response);
 			
@@ -153,8 +181,9 @@ public class FrontController extends HttpServlet {
 		    	mcs.doGet(request, response);
 		    	
 		    	
-			   	this.view="/admin/ad_member_content2.jsp";
+			   	this.view="/admin/ad_member_content.jsp";
 		    	this.isRedirect=false;
+		   
 		    }else if(command.equals("/controller/MemberModifyServlet.do")){
 				MemberModifyServlet mms = new MemberModifyServlet();
 				mms.doGet(request, response);
@@ -256,7 +285,6 @@ public class FrontController extends HttpServlet {
 				CashDonationListServlet cdls = new CashDonationListServlet();
 				cdls.doGet(request, response);
 				
-			 	
 				this.view = "/admin/ad_cash_list.jsp";
 				this.isRedirect = false;
 			
@@ -388,7 +416,7 @@ public class FrontController extends HttpServlet {
 				da.doPost(request,response);
 				
 				
-			this.view = "/controller/DonationListServlet.do";
+				this.view = "/controller/DonationListServlet.do";
 				this.isRedirect = true;
 				
 			} else if(command.equals("/controller/DonationContentServlet.do")){
@@ -413,9 +441,8 @@ public class FrontController extends HttpServlet {
 				DonationModifyActionServlet dam = new DonationModifyActionServlet();
 				dam.doPost(request,response);
 				
-				
-				this.view = "/controller/DonationContentServlet.do";
-				this.isRedirect = false;
+				this.view = "/controller/DonationContentServlet.do?dlidx="+request.getParameter("dlidx");
+				this.isRedirect = true;
 				
 			}else if(command.equals("/controller/DonationDeleteServlet.do")){
 				
@@ -423,8 +450,8 @@ public class FrontController extends HttpServlet {
 				dd.doGet(request,response);
 				
 				
-				this.view = "/admin/ad_donation_list.jsp";
-				this.isRedirect = false;
+				this.view = "/controller/DonationListServlet.do";
+				this.isRedirect = true;
 				
 				// ㅡㅡㅡㅡㅡㅡㅡ	기부처 검색 (커뮤니티)
 				
@@ -563,6 +590,7 @@ public class FrontController extends HttpServlet {
 					
 				}else if(command.equals("/controller/TalentBoardListServlet.do")){ // 재능기부 게시판쪽 목록
 
+					System.out.println("test");
 					TalentBoardListServlet tbs = new TalentBoardListServlet();
 					tbs.doGet(request, response);
 					
@@ -571,11 +599,12 @@ public class FrontController extends HttpServlet {
 				
 				}else if(command.equals("/controller/TalentBoardContentServlet.do")){ // 재능기부 게시판쪽 content
 
+					System.out.println("test2");
 					TalentBoardContentServlet tbcs = new TalentBoardContentServlet();
 					tbcs.doGet(request, response);
 					
-			//		this.view = "/donation/talent_content.jsp";
-			//	this.isRedirect = false;		
+					this.view = "/donation/talent_content.jsp";
+				this.isRedirect = false;		
 					
 				}else if (command.equals("/controller/TalentBoardWriteServlet.do")){ // 재능기부 게시판 글 작성 폼
 
@@ -785,7 +814,7 @@ public class FrontController extends HttpServlet {
 				QuestionDeleteServlet qds = new QuestionDeleteServlet();
 				qds.doPost(request, response);
 				
-				this.view= "/controller/QuestionListServlet.do";
+				this.view= "/controller/MypageQuestionListServlet.do";
 				this.isRedirect = true;
 			
 			}else if (command.equals("/controller/AdQuestionListServlet.do")) {

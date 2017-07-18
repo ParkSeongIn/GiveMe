@@ -47,7 +47,7 @@ div.col-sm-10{
 		 <c:forEach var="cv" items="${clist }">
 		 		<tr>
 		 			<td>${cv.cidx }</td>
-		 			<td>${sessionScope.vo.mname }</td>
+		 			<td>${cv.mname}</td>
 					<td>${cv.cpay}</td>
 					<td>${cv.cway }</td>
 					<td>${cv.cmoney }</td>

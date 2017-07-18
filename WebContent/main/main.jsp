@@ -6,6 +6,8 @@
 <%@ page import ="java.util.*" %>
 <%
 CashDonationVo cv = (CashDonationVo)request.getAttribute("cv");
+AllBoardVo av = (AllBoardVo)request.getAttribute("av");
+ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("ablist");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -85,7 +87,7 @@ font{
 							</tr>
 						</thead>
 						<tbody>
-								<c:forEach var="av" items="${requestScope.ablist}">
+								<c:forEach var="av" items="${ablist}">
 									<c:choose>
 										<c:when test="${av.abtype == 'I' }">
 									<tr>

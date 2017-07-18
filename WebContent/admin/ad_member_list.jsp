@@ -61,7 +61,7 @@ ArrayList<MemberVo> list = (ArrayList<MemberVo>)request.getAttribute("list");
 		   <tbody>	
 			<c:forEach var="vo" items="${requestScope.list}">
 				<c:choose>
-					<c:when test="${vo.mvalue == 'IN'}"> 
+					<c:when test="${vo.mvalue != ''}"> 
 				<tr>
 				<td>${vo.midx}</td>
 				<td><a href="${ContextPath }/controller/MemberContentServlet.do?midx=${vo.midx}">${vo.mname}</a></td>
@@ -84,7 +84,8 @@ ArrayList<MemberVo> list = (ArrayList<MemberVo>)request.getAttribute("list");
 					<option value="0">---선택---</option>
 					<option value="mid">아이디</option>
 					<option value="mname">이름</option>
-					<option value="mphone">전화번호</option>						
+					<option value="mphone">전화번호</option>
+					<option value="mvalue">회원상태</option>								
 				</select>
 				
 				<input type="text" name="keyWord">

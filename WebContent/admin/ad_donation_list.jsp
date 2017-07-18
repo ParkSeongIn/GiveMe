@@ -29,7 +29,6 @@
 <style>
 div.col-sm-10{
 	  padding-top: 60px;
-	  padding-left: 80px;
 }
 </style>
 </head>
@@ -52,13 +51,12 @@ div.col-sm-10{
 				<td>작성자</td>
 				<td>지역</td>
 				<td>등록일자</td>
-				<td>삭제상태</td>
 			</tr>
 		<thead>
 		<tbody>	
 			<c:forEach var="vo" items="${list}">
 				<c:choose>
-					<c:when test="${vo.dldeletest == 'N'}"> 
+					<c:when test="${vo.dldeletest == 2}"> 
 				<tr>
 				<td><a href="${ContextPath}/controller/DonationContentServlet.do?dlidx=${vo.dlidx}">${vo.dlidx}</a></td>
 				<td>${vo.dlgroup2}</td>
@@ -66,7 +64,6 @@ div.col-sm-10{
 				<td>${sessionScope.vo.mid}</td>
 				<td>${vo.dlarea}</td>
 				<td>${vo.dlwdate}</td>
-				<td>${vo.dldeletest}</td>
 				</tr>
 					</c:when>
 				<c:otherwise>
@@ -94,6 +91,40 @@ div.col-sm-10{
 		</c:if>
 		</div>
 	</div>
+	
+	<%-- 페이징 인디케이터 --%>
+		<div class="text-center">
+		<ul class="pagination">
+			<c:url var="path" value="/controller/DonationListServlet.do">
+				<c:param name="page_num" value="1"/>
+			</c:url>
+			<li><a href="${path }"><font color="black">이전</font></a></li>
+			
+			<c:set var="page_num2" value="${param.page_num }"/>
+			<c:if test="${param.page_num == null || param.page_num == '' }">
+				<c:set var="page_num2" value="1"/>
+			</c:if>
+			<c:forEach var="i" begin="${requestScope.indi_min }" end="${requestScope.indi_max}">
+				<c:url var="path" value="/controller/DonationListServlet.do">
+					<c:param name="page_num" value="${i }"/>
+				</c:url>
+				<c:choose>
+					<c:when test="${page_num2 == i }">
+						<li><a href="${path }"><font color="black">${i }</font></a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="${path }"><font color="black">${i }</font></a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:url var="path" value="/controller/DonationListServlet.do">
+				<c:param name="page_num" value="${requestScope.page_cnt }"/>
+			</c:url>	
+			<li><a href="${path }"><font color="black">다음</font></a></li>
+		</ul>
+		</div>
+		<%-- 페이징 인디케이터 --%>
+		
 	</div>
 <c:import url="/nav/footer.jsp"/>
 </body>

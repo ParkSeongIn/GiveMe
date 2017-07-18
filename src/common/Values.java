@@ -12,14 +12,14 @@ public interface Values {
     int login_success = 3;
     
     // 페이지당 글의 개수
- 	int CNT_PER_PAGE = 20;
+ 	int CNT_PER_PAGE = 10;
  	// 게시판 인디케이터의 개수
  	int BOARD_INDICATOR_CNT = 5;
  	
  	// 삭제 상태
- 	String DEL = "Y";
- 	String NON_DEL = "N";
+ 	int DEL = 1;
+ 	int NON_DEL = 2;
  	
- // 기부완료상태
+ 	// 기부완료상태
   	String Result = "후원완료";
 }

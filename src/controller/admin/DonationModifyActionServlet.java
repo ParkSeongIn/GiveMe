@@ -45,28 +45,28 @@ public class DonationModifyActionServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ServletContext context = request.getSession().getServletContext();
-		// 파일이 저장될 물리적인 경로를 얻어온다.
-		String path = context.getRealPath("/upload");
-		// 파일 용량
-		int max = 1024 * 1024 * 100; // 100MB
-		// 저장 인코딩 방식
-		String enc = "utf-8";
-		// 중복 파일이 있을 경우 이름 변경 정책
-		DefaultFileRenamePolicy dfr = new DefaultFileRenamePolicy();
-		// 업로드 처리
-		MultipartRequest mr = new MultipartRequest(request, path, max, enc, dfr);
+//		ServletContext context = request.getSession().getServletContext();
+//		// 파일이 저장될 물리적인 경로를 얻어온다.
+//		String path = context.getRealPath("/upload");
+//		// 파일 용량
+//		int max = 1024 * 1024 * 100; // 100MB
+//		// 저장 인코딩 방식
+//		String enc = "utf-8";
+//		// 중복 파일이 있을 경우 이름 변경 정책
+//		DefaultFileRenamePolicy dfr = new DefaultFileRenamePolicy();
+//		// 업로드 처리
+//		MultipartRequest mr = new MultipartRequest(request, path, max, enc, dfr);
 		
 		request.setCharacterEncoding("UTF-8");
-		int dlidx = Integer.parseInt(mr.getParameter("dlidx"));
-		String dlplace = mr.getParameter("dlplace");
-		String dlarea = mr.getParameter("dlarea");
-		String dlcontent = mr.getParameter("dlcontent");
-		String dlgroup1 = mr.getParameter("dlgroup1");
-		String dlgroup2 = mr.getParameter("dlgroup2");
-		Enumeration files = mr.getFileNames();
-		String name1 = (String)files.nextElement();
-		String dlimage = mr.getFilesystemName(name1);
+		int dlidx = Integer.parseInt(request.getParameter("dlidx"));
+		String dlplace = request.getParameter("dlplace");
+		String dlarea = request.getParameter("dlarea");
+		String dlcontent = request.getParameter("dlcontent");
+		String dlgroup1 = request.getParameter("dlgroup1");
+		String dlgroup2 = request.getParameter("dlgroup2");
+//		Enumeration files = mr.getFileNames();
+//		String name1 = (String)files.nextElement();
+//		String dlimage = mr.getFilesystemName(name1);
 		
 		AdminServiceImpl as = new AdminServiceImpl();
 		
@@ -77,7 +77,7 @@ public class DonationModifyActionServlet extends HttpServlet {
 		dl.setDlcontent(dlcontent);
 		dl.setDlgroup1(dlgroup1);
 		dl.setDlgroup2(dlgroup2);
-		dl.setDlimage(dlimage);
+//		dl.setDlimage(dlimage);
 		
 		int row = as.modifyDonationWrite(dl);
 		

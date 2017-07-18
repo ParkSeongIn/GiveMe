@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.sun.glass.ui.Application;
+//import com.sun.glass.ui.Application;
 
 import service.admin.AdminServiceImpl;
 import service.admin.DonationListVo;

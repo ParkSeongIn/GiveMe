@@ -18,21 +18,21 @@
 			}else if((document.member.mid.value < "0" || document.member.mid.value > "9") && (document.member.mid.value < "A" || document.member.mid.value > "Z") && (document.member.mid.value < "a" || document.member.mid.value > "z")){
 				alert("한글 및 특수문자는 아이디로 사용하실 수 없습니다.");
 				return false;				
-			}else if(document.member.mid.value >= 6 && document.member.mid.value <= 12){
+			}else if(document.member.mid.value.length<=6 || document.member.mid.value.length>=12){
 				alert("아이디는 6자리 이상 12자리 이하입니다.");
 				return false;				
 			}else if(!document.member.mpwd.value){
 				alert("비밀번호를 입력하세요.");
 				return false;
-			}else if(document.member.mpwd.value != document.member.mpwdcheck.value){
-				alert("비밀번호가 동일하지 않습니다.다시한번 입력해주세요.");
-				return false;
 			}else if((document.member.mpwd.value < "0" || document.member.mpwd.value > "9") && (document.member.mpwd.value < "A" || document.member.mpwd.value > "Z") && (document.member.mpwd.value < "a" || document.member.mpwd.value > "z")){
 				alert("한글 및 특수문자는 비밀번호로 사용하실 수 없습니다.");
 				return false;
-			}else if(document.member.mpwd.value >= 8 && document.member.mpwd.value <= 20){
+			}else if(document.member.mpwd.value.length <= 8 || document.member.mpwd.value.length >= 20){
 				alert("비밀번호는 8자리 이상 20자리 이하입니다.");
 				return false;				
+			}else if(document.member.mpwd.value != document.member.mpwdcheck.value){
+				alert("비밀번호가 동일하지 않습니다.다시한번 입력해주세요.");
+				return false;
 			}else if(!document.member.mname.value){
 				alert("이름을 입력하세요.");
 				return false;
@@ -45,11 +45,11 @@
 			}else if(!document.member.mphone.value){
 				alert("통신사를 선택하세요.");
 				return false;
-			}else if(!document.member.mphone1.value){
-				alert("전화번호 가운데 자리를 입력하세요.");
+			}else if(!document.member.mphone1.value || document.member.mphone1.value.length!=4){
+				alert("전화번호 가운데 4자리를 입력하세요.");
 				return false;
-			}else if(!document.member.mphone2.value){
-				alert("전화번호 끝자리를 입력하세요.");
+			}else if(!document.member.mphone2.value || document.member.mphone2.value.length!=4){
+				alert("전화번호 끝자리 4자리를 입력하세요.");
 				return false;
 			}else if(!document.member.mmail.value){
 				alert("e-mail을 입력하세요.");
@@ -63,11 +63,16 @@
 			}else if(!document.member.maddr2.value){
 				alert("나머지 주소를 입력하세요.");
 				return false;
-			}else if(isNaN(form.birth.value)){
+			}else if(!isNaN(document.member.mbirth.value)){
 				alert("년도는 숫자만 입력 가능합니다.");
 				return false;	//true는 문자, false는 숫자.
-			}
-			
+			}else if(isNaN(document.member.mphone1.value)){
+				alert("전화번호는 숫자만 입력 가능합니다.");
+				return false;
+			}else if(isNaN(document.member.mphone2.value)){
+				alert("전화번호는 숫자만 입력 가능합니다.");
+				return false;
+			}			
 		}
 		
 		//취소 버튼 클릭 시 로그인 화면으로 이동
@@ -82,13 +87,13 @@
 		}
 		
 		//우편번호 찾기 화면 (주소1 포함) open
-		function checkpost(){	
-			
+		function checkpost(){			
 			new daum.Postcode({
 				oncomplete: function(data){
 					//팝업에서 검색결과 항목을 클릭했을 때 실행할 코드를 작성하는 부분.
 					
-					document.getElementById('mpost').value = data.postcode;
+					document.getElementById('mpost1').value = data.postcode1;
+					document.getElementById('mpost2').value = data.postcode2;
 					document.getElementById('maddr1').value = data.address;
 					document.getElementById('maddr2').focus();
 					
@@ -106,8 +111,8 @@
 	
 <style>
 	div.container{				
-		margin: auto;
 		width:1135px;
+		margin: auto;		
 	}
 	div.panel-body{
 		width:1135px;
@@ -141,10 +146,16 @@
 		margin-right:-20px;	
 	}
 	div.col-sm-2{
-		margin-left: 10px;
+		margin-left: -10px;
 	}
 	div.mphone2.col-sm-2{
 		margin-left:-15px;
+	}
+	div.post1.col-sm-2{
+		margin-left: -15px;
+	}
+	div.post2.col-sm-2{
+		margin-left: -60px;
 	}
 	#mmail2{
 		width: 100px;
@@ -182,28 +193,28 @@
 				<div class="form-group">
 					<div class="col-sm-5">
 						<label class="control-label">비밀번호</label>
-						<input type="password" class="form-control" name="mpwd" maxlength="100">											
+						<input type="password" class="form-control" name="mpwd">											
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<div class="col-sm-5">
 						<label class="control-label">비밀번호 확인</label>
-						<input type="password" class="form-control" name="mpwdcheck" maxlength="100">											
+						<input type="password" class="form-control" name="mpwdcheck">											
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<div class="col-sm-5">
 						<label class="control-label">이름</label>
-						<input type="text" class="form-control" name="mname" maxlength="100">											
+						<input type="text" class="form-control" name="mname">											
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<div class="col-sm-5">
 						<label class="control-label">생년월일</label>
-						<input type="text" class="form-control" name="mbirth" maxlength="100">		예: YYYYMMDD(8자리)									
+						<input type="text" class="form-control" name="mbirth">	예: YYYYMMDD(8자리)									
 					</div>
 				</div>
 				
@@ -257,10 +268,17 @@
 					<div class="col-sm-12">	
 						<input type="button" value="우편번호 검색" onClick="checkpost()">
 					</div>	
-					<div class="col-sm-5">
-						<input type="text" class="form-control" id="mpost" name="mpost">
-					</div>							
-					
+					<div class="way col-sm-6">					
+						<div class="post1 col-sm-2">
+							<input type="text" class="form-control" id="mpost1" name="mpost1">
+						</div>
+						<div class="connect col-sm-2">
+						<h5>-</h5>
+						</div>
+						<div class="post2 col-sm-2">							
+							<input type="text" class="form-control" id="mpost2" name="mpost2">
+						</div>	
+					</div>					
 				</div>	
 				
 				<div class="form-group">

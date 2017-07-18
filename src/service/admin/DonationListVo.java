@@ -15,7 +15,7 @@ public class DonationListVo {
 	private String dlcontent;
 	private Date dlmdate;
 	private Timestamp dldbdate;
-	private String dldeletest;
+	private int dldeletest;
 	
 	public int getDlidx() {
 		return dlidx;
@@ -77,10 +77,10 @@ public class DonationListVo {
 	public void setDldbdate(Timestamp dldbdate) {
 		this.dldbdate = dldbdate;
 	}
-	public String getDldeletest() {
+	public int getDldeletest() {
 		return dldeletest;
 	}
-	public void setDldeletest(String dldeletest) {
+	public void setDldeletest(int dldeletest) {
 		this.dldeletest = dldeletest;
 	}
 

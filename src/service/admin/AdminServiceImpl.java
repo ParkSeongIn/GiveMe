@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+
 import common.DBClose;
 import common.DBConnect;
 import common.Values;
@@ -35,19 +36,19 @@ public class AdminServiceImpl implements AdminService{
 	try{
 	    String sql="select * from "
 	    	+ "(select rownum rnum, midx, mname, mid, mmail, menter, mvalue "
-		+ "from table_member order by midx desc) "
-	    	+ "where rnum <= 20 and rnum >= 1";
+	    	+ "from table_member order by midx desc) "
+	    	+ "where rnum >= 5 and rnum <= 10";
 	    
 	    if(keyWord != null && !keyWord.equals("") ){
-		sql +=" and "+keyField.trim()+" like '%"+keyWord.trim()+"%' order by midx";
+		sql +=" and "+keyField.trim()+" like '%"+keyWord.trim()+"%' order by midx desc";
 	    }else{
-		sql +=" order by midx";
+		sql +=" order by midx desc";
 	    }
 	    
-//	    String sql="select midx,mname,mid,mmail,menter,mvalue from table_member order by midx desc";
+
 	    pstmt = con.prepareStatement(sql);
+	    
 	    rs=pstmt.executeQuery();	    
-	    	System.out.println(sql);
 	    while(rs.next()){
 		MemberVo vo = new MemberVo();
 		
@@ -115,7 +116,7 @@ public class AdminServiceImpl implements AdminService{
 		AllBoardVo avo = null;
 		
 		try { 
-		String sql = "select tb.abtitle, tb.abwdate, tb.abimage,tb.abcontent "
+		String sql = "select tb.abtitle, tb.abwdate, tb.abcontent "
 				+ "from table_allboard tb where tb.abidx = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,abidx);
@@ -126,8 +127,7 @@ public class AdminServiceImpl implements AdminService{
 			
 			avo.setAbtitle(rs.getString(1));
 			avo.setAbwdate(rs.getDate(2));
-			avo.setAbimage(rs.getString(3));
-			avo.setAbcontent(rs.getString(4));
+			avo.setAbcontent(rs.getString(3));
 
 			}
 		}catch(Exception e) { 
@@ -146,12 +146,11 @@ public class AdminServiceImpl implements AdminService{
 		int abu = 0;
 		
 		try {
-			sql ="update table_allboard set abtitle = ? , abcontent = ? , abimage = ? , abmdate=sysdate where abidx = ?";
+			sql ="update table_allboard set abtitle = ? , abcontent = ? , abmdate=sysdate where abidx = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, avo.getAbtitle());
 			pstmt.setString(2, avo.getAbcontent());
-			pstmt.setString(3, avo.getAbimage());
-			pstmt.setInt(4, abidx);
+			pstmt.setInt(3, abidx);
 			
 			abu = pstmt.executeUpdate();
 			
@@ -193,7 +192,7 @@ public class AdminServiceImpl implements AdminService{
     	try{
     		sql = "insert into table_donationlist "
     			 + "(dlidx,dlgroup1,dlgroup2,dlimage,dlplace,dlarea,dlcontent,dldeletest,dlwdate, dlmdate,dldbdate)"	
-                 + "values(seq_dlidx.nextval,?,?,?,?,?,?,'N',sysdate,sysdate,sysdate)";
+                 + "values(seq_dlidx.nextval,?,?,?,?,?,?,?,sysdate,sysdate,sysdate)";
     		 
     		pstmt = con.prepareStatement(sql);
     		pstmt.setString(1, dl.getDlgroup1());
@@ -202,6 +201,7 @@ public class AdminServiceImpl implements AdminService{
     		pstmt.setString(4, dl.getDlplace());
     		pstmt.setString(5, dl.getDlarea());
     		pstmt.setString(6, dl.getDlcontent());
+    		pstmt.setInt(7, Values.NON_DEL);
     		row = pstmt.executeUpdate();
     		
     		
@@ -253,7 +253,7 @@ public class AdminServiceImpl implements AdminService{
     	
 
     @Override
-    public ArrayList<DonationListVo> getDonationListLine(String keyField, String keyWord){
+    public ArrayList<DonationListVo> getDonationListLine(String keyField, String keyWord, int page_num){
 	// TODO Auto-generated method stub
     	Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt= null;
@@ -265,15 +265,20 @@ public class AdminServiceImpl implements AdminService{
 		String sql = "select * from "
 			+ "(select rownum rnum, dlidx, dlgroup2, dlplace, dlarea, dlwdate, dldeletest from "
 			+ "table_donationlist order by dlidx desc) "
-			+ "where rnum <= 20 and rnum >= 1";
-
+			+ "where rnum >= ? and rnum <= ?";
+		
+		int min = ((page_num - 1) * Values.CNT_PER_PAGE) + 1;
+		int max = min + Values.CNT_PER_PAGE - 1;
+		
 		if(keyWord != null && !keyWord.equals("") ){
 			sql +=" and "+keyField.trim()+" like '%"+keyWord.trim()+"%' order by dlidx";
 		}else{
 			sql +=" order by dlidx";
 		}
 		pstmt = con.prepareStatement(sql);
-			System.out.println(sql);
+		pstmt.setInt(1, min);
+		pstmt.setInt(2, max);
+		
 		rs = pstmt.executeQuery();
            
 		while(rs.next()){
@@ -283,7 +288,7 @@ public class AdminServiceImpl implements AdminService{
         	   dl.setDlplace(rs.getString("dlplace"));
         	   dl.setDlarea(rs.getString("dlarea"));
         	   dl.setDlwdate(rs.getDate("dlwdate"));
-        	   dl.setDldeletest(rs.getString("dldeletest"));
+        	   dl.setDldeletest(rs.getInt("dldeletest"));
         	   list.add(dl);
            }
     	}catch(Exception e){
@@ -307,9 +312,9 @@ public class AdminServiceImpl implements AdminService{
     	DonationListVo dl = new DonationListVo();
     	
     	try{
-    		sql = "select dlidx, dlimage,dlplace, dlarea ,dlcontent, dlgroup1, dlgroup2, dlwdate, dlmdate" 
-       			 + "from table_donationlist" 
-       			 + "where dlidx = ?";
+    		sql = "select dlidx, dlplace, dlarea ,dlcontent, dlgroup1, dlgroup2, dlwdate, dlmdate "
+    				+ " from table_donationlist "
+    				+ " where dlidx = ? ";
     		pstmt = con.prepareStatement(sql);
     		pstmt.setInt(1, dlidx);
     		rs = pstmt.executeQuery();
@@ -317,7 +322,6 @@ public class AdminServiceImpl implements AdminService{
     		if(rs.next()){
     			dl = new DonationListVo();
     			dl.setDlidx(rs.getInt("dlidx"));
-    			dl.setDlimage(rs.getString("dlimage"));
     			dl.setDlplace(rs.getString("dlplace"));
     			dl.setDlarea(rs.getString("dlarea"));
     			dl.setDlcontent(rs.getString("dlcontent"));
@@ -342,17 +346,16 @@ public class AdminServiceImpl implements AdminService{
     	
     	try{
     		sql = "update table_donationlist "
-                + "set dlimage = ?, dlplace = ?, dlarea = ?, dlcontent = ?, "
+                + "set dlplace = ?, dlarea = ?, dlcontent = ?, "
     			+ "dlgroup1=?, dlgroup2=?, dlmdate=sysdate " 
                 + "where dlidx = ?";
     		pstmt=con.prepareStatement(sql);
-    		pstmt.setString(1, dl.getDlimage());
-    		pstmt.setString(2, dl.getDlplace());
-    		pstmt.setString(3, dl.getDlarea());
-    		pstmt.setString(4, dl.getDlcontent());
-    		pstmt.setString(5, dl.getDlgroup1());
-    		pstmt.setString(6, dl.getDlgroup2());
-    		pstmt.setInt(7, dl.getDlidx());
+    		pstmt.setString(1, dl.getDlplace());
+    		pstmt.setString(2, dl.getDlarea());
+    		pstmt.setString(3, dl.getDlcontent());
+    		pstmt.setString(4, dl.getDlgroup1());
+    		pstmt.setString(5, dl.getDlgroup2());
+    		pstmt.setInt(6, dl.getDlidx());
     		
     		row = pstmt.executeUpdate();
     		
@@ -372,9 +375,10 @@ public class AdminServiceImpl implements AdminService{
     int row = 0;
     
     try{
-    sql = "update table_donationlist set dldeletest = 'Y' where dlidx=?";
+    sql = "update table_donationlist set dldeletest = ? where dlidx=?";
     pstmt = con.prepareStatement(sql);
-    pstmt.setInt(1, dlidx);
+    pstmt.setInt(1, Values.DEL);
+    pstmt.setInt(2, dlidx);
     row = pstmt.executeUpdate();
    
     }catch(Exception e){
@@ -386,19 +390,21 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public ArrayList<QuestionVo> getAdQuestionList(String keyField, String keyWord) {
+    public ArrayList<QuestionVo> getAdQuestionList(String keyField, String keyWord, int page_num) {
     	Connection con = dbconnect.getConnection();
     	PreparedStatement pstmt = null;
     	ResultSet rs = null;
     	ArrayList<QuestionVo> aqlist = new ArrayList<QuestionVo>();
     	try { 
-    		sql = "select * from "
-    			+ "(select * from "
-    			+ "	(select rownum rn, AA.* from "
-    			+ "		(select tq.qidx, tq.qcategory, tq.qtitle, tm.mid, tq.qstate, tq.qwdate, tq.qdeletest from "
-    			+ "			table_member tm, table_question tq where tm.midx = tq.midx)AA order by AA.qidx desc) "
-    			+ "where rn <=25) "
-    			+ "where rn >=1";
+    		sql = "select a2.* from "
+    			+ "(select a1.*, rownum as rnum from "
+    			+ "(select tq.qidx, tq.qcategory, tq.qtitle, tm.mid, tq.qstate, tq.qwdate, tq.qdeletest from "
+    			+ "			table_member tm, table_question tq where tm.midx = tq.midx and tq.qdeletest=? order by tq.qidx desc "
+    			+ ") a1 ) a2 "
+    			+ "where a2.rnum >=? and a2.rnum <=?";
+    		
+    		int min = ((page_num - 1) * Values.CNT_PER_PAGE) + 1;
+    		int max = min + Values.CNT_PER_PAGE - 1;
     		
     		if(keyWord != null && !keyWord.equals("") ){
     		    sql +=" and "+keyField.trim()+" like '%"+keyWord.trim()+"%' order by qidx desc";
@@ -406,6 +412,9 @@ public class AdminServiceImpl implements AdminService{
     		    sql +=" order by qidx desc";
     		}
     		pstmt = con.prepareStatement(sql);
+    		pstmt.setInt(1, Values.NON_DEL);
+    		pstmt.setInt(2, min);
+    		pstmt.setInt(3, max);
     		rs = pstmt.executeQuery();
     		
     		while(rs.next()) {
@@ -417,7 +426,7 @@ public class AdminServiceImpl implements AdminService{
     			vo.setMid(rs.getString("mid"));
     			vo.setQstate(rs.getString("qstate"));
     			vo.setQwdate(rs.getTimestamp("qwdate"));
-    			vo.setQdeletest(rs.getString("qdeletest"));
+    			vo.setQdeletest(rs.getInt("qdeletest"));
     			
     			aqlist.add(vo);
     		}
@@ -490,12 +499,13 @@ public class AdminServiceImpl implements AdminService{
 	ResultSet rs = null;
 	int page_cnt = 0;
 	try{
-	String sql = "select count(*) from from table_donationlist";
+	String sql = "select count(*) from table_donationlist where dldeletest=?";
 	pstmt = con.prepareStatement(sql);
+	pstmt.setInt(1, Values.NON_DEL);
 	rs = pstmt.executeQuery();
 	rs.next();
-	page_cnt = Values.CNT_PER_PAGE;
-	if(Values.CNT_PER_PAGE > 0){
+	page_cnt = rs.getInt(1)/Values.CNT_PER_PAGE;
+	if(rs.getInt(1) % Values.CNT_PER_PAGE > 0){
 		page_cnt++;
 	}
 		
@@ -509,5 +519,32 @@ public class AdminServiceImpl implements AdminService{
 	return page_cnt;
     }
     
+    @Override
+    public int getPaging1() {
+	// TODO Auto-generated method stub
+    Connection con = dbconnect.getConnection();
+	PreparedStatement pstmt= null;
+	ResultSet rs = null;
+	int page_cnt = 0;
+	try{
+	String sql = "select count(*) from table_question where qdeletest=?";
+	pstmt = con.prepareStatement(sql);
+	pstmt.setInt(1, Values.NON_DEL);
+	rs = pstmt.executeQuery();
+	rs.next();
+	page_cnt = rs.getInt(1)/Values.CNT_PER_PAGE;
+	if(rs.getInt(1) % Values.CNT_PER_PAGE > 0){
+		page_cnt++;
+	}
+		
+    
+	}catch(Exception e){
+    	
+    }finally{
+    	DBClose.close(con,pstmt,rs);
+    }
+
+	return page_cnt;
+    }
 }
 

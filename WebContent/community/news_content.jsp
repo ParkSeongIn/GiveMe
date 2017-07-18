@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import ="service.allboard.AllBoardVo" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	AllBoardVo av = (AllBoardVo)request.getAttribute("av");
@@ -30,45 +31,75 @@
 </script>
 </head>
 <style>
-.container {
-height : 550px;
+.total_group {
+	width:700px;
+	float:right;
 }
-.table {
-width : 930px;
-height : 80px;
-margin-bottom : 10px;
-text-align : center;
-vertical-align : middle;
+.form-group1, .form-group2, .form-group3, .form-group4, .form-group5, .form-group6 {
+	width:300px;
 }
+.bottom{
+	float:right;
+}
+.bottom1{
+	float:left;
+}
+
 </style>
-<%@ include file="/nav/header.jsp" %>
-<%@ include file="/nav/sidebar4.jsp" %>
+<c:import url="/nav/header.jsp" />
+<c:import url="/nav/sidebar4.jsp" />
 <link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
+<c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 <div class="container"> <!-- div로 묶음 -->
-
-<table class="table table-striped table-bordered table-hover ">
-<tr>
-<td>제목</td><td>작성자</td><td>조회수</td><td>작성날짜</td><td>수정날짜</td>
-<td>이미지</td><td>내용</td>
-</tr>
-<tr>
-<td><%=av.getAbtitle() %></td><td><%=av.getAbid() %></td>
-<td><%=av.getAbhit() %></td><td><%=av.getAbwdate() %></td><td><%=av.getAbmdate() %></td>
-<td><%=av.getAbimage() %></td><td><%=av.getAbcontent() %></td>
-</tr>
-</table>
+<h1>기부동향 내용</h1>
+	<div class="total_group">
+	
+		<div class="form-group1">
+	         <label for="abtitle">제목</label>
+	         <input class="form-control" name="abtitle" id="abtitle" type="text" value="${av.abtitle}" readonly="readonly"/>
+	    </div>
+		<div class="form-group1">
+		     <label for="abid">작성자</label>
+		     <input class="form-control" name="abid" id="abid" type="text" value="${av.abid}" readonly="readonly"/>
+	    </div>
+	    <div class="form-group1">
+	         <label for="abhit">조회수</label>
+	         <input class="form-control" name="abhit" id="abhit" type="text" value="${av.abhit}" readonly="readonly"/>
+	    </div>
+	    <div class="form-group1">
+	         <label for="abwdate">작성날짜</label>
+	         <input class="form-control" name="abwdate" id="abwdate" type="text" value="${av.abwdate}" readonly="readonly"/>
+	    </div>
+	    <div class="form-group1">
+             <label for="abmdate">수정날짜</label>
+             <input class="form-control" name="abmdate" id="abmdate" type="text" value="${av.abmdate}" readonly="readonly"/>
+        </div>
+        <div class="form-group1">
+            <label for="abimage">이미지</label>
+            <input class="form-control" name="abimage" id="abimage" type="image" value="${av.abimage}" readonly="readonly"/>
+        </div>
+    	<div class="form-group7">
+        	<label for="abcontent">내용 :</label>
+        	<textarea name="abcontent" id="abcontent" rows="10" cols="100"  disabled="disabled">${av.abcontent}</textarea>
+        </div><br/>
+        
 	<div class="col-sm-8"></div>
 	<div class="col-sm-4">
+	
 	<c:if test="${sessionScope.vo.mgrade == 'A' }">
 	<div>
-		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardModifyServlet.do?abidx=<%=abidx %>">수정</a> <!--idx 값을 못 불러오니까 getidx였지만 설정을 안해둬서 그냥 idx 값을 불러와서 실행 -->
+		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardModifyServlet.do?abidx=<%=abidx %>">수정</a>
 		<input class="btn btn-default" id="DeleteButton" type="button" value="삭제" onclick="dab()"/>
+	</div>
+	</c:if><br/>
+	<div class="bottom1">
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardListServlet.do?abtype=N">글목록</a>
 	</div>
-	</c:if>
 	</div>
+	</div>
+	
 </div>
-<%@ include file="/nav/footer.jsp" %>
+<c:import url="/nav/footer.jsp" />
 </body>
 </html>

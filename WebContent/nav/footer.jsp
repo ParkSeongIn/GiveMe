@@ -14,16 +14,16 @@
 				<div>
 					<h3>소개</h3>
 					<ul>
-						<li><a href="#" target="_self">기획의도</a></li>
-						<li><a href="#" target="_self">사업안내</a></li>
+						<li><a href="${ContextPath}/controller/IntroPlanServlet.do" target="_self">기획의도</a></li>
+						<li><a href="${ContextPath}/controller/IntroGuideServlet.do" target="_self">사업안내</a></li>
 						<li><a href="${ContextPath}/controller/AllBoardIfListServlet.do?abtype=I" target="_self">공지사항</a></li>
 					</ul>
 				</div>
 				<div>
 					<h3>사업내용</h3>		
 					<ul>
-						<li><a href="#" target="_self">현금기부</a></li>
-						<li><a href="#" target="_self">재능기부</a></li>	
+						<li><a href="${ContextPath}/controller/BusinessCashDonation.do" target="_self">현금기부</a></li>
+						<li><a href="${ContextPath}/controller/BusinessTalentDonation.do" target="_self">재능기부</a></li>	
 					</ul>
 				</div>
 				<div>

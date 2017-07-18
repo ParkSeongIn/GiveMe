@@ -34,15 +34,13 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>QNA 게시판</title>
 <style>
-.form-group1{
-	width: 800px;
-	height: 300px;
-    float: right;
-    margin-right: 210px;
+.faq dd{display:none;}
+
+.form-group{
+	padding-top: 30px;
 }
-div.col-sm-10{
-	  padding-top: 60px;
-	  padding-left: 80px;
+dl{
+	font-size: 20px;
 }
 </style>
 </head>
@@ -51,15 +49,45 @@ div.col-sm-10{
 <body>
 <c:import url="/nav/header.jsp"/>
 <c:import url="/nav/sidebar4.jsp"/>
-<div class="container">	
-	<div class="panel-body">
-		<div class="form-group1">
+<div class="container">
+		<div class="form-group">
 				<div class="faq">
 					<font size="5" face="맑은 고딕">FAQ</font>
+					<hr color="#D5D5D5" width="40%" align="left">
+					<dl  class="faq">
+					<dt><a href="#" onclick="evt('sub1')">질문1</a></dt>
+					<dd id="sub1">답변1<dd>
+					<dt><a href="#" onclick="evt('sub2')">질문2</a></dt>
+					<dd id="sub2">답변2<dd>
+					<dt><a href="#" onclick="evt('sub3')">질문3</a></dt>
+					<dd id="sub3">답변3<dd>
+					<dt><a href="#" onclick="evt('sub4')">질문4</a></dt>
+					<dd id="sub4">답변4<dd>
+					</dl>
+				</div>
+				<div class="col-sm-4">
+					<ul class="pagination pagination-sm">
+					  <li><a href="#">1</a></li>
+					  <li><a href="#">2</a></li>
+					  <li><a href="#">3</a></li>
+					  <li><a href="#">4</a></li>
+					  <li><a href="#">5</a></li>
+					</ul>
 				</div>
 		</div>
 	</div>	
-</div>
 <c:import url="/nav/footer.jsp"/>
+<script>
+	function evt(newwin){
+	var objid=document.getElementById(newwin);
+	if(objid.style.display=="block")
+	{
+	objid.style.display="none";
+	}
+	else{
+	objid.style.display="block";
+	}
+	}
+</script>
 </body>
 </html>

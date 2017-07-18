@@ -17,16 +17,9 @@ public class CashDonationVo {
 	private Timestamp cdbdate;
 	private int midx;
 	private int dlidx;
-	private int cname;
+	private String mname;
 	
-	
-	
-	public int getCName() {
-		return cname;
-	}
-	public void setCname(int cname) {
-		this.cname = cname;
-	}
+
 	public int getCidx() {
 		return cidx;
 	}
@@ -99,6 +92,10 @@ public class CashDonationVo {
 	public void setDlidx(int dlidx) {
 		this.dlidx = dlidx;
 	}
-	
-	
+	public String getMname() {
+		return mname;
+	}
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
 }

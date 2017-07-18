@@ -103,7 +103,7 @@ div.qrecontent{
 				<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionModifyServlet.do?qidx=<%=qidx %>">수정</a>
 				<% } %>
 				<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionDeleteServlet.do?qidx=<%=qidx %>">삭제</a>
-			 	<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/QuestionListServlet.do">글목록</a>
+			 	<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/MypageQuestionListServlet.do">글목록</a>
 			</div> 	
 		</div>
 	</div>

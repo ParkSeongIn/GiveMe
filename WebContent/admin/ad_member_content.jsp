@@ -5,6 +5,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
  <%
  	request.setCharacterEncoding("UTF-8");
+	 String diff = "@@"; 
+	if(request.getParameter("diff") != null){
+		diff = request.getParameter("diff").trim();
+	}
 	MemberVo vo = (MemberVo)request.getAttribute("vo");	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -30,6 +34,7 @@
 	div.birth.col-sm-4{
 		margin-left: 12px;
 		margin-right: -201px;
+		width: 32%;
 	}
 	div.name.col-sm-4{
 		margin-left: 1px;
@@ -39,6 +44,11 @@
 	div.title.col-sm-3{
 		margin-left: 12px;
 		margin-right:-120px;
+	}
+	div.title.col-sm-5{
+		margin-left: 12px;
+		margin-right:-120px;
+		width:28%
 	}	
 	select{
 		height: 34px;
@@ -71,19 +81,22 @@
 		margin-right: -118px;		
 	}
 	div.post.col-sm-5{
-		padding-left: 150px;			
+		padding-left: 137px;			
 	}
 	div.addr.col-sm-3{
 		margin-left: 12px;
 		margin-right: -107px;
+		width: 24%;
 	}
 	div.prim1.col-sm-3{
 		margin-left: 12px;
 		margin-right: -108px;
+		width: 24%;
 	}
 	div.prim2.col-sm-3{
 		margin-left: 12px;
 		margin-right: -108px;
+		width: 24%;
 	}
 	div.footer.col-sm-5{
 		padding-left:160px;
@@ -93,9 +106,35 @@
 		white-space: nowrap;
 		text-overflow:clip;
 	}
-
+	div.phone {
+	display: block;
+    width: 100%;
+    padding: 6px 12px;
+	}
 </style>
+<script>
 
+window.onload=function(){
+	<% if (diff.equals("1")){ %>
+	alert("비밀번호를 잘못 입력하셨습니다.");
+	<% } %>
+
+	// 비밀번호 미 입력시 알림 기능.
+	
+	function chkValue(){
+	//	alert("ddd");
+		if(!document.ModifyForm.mpwd.value){
+			alert("비밀번호를 입력하세요.");
+			document.ModifyForm.mpwd.focus();
+					
+		}else{
+			ModifyForm.submit();				
+		}
+		return false;
+	}	
+	}
+	
+</script>
 
 </head>
 <link rel="stylesheet" href="../css/font.css" type="text/css">
@@ -107,16 +146,16 @@
 		<h2>내 정보 수정</h2>
 			<br><br><br>
 			<div class="body">	
-			<form method="post" action="<%=request.getContextPath()%>/controller/MemberModifyActionServlet.do" name="member" onsubmit="return checkValue()">
-				
-				<input type="hidden" name="midx" value="<%=vo.getMidx() %>">
-				
-				
+				<div class="col-sm-4">
+				<label class="control-label">회원번호</label>
+				</div>
+				<%=vo.getMidx() %>
+				</div>
 				<div class="col-sm-4">
 					<label class="control-label">아이디</label>					
 				</div>
 				<div class="input col-sm-4">
-					<input type="text" class="form-control" name="mid" value="<%=vo.getMid() %>" disabled="disabled"/>	
+					<%=vo.getMid() %>
 				</div>
 				<br><br>						
 				
@@ -124,7 +163,7 @@
 					<label  class="control-label">비밀번호</label>	
 				</div>	
 				<div class="input col-sm-4">	
-					<input type="password" class="form-control" name="mpwd" value="<%=vo.getMpwd() %>"/>	
+					<%=vo.getMpwd() %>
 				</div>	
 				<br><br>				
 				
@@ -132,7 +171,7 @@
 					<label  class="control-label">이름</label>	
 				</div>	
 				<div class="name col-sm-4">	
-					<input type="text" class="form-control" name="mname" value="<%=vo.getMname() %>" disabled="disabled"/>	
+					<%=vo.getMname() %>
 				</div>	
 				<br><br>			
 				
@@ -140,61 +179,35 @@
 					<label  class="control-label">생년월일</label>	
 				</div>	
 				<div class="birth2 col-sm-4">	
-					<input type="text" class="form-control" name="mbirth" value="<%=vo.getMbirth() %>" disabled="disabled"/>	
+					<%=vo.getMbirth() %>
 				</div>	
 				<br><br>			
 				
-				<div class="title col-sm-3">
+				<div class="title col-sm-5">
 					<label class="control-label">핸드폰번호</label>
 				</div>
-				<div class="select col-sm-3">									
-					<select id="mphone" name="mphone">
-						<option value="010">010</option>
-						<option value="011">011</option>
-						<option value="017">017</option>
-						<option value="019">019</option>
-					</select>
-				</div>		
+				<div class="phone">
+					
 				<div class="content1 col-sm-3">									
-					<input type="text" class="form-control" id="mphone1" name="mphone1" value="<%=vo.getMphone() %>".substring(3, 7)>					
+					<%=vo.getMphone() %>				
 				</div>		
 				<div class="content2 col-sm-3">
-					<input type="text" class="form-control" id="mphone2" name="mphone2" value="<%=vo.getMphone() %>">
+					<%=vo.getMphone() %>
 				</div>
 				<br><br>	
+				</div>
 				
-				<div class="title col-sm-1">
+				<div class="title col-sm-3">
 					<label class="control-label">이메일</label>
 				</div>
 				
 				<div class="input col-sm-3">						
-					<input type="text" class="form-control" name="mmail1" value="<%=vo.getMmail() %>">
-				</div>
-				
-				<div class="at col-sm-1">
-					<h4>@</h4>
+					<%=vo.getMmail() %>
 				</div>
 								
-				<div class="select col-sm-6">											
-					<select id="mmail2" name="mmail2">
-						<option value="naver.com">naver.com</option>
-						<option value="hanmail.net">hanmail.net</option>
-						<option value="google.com">google.com</option>
-						<option value="yahoo.com">yahoo.com</option>
-						<option value="nate.com">nate.com</option>						
-					</select>							
-				</div>
-				<br><br>
-				
-				<div class="post col-sm-3">
-					<label class="control-label">우편번호</label>
-				</div>
-				<div class="post col-sm-3">										
-					<input type="button" value="우편번호 검색">
-				</div>
-					<br><br>	
+					
 				<div class="post col-sm-5">
-					<input type="text" class="form-control" name="mpost" value="<%=vo.getMpost()%>">
+					<%=vo.getMpost()%>
 				</div>	
 					<br><br>
 				
@@ -202,7 +215,7 @@
 					<label class="control-label">주소</label>
 				</div>
 				<div class="addr1 col-sm-8">	
-					<input type="text" class="form-control" name="maddr1" value="<%=vo.getMaddr1() %>">																	
+					<%=vo.getMaddr1() %>																
 				</div>
 					<br><br>
 			
@@ -210,7 +223,7 @@
 					<label class="control-label">상세주소</label>
 				</div>
 				<div class="addr2 col-sm-8">	
-					<input type="text" class="form-control" name="maddr2" value="<%=vo.getMaddr2() %>">																	
+					<%=vo.getMaddr2() %>																	
 				</div>
 					<br><br>
 				
@@ -218,14 +231,14 @@
 					<label> 가입날짜</label>
 				</div>
 				<div class="col-sm-3">		
-					<input type="text" class="form-control" name="menter" value="<%=vo.getMenter() %>" disabled="disabled"/>	
+					<%=vo.getMenter() %>
 				</div>	
 				
 				<div class="prim1 col-sm-3">				
 					<label>수정날짜</label>
 				</div>
 				<div class="col-sm-3">		
-					<input type="text" class="form-control" name="mmdate" value="<%=vo.getMmdate() %>" disabled="disabled"/>	
+					<%=vo.getMmdate() %>
 				</div>
 					<br><br>							
 				
@@ -233,27 +246,49 @@
 					<label>탈퇴날짜</label>
 				</div>	
 				<div class="col-sm-3">		
-					<input type="text" class="form-control" name="mbreakdate" value="<%=vo.getMbreakdate() %>" disabled="disabled"/>	
+					<%=((vo.getMbreakdate()+" ").replace("null", ""))%>
 				</div>						
 				
 				<div class="prim1 col-sm-3">
 					<label>총 마일리지</label>
 				</div>
 				<div class="col-sm-3">						
-					<input type="text" class="form-control" name="mpoint" value="<%=vo.getMpoint() %>" disabled="disabled"/>	
+					<%=vo.getMpoint() %>
 				</div>	
 					<br><br><br>
-					
+				
 				<div class="row" style="margin-top:10px">
 					<div class="footer col-sm-7"></div>
 					<div class="footer col-sm-5">
 						<div>
-							<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/MemberModifyServlet.do?midx=<%=vo.getMidx()%>">수정</a>
+							<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+	 										회원정보 수정
+							</button>
 							<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/MemberDeleteActionServlet.do?midx=<%=vo.getMidx()%>">탈퇴</a>	  						
 						</div>	
 					</div>
 				</div>				
 			
+				<form name="ModifyForm" id="ModifyForm" action="<%=request.getContextPath()%>/controller/MemberModifyServlet.do" method="post">	
+				
+					<div class="modal fade memberModify" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					        <span aria-hidden="true">&times;</span>
+					        </button>
+					        <h4 class="modal-title" id="myModalLabel">비밀번호를 입력해주세요.</h4>
+					      </div>
+					      <div class="modal-body">
+					      	 <input class="form-control" type="password" name="mpwd" id="mpwd">
+					      </div>
+					      <div class="modal-footer">
+					        <button type="submit" id="Modifybutton" class="btn btn-default" onclick="chkValue();return false;">입력</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>				
   				</form>
 				<div>	
 	  		</div>

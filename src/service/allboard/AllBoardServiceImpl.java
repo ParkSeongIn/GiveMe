@@ -19,7 +19,7 @@ public class AllBoardServiceImpl implements AllBoardService{
     }
     
     @Override
-    public ArrayList<AllBoardVo> getAllBoardList(String abtype, String keyField, String keyWord) {
+    public ArrayList<AllBoardVo> getAllBoardList(String keyField, String keyWord) {
     	Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -28,27 +28,33 @@ public class AllBoardServiceImpl implements AllBoardService{
 			String sql = "select * from "
 				+ 	"(select * from "
 				+ 		"(select rownum rnum, AA.* from "
-				+ 			"(select tb.abidx, tb.abimage, tb.abtitle, tb.abhit, tb.abwdate, tb.abdeletest, tb.abcontent, tb.abid from "
-				+ 			"table_allboard tb where tb.abtype = ? and tb.abdeletest='N' order by tb.abidx asc) AA) "
-				+ 		"where rnum <= 5) "
+				+ 			"(select abtype, abidx, abimage, abtitle, abhit, abwdate, abdeletest, abcontent, abid from "
+				+ 			"table_allboard where abdeletest='N' order by abidx desc) AA) "
+				+ 		"where rnum <= 10) "
 				+ 	"where rnum >= 1";
 			
 			if(keyWord != null && !keyWord.equals("") ){
-				sql +=" and "+keyField.trim()+" like '%"+keyWord.trim()+"%' order by abidx";
+				sql +=" and "+keyField.trim()+" like '%"+keyWord.trim()+"%' order by abidx desc";
 			}else{
-				sql +=" order by abidx";
+			//	alert("검색 키워드와 일치한 내용을 찾지 못했습니다.");	
+				sql +=" order by abidx desc";
 			}
 			
 			pstmt = con.prepareStatement(sql);
-				System.out.println(sql);
-			pstmt.setString(1, abtype);
-			pstmt.setString(2, keyField);
-			pstmt.setString(3, keyWord);
+				
+	//		pstmt.setString(1, abtype);
+				System.out.println("A");
+	//		pstmt.setString(2, keyField);
+				System.out.println("C");
+	//		pstmt.setString(3, keyWord);
 			rs = pstmt.executeQuery();
+				System.out.println(sql);
 			
 			while(rs.next()) {
 				AllBoardVo avo = new AllBoardVo();
-				
+				//	System.out.println("나오냐");
+					
+				avo.setAbtype(rs.getString("abtype"));
 				avo.setAbidx(rs.getInt("abidx"));
 				avo.setAbimage(rs.getString("abimage"));
 				avo.setAbtitle(rs.getString("abtitle"));
@@ -60,13 +66,14 @@ public class AllBoardServiceImpl implements AllBoardService{
 				ablist.add(avo);
 			}
 			
-		}	catch(Exception e) { 
-				
-		}	finally {
-				DBClose.close(con,pstmt,rs);
+		}catch(Exception e) { 
+			
+		}finally {
+			DBClose.close(con,pstmt,rs);
 		}
 			return ablist;
 		}
+
     
     @Override
     public AllBoardVo getAllBoard(int abidx) {

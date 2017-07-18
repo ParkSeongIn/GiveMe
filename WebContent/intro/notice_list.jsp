@@ -33,9 +33,13 @@ div.col-sm-10{
 }
 </style>
 </head>
-<c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
+
 <link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
+<%
+	ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("ablist");
+%>
+<c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 <c:import url="/nav/header.jsp"/>
 <c:import url="/nav/sidebar1.jsp"/>
 	
@@ -56,13 +60,18 @@ div.col-sm-10{
 		</thead>
 		 <tbody>
 		 	<c:forEach var="ab" items="${ablist}">
+		 		<c:choose>
+		 			<c:when test="${ab.abtype=='I' }">
 		 		<tr>
 		 			<td>${ab.abidx}</td>
 					<td><a href="${ContextPath}/controller/AllBoardIfContentServlet.do?abidx=${ab.abidx}">${ab.abtitle}</a></td>
 					<td>${ab.abid}</td>
 					<td>${ab.abhit}</td>
 					<td>${ab.abwdate}</td>
-				</tr>
+				</tr>				
+					</c:when>
+					<c:otherwise></c:otherwise>
+				</c:choose>	
 			</c:forEach>
 		</tbody>
 	</table>
@@ -70,7 +79,7 @@ div.col-sm-10{
 		<form name="noticesearch" method="post" action="<%=request.getContextPath()%>/controller/AllBoardIfListServlet.do" onsubmit="return noticesearchList()">
 			<select name="keyField">
 				<option value="0">---선택---</option>
-				<option value="abid">아이디</option>	
+				<option value="abid">작성자</option>	
 				<option value="abtitle">제목</option>
 			</select>
 			

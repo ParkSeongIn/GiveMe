@@ -39,6 +39,11 @@ public class MemberContentServlet extends HttpServlet {
 			diff = request.getParameter("diff").trim();
 		}
 		
+		String del = null;
+		if(request.getParameter("del") != null){
+			del = request.getParameter("del").trim();
+		}
+		
 		HttpSession session = request.getSession();
 		MemberVo vo = (MemberVo)session.getAttribute("vo");
 		int midx=vo.getMidx();

@@ -47,8 +47,8 @@ public class MemberModifyServlet extends HttpServlet {
 		if(request.getParameter("mpwd") != null){
 			mpwd = request.getParameter("mpwd").trim();
 		}
-		System.out.println(midx);
-		System.out.println(mpwd);
+//		System.out.println(midx);
+//		System.out.println(mpwd);
 
 		MemberVo vo = new MemberVo();
 		vo.setMidx(midx);
@@ -65,7 +65,7 @@ public class MemberModifyServlet extends HttpServlet {
 	    
 		row = msi.MemberConModChk(midx,mpwd);
 		
-		System.out.println(row);		
+//		System.out.println(row);		
 		retn(row);
 	}
 

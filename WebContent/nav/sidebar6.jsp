@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <title></title>
 <style>
-.col-sm-2{
-	padding-left: 130px;
+.col-sm-3{
+	padding-left: 120px;
 	padding-top: 60px;
 }
 </style>
@@ -16,7 +16,7 @@
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 <body>
 	
-	<div class="col-sm-2">
+	<div class="col-sm-3">
 	<h3><font color="#949494" size="4" face="맑은 고딕">관리자페이지</font></h3>
 	<br>
 		<ul class="nav nav-pills nav-stacked">

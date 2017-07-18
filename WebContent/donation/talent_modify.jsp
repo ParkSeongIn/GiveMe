@@ -86,15 +86,18 @@ $(document).ready(function(){
 			<input class="form-control" name="tbpeople" id="tbpeople" type="hidden" value="${tv.tbpeople}"/>
         </div><br/>
         
-        <div class="form-group3">
-	    	<label for="tbcategory1">분류1 :</label>
-			<input class="form-control" name="tbcategory1" id="tbcategory1" type="text" value="${tv.tbcategory1}"/>
-		</div>
-			
-		<div class="form-group3">
-	    	<label for="tbcategory2">분류2 :</label>
-			<input class="form-control" name="tbcategory2" id="tbcategory2" type="text" value="${tv.tbcategory2}"/>
-		</div>
+		<select id="tbcategory1" name="tbcategory1">
+			<option value="언어" selected>언어</option>
+			<option value="컴퓨터">컴퓨터</option>
+			<option value="음악">음악</option>
+			<option value="디자인">디자인</option>
+			<option value="수공예">수공예</option>
+			<option value="기타">기타</option>
+		</select>
+		
+		<select id="tbcategory2" name="tbcategory2">
+			<option value="언어" selected>언어</option>
+		</select>
 			
 		<div class="form-group4">
 	    	<label for="tbtitle">제목 :</label>
@@ -115,16 +118,34 @@ $(document).ready(function(){
         <div class="form-group6">
 			<label for="tbpeoplecnt">희망 인원 :</label>
 			<input class="form-control" name="tbpeoplecnt" id="tbpeoplecnt" type="text" value="${tv.tbpeoplecnt}"/>
+		</div><br/>
+
+		<div class="col-sm-3">
+			<select id="시" name="tbarea1">
+				<option value="서울특별시" selected>서울특별시</option>
+				<option value="부산광역시">부산광역시</option>
+				<option value="대구광역시">대구광역시</option>
+				<option value="인천광역시">인천광역시</option>
+				<option value="광주광역시">광주광역시</option>
+				<option value="대전광역시">대전광역시</option>
+				<option value="울산광역시">울산광역시</option>
+				<option value="세종특별자치시">세종특별자치시</option>
+				<option value="경기도">경기도</option>
+				<option value="강원도">강원도</option>
+				<option value="충청북도">충청북도</option>
+				<option value="충청남도">충청남도</option>
+				<option value="전라북도">전라북도</option>
+				<option value="전라남도">전라남도</option>
+				<option value="경상북도">경상북도</option>
+				<option value="경상남도">경상남도</option>
+				<option value="제주특별자치도">제주특별자치도</option>
+			</select>
 		</div>
-		
-		<div class="form-group6">
-			<label for="tbarea1">지역1 :</label>
-			<input class="form-control" name="tbarea1" id="tbarea1" type="text" value="${tv.tbarea1}"/>
-		</div>
-		<div class="form-group6">
-			<label for="tbarea2">지역2 :</label>
-			<input class="form-control" name="tbarea2" id="tbarea2" type="text" value="${tv.tbarea2}"/>
-		</div>
+		<div class="col-sm-3">
+			<select id="군" name="tbarea2">
+				<option value="강서구" selected>강서구</option>
+			</select>
+		</div><br/><br/>
 		
 		<c:if test = "${tv.tbpeople == '제공자'}">
 	    <div class="form-group6">

@@ -143,8 +143,11 @@ select::-ms-expand { /* for IE 11 */
 		<c:set var="sum" value="${sum+cv.cpoint }"/>
 	</c:forEach>
 	<h3>총 마일리지 : ${sum}</h3>
+		<a class="btn btn-default" style="float:right" href="<%=request.getContextPath()%>/controller/CashDonationInsertServlet.do">후원하기</a>
 	</div>
+	
 	</div>
+
 	</div>
 <c:import url="/nav/footer.jsp"/>
 <script>

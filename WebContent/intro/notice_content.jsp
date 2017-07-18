@@ -30,41 +30,71 @@
 </script>
 </head>
 <style>
-.container {
-height : 550px;
+.total_group {
+	width:700px;
+	float:right;
 }
-.table {
-width : 950px;
-height : 80px;
-margin-bottom : 10px;
-text-align : center;
-vertical-align : middle;
+.form-group1, .form-group2, .form-group3, .form-group4, .form-group5, .form-group6 {
+	width:300px;
 }
+.bottom{
+	float:right;
+}
+.bottom1{
+	float:left;
+}
+
 </style>
-<%@ include file="/nav/header.jsp" %>
-<%@ include file="/nav/sidebar4.jsp" %>
+<c:import url="/nav/header.jsp" />
+<c:import url="/nav/sidebar4.jsp" />
 <link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
+<c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 <div class="container"> <!-- div로 묶음 -->
-
-<table class="table table-striped table-bordered table-hover ">
-<tr>
-<td>글번호</td><td>제목</td><td>작성자</td>
-<td>조회수</td><td>작성날짜</td><td>내용</td>
-</tr>
-<tr>
-<td><%=abidx %></td><td><%=av.getAbtitle() %></td><td><%=av.getAbid() %></td>
-<td><%=av.getAbhit() %></td><td><%=av.getAbwdate() %></td><td><%=av.getAbcontent() %></td>
-</tr>
-</table>
+<h1>공지사항 내용</h1>
+	<div class="total_group">
+	
+		<div class="form-group1">
+            <label for="abidx">글번호</label>
+            <input class="form-control" name="abidx" id="abidx" type="text" value="${abidx}" readonly="readonly"/>
+        </div><br/>
+        <div class="form-group1">
+            <label for="abtitle">제목</label>
+            <input class="form-control" name="abtitle" id="abtitle" type="text" value="${av.abtitle}" readonly="readonly"/>
+        </div><br/>
+		<div class="form-group1">
+            <label for="abid">작성자</label>
+            <input class="form-control" name="abid" id="abid" type="text" value="${av.abid}" readonly="readonly"/>
+        </div>
+        <div class="form-group1">
+            <label for="abhit">조회수</label>
+            <input class="form-control" name="abhit" id="abhit" type="text" value="${av.abhit}" readonly="readonly"/>
+        </div>
+        <div class="form-group1">
+            <label for="abwdate">작성날짜</label>
+            <input class="form-control" name="abwdate" id="abwdate" type="text" value="${av.abwdate}" readonly="readonly"/>
+        </div>
+        <div class="form-group7">
+        	<label for="abcontent">내용 :</label>
+        	<textarea name="abcontent" id="abcontent" rows="10" cols="100"  disabled="disabled">${av.abcontent}</textarea>
+        </div><br/>
+        
+    <div class="col-sm-8"></div>
+	<div class="col-sm-4">
+	
 	<c:if test="${sessionScope.vo.mgrade == 'A' }">
 	<div>
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardIfModifyServlet.do?abidx=<%=abidx %>">수정</a>
 		<input class="btn btn-default" id="DeleteButton" type="button" value="삭제" onclick="dab()"/>
+	</div>
+	</c:if><br/>
+	<div class="bottom1">
 		<a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardIfListServlet.do?abtype=I">글목록</a>
 	</div>
-	</c:if>
+	</div>
+	</div>
+	
 </div>
-<%@ include file="/nav/footer.jsp" %>
+<c:import url="/nav/footer.jsp" />
 </body>
 </html>

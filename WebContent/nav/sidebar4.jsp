@@ -8,7 +8,7 @@
 <title></title>
 
 <style>
-.col-sm-2{
+.col-sm-3{
 	padding-left: 130px;
 	padding-top: 60px;
 }
@@ -17,7 +17,7 @@
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 <body>
 	
-	<div class="col-sm-2">
+	<div class="col-sm-3">
 	<h3><font color="#949494" size="5" face="맑은 고딕">커뮤니티</font></h3>
 	<br>
 		<ul class="nav nav-pills nav-stacked">
