@@ -42,6 +42,12 @@
 dl{
 	font-size: 20px;
 }
+div.faq{
+	padding-left: 180px;
+}
+div.col-sm-4{
+	padding-left: 130px;
+}
 </style>
 </head>
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
