@@ -11,14 +11,43 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <link rel="stylesheet" href="../css/font.css" type="text/css">
+<style>
+div.col-sm-8{
+	border: 1px solid #EFEFEF;
+    width: 850px;
+    height: 400px;
+    margin-top:30px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+div.col-sm-2{
+    width: 174px;
+}
+div.col-sm-7{
+	border: 1px solid #EFEFEF;
+    width: 850px;
+    height: 400px;
+    margin-top:30px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+</style>
 <body>
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 <c:import url="/nav/header.jsp"/>
 <c:import url="/nav/sidebar1.jsp"/>
 <div class="container">
-
+	<div><font size="40px;">사업안내</font></div>
+	도움이 필요한 곳이라면 어디든 달려가겠습니다.
+	<div class="col-sm-8">
+	<font size="20px;">2017 현금후원현항</font>
+	</div>
+	<div class="col-sm-2"></div>
+	<div class="col-sm-7">
+	<font size="20px;">2017 재능후원현항</font>
+	</div>
 </div>
 
-
 </body>
+<c:import url="/nav/footer.jsp"/>
 </html>

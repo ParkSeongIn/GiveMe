@@ -43,12 +43,9 @@ public class AllBoardServiceImpl implements AllBoardService{
 			pstmt = con.prepareStatement(sql);
 				
 	//		pstmt.setString(1, abtype);
-				System.out.println("A");
 	//		pstmt.setString(2, keyField);
-				System.out.println("C");
 	//		pstmt.setString(3, keyWord);
 			rs = pstmt.executeQuery();
-				System.out.println(sql);
 			
 			while(rs.next()) {
 				AllBoardVo avo = new AllBoardVo();
@@ -73,7 +70,45 @@ public class AllBoardServiceImpl implements AllBoardService{
 		}
 			return ablist;
 		}
-
+    
+    @Override
+    public ArrayList<AllBoardVo> getAllBoardMainList(String abtype) {
+    	Connection con = dbconnect.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<AllBoardVo> ablist = new ArrayList<AllBoardVo>();
+		try {
+			String sql = "select * from "
+				+ 	"(select * from "
+				+ 		"(select rownum rnum, AA.* from "
+				+ 			"(select abtype, abidx, abtitle, abdeletest, abwdate from "
+				+ 			"table_allboard where abdeletest='N' order by abidx desc) AA) "
+				+ 		"where rnum <= 5) "
+				+ 	"where rnum >= 1";
+			
+			
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				AllBoardVo avo = new AllBoardVo();
+					
+				avo.setAbtype(rs.getString("abtype"));
+				avo.setAbidx(rs.getInt("abidx"));
+				avo.setAbtitle(rs.getString("abtitle"));
+				avo.setAbdeletest(rs.getString("abdeletest"));
+				avo.setAbwdate(rs.getDate("abwdate"));
+				ablist.add(avo);
+			}
+			
+		}catch(Exception e) { 
+			
+		}finally {
+			DBClose.close(con,pstmt,rs);
+		}
+			return ablist;
+		}
+    
     
     @Override
     public AllBoardVo getAllBoard(int abidx) {

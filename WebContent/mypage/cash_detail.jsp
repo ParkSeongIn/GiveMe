@@ -50,21 +50,23 @@ select::-ms-expand { /* for IE 11 */
 	<div class="container">
 	<div class="col-sm-10">	
 	<br>
-	<h2>현금기부 내역</h2>
+	<span style="font-size:40px;">현금후원 내역</span>
+	<a href="#" class="btn btn-default">현금후원 설명</a>
+	
 	<hr color="#D5D5D5" width="40%" align="left">
 	
 	<h3>정기후원</h3>
 	<table class="table table-hover" id="clist">
 		<thead>
 			<tr>
-				<th width="5%" align="center" valign="middle">번호</th>
+				<th width="10%" align="center" valign="middle">번호</th>
 				<th width="10%">금액</th>
 				<th width="15%">납입방법</th>
 				<th width="15%">후원날짜</th>
 				<th width="10%">월 출금일</th>
 				<th width="10%">후원상태</th>
 				<th width="10%">영수증</th>
-				<th width="20%">마일리지</th>
+				<th width="10%">마일리지</th>
 				<th width="20%">취소</th>
 			</tr>
 		</thead>

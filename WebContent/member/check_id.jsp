@@ -55,11 +55,12 @@ request.setCharacterEncoding("UTF-8");
 		if(!mid){
 			alert("아이디를 입력하지 않았습니다");
 			return false;
-
-		}
-		else if((mid < "0" || mid > "9") && (mid < "A" || mid > "Z") && (mid < "a" || mid > "z")){
+		}else if((mid < "0" || mid > "9") && (mid < "A" || mid > "Z") && (mid < "a" || mid > "z")){
 			alert("한글 및 특수문자는 아이디로 사용하실 수 없습니다.");
 			return false;
+		}else if((mid.length<=5 || mid.length>=12)){
+			alert("아이디는 6자리 이상 12자리 이하입니다.");
+			return false;	
 		}else{
 			var param="mid="+mid
             httpRequest = getXMLHttpRequest();

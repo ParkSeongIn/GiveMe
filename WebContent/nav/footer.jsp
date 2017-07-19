@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<link rel="stylesheet" href="../css/font.css" type="text/css">
 <link rel="stylesheet" href="../css/footer.css" type="text/css">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -51,14 +52,14 @@
 			
 			</div>
 			<div class='footerIcon' onmouseover='iconSubOn()' onmouseout='iconSubOff()'>
-				<img class='img1' src='https://d30y9cdsu7xlg0.cloudfront.net/png/29964-200.png' alt='기부 아이콘1'>
+				<img class='img1' src='https://d30y9cdsu7xlg0.cloudfront.net/png/29964-200.png' alt='후원 아이콘1'>
 			
 				<div id='iconSub' class='iconSub'>
 					<div>
-						현금기부
+						<a href="${ContextPath}/controller/CashDonationInsertServlet.do" target="_self">현금후원</a>
 					</div>
 					<div>
-						<a href="${ContextPath}/controller/TalentBoardIndexServlet.do" target="_self">재능기부</a>
+						<a href="${ContextPath}/controller/TalentBoardIndexServlet.do" target="_self">재능후원</a>
 					</div>
 				</div>
 			</div>

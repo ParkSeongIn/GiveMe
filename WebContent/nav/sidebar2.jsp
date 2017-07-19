@@ -18,12 +18,13 @@
 </style>
 </head>
 <body>
+	<c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 	<br>
 	<div class="col-sm-3">
 		<h3><font color="#949494" size="5" face="맑은 고딕">사업내용</font></h3>
 		<ul class="nav nav-pills nav-stacked">
-			  <li><a href="#"><font color="#8C8C8C">현금기부</font></a></li>
-			  <li><a href="#" ><font color="#8C8C8C">재능기부</font></a></li>
+			  <li><a href="${ContextPath}/controller/BusinessCashDonation.do" target="_self"><font color="#8C8C8C">현금기부</font></a></li>
+			  <li><a href="${ContextPath}/controller/BusinessTalentDonation.do" target="_self"><font color="#8C8C8C">재능기부</font></a></li>
 		</ul>
 		</div>
 </body>

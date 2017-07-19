@@ -30,7 +30,8 @@ div.col-sm-10{
 	<div class="container">
 	<div class="col-sm-10">	
 	<br>
-	<h2>재능후원 내역</h2>
+	<span style="font-size:40px;">재능후원 내역</span>
+	<a href="#" class="btn btn-default">재능후원 설명</a>
 	<hr color="#D5D5D5" width="40%" align="left">
 	<table class="table table-hover" id="tblist">
 		<thead>
