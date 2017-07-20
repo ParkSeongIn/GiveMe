@@ -16,7 +16,7 @@ public class MemberVo {
 	private String maddr1;
 	private String maddr2;
 	private String mgrade;
-	private String mvalue;
+	private int mvalue;
 	private int mpoint;
 	private Timestamp mcanclecash;
 	private Date menter;
@@ -97,10 +97,10 @@ public class MemberVo {
 	public void setMgrade(String mgrade) {
 		this.mgrade = mgrade;
 	}
-	public String getMvalue() {
+	public int getMvalue() {
 		return mvalue;
 	}
-	public void setMvalue(String mvalue) {
+	public void setMvalue(int mvalue) {
 		this.mvalue = mvalue;
 	}
 	public int getMpoint() {

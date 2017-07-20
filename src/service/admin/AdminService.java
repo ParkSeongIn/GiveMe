@@ -9,7 +9,7 @@ import service.question.QuestionVo;
 
 public interface AdminService {
 
-    ArrayList<MemberVo> getMemberList(String keyField, String keyWord);
+    ArrayList<MemberVo> getMemberList(String keyField, String keyWord, int page_num);
     int deleteMember();
     CashDonationVo getCashDonation();
     int insertAllBoard(AllBoardVo avo);
@@ -24,6 +24,7 @@ public interface AdminService {
     int deleteDonationList(int dlidx);
     int getPaging();
     int getPaging1();
+    int getPagingM();
     // 관리자 table_Question
  	ArrayList<QuestionVo> getAdQuestionList(String keyField, String keyWord, int page_num);
  	QuestionVo getAdQuestion(int qidx);

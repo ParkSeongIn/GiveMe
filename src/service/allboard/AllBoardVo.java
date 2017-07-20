@@ -14,7 +14,7 @@ public class AllBoardVo {
 	private String abimage;
 	private Date abmdate;
 	private Timestamp abdbdate;
-	private String abdeletest;
+	private int abdeletest;
 	private String abid;
 	
 	public String getAbtype() {
@@ -71,10 +71,10 @@ public class AllBoardVo {
 	public void setAbdbdate(Timestamp abdbdate) {
 		this.abdbdate = abdbdate;
 	}
-	public String getAbdeletest() {
+	public int getAbdeletest() {
 		return abdeletest;
 	}
-	public void setAbdeletest(String abdeletest) {
+	public void setAbdeletest(int abdeletest) {
 		this.abdeletest = abdeletest;
 	}
 	public String getAbid() {

@@ -20,7 +20,7 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<div class="navbar-brand">
-				<a href="${ContextPath}/controller/MainServlet.do">Give Me</a></div>
+				<a href="${ContextPath}/controller/MainServlet.do"><img src="../image/logo.png" style="width: 200px;height: 80px; margin-top: -35px;"></a></div>
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="dropdown">

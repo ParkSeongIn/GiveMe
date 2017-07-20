@@ -39,7 +39,7 @@ public class MemberServiceImpl implements MemberService{
 	try{
 	    sql="insert into table_member (midx,mid,mpwd,mname,mbirth,mphone,mmail,mpost,maddr1,maddr2,"
 	    	+ "mgrade, mvalue,mpoint, mcanclecash, menter, mmdate,mbreakdate,mdbdate)"
-	    	+ "values(seq_midx.nextval,?,?,?,?,?,?,?,?,?,?,?,0,sysdate,sysdate,sysdate,sysdate,sysdate)";
+	    	+ "values(seq_midx.nextval,?,?,?,?,?,?,?,?,?,'G',1,0,sysdate,sysdate,sysdate,sysdate,sysdate)";
 	    pstmt = con.prepareStatement(sql);	
 	    	    
 	    pstmt.setString(1, vo.getMid());	
@@ -51,8 +51,6 @@ public class MemberServiceImpl implements MemberService{
 	    pstmt.setInt(7, vo.getMpost());
 	    pstmt.setString(8, vo.getMaddr1());
 	    pstmt.setString(9, vo.getMaddr2());
-	    pstmt.setString(10, Values.grade_guest);	
-	    pstmt.setString(11, Values.value_in);	
 	    row=pstmt.executeUpdate();	//execute를 실행한 후 값을 row에 담는다.
 	
 	}catch(Exception e){
@@ -87,7 +85,7 @@ public class MemberServiceImpl implements MemberService{
 	    if(rs.next()){	// next = 쿼리를 실행해서 다음의 값이 있는지 확인
 		vo = new MemberVo();
 		
-		vo.setMgrade(Values.grade_guest);
+		vo.setMgrade(Values.GRADE_GUEST);
 		vo.setMidx(rs.getInt("midx"));
 		vo.setMid(rs.getString("mid"));
 		vo.setMpwd(rs.getString("mpwd"));
@@ -182,7 +180,6 @@ public class MemberServiceImpl implements MemberService{
 		
 		vo.setMidx(rs.getInt("midx"));
 		vo.setMid(rs.getString("mid"));
-	//	vo.setMpwd(rs.getString("mpwd"));
 		vo.setMname(rs.getString("mname"));
 		vo.setMbirth(rs.getInt("mbirth"));
 		vo.setMphone(rs.getInt("mphone"));
@@ -252,7 +249,7 @@ public class MemberServiceImpl implements MemberService{
 	try{  	    
 	    String sql="select mpwd, mid, mvalue "
 	    	+ "from table_member "
-	    	+ "where mvalue <> 'OUT' and mid=?";    	
+	    	+ "where mvalue <> 2 and mid=?";    	
 	    
 	    
 	    pstmt=con.prepareStatement(sql);
@@ -286,8 +283,6 @@ public class MemberServiceImpl implements MemberService{
 		PreparedStatement pstmt = null;  
 		ResultSet rs = null;  
 		
-		System.out.println("메소드안임"+midx);
-		System.out.println("메소드안임"+mpwd);
 		
 		int row = 0;
 		
@@ -517,10 +512,11 @@ public class MemberServiceImpl implements MemberService{
 	int deletem = 0;
 	
 	try{
-	    sql = "update table_member set mvalue='OUT' where midx=?";
+	    sql = "update table_member set mvalue=? where midx=?";
 	    
 	    pstmt = con.prepareStatement(sql);
-	    pstmt.setInt(1, midx);
+	    pstmt.setInt(1, Values.VALUE_OUT);
+	    pstmt.setInt(2, midx);
 	    
 	    deletem=pstmt.executeUpdate();
 	    

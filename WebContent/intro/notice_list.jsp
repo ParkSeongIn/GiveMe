@@ -36,9 +36,6 @@ div.col-sm-10{
 
 <link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
-<%
-	ArrayList<AllBoardVo> ablist = (ArrayList<AllBoardVo>)request.getAttribute("ablist");
-%>
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 <c:import url="/nav/header.jsp"/>
 <c:import url="/nav/sidebar1.jsp"/>
@@ -51,27 +48,27 @@ div.col-sm-10{
 	<table class="table table-striped table-bordered table-hover" id="notic_board_list">
 		<thead>
 			<tr>
-				<th width="10%" align="center" valign="middle">글 번호</th>
-				<th width="20%">글제목</th>
-				<th width="10%">작성자</th>
-				<th width="10%">조회수</th>
-				<th width="20%">작성날짜</th>
+				<td width="10%" align="center" valign="middle">글 번호</td>
+				<td width="20%">글제목</td>
+				<td width="10%">작성자</td>
+				<td width="10%">조회수</td>
+				<td width="20%">작성날짜</td>
 			</tr>
 		</thead>
 		 <tbody>
 		 	<c:forEach var="ab" items="${ablist}">
 		 		<c:choose>
-		 			<c:when test="${ab.abtype=='I' }">
+		 			<c:when test="${ab.abtype=='I' && ab.abdeletest == 2}">
 		 		<tr>
 		 			<td>${ab.abidx}</td>
 					<td><a href="${ContextPath}/controller/AllBoardIfContentServlet.do?abidx=${ab.abidx}">${ab.abtitle}</a></td>
 					<td>${ab.abid}</td>
 					<td>${ab.abhit}</td>
 					<td>${ab.abwdate}</td>
-				</tr>				
+				</tr>
 					</c:when>
 					<c:otherwise></c:otherwise>
-				</c:choose>	
+				</c:choose>					
 			</c:forEach>
 		</tbody>
 	</table>
@@ -94,6 +91,38 @@ div.col-sm-10{
 		</c:if>
 		</div>
 	</div>
+	<%-- 페이징 인디케이터 --%>
+		<div class="text-center">
+		<ul class="pagination">
+			<c:url var="path" value="/controller/AllBoardIfListServlet.do">
+				<c:param name="page_num" value="1"/>
+			</c:url>
+			<li><a href="${path }"><font color="black">이전</font></a></li>
+			
+			<c:set var="page_num2" value="${param.page_num }"/>
+			<c:if test="${param.page_num == null || param.page_num == '' }">
+				<c:set var="page_num2" value="1"/>
+			</c:if>
+			<c:forEach var="i" begin="${requestScope.indi_min }" end="${requestScope.indi_max}">
+				<c:url var="path" value="/controller/AllBoardIfListServlet.do">
+					<c:param name="page_num" value="${i }"/>
+				</c:url>
+				<c:choose>
+					<c:when test="${page_num2 == i }">
+						<li><a href="${path }"><font color="black">${i }</font></a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="${path }"><font color="black">${i }</font></a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:url var="path" value="/controller/AllBoardIfListServlet.do">
+				<c:param name="page_num" value="${requestScope.page_cnt }"/>
+			</c:url>	
+			<li><a href="${path }"><font color="black">다음</font></a></li>
+		</ul>
+		</div>
+		<%-- 페이징 인디케이터 --%>
 	</div>
 <c:import url="/nav/footer.jsp"/>
 </body>

@@ -4,10 +4,14 @@ div.navbar-brand {
     padding: 0px 15px;
     font-size: 60px;
     line-height: 20px;
+    font-color:#000000;
 }
 div.container-fluid{
 	padding-top: 40px;
 }
 .nav{
 	font-size : 22px;
+}
+.navbar-default .navbar-nav>li>a {
+    color: #000000;
 }

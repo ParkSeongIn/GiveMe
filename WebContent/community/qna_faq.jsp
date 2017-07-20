@@ -49,6 +49,7 @@
 <div class="container">
 	<h2>자주 하는 질문</h2>
     <div class="panel-group col-sm-8" id="accordion">
+       
         <div class="faqHeader">홈페이지관련</div>
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -110,7 +111,7 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                    I want to sell my items - what are the steps?</a>
+                    구체적인 후원처 정보를 알고싶습니다.	</a>
                 </h4>
             </div>
             <div id="collapseThree" class="panel-collapse collapse">
@@ -169,12 +170,27 @@
                 </div>
             </div>
         </div>
+         <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">
+                     납부방법 변경은 할수 있나요?</a>
+                </h4>
+            </div>
+            <div id="#collapseTen" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Our standard payment plan provides for monthly payments. At the end of each month, all accumulated funds are transfered to your account. 
+                    The minimum amount of your balance should be at least 70 USD. 
+                </div>
+            </div>
+        </div>
+       
         <div class="faqHeader">재능후원관련</div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine">
-                     납부방법 변경은 할수 있나요?</a>
+                     후원자의 인적사항을 알고 싶습니다.</a>
                 </h4>
             </div>
             <div id="collapseNine" class="panel-collapse collapse">
@@ -189,7 +205,7 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                  ㅁㅁㅁㅁㅁㅁ</a>
+                  서비스를 중간에 그만두고 싶습니다.</a>
                 </h4>
             </div>
             <div id="collapseFour" class="panel-collapse collapse">
@@ -204,7 +220,8 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">Is this the latest version of an item</a>
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
+                    신청자 확인이란 무엇입니까?</a>
                 </h4>
             </div>
             <div id="collapseSeven" class="panel-collapse collapse">

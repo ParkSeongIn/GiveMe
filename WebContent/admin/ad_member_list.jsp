@@ -36,10 +36,6 @@ div.col-sm-10{
 </style>
 <link rel="stylesheet" href="../css/font.css" type="text/css">
 <body>
-<%
-ArrayList<MemberVo> list = (ArrayList<MemberVo>)request.getAttribute("list");
-%>
-
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 <c:import url="/nav/header.jsp"/>
 <c:import url="/nav/sidebar6.jsp"/>
@@ -50,6 +46,7 @@ ArrayList<MemberVo> list = (ArrayList<MemberVo>)request.getAttribute("list");
 		<table class="table table-striped table-bordered table-hover" id="list">
 		  <thead>
 			<tr>
+				<td>회원등급</td>
 				<td>회원번호</td>
 				<td>이름</td>
 				<td>아이디</td>
@@ -59,21 +56,32 @@ ArrayList<MemberVo> list = (ArrayList<MemberVo>)request.getAttribute("list");
 			</tr>
 		  <thead>
 		   <tbody>	
-			<c:forEach var="vo" items="${requestScope.list}">
-				<c:choose>
-					<c:when test="${vo.mvalue != ''}"> 
+			<c:forEach var="vo" items="${list}">
 				<tr>
+				<c:choose>
+					<c:when test="${vo.mgrade == 'G' }">
+				<td>일반회원</td>
+				</c:when>
+				<c:otherwise>
+				<td>관리자</td>
+				</c:otherwise>
+				</c:choose>
 				<td>${vo.midx}</td>
 				<td><a href="${ContextPath }/controller/MemberContentServlet.do?midx=${vo.midx}">${vo.mname}</a></td>
 				<td>${vo.mid}</td>
 				<td>${vo.mmail}</td>
 				<td>${vo.menter}</td>
-				<td>${vo.mvalue}</td>
-				</tr>
+				
+				<c:choose>
+					<c:when test="${vo.mvalue == 1 }">
+				<td>회원</td>
 					</c:when>
-					<c:otherwise>
-					</c:otherwise>
+				<c:otherwise>
+				<td>탈퇴회원</td>
+				</c:otherwise>
 				</c:choose>
+				
+				</tr>
 			</c:forEach>	
 		</tbody>	
 				
@@ -92,6 +100,38 @@ ArrayList<MemberVo> list = (ArrayList<MemberVo>)request.getAttribute("list");
 				<input type="submit" value="검색">
 			</form>			
 	</div>
+	<%-- 페이징 인디케이터 --%>
+		<div class="text-center">
+		<ul class="pagination">
+			<c:url var="path" value="/controller/MemberListServlet.do">
+				<c:param name="page_num" value="1"/>
+			</c:url>
+			<li><a href="${path }"><font color="black">이전</font></a></li>
+			
+			<c:set var="page_num2" value="${param.page_num }"/>
+			<c:if test="${param.page_num == null || param.page_num == '' }">
+				<c:set var="page_num2" value="1"/>
+			</c:if>
+			<c:forEach var="i" begin="${requestScope.indi_min }" end="${requestScope.indi_max}">
+				<c:url var="path" value="/controller/MemberListServlet.do">
+					<c:param name="page_num" value="${i }"/>
+				</c:url>
+				<c:choose>
+					<c:when test="${page_num2 == i }">
+						<li><a href="${path }"><font color="black">${i }</font></a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="${path }"><font color="black">${i }</font></a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:url var="path" value="/controller/MemberListServlet.do">
+				<c:param name="page_num" value="${requestScope.page_cnt }"/>
+			</c:url>	
+			<li><a href="${path }"><font color="black">다음</font></a></li>
+		</ul>
+		</div>
+		<%-- 페이징 인디케이터 --%>
 	</div>
 <c:import url="/nav/footer.jsp"/>	
 </body>

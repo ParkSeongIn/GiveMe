@@ -18,7 +18,7 @@
 			}else if((document.member.mid.value < "0" || document.member.mid.value > "9") && (document.member.mid.value < "A" || document.member.mid.value > "Z") && (document.member.mid.value < "a" || document.member.mid.value > "z")){
 				alert("한글 및 특수문자는 아이디로 사용하실 수 없습니다.");
 				return false;				
-			}else if(document.member.mid.value.length<=6 || document.member.mid.value.length>=12){
+			}else if(document.member.mid.value.length<=5 || document.member.mid.value.length>=12){
 				alert("아이디는 6자리 이상 12자리 이하입니다.");
 				return false;				
 			}else if(!document.member.mpwd.value){
@@ -27,7 +27,7 @@
 			}else if((document.member.mpwd.value < "0" || document.member.mpwd.value > "9") && (document.member.mpwd.value < "A" || document.member.mpwd.value > "Z") && (document.member.mpwd.value < "a" || document.member.mpwd.value > "z")){
 				alert("한글 및 특수문자는 비밀번호로 사용하실 수 없습니다.");
 				return false;
-			}else if(document.member.mpwd.value.length <= 8 || document.member.mpwd.value.length >= 20){
+			}else if(document.member.mpwd.value.length <= 7 || document.member.mpwd.value.length >= 20){
 				alert("비밀번호는 8자리 이상 20자리 이하입니다.");
 				return false;				
 			}else if(document.member.mpwd.value != document.member.mpwdcheck.value){

@@ -26,7 +26,7 @@ public class AdminServiceImpl implements AdminService{
 
     
     @Override
-    public ArrayList<MemberVo> getMemberList(String keyField, String keyWord) {
+    public ArrayList<MemberVo> getMemberList(String keyField, String keyWord, int page_num) {
 	// TODO Auto-generated method stub
 	Connection con = dbconnect.getConnection();
 	PreparedStatement pstmt = null;
@@ -35,10 +35,13 @@ public class AdminServiceImpl implements AdminService{
 	
 	try{
 	    String sql="select * from "
-	    	+ "(select rownum rnum, midx, mname, mid, mmail, menter, mvalue "
+	    	+ "(select rownum rnum, midx, mname, mid, mmail, menter, mvalue, mgrade "
 	    	+ "from table_member order by midx desc) "
-	    	+ "where rnum >= 5 and rnum <= 10";
+	    	+ "where rnum >= ? and rnum <= ?";
 	    
+	    int min = ((page_num - 1) * Values.CNT_PER_PAGE) + 1;
+		int max = min + Values.CNT_PER_PAGE - 1;
+		
 	    if(keyWord != null && !keyWord.equals("") ){
 		sql +=" and "+keyField.trim()+" like '%"+keyWord.trim()+"%' order by midx desc";
 	    }else{
@@ -47,7 +50,9 @@ public class AdminServiceImpl implements AdminService{
 	    
 
 	    pstmt = con.prepareStatement(sql);
-	    
+	    pstmt.setInt(1, min);
+		pstmt.setInt(2, max);
+		
 	    rs=pstmt.executeQuery();	    
 	    while(rs.next()){
 		MemberVo vo = new MemberVo();
@@ -57,7 +62,8 @@ public class AdminServiceImpl implements AdminService{
 		vo.setMid(rs.getString("mid"));
 		vo.setMmail(rs.getString("mmail"));
 		vo.setMenter(rs.getDate("menter"));
-		vo.setMvalue(rs.getString("mvalue"));
+		vo.setMvalue(rs.getInt("mvalue"));
+		vo.setMgrade(rs.getString("mgrade"));
 		list.add(vo);
 	    }
 	}catch(Exception e){
@@ -91,13 +97,14 @@ public class AdminServiceImpl implements AdminService{
 		
 		try { 
 			sql = "insert into table_allboard (abid,abtype,abidx,abtitle,abhit,abwdate,abcontent,abmdate,abdbdate,abdeletest,abimage) "
-					+ "values(?,?,seq_abidx.nextval,?,0,sysdate,?,'',sysdate,'N',?)";
+					+ "values(?,?,seq_abidx.nextval,?,0,sysdate,?,'',sysdate,?,?)";
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, avo.getAbid());
 		pstmt.setString(2, avo.getAbtype());
 		pstmt.setString(3, avo.getAbtitle());
 		pstmt.setString(4, avo.getAbcontent());
-		pstmt.setString(5, avo.getAbimage());
+		pstmt.setInt(5, Values.NON_DEL);
+		pstmt.setString(6, avo.getAbimage());
 		
 		iab = pstmt.executeUpdate();
 		}catch(Exception e){
@@ -262,10 +269,10 @@ public class AdminServiceImpl implements AdminService{
 		ArrayList<DonationListVo> list = new ArrayList<DonationListVo>();
     	
 		try{
-		String sql = "select * from "
-			+ "(select rownum rnum, dlidx, dlgroup2, dlplace, dlarea, dlwdate, dldeletest from "
-			+ "table_donationlist order by dlidx desc) "
-			+ "where rnum >= ? and rnum <= ?";
+			String sql = "select * from "
+				+ "(select rownum rnum, dlidx, dlgroup2, dlplace, dlarea, dlwdate, dldeletest from "
+				+ "table_donationlist order by dlidx desc) "
+				+ "where rnum >= ? and rnum <= ?";
 		
 		int min = ((page_num - 1) * Values.CNT_PER_PAGE) + 1;
 		int max = min + Values.CNT_PER_PAGE - 1;
@@ -546,5 +553,31 @@ public class AdminServiceImpl implements AdminService{
 
 	return page_cnt;
     }
+    @Override
+    public int getPagingM() {
+	// TODO Auto-generated method stub
+    Connection con = dbconnect.getConnection();
+	PreparedStatement pstmt= null;
+	ResultSet rs = null;
+	int page_cnt = 0;
+	try{
+	String sql = "select count(*) from table_member ";
+	pstmt = con.prepareStatement(sql);
+	rs = pstmt.executeQuery();
+	rs.next();
+	page_cnt = Values.CNT_PER_PAGE;
+	page_cnt++;
+	
+		
+    
+	}catch(Exception e){
+    	
+    }finally{
+    	DBClose.close(con,pstmt,rs);
+    }
+
+	return page_cnt;
+    }
+    
 }
 

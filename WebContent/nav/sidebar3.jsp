@@ -20,11 +20,11 @@
 <c:set var="ContextPath" value="${pageContext.request.contextPath}"/>
 <body>
 	<div class="col-sm-2">
-		<h3><font color="#949494" size="5" face="맑은 고딕">후원하기</font></h3>
+		<h3><font color="#000000" size="5" face="맑은 고딕">후원하기</font></h3>
 		<br>
 			<ul class="nav nav-pills nav-stacked">
-				  <li><a href="${ContextPath}/controller/CashDonationInsertServlet.do"><font color="#8C8C8C">현금기부</font></a></li>
-				  <li><a href="${ContextPath}/controller/TalentBoardIndexServlet.do"><font color="#8C8C8C">재능기부</font></a></li>
+				  <li><a href="${ContextPath}/controller/CashDonationInsertServlet.do"><font color="#000000">현금기부</font></a></li>
+				  <li><a href="${ContextPath}/controller/TalentBoardIndexServlet.do"><font color="#000000">재능기부</font></a></li>
 			</ul>
 	</div>
 </body>

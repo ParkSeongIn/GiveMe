@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+
 import common.DBConnect;
+import common.Values;
 import common.DBClose;
 
 
@@ -19,47 +21,45 @@ public class AllBoardServiceImpl implements AllBoardService{
     }
     
     @Override
-    public ArrayList<AllBoardVo> getAllBoardList(String keyField, String keyWord) {
+    public ArrayList<AllBoardVo> getAllBoardList(String keyField, String keyWord, int page_num) {
     	Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		ArrayList<AllBoardVo> ablist = new ArrayList<AllBoardVo>();
+		
 		try {
 			String sql = "select * from "
-				+ 	"(select * from "
-				+ 		"(select rownum rnum, AA.* from "
-				+ 			"(select abtype, abidx, abimage, abtitle, abhit, abwdate, abdeletest, abcontent, abid from "
-				+ 			"table_allboard where abdeletest='N' order by abidx desc) AA) "
-				+ 		"where rnum <= 10) "
-				+ 	"where rnum >= 1";
+					+ "(select rownum rnum,  abtype, abidx, abimage, abtitle, abhit, abwdate, abdeletest, abcontent, abid from "
+					+ "table_allboard order by abidx desc) "
+					+ "where rnum >= ? and rnum <= ?";
+
+			int min = ((page_num - 1) * Values.CNT_PER_PAGE) + 1;
+			int max = min + Values.CNT_PER_PAGE - 1;
 			
 			if(keyWord != null && !keyWord.equals("") ){
 				sql +=" and "+keyField.trim()+" like '%"+keyWord.trim()+"%' order by abidx desc";
 			}else{
-			//	alert("검색 키워드와 일치한 내용을 찾지 못했습니다.");	
 				sql +=" order by abidx desc";
 			}
 			
 			pstmt = con.prepareStatement(sql);
-				
-	//		pstmt.setString(1, abtype);
-	//		pstmt.setString(2, keyField);
-	//		pstmt.setString(3, keyWord);
+			pstmt.setInt(1, min);
+			pstmt.setInt(2, max);
+			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				AllBoardVo avo = new AllBoardVo();
-				//	System.out.println("나오냐");
-					
 				avo.setAbtype(rs.getString("abtype"));
 				avo.setAbidx(rs.getInt("abidx"));
 				avo.setAbimage(rs.getString("abimage"));
 				avo.setAbtitle(rs.getString("abtitle"));
 				avo.setAbhit(rs.getInt("abhit"));
 				avo.setAbwdate(rs.getDate("abwdate"));
-				avo.setAbdeletest(rs.getString("abdeletest"));
 				avo.setAbcontent(rs.getString("abcontent"));
 				avo.setAbid(rs.getString("abid"));
+				avo.setAbdeletest(rs.getInt("abdeletest"));
 				ablist.add(avo);
 			}
 			
@@ -70,9 +70,11 @@ public class AllBoardServiceImpl implements AllBoardService{
 		}
 			return ablist;
 		}
+    	
+    
     
     @Override
-    public ArrayList<AllBoardVo> getAllBoardMainList(String abtype) {
+    public ArrayList<AllBoardVo> getAllBoardMainList() {
     	Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -82,12 +84,13 @@ public class AllBoardServiceImpl implements AllBoardService{
 				+ 	"(select * from "
 				+ 		"(select rownum rnum, AA.* from "
 				+ 			"(select abtype, abidx, abtitle, abdeletest, abwdate from "
-				+ 			"table_allboard where abdeletest='N' order by abidx desc) AA) "
+				+ 			"table_allboard where abdeletest=? order by abidx desc) AA) "
 				+ 		"where rnum <= 5) "
 				+ 	"where rnum >= 1";
 			
 			
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, Values.NON_DEL);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -96,7 +99,7 @@ public class AllBoardServiceImpl implements AllBoardService{
 				avo.setAbtype(rs.getString("abtype"));
 				avo.setAbidx(rs.getInt("abidx"));
 				avo.setAbtitle(rs.getString("abtitle"));
-				avo.setAbdeletest(rs.getString("abdeletest"));
+				avo.setAbdeletest(rs.getInt("abdeletest"));
 				avo.setAbwdate(rs.getDate("abwdate"));
 				ablist.add(avo);
 			}
@@ -168,24 +171,49 @@ public class AllBoardServiceImpl implements AllBoardService{
     }
 
     @Override
-    public int getPaging(String abtype) {
+    public int getPaging() {
     	Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-    	int p = 0;
+    	int page_cnt = 0;
     	try {
-    		String sql = "select Count(*) from table_allboard where abdeletest = 'N' and abtype = ?";
+    		String sql = "select count(*) from table_allboard where abdeletest = ?";
     		pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, abtype);
+    		pstmt.setInt(1, Values.NON_DEL);
     		rs = pstmt.executeQuery();
-		
-			if(rs.next()) {
-				p = rs.getInt(1);
-			}
+    		rs.next();
+    		page_cnt = rs.getInt(1)/Values.CNT_PER_PAGE;
+    		if(rs.getInt(1) % Values.CNT_PER_PAGE > 0){
+    			page_cnt++;
+    		}
     	}catch(Exception e){
+    	
     	}finally{
     		DBClose.close(con,pstmt,rs);
 		}
-    	return p;
+    	return page_cnt;
+    }
+    @Override
+    public int getPaging1() {
+    	Connection con = dbconnect.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+    	int page_cnt = 0;
+    	try {
+    		String sql = "select count(*) from table_allboard where abdeletest = ?";
+    		pstmt = con.prepareStatement(sql);
+    		pstmt.setInt(1, Values.NON_DEL);
+    		rs = pstmt.executeQuery();
+    		rs.next();
+    		page_cnt = rs.getInt(1)/Values.CNT_PER_PAGE_N;
+    		if(rs.getInt(1) % Values.CNT_PER_PAGE_N > 0){
+    			page_cnt++;
+    		}
+    	}catch(Exception e){
+    	
+    	}finally{
+    		DBClose.close(con,pstmt,rs);
+		}
+    	return page_cnt;
     }
 }

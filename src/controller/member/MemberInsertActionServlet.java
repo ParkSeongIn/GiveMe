@@ -54,8 +54,6 @@ public class MemberInsertActionServlet extends HttpServlet {
 	    String mpost2 = request.getParameter("mpost2");
 	    String maddr1 = request.getParameter("maddr1");
 	    String maddr2 = request.getParameter("maddr2");
-	    String mgrade = request.getParameter("mgrade");
-	    String mvalue = request.getParameter("mvalue");	
 		    
 		    
 	    MemberServiceImpl ms= new MemberServiceImpl();	//insert구문이 있는 DAO를 생성.
@@ -70,8 +68,6 @@ public class MemberInsertActionServlet extends HttpServlet {
 	    vo.setMpost(Integer.parseInt((mpost1)+(mpost2), 10));
 	    vo.setMaddr1(maddr1);
 	    vo.setMaddr2(maddr2);
-	    vo.setMgrade(mgrade);
-	    vo.setMvalue(mvalue);
 	    
 	    int row = ms.insertMember(vo);	//DAO에 있는 insert메소드에 매개변수를 담아 row로 보내는 것(반환)?
 	}

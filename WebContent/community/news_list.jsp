@@ -43,9 +43,9 @@ div.col-sm-10{
 	<hr color="#D5D5D5" width="40%" align="left">
 			<c:forEach var="ab" items="${ablist}">
 				<c:choose>
-					<c:when test="${ab.abtype=='N' }">
+					<c:when test="${ab.abtype=='N' && ab.abdeletest == 2}">
 						<c:url var="img_path" value="../upload"/>
-			 			<div class="news_image col-sm-4"><img src="${img_path }/${items.abimage}"></div>
+			 			<div class="news_image col-sm-4"><img src="${img_path }/${ab.abimage}"></div>
 						<div class="news_content col-sm-7" ><a href="${ContextPath}/controller/AllBoardContentServlet.do?abidx=${ab.abidx}">${ab.abcontent}</a></div>
 					
 					</c:when>
@@ -59,6 +59,38 @@ div.col-sm-10{
 		</c:if>
 	</div>
 	</div>
+	<%-- 페이징 인디케이터 --%>
+		<div class="text-center">
+		<ul class="pagination">
+			<c:url var="path" value="/controller/AllBoardListServlet.do">
+				<c:param name="page_num" value="1"/>
+			</c:url>
+			<li><a href="${path }"><font color="black">이전</font></a></li>
+			
+			<c:set var="page_num2" value="${param.page_num }"/>
+			<c:if test="${param.page_num == null || param.page_num == '' }">
+				<c:set var="page_num2" value="1"/>
+			</c:if>
+			<c:forEach var="i" begin="${requestScope.indi_min }" end="${requestScope.indi_max}">
+				<c:url var="path" value="/controller/AllBoardListServlet.do">
+					<c:param name="page_num" value="${i }"/>
+				</c:url>
+				<c:choose>
+					<c:when test="${page_num2 == i }">
+						<li><a href="${path }"><font color="black">${i }</font></a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="${path }"><font color="black">${i }</font></a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:url var="path" value="/controller/AllBoardListServlet.do">
+				<c:param name="page_num" value="${requestScope.page_cnt }"/>
+			</c:url>	
+			<li><a href="${path }"><font color="black">다음</font></a></li>
+		</ul>
+		</div>
+		<%-- 페이징 인디케이터 --%>
 	</div>
 <c:import url="/nav/footer.jsp"/>
 </body>

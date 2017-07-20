@@ -36,7 +36,7 @@ public class MainServlet extends HttpServlet {
 		String abtitle = request.getParameter("abtitle");
 		
 		AllBoardServiceImpl ab = new AllBoardServiceImpl();
-		ArrayList<AllBoardVo> ablist = ab.getAllBoardMainList(abtype);
+		ArrayList<AllBoardVo> ablist = ab.getAllBoardMainList();
 		request.setAttribute("abtype", abtype);
 		request.setAttribute("abtitle", abtitle);
 		request.setAttribute("ablist", ablist);
