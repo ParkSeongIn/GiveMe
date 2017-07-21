@@ -16,8 +16,9 @@
         1. 모든 폼은 공백 또는 "" 문자는 입력되면 안된다.
         2. 비밀번호는 4자이상 입력하여야 한다.
     */
-        $('#addButton').click(function(){
-            if($('#dlplace').val().length <1) {
+       
+    	$('#addButton').click(function(){
+    		if($('#dlplace').val().length <1) {
                 alert('기부처는 1자이상 이어야 합니다');
                 $('#dlplace').focus();
             } else if($('#dlarea').val()=='') {
@@ -26,12 +27,24 @@
             } else if($('#dlcontent').val()=='') {
                 alert('내용을 입력하세요');
                 $('#dlcontent').focus();
-            }  else {
+            } else {
                 $('#addForm').submit();
             }
         });
+
+    	
+   	 $('#dlgroup1').change(function(){
+    		if($('#dlgroup1 option:selected').val() == 'P'){
+    			$('#dlgroup2').show();
+    			$('#dlgroup3').hide();
+    		}else{
+    			$('#dlgroup2').hide();
+    			$('#dlgroup3').show();
+    		}
+    	});
     });	
 	function get_image(){
+		sizingMethod='scale'
 		var file = $("#image_file")[0].files[0];
 		var reader = new FileReader();
 		reader.onloadend = function(){
@@ -39,8 +52,6 @@
 		};
 		reader.readAsDataURL(file);
 	}
-	
-	
 </script>
 <style>
 div.col-sm-10{
@@ -61,7 +72,12 @@ select{
 select::-ms-expand { /* for IE 11 */
     display: none;
 }
-
+#preview {
+	width:100%;
+	height:100%;
+	z-index:1;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);
+}
 </style>
 </head>
 <link rel="stylesheet" href="../css/font.css" type="text/css">
@@ -74,7 +90,7 @@ select::-ms-expand { /* for IE 11 */
 	
 	<div class="col-sm-4">
 	<h1>기부처 리스트 작성</h1>
-		<img id="preview"  src="http://placehold.it/300x300?text=preview"/>
+		<img id="preview"  src="http://placehold.it/300x300?text=preview"  />
 	</div>
 	<div class="col-sm-6">
 	<form id="addForm" action="${ContextPath }/controller/DonationWriteActionServlet.do"enctype="multipart/form-data" method="post">
@@ -97,13 +113,20 @@ select::-ms-expand { /* for IE 11 */
         </div><br/>
         	
         	<select id="dlgroup1" name="dlgroup1">
-	    		<option value="P" >개인</option>
+	    		<option value="개인" >개인</option>
+	    		<option value="단체">단체</option>
 			</select>
 			
 			<select id="dlgroup2" name="dlgroup2">
 				<option value="독거노인">독거노인</option>
 	    		<option value="저소득">저소득</option>
 	    		<option value="한부모">한부모</option>
+			</select>
+			
+			<select id="dlgroup3" name="dlgroup3" style="display:none;">
+				<option value="복지관">복지관</option>
+	    		<option value="요양시설">요양시설</option>
+	    		<option value="학교급식">학교급식</option>
 			</select>
 			
         
@@ -128,6 +151,6 @@ select::-ms-expand { /* for IE 11 */
        </form> 
        </div>
 		
- </div>    
+ </div>     
 </body>
 </html>

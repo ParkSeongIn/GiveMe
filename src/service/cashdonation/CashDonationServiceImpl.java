@@ -27,7 +27,7 @@ public class CashDonationServiceImpl implements CashDonationService {
 					+			 "select * from ( "
 					+ 				"select rownum rn, AA.* from ("
 					+ 					"select tc.cidx, tm.mname, tc.cmoney, tc.cpay, tc.cstate, tc.cpoint, tc.cway, tc.cpaydate2 "
-					+					 "from table_member tm, table_cashdonation tc "
+					+					 "from table_member tm, table_cashdonation tc, table_donationlist td"
 					+ 					 "where tm.midx = tc.midx"
 					+ 					")AA order by AA.cidx desc"
 					+ 				") where rn <=20"
@@ -114,7 +114,6 @@ public class CashDonationServiceImpl implements CashDonationService {
 		pstmt.setInt(6, cv.getCpoint());
 		pstmt.setInt(7, cv.getMidx());
 		pstmt.setString(8, cv.getCpay());
-			
 		row = pstmt.executeUpdate(); 
 		
 		}catch(Exception e) { 

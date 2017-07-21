@@ -54,6 +54,7 @@ public class CashDonationInsertActionServlet extends HttpServlet {
 		cv.setCpaydate1(cpaydate1);
 		cv.setMidx(midx);	
 		cv.setCpoint(cpoint);
+		
 		CashDonationServiceImpl cdsi = new CashDonationServiceImpl();
 		int row = cdsi.insertCashDonation(cv);
 

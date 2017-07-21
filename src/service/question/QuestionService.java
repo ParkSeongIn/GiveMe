@@ -6,7 +6,7 @@ public interface QuestionService {
 	
 	int getPaging();
 	int insertQuestion(QuestionVo vo);
-	ArrayList<QuestionVo> getQuestionList(int midx);
+	ArrayList<QuestionVo> getQuestionList(int midx, int page_num);
 	int modifyWriteQuestion(QuestionVo qv);
 	QuestionVo getQuestion(int qidx, int midx);
 //	int deleteQuestion(int qidx);

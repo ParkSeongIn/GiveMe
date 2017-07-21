@@ -291,9 +291,7 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 			sql = "update table_talentboard set tbstate = 'I' ,tbcancle = 'N', tbapply = 'Y' "
 					+ "where tbstate = 'W' and tbapply = 'N' and tbidx = ? ";
 			pstmt = con.prepareStatement(sql);
-			System.out.println(sql);
 			pstmt.setInt(1, tbidx);
-//			pstmt.setInt(1, midx);
 			mtbs = pstmt.executeUpdate();
 		}catch(Exception e) { 
 
@@ -313,7 +311,6 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 		try {
 			sql = "update table_talentboard set tbhconfirm = 'Y', tbstate = 'C' where tbhconfirm = 'N' and tbstate = 'S' and tbidx = ?";
 			pstmt = con.prepareStatement(sql);
-			System.out.println(sql);
 			pstmt.setInt(1, tbidx);
 			mtbc = pstmt.executeUpdate();
 		}catch(Exception e) { 
@@ -337,7 +334,6 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 			sql ="update table_talentboard set tbstate = 'W', tbapply = 'N', tbcancle = 'Y' "
 					+ " where tbstate = 'I' and tbapply='Y' and tbcancle='N' and midx = ?";
 			pstmt = con.prepareStatement(sql);
-			System.out.println(sql);
 			pstmt.setInt(1, midx);
 			mcan = pstmt.executeUpdate();
 		
@@ -362,7 +358,6 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 			sql ="update table_talentboard set tbstate = 'R', tbapply = 'N', tbcancle = 'Y', tbdeletest = 'Y'"
 					+ " where tbidx = ? ";
 			pstmt = con.prepareStatement(sql);
-			System.out.println(sql);
 			pstmt.setInt(1, tbidx);
 			tbdc = pstmt.executeUpdate();
 		
@@ -387,7 +382,6 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 			sql = "update table_talentboard set tbstate = 'S', tbetime=sysdate "
 					+ "where Tbstate = 'I' and tbcancle='N' and tbdeletest ='N' and tbapply = 'Y' and tbidx = ?";
 			pstmt = con.prepareStatement(sql);
-			System.out.println(sql);
 			pstmt.setInt(1, tbidx);
 			mtbe = pstmt.executeUpdate();
 		
@@ -460,7 +454,6 @@ public class TalentBoardServiceImpl implements TalentBoardService{
 	         		+ "and tbseq > (select tbseq from table_talentboard where tbidx = ?) ";
 	         
 	         pstmt = con.prepareStatement(sql);	
-	         System.out.println(sql);
 	         pstmt.setInt(1, tvo.getTbidx());
 	         pstmt.setInt(2, tvo.getTbidx());
 	                     

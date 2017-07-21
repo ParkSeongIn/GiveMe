@@ -198,17 +198,18 @@ public class AdminServiceImpl implements AdminService{
     	int row = 0;
     	try{
     		sql = "insert into table_donationlist "
-    			 + "(dlidx,dlgroup1,dlgroup2,dlimage,dlplace,dlarea,dlcontent,dldeletest,dlwdate, dlmdate,dldbdate)"	
-                 + "values(seq_dlidx.nextval,?,?,?,?,?,?,?,sysdate,sysdate,sysdate)";
+    			 + "(dlidx,dlgroup1,dlgroup2,dlgroup3,dlimage,dlplace,dlarea,dlcontent,dldeletest,dlwdate, dlmdate,dldbdate)"	
+                 + "values(seq_dlidx.nextval,?,?,?,?,?,?,?,?,sysdate,sysdate,sysdate)";
     		 
     		pstmt = con.prepareStatement(sql);
     		pstmt.setString(1, dl.getDlgroup1());
     		pstmt.setString(2, dl.getDlgroup2());
-    		pstmt.setString(3, dl.getDlimage());
-    		pstmt.setString(4, dl.getDlplace());
-    		pstmt.setString(5, dl.getDlarea());
-    		pstmt.setString(6, dl.getDlcontent());
-    		pstmt.setInt(7, Values.NON_DEL);
+    		pstmt.setString(3, dl.getDlgroup3());
+    		pstmt.setString(4, dl.getDlimage());
+    		pstmt.setString(5, dl.getDlplace());
+    		pstmt.setString(6, dl.getDlarea());
+    		pstmt.setString(7, dl.getDlcontent());
+    		pstmt.setInt(8, Values.NON_DEL);
     		row = pstmt.executeUpdate();
     		
     		
@@ -230,7 +231,7 @@ public class AdminServiceImpl implements AdminService{
     	DonationListVo dl = null;
     	
     	try{
-    		sql = "select dlidx, dlimage, dlplace, dlarea ,dlcontent, dlgroup1, dlgroup2, dlwdate, dlmdate " 
+    		sql = "select dlidx, dlimage, dlplace, dlarea ,dlcontent, dlgroup1, dlgroup2, dlgroup3,dlwdate, dlmdate " 
     			 + "from table_donationlist " 
     			 + "where dlidx = ?"; 
     		pstmt = con.prepareStatement(sql);
@@ -246,6 +247,7 @@ public class AdminServiceImpl implements AdminService{
     			dl.setDlcontent(rs.getString("dlcontent"));
     			dl.setDlgroup1(rs.getString("dlgroup1"));
     			dl.setDlgroup2(rs.getString("dlgroup2"));
+    			dl.setDlgroup3(rs.getString("dlgroup3"));
     			dl.setDlwdate(rs.getDate("dlwdate"));
     			dl.setDlmdate(rs.getDate("dlmdate"));
     		}
@@ -270,7 +272,7 @@ public class AdminServiceImpl implements AdminService{
     	
 		try{
 			String sql = "select * from "
-				+ "(select rownum rnum, dlidx, dlgroup2, dlplace, dlarea, dlwdate, dldeletest from "
+				+ "(select rownum rnum, dlidx, dlgroup1, dlgroup2, dlgroup3, dlplace, dlarea, dlwdate, dldeletest from "
 				+ "table_donationlist order by dlidx desc) "
 				+ "where rnum >= ? and rnum <= ?";
 		
@@ -291,7 +293,9 @@ public class AdminServiceImpl implements AdminService{
 		while(rs.next()){
         	   DonationListVo dl = new DonationListVo();
         	   dl.setDlidx(rs.getInt("dlidx"));
+        	   dl.setDlgroup1(rs.getString("dlgroup1"));
         	   dl.setDlgroup2(rs.getString("dlgroup2"));
+        	   dl.setDlgroup3(rs.getString("dlgroup3"));
         	   dl.setDlplace(rs.getString("dlplace"));
         	   dl.setDlarea(rs.getString("dlarea"));
         	   dl.setDlwdate(rs.getDate("dlwdate"));
@@ -319,7 +323,7 @@ public class AdminServiceImpl implements AdminService{
     	DonationListVo dl = new DonationListVo();
     	
     	try{
-    		sql = "select dlidx, dlplace, dlarea ,dlcontent, dlgroup1, dlgroup2, dlwdate, dlmdate "
+    		sql = "select dlidx, dlplace, dlarea ,dlcontent, dlgroup1, dlgroup2, dlgroup3, dlwdate, dlmdate "
     				+ " from table_donationlist "
     				+ " where dlidx = ? ";
     		pstmt = con.prepareStatement(sql);
@@ -334,6 +338,7 @@ public class AdminServiceImpl implements AdminService{
     			dl.setDlcontent(rs.getString("dlcontent"));
     			dl.setDlgroup1(rs.getString("dlgroup1"));
     			dl.setDlgroup2(rs.getString("dlgroup2"));
+    			dl.setDlgroup3(rs.getString("dlgroup3"));
     			dl.setDlwdate(rs.getDate("dlwdate"));
     			dl.setDlmdate(rs.getDate("dlmdate"));
     		}
@@ -354,7 +359,7 @@ public class AdminServiceImpl implements AdminService{
     	try{
     		sql = "update table_donationlist "
                 + "set dlplace = ?, dlarea = ?, dlcontent = ?, "
-    			+ "dlgroup1=?, dlgroup2=?, dlmdate=sysdate " 
+    			+ "dlgroup1=?, dlgroup2=?, dlgroup3=?, dlmdate=sysdate " 
                 + "where dlidx = ?";
     		pstmt=con.prepareStatement(sql);
     		pstmt.setString(1, dl.getDlplace());
@@ -362,7 +367,8 @@ public class AdminServiceImpl implements AdminService{
     		pstmt.setString(3, dl.getDlcontent());
     		pstmt.setString(4, dl.getDlgroup1());
     		pstmt.setString(5, dl.getDlgroup2());
-    		pstmt.setInt(6, dl.getDlidx());
+    		pstmt.setString(6, dl.getDlgroup3());
+    		pstmt.setInt(7, dl.getDlidx());
     		
     		row = pstmt.executeUpdate();
     		

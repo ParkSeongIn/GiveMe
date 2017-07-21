@@ -46,7 +46,8 @@ div.col-sm-10{
 		<thead>	
 			<tr>
 				<td>기부처리스트 번호</td>
-				<td>분류</td>
+				<td>대분류</td>
+				<td>소분류</td>
 				<td>이름</td>
 				<td>작성자</td>
 				<td>지역</td>
@@ -59,7 +60,17 @@ div.col-sm-10{
 					<c:when test="${vo.dldeletest == 2}"> 
 				<tr>
 				<td><a href="${ContextPath}/controller/DonationContentServlet.do?dlidx=${vo.dlidx}">${vo.dlidx}</a></td>
-				<td>${vo.dlgroup2}</td>
+				<td>${vo.dlgroup1}</td>
+				
+				<c:choose>
+					<c:when test="${vo.dlgroup1 == '개인' }">
+					<td>${vo.dlgroup2}</td>
+					</c:when>
+					<c:otherwise>
+					<td>${vo.dlgroup3 }</td>
+					</c:otherwise>
+				</c:choose>
+				
 				<td>${vo.dlplace}</td>
 				<td>${sessionScope.vo.mid}</td>
 				<td>${vo.dlarea}</td>

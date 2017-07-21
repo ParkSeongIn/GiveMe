@@ -61,7 +61,12 @@ select{
 select::-ms-expand { /* for IE 11 */
     display: none;
 }
-
+#preview {
+	width:100%;
+	height:100%;
+	z-index:1;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);
+}
 </style>
 <title>기부동향</title>
 </head>
@@ -73,7 +78,7 @@ select::-ms-expand { /* for IE 11 */
 <div class="container">
 	<div class="col-sm-4">
     <h2>기부동향 게시판 글쓰기</h2>
-    	<img id="preview"  src="http://placehold.it/300x300?text=preview"/>
+    	<img id="preview"  src="http://placehold.it/300x300?text=preview" />
     </div>
     <div class="col-sm-6">
     <form id="addForm" enctype="multipart/form-data" action="${ContextPath }/controller/AllBoardWriteActionServlet.do" method="post" >

@@ -66,6 +66,7 @@ public class DonationWriteActionServlet extends HttpServlet {
 		String dlarea = mr.getParameter("dlarea");
 		String dlgroup1 = mr.getParameter("dlgroup1");
 		String dlgroup2 = mr.getParameter("dlgroup2");
+		String dlgroup3	= mr.getParameter("dlgroup3");
 		String dlcontent = mr.getParameter("dlcontent");
 		Enumeration files = mr.getFileNames();
 		String name1 = (String)files.nextElement();
@@ -78,6 +79,7 @@ public class DonationWriteActionServlet extends HttpServlet {
 		dl.setDlarea(dlarea);
 		dl.setDlgroup1(dlgroup1);
 		dl.setDlgroup2(dlgroup2);
+		dl.setDlgroup3(dlgroup3);
 		dl.setDlcontent(dlcontent);
 		dl.setDlimage(dlimage);
 		

@@ -46,10 +46,6 @@ public class TalentBoardReplyActionServlet extends HttpServlet {
 		int tbidx = Integer.parseInt(request.getParameter("tbidx"));
 		int midx = Integer.parseInt(request.getParameter("midx"));
 		
-		System.out.println(tbtitle);
-		System.out.println(tbcontent);
-		System.out.println(tbidx);
-		System.out.println(midx);
 		
 		TalentBoardServiceImpl tbsi = new TalentBoardServiceImpl();
 		TalentBoardVo tvo = new TalentBoardVo();
@@ -58,11 +54,6 @@ public class TalentBoardReplyActionServlet extends HttpServlet {
 			tvo.setTbcontent(tbcontent);
 			tvo.setTbidx(tbidx);
 			tvo.setMidx(midx);
-		
-			System.out.println(tvo.getTbtitle());
-			System.out.println(tvo.getTbcontent());
-			System.out.println(tvo.getTbidx());
-			System.out.println(tvo.getMidx());
 			
 			int rtb = tbsi.replyTalentBoard(tvo);
 			System.out.println(rtb);

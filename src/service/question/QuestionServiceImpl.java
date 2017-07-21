@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import common.DBConnect;
+import common.Values;
 import common.DBClose;
 
 public class QuestionServiceImpl implements QuestionService{
@@ -16,25 +17,25 @@ public class QuestionServiceImpl implements QuestionService{
 	    }
 	
 	@Override
-	public ArrayList<QuestionVo> getQuestionList(int midx) {
+	public ArrayList<QuestionVo> getQuestionList(int midx,int page_num) {
 		Connection con = dbconnect.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<QuestionVo> qlist = new ArrayList<QuestionVo>();
-		//System.out.println(midx);
 		try {
-			sql = " select * from ("
-					+ "select * from ("
-					+ 	"select rownum rn, AA.*from ("
-					+ 		"select tq.qidx, tq.qcategory, tq.qtitle, tm.mid, tq.qstate, tq.qwdate "
-					+ 		"from table_member tm, table_question tq "
-					+ 		"where tm.midx = tq.midx "
-					+ 		"and tm.midx = ? and tq.qdeletest = 'N' "
-					+ 		")AA order by AA.qidx desc) where rn <=10 ) where rn >=1";
+			String sql = "select * from "
+			         + "(select rownum rnum,  tq.qidx, tq.qcategory, tq.qtitle, tm.mid, tq.qstate, tq.qwdate from "
+					 + "table_member tm, table_question tq "
+					 + "where tm.midx = tq.midx and tm.midx=? order by qidx desc) "
+					 + "where rnum>=? and rnum <=?";
+			int min = ((page_num - 1) * Values.CNT_PER_PAGE) + 1;
+			int max = min + Values.CNT_PER_PAGE - 1;
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, midx);
+			pstmt.setInt(2, min);
+			pstmt.setInt(3, max);
 			rs = pstmt.executeQuery();
-			//System.out.println(sql);
 		
 			while(rs.next()) {
 				QuestionVo vo = new QuestionVo();
@@ -65,7 +66,7 @@ public class QuestionServiceImpl implements QuestionService{
 			sql = "insert into table_question "
             + "(qidx,qcategory,qtitle,qcontent,qwdate,qrewdate,qstate,qmdate,qdbdate,midx, "
             + "qdeletest) "
-            + "values(seq_qidx.nextval,?,?,?,sysdate,sysdate,'답변대기',sysdate,sysdate,?,'N')";
+            + "values(seq_qidx.nextval,?,?,?,sysdate,sysdate,'답변대기',sysdate,sysdate,?,2)";
 		
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, vo.getQcategory());
@@ -95,15 +96,8 @@ public class QuestionServiceImpl implements QuestionService{
 			pstmt.setInt(1, qidx);
 			pstmt.setInt(2, midx);
 			rs = pstmt.executeQuery();
-//			System.out.println(sql);
 			if(rs.next()) {
 				
-//				System.out.println("qidx :"+rs.getInt("qidx"));
-//				System.out.println("qtitle :"+rs.getString("qtitle"));
-//				System.out.println("midx :"+rs.getInt("midx"));
-//				System.out.println("qcategory"+rs.getString("qcategory"));
-//				System.out.println("qwdate :"+rs.getDate("qwdate"));
-//				System.out.println("qcontent :"+rs.getString("qcontent"));
 				
 				qv = new QuestionVo();
 				qv.setQidx(rs.getInt("qidx"));
@@ -175,9 +169,27 @@ public class QuestionServiceImpl implements QuestionService{
 	}
 
 	@Override
-	public int getPaging() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public int getPaging() {
+    	Connection con = dbconnect.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+    	int page_cnt = 0;
+    	try {
+    		String sql = "select count(*) from table_question where qdeletest = ?";
+    		pstmt = con.prepareStatement(sql);
+    		pstmt.setInt(1, Values.NON_DEL);
+    		rs = pstmt.executeQuery();
+    		rs.next();
+    		page_cnt = rs.getInt(1)/Values.CNT_PER_PAGE;
+    		if(rs.getInt(1) % Values.CNT_PER_PAGE > 0){
+    			page_cnt++;
+    		}
+    	}catch(Exception e){
+    	
+    	}finally{
+    		DBClose.close(con,pstmt,rs);
+		}
+    	return page_cnt;
+    }
 
 }

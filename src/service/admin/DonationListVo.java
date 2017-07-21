@@ -8,6 +8,7 @@ public class DonationListVo {
 	private int dlidx;
 	private String dlgroup1;
 	private String dlgroup2;
+	private String dlgroup3;
 	private String dlplace;
 	private String dlarea;
 	private Date dlwdate;
@@ -76,6 +77,12 @@ public class DonationListVo {
 	}
 	public void setDldbdate(Timestamp dldbdate) {
 		this.dldbdate = dldbdate;
+	}
+	public String getDlgroup3() {
+		return dlgroup3;
+	}
+	public void setDlgroup3(String dlgroup3) {
+		this.dlgroup3 = dlgroup3;
 	}
 	public int getDldeletest() {
 		return dldeletest;

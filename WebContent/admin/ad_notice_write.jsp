@@ -48,6 +48,10 @@ div.panel-body{
 div.panel.panel-default{
 	margin-left: 100px;
 }
+div.bottom.col-sm-4{
+    padding-left: 80px;
+    padding-top: 20px;
+}
 h2{
 	padding-left: 50px;
 }
@@ -55,6 +59,15 @@ h2{
     margin-right: -10px;
     margin-left: -12px;
     margin-bottom: -125px;
+}
+input#abid.form-control{
+	margin-bottom: 10px;
+}
+input#abtitle.form-control{
+	margin-bottom: 10px;
+}
+input#abcontent.form-control{
+	margin-bottom: 10px;
 }
 </style>
 <title>공지사항</title>
@@ -71,29 +84,28 @@ h2{
        	<div class="form-horizontal">
        
        	<div class="form-group">
-  			<label class="control-label col-sm-3" for="abid">작성자 : </label>
-  			<div class="col-sm-3">
+  			<label class="control-label col-sm-4" for="abid">작성자 : </label>
+  			<div class="col-sm-4">
   			<input class="form-control" name="abid" id="abid" type="text" value="${sessionScope.vo.mid}" readonly="readonly"/>
   			</div>
   		</div>
         <input class="form-control" name="abtype" id="abtype" type="hidden" value="I" readonly="readonly"/>
-        
-		<div class="form-group">
-            <label class="control-label col-sm-3" for="abtitle">제목 :</label>
-            <div class="col-sm-8">
+		<div class="form-group" >
+            <label class="control-label col-sm-4" for="abtitle">제목 :</label>
+            <div class="col-sm-5">
             <input class="form-control" name="abtitle" id="abtitle" type="text"/>
         	</div>
         </div>
-        
+       	
        	<div class="form-group">
-            <label class="control-label col-sm-3" for="abcontent">내용 :</label>
+            <label class="control-label col-sm-4" for="abcontent">내용 :</label>
             <div class="col-sm-5">
             <textarea name="abcontent" id="abcontent" rows="10" cols="80"></textarea>
         	</div>
         </div>
         <div class="row" style="margin-top:10px">
         	<div class="col-sm-8"></div>
-        	<div class="col-sm-4">
+        	<div class="bottom col-sm-4">
             <input class="btn btn-default" id="addButton" type="button" value="글입력"/>
             <input class="btn btn-default" type="reset" value="초기화"/>
             <a class="btn btn-default" href="<%=request.getContextPath()%>/controller/AllBoardIfListServlet.do?abtype=I">글목록</a>

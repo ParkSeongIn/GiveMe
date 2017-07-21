@@ -40,7 +40,7 @@ public class AllBoardListServlet extends HttpServlet {
 		String keyField = request.getParameter("keyField");
 		String keyWord = request.getParameter("keyWord");
 		
-		int pageCnt = ab.getPaging();
+		int pageCnt = ab.getPaging1();
 		request.setAttribute("page_cnt", pageCnt);
 
 		String page_num_str = request.getParameter("page_num");

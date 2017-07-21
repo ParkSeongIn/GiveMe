@@ -54,13 +54,13 @@ select::-ms-expand { /* for IE 11 */
 			
 	    });
     	
-    	$('#cplace1').change(function(){
-    		if($('#cplace1 option:selected').val() == '개인'){
-    		   $('#cplace2').show();
-    		   $('#cplace3').hide();	
+    	$('#dlplace1').change(function(){
+    		if($('#dlplace1 option:selected').val() == '개인'){
+    		   $('#dlplace2').show();
+    		   $('#dlplace3').hide();	
     		}else{
-    			$('#cplace2').hide();
-    			$('#cplace3').show();
+    			$('#dlplace2').hide();
+    			$('#dlplace3').show();
     		}
     	});
     });
@@ -96,20 +96,20 @@ select::-ms-expand { /* for IE 11 */
 						</select>
 					</div>
 					
-					<div class="form-group" id="cplace1">
+					<div class="form-group" id="dlplace1">
 						<label class="control-label col-sm-3" for="cplace1">후원처</label>
-						<select id="cplace1" name="cplace1">
+						<select id="dlplace1" name="dlplace1">
 		    			<option value="개인">개인</option>
 		    			<option value="단체">단체</option>
 						</select>
 						
-						<select id="cplace2" name="cplace2">
+						<select id="dlplace2" name="dlplace2">
 		    			<option value="저소득층 가정">저소득층 가정</option>
 		    			<option value="장애인 가정">장애인 가정</option>
 		    			<option value="독거노인">독거노인</option>
 						</select>
 						
-						<select id="cplace3" name="cplace3" style="display:none;">
+						<select id="dlplace3" name="dlplace3" style="display:none;">
 		    			<option value="복지관">복지관</option>
 		    			<option value="요양시설">요양시설</option>
 		    			<option value="학교급식">학교급식</option>

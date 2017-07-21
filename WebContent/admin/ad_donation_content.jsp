@@ -64,10 +64,17 @@ int dlidx = (Integer)request.getAttribute("dlidx");
 	    		<label for="dlgroup1"></label>
 	    		<input class="form-control" name="dlgroup1" id="dlgroup1" type="text" value="${dl.dlgroup1}" disabled="disabled"/>
 			</div>
-			
 			<div class="form-group3">
-	    		<label for="dlgroup2"></label>
-	    		<input class="form-control" name="dlgroup2" id="dlgroup2" type="text" value="${dl.dlgroup2}" disabled="disabled"/>
+				<c:choose>
+					<c:when test="${dl.dlgroup1 == '´ÜÃ¼' }">
+						<label for="dlgroup3"></label>
+	    				<input class="form-control" name="dlgroup3" id="dlgroup3" type="text" value="${dl.dlgroup3}" disabled="disabled"/>
+	    			</c:when>
+	    			<c:otherwise>
+	    				<label for="dlgroup2"></label>
+	    				<input class="form-control" name="dlgroup2" id="dlgroup2" type="text" value="${dl.dlgroup2}" disabled="disabled"/>
+	    			</c:otherwise>
+				</c:choose>
 			</div>
 			<br/>
         

@@ -205,8 +205,8 @@ public class AllBoardServiceImpl implements AllBoardService{
     		pstmt.setInt(1, Values.NON_DEL);
     		rs = pstmt.executeQuery();
     		rs.next();
-    		page_cnt = rs.getInt(1)/Values.CNT_PER_PAGE_N;
-    		if(rs.getInt(1) % Values.CNT_PER_PAGE_N > 0){
+    		page_cnt = rs.getInt(1)/Values.CNT_PER_PAGE;
+    		if(rs.getInt(1) % Values.CNT_PER_PAGE > 0){
     			page_cnt++;
     		}
     	}catch(Exception e){

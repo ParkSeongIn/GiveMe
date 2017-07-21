@@ -73,15 +73,38 @@ div.col-sm-10{
 		</tr>
 	</table>
 	</div>
-</div>
-	<div class="text-center">
+	<%-- 페이징 인디케이터 --%>
+		<div class="text-center">
 		<ul class="pagination">
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
+			<c:url var="path" value="/controller/MypageQuestionListServlet.do">
+				<c:param name="page_num" value="1"/>
+			</c:url>
+			<li><a href="${path }"><font color="black">이전</font></a></li>
+			
+			<c:set var="page_num2" value="${param.page_num }"/>
+			<c:if test="${param.page_num == null || param.page_num == '' }">
+				<c:set var="page_num2" value="1"/>
+			</c:if>
+			<c:forEach var="i" begin="${requestScope.indi_min }" end="${requestScope.indi_max}">
+				<c:url var="path" value="/controller/MypageQuestionListServlet.do">
+					<c:param name="page_num" value="${i }"/>
+				</c:url>
+				<c:choose>
+					<c:when test="${page_num2 == i }">
+						<li><a href="${path }"><font color="black">${i }</font></a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="${path }"><font color="black">${i }</font></a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:url var="path" value="/controller/MypageQuestionListServlet.do">
+				<c:param name="page_num" value="${requestScope.page_cnt }"/>
+			</c:url>	
+			<li><a href="${path }"><font color="black">다음</font></a></li>
 		</ul>
+		</div>
+		<%-- 페이징 인디케이터 --%>
 </div>
 <c:import url="/nav/footer.jsp"/>
 </body>

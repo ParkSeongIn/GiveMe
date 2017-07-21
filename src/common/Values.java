@@ -14,7 +14,6 @@ public interface Values {
     
     // 페이지당 글의 개수
  	int CNT_PER_PAGE = 10;
- 	int CNT_PER_PAGE_N = 3;
  	// 게시판 인디케이터의 개수
  	int BOARD_INDICATOR_CNT = 5;
  	// 게시판 타입

@@ -14,9 +14,9 @@ CashDonationVo cv = (CashDonationVo)request.getAttribute("cv");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>현금후원내역(마이페이지)</title>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<link href="../css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 div.col-sm-10{
 	  padding-top: 60px;
@@ -134,12 +134,25 @@ select::-ms-expand { /* for IE 11 */
 	<div class="total" >
 	<hr color="#D5D5D5" width="100%" align="left">
 	
+	<div style="display:none;">
 	<c:set var="sum" value="${cv.cmoney }"/>
 	<c:forEach var="cv" items="${clist }">
 		<c:set var="sum" value="${sum+cv.cmoney }"/>
 	</c:forEach>
 	<h3>총 후원금액 : &#8361; ${sum}</h3>
 	
+	<c:set var="minus" value="${cv.cmoney }"/>
+	<c:forEach var="cv" items="${clist }">
+		<c:choose>
+		<c:when test="${cv.cstate == '후원취소' }">
+			<c:set var="minus" value="${minus+cv.cmoney }"/>
+		</c:when>
+		</c:choose>
+	</c:forEach>
+	<h3>총 취소금액:&#8361; ${minus}</h3>
+	</div>
+	
+	<h3>총 후원금액 : &#8361; ${sum-minus}</h3>
 	<c:set var="sum" value="${cv.cpoint }"/>
 	<c:forEach var="cv" items="${clist }">
 		<c:set var="sum" value="${sum+cv.cpoint }"/>

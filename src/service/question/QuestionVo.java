@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 
 public class QuestionVo {
 
-//	private int rnum;
 	private int qidx;
 	private String qcategory;
 	private String qtitle;
@@ -20,12 +19,6 @@ public class QuestionVo {
 	private int midx;
 	private String mid;
 	
-	//	public int getRnum() {
-//		return rnum;
-//	}
-//	public void setRnum(int rnum) {
-//		this.rnum = rnum;
-//	}
 	public int getQidx() {
 		return qidx;
 	}

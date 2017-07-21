@@ -98,4 +98,5 @@ public class CashDonationVo {
 	public void setMname(String mname) {
 		this.mname = mname;
 	}
+	
 }

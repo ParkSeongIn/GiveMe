@@ -19,14 +19,24 @@ div.col-sm-10{
 }
 .news_image{
 	height:150px;
-	border:1px solid black;
 	margin-right:20px;
 	margin-bottom:10px;
 }
 .news_content{
 	height:150px;
-	border:1px solid black;
 	margin-bottom:10px;
+}
+a.btn.btn-default{
+    float: right;
+    margin-right: 36px;
+}
+img{
+	width:100%;
+	height:100%;
+}
+div.news_image.col-sm-4{
+	padding-left:0;
+	padding-right:0;
 }
 </style>
 </head>
@@ -46,7 +56,9 @@ div.col-sm-10{
 					<c:when test="${ab.abtype=='N' && ab.abdeletest == 2}">
 						<c:url var="img_path" value="../upload"/>
 			 			<div class="news_image col-sm-4"><img src="${img_path }/${ab.abimage}"></div>
-						<div class="news_content col-sm-7" ><a href="${ContextPath}/controller/AllBoardContentServlet.do?abidx=${ab.abidx}">${ab.abcontent}</a></div>
+						<div class="news_content col-sm-7" >
+						<h4>${ab.abtitle }</h4>
+						<a href="${ContextPath}/controller/AllBoardContentServlet.do?abidx=${ab.abidx}">${ab.abcontent}</a></div>
 					
 					</c:when>
 					<c:otherwise></c:otherwise>

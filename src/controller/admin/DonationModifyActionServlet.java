@@ -64,6 +64,7 @@ public class DonationModifyActionServlet extends HttpServlet {
 		String dlcontent = request.getParameter("dlcontent");
 		String dlgroup1 = request.getParameter("dlgroup1");
 		String dlgroup2 = request.getParameter("dlgroup2");
+		String dlgroup3 = request.getParameter("dlgroup3");
 //		Enumeration files = mr.getFileNames();
 //		String name1 = (String)files.nextElement();
 //		String dlimage = mr.getFilesystemName(name1);
@@ -77,6 +78,7 @@ public class DonationModifyActionServlet extends HttpServlet {
 		dl.setDlcontent(dlcontent);
 		dl.setDlgroup1(dlgroup1);
 		dl.setDlgroup2(dlgroup2);
+		dl.setDlgroup3(dlgroup3);
 //		dl.setDlimage(dlimage);
 		
 		int row = as.modifyDonationWrite(dl);

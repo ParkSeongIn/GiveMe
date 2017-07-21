@@ -215,7 +215,7 @@ public class FrontController extends HttpServlet {
 		    	MemberCheckLoginActionServlet mclas = new MemberCheckLoginActionServlet();
 		    	mclas.doPost(request, response);
 		    	
-		    	this.view="/main/main.jsp";
+		    	this.view="/controller/MainServlet.do";
 		    	this.isRedirect=true;
 			
 		    }else if(command.equals("/controller/MemberFindidServlet.do")){
